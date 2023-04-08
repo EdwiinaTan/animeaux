@@ -24,9 +24,10 @@ export const AnimalUpdate = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
 
   const validationSchema = Yup.object().shape({
-    nameAnimal: Yup.string()
+    name: Yup.string()
       .min(1, 'Le nom doit contenir au moins 1 caractère')
       .required('Le nom est requis'),
+    alias: Yup.string().min(1, 'L’alias doit contenir au moins 1 caractère'),
   })
 
   const onClickGoBack = () => {
@@ -34,13 +35,13 @@ export const AnimalUpdate = () => {
   }
 
   const initialValues = {
+    animal: animalDetails.species,
+    gender: animalDetails.gender,
     name: animalDetails.name,
     alias: animalDetails.alias,
     icad: animalDetails.icadNumber,
-    race: '',
+    race: animalDetails.race,
     color: animalDetails.color,
-    animal: animalDetails.species,
-    gender: animalDetails.gender,
   }
 
   const animals = [
@@ -95,7 +96,7 @@ export const AnimalUpdate = () => {
         <Card>
           <Formik
             initialValues={initialValues}
-            // validationSchema={validationSchema}
+            validationSchema={validationSchema}
             onSubmit={(values) => console.log('submit: ', values)}
           >
             {({ handleChange, values, handleSubmit, handleBlur }) => (
@@ -167,30 +168,43 @@ export const AnimalUpdate = () => {
                 </Field>
                 <Text style={{ fontSize: 15, marginBottom: 5 }}>Race</Text>
                 <Spacing size="4" />
-                <Field name="race">
-                  {({ field }) => (
-                    <SelectList
-                      boxStyles={{ width: 200 }}
-                      {...field}
-                      setSelected={handleChange('race')}
-                      data={options}
-                      save="value"
-                    />
-                    // <Picker
-                    //   {...field}
-                    //   selectedValue={values.race}
-                    //   onChange={handleChange('icad')}
-                    //   value={values.race}
-                    //   style={{ backgroundColor: 'red', width: '100%', height: 10 }}
-                    //   onValueChange={handleChange('race')}
-                    //   onBlur={handleBlur('race')}
-                    // >
-                    //   {options.map((option) => (
-                    //     <Picker.Item key={option.value} label={option.label} value={option.value} />
-                    //   ))}
-                    // </Picker>
-                  )}
-                </Field>
+                <View style={{ width: '100%' }}>
+                  <Field name="race">
+                    {({ field }) => (
+                      <SelectList
+                        boxStyles={{ width: '100%' }}
+                        {...field}
+                        setSelected={handleChange('race')}
+                        onChange={handleChange('race')}
+                        data={options}
+                        placeholder="Veuillez choisir la race"
+                        // defaultOption={{ label: 'race', value: 'race' }}
+                        save="value"
+                        value={values.race}
+                      />
+                    )}
+                  </Field>
+                </View>
+                <Spacing size="16" />
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Couleur</Text>
+                <Spacing size="4" />
+                <View style={{ width: '100%' }}>
+                  <Field name="color">
+                    {({ field }) => (
+                      <SelectList
+                        boxStyles={{ width: '100%' }}
+                        {...field}
+                        setSelected={handleChange('color')}
+                        onChange={handleChange('color')}
+                        data={options}
+                        placeholder="Veuillez choisir la couleur"
+                        // defaultOption={{ label: 'race', value: 'race' }}
+                        save="value"
+                        value={values.color}
+                      />
+                    )}
+                  </Field>
+                </View>
                 <Spacing size="24" />
                 <Button title="Submit" onPress={() => handleSubmit()} />
               </View>

@@ -9,7 +9,10 @@ import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
 import { BottomSheetProps } from './Type'
 
-export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModalRef, params }) => {
+export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
+  bottomSheetModalRef,
+  animalDetails,
+}) => {
   const snapPoints = ['30%']
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
@@ -21,14 +24,14 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
   const handleViewEditProfil = () => {
     bottomSheetModalRef.current.close()
     navigation.navigate('animalUpdateProfil', {
-      animalDetails: params.animalDetails,
+      animalDetails: animalDetails,
     })
   }
 
   const handleViewEditSituation = () => {
     bottomSheetModalRef.current.close()
     navigation.navigate('animalUpdateSituation', {
-      animalDetails: params.animalDetails,
+      animalDetails: animalDetails,
     })
   }
 
@@ -92,7 +95,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
       </View>
       <Overlay isVisible={isOverlayVisible} onBackdropPress={toggleOverlay}>
         <Text>{`Etes vous sûre de vouloir supprimer le ${startsWithVowel(
-          params?.animalDetails.name
+          animalDetails.name
         )} ?`}</Text>
         <Text>Ce choix sera irréversible</Text>
       </Overlay>

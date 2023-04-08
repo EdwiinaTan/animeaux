@@ -40,11 +40,11 @@ export const AnimalInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const bottomSheetModalRef = useRef(null)
-  const { params } = route
-  const { statusUser, userData } = useGetUserById(params?.animalDetails.userId)
-  const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(
-    params?.animalDetails.hostFamilyId
-  )
+  const {
+    params: { animalDetails },
+  } = route
+  const { statusUser, userData } = useGetUserById(animalDetails.userId)
+  const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
@@ -59,7 +59,7 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const renderIsSterilised = () => {
-    if (params?.animalDetails.isSterilised) {
+    if (animalDetails.isSterilised) {
       return <Text>Stérilisé</Text>
     } else {
       return <Text>Non stérilisé</Text>
@@ -78,42 +78,42 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const dateA = moment(new Date())
-  const dateB = moment(params.animalDetails.birthday)
+  const dateB = moment(animalDetails.birthday)
   console.log('aaa', dateA.diff(dateB, 'years'))
 
   return (
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={startsWithVowel(params?.animalDetails.name)}
+        title={startsWithVowel(animalDetails.name)}
         toggleOverlay={handlePresentModal}
       />
       <Container>
         <ScrollView>
-          <CarouselAnimal animal={params.animalDetails} />
+          <CarouselAnimal animal={animalDetails} />
           <Description>
             <View>
               <TitleCard>
-                <Text style={{ paddingRight: 4 }}>{params.animalDetails.name}</Text>
-                {params && renderAnimalGender(params.animalDetails)}
+                <Text style={{ paddingRight: 4 }}>{animalDetails.name}</Text>
+                {renderAnimalGender(animalDetails)}
               </TitleCard>
               <Spacing size="4" />
-              <Text>{uppercaseWord(params.animalDetails.species)}</Text>
+              <Text>{uppercaseWord(animalDetails.species)}</Text>
               <Spacing size="4" />
               <Text>Age : {dateA.diff(dateB, 'years')} ans</Text>
-              {params.animalDetails.icadNumber && (
+              {animalDetails.icadNumber && (
                 <>
                   <Spacing size="4" />
-                  <Text>Icad : {params.animalDetails.icadNumber}</Text>
+                  <Text>Icad : {animalDetails.icadNumber}</Text>
                 </>
               )}
               <Spacing size="4" />
-              <Text>Alias : {params.animalDetails.alias}</Text>
+              <Text>Alias : {animalDetails.alias}</Text>
               <Spacing size="4" />
               {renderHostFamily(statusHostFamily, hostFamilyData)}
             </View>
             <View style={{ alignItems: 'flex-end' }}>
-              <ChipComponent value={params.animalDetails.status} />
+              <ChipComponent value={animalDetails.status} />
               <Spacing size="4" />
               <Text>{renderIsSterilised()}</Text>
             </View>
@@ -145,11 +145,11 @@ export const AnimalInformation = (): React.ReactElement => {
                   {userData.firstname} {userData.lastname}
                 </Text>
                 <Spacing size="4" />
-                <Text>Date : {renderDateFormat(params.animalDetails.dateInCharge)}</Text>
+                <Text>Date : {renderDateFormat(animalDetails.dateInCharge)}</Text>
                 <Spacing size="4" />
-                <Text>Lieu : {params.animalDetails.placeCare}</Text>
+                <Text>Lieu : {animalDetails.placeCare}</Text>
                 <Spacing size="4" />
-                <Text>Raison : {uppercaseWord(renderReason(params.animalDetails.reason))}</Text>
+                <Text>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Text>
               </View>
             </InCharge>
           </Card>
@@ -160,7 +160,7 @@ export const AnimalInformation = (): React.ReactElement => {
               <TitleText>Son histoire</TitleText>
             </TitleCard>
             <Spacing size="8" />
-            <Text>{params.animalDetails.publicDescription}</Text>
+            <Text>{animalDetails.publicDescription}</Text>
           </Card>
           <Spacing size="16" />
           <Card>
@@ -174,19 +174,19 @@ export const AnimalInformation = (): React.ReactElement => {
             </TitleCard>
             <Spacing size="16" />
             <ContainerViewImage>
-              <ViewImage marginRight color={renderAgreement(params.animalDetails.dogAgreement)}>
+              <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
                 <Image
                   source={require('../../../../../assets/icons/chien1.png')}
                   style={{ width: 50, height: 50 }}
                 />
               </ViewImage>
-              <ViewImage marginRight color={renderAgreement(params.animalDetails.catAgreement)}>
+              <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
                 <Image
                   source={require('../../../../../assets/icons/chat1.png')}
                   style={{ width: 50, height: 50 }}
                 />
               </ViewImage>
-              <ViewImage color={renderAgreement(params.animalDetails.childAgreement)}>
+              <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
                 <Image
                   source={require('../../../../../assets/icons/kids1.png')}
                   style={{ width: 50, height: 50 }}
@@ -201,14 +201,12 @@ export const AnimalInformation = (): React.ReactElement => {
               <TitleText>Description privé</TitleText>
             </TitleCard>
             <Spacing size="8" />
-            <Text>
-              {params.animalDetails.privateDescription ?? 'Aucune description pour le moment'}
-            </Text>
+            <Text>{animalDetails.privateDescription ?? 'Aucune description pour le moment'}</Text>
           </Card>
           <Spacing size="32" />
         </ScrollView>
       </Container>
-      <BottomSheetAnimal bottomSheetModalRef={bottomSheetModalRef} params={params} />
+      <BottomSheetAnimal bottomSheetModalRef={bottomSheetModalRef} animalDetails={animalDetails} />
     </Layout>
   )
 }

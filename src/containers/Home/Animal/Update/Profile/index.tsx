@@ -13,7 +13,7 @@ import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import * as Yup from 'yup'
 import { AnimalRouteParams } from '../../Router/type'
-import { CheckBoxComponent } from './Checkbox'
+import { CheckBoxComponent } from '../Checkbox'
 import { Card, Container } from './Styled'
 
 export const AnimalUpdate = () => {
@@ -211,6 +211,7 @@ export const AnimalUpdate = () => {
             )}
           </Formik>
         </Card>
+        <Spacing size="24" />
       </Container>
     </Layout>
   )

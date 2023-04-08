@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Animal } from '..'
 import { AnimalInformation } from '../Information'
 import { AnimalUpdate } from '../Update/Profile'
+import { UpdateAnimalSituation } from '../Update/Situation'
 import { AnimalRouteParams } from './type'
 
 export const AnimalRouter: React.FC = () => {
@@ -23,6 +24,11 @@ export const AnimalRouter: React.FC = () => {
       <Tab.Screen
         name="animalUpdateProfil"
         component={AnimalUpdate}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Tab.Screen
+        name="animalUpdateSituation"
+        component={UpdateAnimalSituation}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

@@ -25,6 +25,13 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
     })
   }
 
+  const handleViewEditSituation = () => {
+    bottomSheetModalRef.current.close()
+    navigation.navigate('animalUpdateSituation', {
+      animalDetails: params.animalDetails,
+    })
+  }
+
   const renderBackdrop = useCallback(
     (props: any) => (
       <BottomSheetBackdrop
@@ -48,7 +55,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
     {
       name: 'Éditer la situation',
       icon: <IconAntDesign name="edit" size={20} style={{ paddingRight: 16 }} />,
-      press: handleViewEditProfil,
+      press: handleViewEditSituation,
       chevron: true,
     },
     {

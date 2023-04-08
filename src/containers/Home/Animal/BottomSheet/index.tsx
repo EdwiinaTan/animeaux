@@ -10,7 +10,7 @@ import { AnimalRouteParams } from '../Router/type'
 import { BottomSheetProps } from './Type'
 
 export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModalRef, params }) => {
-  const snapPoints = ['24%']
+  const snapPoints = ['30%']
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
 
@@ -41,6 +41,12 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
   const listBottomSheet = [
     {
       name: 'Éditer le profil',
+      icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,
+      press: handleViewEditProfil,
+      chevron: true,
+    },
+    {
+      name: 'Éditer la situation',
       icon: <IconAntDesign name="edit" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewEditProfil,
       chevron: true,

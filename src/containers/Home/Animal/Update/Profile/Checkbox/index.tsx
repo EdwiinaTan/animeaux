@@ -1,26 +1,48 @@
 import { CheckBox } from 'react-native-elements'
-import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
+import {
+  AnimalAgreement,
+  AnimalGenderEnum,
+  AnimalReasonEnum,
+  AnimalStatusEnum,
+  AnimalTypeEnum,
+} from 'src/types/Animal/enum'
 
-export const CheckBoxComponent = (isFieldActive, option, values, handleChange) => {
+interface CheckboxProps {
+  animal: {
+    label: string
+    value: any
+  }
+  values:
+    | AnimalTypeEnum
+    | AnimalGenderEnum
+    | AnimalStatusEnum
+    | AnimalReasonEnum
+    | AnimalAgreement
+    | AnimalAgreement
+    | AnimalAgreement
+  handleChange: {
+    (e: React.ChangeEvent<any>): void
+    <T = string | React.ChangeEvent<any>>(field: T): T extends React.ChangeEvent<any>
+      ? void
+      : (e: string | React.ChangeEvent<any>) => void
+  }
+}
+
+export const CheckBoxComponent: React.FC<CheckboxProps> = ({ animal, values, handleChange }) => {
   return (
     <CheckBox
       center
       containerStyle={{
-        borderColor: isFieldActive(option.value),
         backgroundColor: theme.lightColors?.white,
         paddingRight: 0,
         marginRight: 0,
       }}
-      textStyle={{ color: isFieldActive(option.value) }}
-      key={option.value}
-      title={option.label}
-      checkedIcon={
-        <IconMaterialCommunityIcons name={option.icon} size={18} color={theme.lightColors.grey0} />
-      }
-      uncheckedIcon={<IconMaterialCommunityIcons name={option.icon} size={18} color="grey" />}
-      checked={values.option === option.value}
-      onPress={() => handleChange('option')(option.value)}
+      key={animal.value}
+      title={animal.label}
+      checkedColor={theme.lightColors.grey0}
+      checked={values === animal.value}
+      onPress={handleChange}
     />
   )
 }

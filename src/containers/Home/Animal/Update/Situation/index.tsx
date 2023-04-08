@@ -46,6 +46,7 @@ export const UpdateAnimalSituation = () => {
     { label: 'Adoptable', value: AnimalStatusEnum.ADOPTABLE },
     { label: 'Réservable', value: AnimalStatusEnum.RESERVABLE },
     { label: 'Indisponible', value: AnimalStatusEnum.INDISPONIBLE },
+    { label: 'Réservé', value: AnimalStatusEnum.RESERVE },
   ]
 
   const reasonArray = [
@@ -109,7 +110,6 @@ export const UpdateAnimalSituation = () => {
                     handleChange={() => handleChange('reason')(reason.value)}
                   />
                 ))}
-                <Spacing size="8" />
                 <Spacing size="8" />
                 <Text>Entente</Text>
                 <Spacing size="8" />

@@ -1,5 +1,7 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useState } from 'react'
+import { Checkboxes } from 'src/components/Checkboxes/Type'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { AnimalType } from 'src/types/Animal/Type'
@@ -22,6 +24,7 @@ export const AnimalUpdate = () => {
   const onClickGoBack = () => {
     return navigation.goBack()
   }
+  const [isActive, setIsActive] = useState(false)
 
   return (
     <Layout>
@@ -31,6 +34,7 @@ export const AnimalUpdate = () => {
       />
       <Container>
         <Card>
+          <Checkboxes isActive={isActive} setIsActive={setIsActive} />
           <ButtonGroupAnimal title="Espèce" animalTest={<ButtonSpecies animal={animalDetails} />} />
           <ButtonGroupAnimal title="Genre" animalTest={<ButtonGender animal={animalDetails} />} />
           <ButtonGroupAnimal title="Status" animalTest={<ButtonStatus animal={animalDetails} />} />

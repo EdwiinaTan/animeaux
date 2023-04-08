@@ -1,14 +1,15 @@
-import { ScrollView } from 'react-native'
+import { View } from 'react-native'
 import { CheckboxComponent } from 'src/components/Checkbox'
 import { CheckboxesProps } from './Type'
 
 export const Checkboxes: React.FC<CheckboxesProps> = ({ isActive, setIsActive }) => {
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      style={{ paddingLeft: 6, marginRight: 16 }}
-    >
+    // <ScrollView
+    //   horizontal
+    //   showsHorizontalScrollIndicator={false}
+    //   style={{ paddingLeft: 6, marginRight: 16 }}
+    // >
+    <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
       <CheckboxComponent title="Tous" isActive={isActive} setIsActive={setIsActive} name={'paw'} />
       <CheckboxComponent title="Chien" isActive={isActive} setIsActive={setIsActive} name={'dog'} />
       <CheckboxComponent title="Chat" isActive={isActive} setIsActive={setIsActive} name={'cat'} />
@@ -30,6 +31,6 @@ export const Checkboxes: React.FC<CheckboxesProps> = ({ isActive, setIsActive })
         setIsActive={setIsActive}
         name={'snake'}
       />
-    </ScrollView>
+    </View>
   )
 }

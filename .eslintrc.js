@@ -1,0 +1,113 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:prettier/recommended',
+    'plugin:react-i18n/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+    createDefaultProgram: true,
+  },
+  plugins: ['react', '@typescript-eslint', 'react-hooks', 'unused-imports'],
+  rules: {
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      {
+        allowExpressions: true,
+      },
+    ],
+    'import/no-unresolved': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'import/prefer-default-export': 'off',
+    'react/prop-types': 'off',
+    'react/display-name': [0],
+    'react/no-unescaped-entities': [0],
+    'react/jsx-props-no-spreading': [0],
+    radix: [0],
+    'no-underscore-dangle': [0],
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': [0],
+    // TO ENABLED IN FUTURE
+    'react/no-array-index-key': [0],
+    'no-shadow': [0],
+    '@typescript-eslint/no-shadow': [0],
+    'import/prefer-default-export': [0],
+    'import/no-extraneous-dependencies': [0],
+    'no-param-reassign': [0],
+    'react/require-default-props': [0],
+    'consistent-return': [0],
+    'no-plusplus': [0],
+    'react-hooks/exhaustive-deps': [0],
+    'no-cycle': [0],
+    'import/no-cycle': [0],
+    // Custom
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'variable',
+        types: ['boolean'],
+        format: ['camelCase', 'UPPER_CASE', 'PascalCase', 'snake_case'],
+      },
+    ],
+    camelcase: 'off',
+    'max-len': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    'import/no-duplicates': 'off',
+    'import/no-named-as-default': [0],
+    'unused-imports/no-unused-imports-ts': 'error',
+    'unused-imports/no-unused-vars-ts': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      {
+        'ts-expect-error': 'allow-with-description',
+        minimumDescriptionLength: 10,
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
+}

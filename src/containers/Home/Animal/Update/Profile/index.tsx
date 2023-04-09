@@ -1,6 +1,7 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Field, Formik } from 'formik'
+import { useRef } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
@@ -37,6 +38,7 @@ export const AnimalUpdate = () => {
     params: { animalDetails },
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
+  const nameRef = useRef(animalDetails.name)
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -71,29 +73,6 @@ export const AnimalUpdate = () => {
     { label: 'Male', value: AnimalGenderEnum.MALE },
     { label: 'Femelle', value: AnimalGenderEnum.FEMALE },
   ]
-
-  // const statusArray = [
-  //   { label: 'Adopté', value: AnimalStatusEnum.ADOPTE },
-  //   { label: 'Décédé', value: AnimalStatusEnum.DECEDE },
-  //   { label: 'Libre', value: AnimalStatusEnum.LIBRE },
-  //   { label: 'Adoptable', value: AnimalStatusEnum.ADOPTABLE },
-  //   { label: 'Réservable', value: AnimalStatusEnum.RESERVABLE },
-  //   { label: 'Indisponible', value: AnimalStatusEnum.INDISPONIBLE },
-  // ]
-
-  // const reasonArray = [
-  //   { label: 'Décès du propriétaire', value: AnimalReasonEnum.DECES_DU_PROPRIETAIRE },
-  //   { label: 'Abandon', value: AnimalReasonEnum.ABANDON },
-  //   { label: 'Maltraitance', value: AnimalReasonEnum.MALTRAITANCE },
-  //   { label: 'Errance', value: AnimalReasonEnum.ERRANCE },
-  //   { label: 'Autre raison', value: AnimalReasonEnum.AUTRE_RAISON },
-  // ]
-
-  // const agreementArray = [
-  //   { label: 'Oui', value: AnimalAgreement.YES },
-  //   { label: 'Non', value: AnimalAgreement.NO },
-  //   { label: 'Inconnu', value: AnimalAgreement.UNKNOW },
-  // ]
 
   const races = [
     { key: AnimalRaceEnum.BEAGLE, value: AnimalRaceEnum.BEAGLE },
@@ -206,6 +185,7 @@ export const AnimalUpdate = () => {
                       onChange={handleChange('name')}
                       onBlur={handleBlur('name')}
                       value={values.name}
+                      ref={nameRef}
                     />
                   )}
                 </Field>

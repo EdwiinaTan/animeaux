@@ -13,6 +13,7 @@ export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch
         platform="android"
         onBlur={() => updateSearch}
         placeholder="Rechercher"
+        autoCorrect={false}
         onChangeText={(text: string) => setSearch(text)}
         value={search || ''}
         inputContainerStyle={{

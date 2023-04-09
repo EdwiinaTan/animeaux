@@ -3,7 +3,9 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
 import { Text, View } from 'react-native'
-import { ListItem, Overlay } from 'react-native-elements'
+import { Divider, ListItem, Overlay } from 'react-native-elements'
+import { deleteAnimalById } from 'src/client/Animal'
+import { Spacing } from 'src/components/Layout/Spacing'
 import { IconAntDesign, IconFontAwesome, IconFoundation } from 'src/constant/Icons'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
@@ -19,6 +21,9 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible)
+    if (isOverlayVisible) {
+      bottomSheetModalRef.current.close()
+    }
   }
 
   const handleViewEditProfil = () => {
@@ -47,6 +52,11 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
     ),
     []
   )
+
+  const deleteAnimal = () => {
+    deleteAnimalById(animalDetails.id)
+    navigation.navigate('animalScreen')
+  }
 
   const listBottomSheet = [
     {
@@ -93,11 +103,23 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
           </ListItem>
         ))}
       </View>
-      <Overlay isVisible={isOverlayVisible} onBackdropPress={toggleOverlay}>
+      <Overlay
+        isVisible={isOverlayVisible}
+        overlayStyle={{ marginHorizontal: 40, padding: 16 }}
+        onBackdropPress={toggleOverlay}
+      >
         <Text>{`Etes vous sûre de vouloir supprimer le ${startsWithVowel(
           animalDetails.name
         )} ?`}</Text>
-        <Text>Ce choix sera irréversible</Text>
+        <Text>Ce choix sera irréversible.</Text>
+        <Spacing size="8" />
+        <Divider />
+        <Spacing size="8" />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Text onPress={deleteAnimal}>Oui</Text>
+          <Divider orientation="vertical" />
+          <Text onPress={toggleOverlay}>Non</Text>
+        </View>
       </Overlay>
     </BottomSheetModal>
   )

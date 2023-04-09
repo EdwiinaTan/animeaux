@@ -172,6 +172,7 @@ export const AnimalUpdate = () => {
                   <Field name="race">
                     {({ field }) => (
                       <SelectList
+                        inputStyles={{ padding: 0 }}
                         boxStyles={{ width: '100%' }}
                         {...field}
                         setSelected={handleChange('race')}

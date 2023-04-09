@@ -31,3 +31,14 @@ export const getAnimalById = (recordId: string) => {
       throw err
     })
 }
+
+export const deleteAnimalById = (recordId: string) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
+  axios
+    .delete(url, {
+      headers: header,
+    })
+    .catch((err) => {
+      console.log('err', err)
+    })
+}

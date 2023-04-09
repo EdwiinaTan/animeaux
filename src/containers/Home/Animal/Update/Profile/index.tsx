@@ -3,12 +3,18 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Field, Formik } from 'formik'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
-import { Button } from 'react-native-elements'
+import { Button, Divider } from 'react-native-elements'
+import { updateAnimalById } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
-import { AnimalGenderEnum, AnimalTypeEnum } from 'src/types/Animal/enum'
+import {
+  AnimalColorEnum,
+  AnimalGenderEnum,
+  AnimalRaceEnum,
+  AnimalTypeEnum,
+} from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import * as Yup from 'yup'
@@ -16,6 +22,15 @@ import { AnimalRouteParams } from '../../Router/type'
 import { CheckBoxComponent } from '../Checkbox'
 import { Card, Container } from './Styled'
 
+export interface AnimalRequest {
+  species: AnimalTypeEnum
+  gender: AnimalGenderEnum
+  name: string
+  alias: string
+  icadNumber: string
+  race: AnimalRaceEnum
+  color: AnimalColorEnum
+}
 export const AnimalUpdate = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
@@ -34,17 +49,17 @@ export const AnimalUpdate = () => {
     return navigation.goBack()
   }
 
-  const initialValues = {
-    animal: animalDetails.species,
+  const initialValues: AnimalRequest = {
+    species: animalDetails.species,
     gender: animalDetails.gender,
     name: animalDetails.name,
     alias: animalDetails.alias,
-    icad: animalDetails.icadNumber,
+    icadNumber: animalDetails.icadNumber,
     race: animalDetails.race,
     color: animalDetails.color,
   }
 
-  const animals = [
+  const species = [
     { label: 'Chien', value: AnimalTypeEnum.DOG },
     { label: 'Chat', value: AnimalTypeEnum.CAT },
     { label: 'Rongeur', value: AnimalTypeEnum.RONDENT },
@@ -80,11 +95,59 @@ export const AnimalUpdate = () => {
   //   { label: 'Inconnu', value: AnimalAgreement.UNKNOW },
   // ]
 
-  const options = [
-    { label: 'Option 1', value: 'option1' },
-    { label: 'Option 2', value: 'option2' },
-    { label: 'Option 3', value: 'option3' },
+  const races = [
+    { key: AnimalRaceEnum.BEAGLE, value: AnimalRaceEnum.BEAGLE },
+    { key: AnimalRaceEnum.BERGER_ALLEMAND, value: AnimalRaceEnum.BERGER_ALLEMAND },
+    { key: AnimalRaceEnum.BERGER_SERBE, value: AnimalRaceEnum.BERGER_SERBE },
+    { key: AnimalRaceEnum.BORDER_COLLIE, value: AnimalRaceEnum.BORDER_COLLIE },
+    { key: AnimalRaceEnum.BOULEDOGUE_ANGLAIS, value: AnimalRaceEnum.BOULEDOGUE_ANGLAIS },
+    { key: AnimalRaceEnum.BOULEDOGUE_FRANCAIS, value: AnimalRaceEnum.BOULEDOGUE_FRANCAIS },
+    { key: AnimalRaceEnum.BOWER, value: AnimalRaceEnum.BOWER },
+    { key: AnimalRaceEnum.CANICHE, value: AnimalRaceEnum.CANICHE },
+    { key: AnimalRaceEnum.COCHON_INDE, value: AnimalRaceEnum.COCHON_INDE },
+    { key: AnimalRaceEnum.CROISE, value: AnimalRaceEnum.CROISE },
+    { key: AnimalRaceEnum.DOGUE_ARGENTIN, value: AnimalRaceEnum.DOGUE_ARGENTIN },
+    { key: AnimalRaceEnum.EUROPEEN, value: AnimalRaceEnum.EUROPEEN },
+    { key: AnimalRaceEnum.GRIFFON, value: AnimalRaceEnum.GRIFFON },
+    { key: AnimalRaceEnum.JACK_RUSSEL, value: AnimalRaceEnum.JACK_RUSSEL },
+    { key: AnimalRaceEnum.LAPIN, value: AnimalRaceEnum.LAPIN },
+    { key: AnimalRaceEnum.MALINOIS, value: AnimalRaceEnum.MALINOIS },
+    { key: AnimalRaceEnum.PEKINOIS, value: AnimalRaceEnum.PEKINOIS },
+    { key: AnimalRaceEnum.PINSCHER, value: AnimalRaceEnum.PINSCHER },
+    { key: AnimalRaceEnum.ROTTWEILER, value: AnimalRaceEnum.ROTTWEILER },
+    { key: AnimalRaceEnum.SIAMOIS, value: AnimalRaceEnum.SIAMOIS },
+    { key: AnimalRaceEnum.STAFF, value: AnimalRaceEnum.STAFF },
+    { key: AnimalRaceEnum.TECKEL, value: AnimalRaceEnum.TECKEL },
   ]
+
+  const colors = [
+    { key: AnimalColorEnum.BEIGE, value: AnimalColorEnum.BEIGE },
+    { key: AnimalColorEnum.BLANC, value: AnimalColorEnum.BLANC },
+    { key: AnimalColorEnum.BLEU, value: AnimalColorEnum.BLEU },
+    { key: AnimalColorEnum.BRINGE, value: AnimalColorEnum.BRINGE },
+    { key: AnimalColorEnum.CHOCOLAT, value: AnimalColorEnum.CHOCOLAT },
+    { key: AnimalColorEnum.ECAILLE_DE_TORTUE, value: AnimalColorEnum.ECAILLE_DE_TORTUE },
+    { key: AnimalColorEnum.FAUVE, value: AnimalColorEnum.FAUVE },
+    { key: AnimalColorEnum.FAUVE_NOIR, value: AnimalColorEnum.FAUVE_NOIR },
+    { key: AnimalColorEnum.GRIS, value: AnimalColorEnum.GRIS },
+    { key: AnimalColorEnum.GRIS_BLANC, value: AnimalColorEnum.GRIS_BLANC },
+    { key: AnimalColorEnum.MARRON, value: AnimalColorEnum.MARRON },
+    { key: AnimalColorEnum.MARRON_BLANC, value: AnimalColorEnum.MARRON_BLANC },
+    { key: AnimalColorEnum.NOIR, value: AnimalColorEnum.NOIR },
+    { key: AnimalColorEnum.ROUX, value: AnimalColorEnum.ROUX },
+    { key: AnimalColorEnum.ROUX_BLANC, value: AnimalColorEnum.ROUX_BLANC },
+    { key: AnimalColorEnum.TIGRE, value: AnimalColorEnum.TIGRE },
+    { key: AnimalColorEnum.TIBRE_BLANC, value: AnimalColorEnum.TIBRE_BLANC },
+    { key: AnimalColorEnum.TIGRE_ROUX, value: AnimalColorEnum.TIGRE_ROUX },
+    { key: AnimalColorEnum.TRICOLORE, value: AnimalColorEnum.TRICOLORE },
+    { key: AnimalColorEnum.TYPE_SIAMOIS, value: AnimalColorEnum.TYPE_SIAMOIS },
+    { key: AnimalColorEnum.NOIR_BLANC, value: AnimalColorEnum.NOIR_BLANC },
+    { key: AnimalColorEnum.CREME, value: AnimalColorEnum.CREME },
+  ]
+
+  const updateAnimal = (values: AnimalRequest) => {
+    updateAnimalById(animalDetails.id, values)
+  }
 
   return (
     <Layout>
@@ -97,32 +160,38 @@ export const AnimalUpdate = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={(values) => console.log('submit: ', values)}
+            onSubmit={(values: AnimalRequest) => {
+              updateAnimal(values)
+            }}
           >
             {({ handleChange, values, handleSubmit, handleBlur }) => (
-              <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                <Text>Espèce</Text>
-                <Spacing size="8" />
-                {animals.map((animal, key) => (
-                  <CheckBoxComponent
-                    key={`specie_${key}`}
-                    animal={animal}
-                    values={values.animal}
-                    handleChange={() => handleChange('animal')(animal.value)}
-                  />
-                ))}
+              <>
+                <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                  <Text>Espèce</Text>
+                  <Spacing size="8" />
+                  {species.map((specie, key) => (
+                    <CheckBoxComponent
+                      key={`species_${key}`}
+                      animal={specie}
+                      values={values.species}
+                      handleChange={() => handleChange('species')(specie.value)}
+                    />
+                  ))}
+                  <Spacing size="24" />
+                  <Text>Genre</Text>
+                  <Spacing size="8" />
+                  {genderArray.map((gender, key) => (
+                    <CheckBoxComponent
+                      key={`gender_${key}`}
+                      animal={gender}
+                      values={values.gender}
+                      handleChange={() => handleChange('gender')(gender.value)}
+                    />
+                  ))}
+                </View>
                 <Spacing size="24" />
-                <Text>Genre</Text>
+                <Divider />
                 <Spacing size="8" />
-                {genderArray.map((gender, key) => (
-                  <CheckBoxComponent
-                    key={`gender_${key}`}
-                    animal={gender}
-                    values={values.gender}
-                    handleChange={() => handleChange('gender')(gender.value)}
-                  />
-                ))}
-                <Spacing size="24" />
                 <Text>Informations</Text>
                 <Spacing size="8" />
                 <Text style={{ fontSize: 15, marginBottom: 5 }}>Nom</Text>
@@ -131,10 +200,9 @@ export const AnimalUpdate = () => {
                     <TextInput
                       {...field}
                       style={styles.input}
-                      placeholder="Veuillez mettre le nom de l'animal"
-                      // onChangeText={handleChange('nameAnimal')}
+                      placeholder="Veuillez mettre le nom de l’animal"
+                      onChangeText={handleChange('name')}
                       onChange={handleChange('name')}
-                      autoCapitalize="words"
                       onBlur={handleBlur('name')}
                       value={values.name}
                     />
@@ -147,6 +215,7 @@ export const AnimalUpdate = () => {
                       {...field}
                       style={styles.input}
                       placeholder="Veuillez mettre l’alias"
+                      onChangeText={handleChange('alias')}
                       onChange={handleChange('alias')}
                       onBlur={handleBlur('alias')}
                       value={values.alias}
@@ -154,15 +223,16 @@ export const AnimalUpdate = () => {
                   )}
                 </Field>
                 <Text style={{ fontSize: 15, marginBottom: 5 }}>Icad</Text>
-                <Field name="icad">
+                <Field name="icadNumber">
                   {({ field }) => (
                     <TextInput
                       {...field}
                       style={styles.input}
                       placeholder="Veuillez mettre le numéro icad"
-                      onChange={handleChange('icad')}
-                      onBlur={handleBlur('icad')}
-                      value={values.icad}
+                      onChangeText={handleChange('icadNumber')}
+                      onChange={handleChange('icadNumber')}
+                      onBlur={handleBlur('icadNumber')}
+                      value={values.icadNumber}
                     />
                   )}
                 </Field>
@@ -177,9 +247,9 @@ export const AnimalUpdate = () => {
                         {...field}
                         setSelected={handleChange('race')}
                         onChange={handleChange('race')}
-                        data={options}
+                        data={races}
                         placeholder="Veuillez choisir la race"
-                        // defaultOption={{ label: 'race', value: 'race' }}
+                        defaultOption={{ key: animalDetails.race, value: animalDetails.race }}
                         save="value"
                         value={values.race}
                       />
@@ -197,9 +267,9 @@ export const AnimalUpdate = () => {
                         {...field}
                         setSelected={handleChange('color')}
                         onChange={handleChange('color')}
-                        data={options}
+                        data={colors}
                         placeholder="Veuillez choisir la couleur"
-                        // defaultOption={{ label: 'race', value: 'race' }}
+                        defaultOption={{ key: animalDetails.color, value: animalDetails.color }}
                         save="value"
                         value={values.color}
                       />
@@ -208,7 +278,7 @@ export const AnimalUpdate = () => {
                 </View>
                 <Spacing size="24" />
                 <Button title="Submit" onPress={() => handleSubmit()} />
-              </View>
+              </>
             )}
           </Formik>
         </Card>

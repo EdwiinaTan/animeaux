@@ -79,7 +79,6 @@ export const AnimalInformation = (): React.ReactElement => {
 
   const dateA = moment(new Date())
   const dateB = moment(animalDetails.birthday)
-  console.log('aaa', dateA.diff(dateB, 'years'))
 
   return (
     <Layout>

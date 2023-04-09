@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { AIRTABLE_API_KEY, AIRTABLE_APP_ID } from 'config'
+import { AnimalRequest } from 'src/containers/Home/Animal/Update/Profile'
 
 export const header = {
   'content-type': 'application/json; charset=utf-8',
@@ -41,4 +42,33 @@ export const deleteAnimalById = (recordId: string) => {
     .catch((err) => {
       console.log('err', err)
     })
+}
+
+// createdTime: new Date(),
+// fields: data,
+// id: recordId,
+
+// const baseAirtable = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_APP_ID)
+
+export const updateAnimalById = (recordId: string, data: AnimalRequest) => {
+  console.log('data', data)
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
+  axios
+    .patch(
+      url,
+      {
+        fields: { ...data },
+      },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+  // baseAirtable('animal').update([
+  //     fields: {
+  //       name: 'Bloom',
+  //     },
+  // ])
 }

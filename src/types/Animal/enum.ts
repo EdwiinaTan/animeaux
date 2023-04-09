@@ -72,6 +72,29 @@ export enum AnimalStatusEnum {
   ADOPTE = 'adopté',
 }
 
+export enum AnimalPlaceCareEnum {
+  COUILLY_PONT_AUX_DAMES = 'Couilly-Pont-aux-Dames',
+  FAREMOUTIERS = 'Faremoutiers',
+  JOSSIGNY = 'Jossigny',
+  LA_FERTE_SOUS_JOUARRE = 'La ferté sous Jouarre',
+  LA_PLESSIS_BELLEVILLE = 'La Plessis Belleville',
+  LAGNY_SUR_MARNE = 'Lagny-sur-Marne',
+  LIZY_SUR_OURCQ = 'Lizy-sur-Ourcq',
+  LOGNES = 'Lognes',
+  MAREUIL_LES_MEAUX = 'Mareuil-les-Meaux',
+  MEAUX = 'Meaux',
+  MORTERY = 'Mortery',
+  NANTEUIL_LES_MEAUX = 'Nanteuil-les-Meaux',
+  NOISY_LE_GRAND = 'Noisy le Grand',
+  PARIS = 'Paris',
+  POINCY = 'Poincy',
+  PROVINS = 'Provins',
+  SAINT_PATHUS = 'Saint-Pathus',
+  SOIGNOLLES_EN_BRIE = 'Soignolles-en-Brie',
+  TORCY = 'Torcy',
+  VILLENOY = 'Villenoy',
+}
+
 export enum AnimalReasonEnum {
   ABANDON = 'abandon',
   MALTRAITANCE = 'maltraitance',

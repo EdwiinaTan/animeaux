@@ -147,6 +147,7 @@ export const AnimalUpdate = () => {
 
   const updateAnimal = (values: AnimalRequest) => {
     updateAnimalById(animalDetails.id, values)
+    navigation.goBack()
   }
 
   return (
@@ -243,8 +244,9 @@ export const AnimalUpdate = () => {
                     {({ field }) => (
                       <SelectList
                         inputStyles={{ padding: 0 }}
-                        boxStyles={{ width: '100%' }}
+                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
                         {...field}
+                        searchPlaceholder="Rechercher"
                         setSelected={handleChange('race')}
                         onChange={handleChange('race')}
                         data={races}
@@ -263,8 +265,9 @@ export const AnimalUpdate = () => {
                   <Field name="color">
                     {({ field }) => (
                       <SelectList
-                        boxStyles={{ width: '100%' }}
+                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
                         {...field}
+                        searchPlaceholder="Rechercher"
                         setSelected={handleChange('color')}
                         onChange={handleChange('color')}
                         data={colors}

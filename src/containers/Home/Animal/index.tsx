@@ -20,6 +20,7 @@ export const Animal = (): React.ReactElement => {
   const [search, setSearch] = useState<string>()
   const [isActive, setIsActive] = useState<AnimalTypeEnum>(AnimalTypeEnum.ALL)
   const bottomSheetModalRef = useRef(null)
+  const listRef = useRef(null)
   const navigation = useNavigation()
   const snapPoints = ['30%']
   const { status, animal } = useGetAnimals() //useEffect
@@ -30,9 +31,11 @@ export const Animal = (): React.ReactElement => {
     refacto()
   }, [search, animal, isActive, status])
 
-  const handleScrollTo = (y) => {
-    scrollViewRef.current.scrollTo({ y, animated: true })
-  }
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      listRef.current?.scrollToOffset({ offset: 0, animated: false })
+    })
+  }, [navigation])
 
   const refacto = () => {
     // ça marche mais à refacto lol
@@ -110,13 +113,12 @@ export const Animal = (): React.ReactElement => {
     return <CardContainer animal={item.fields} />
   }
 
-  const listRef = useRef(null)
-
-  useEffect(() => {
-    navigation.addListener('focus', () => {
-      listRef.current?.scrollToOffset({ offset: 0, animated: false })
-    })
-  }, [navigation])
+  const renderSearchNotFound = () => {
+    if (isActive === AnimalTypeEnum.ALL) {
+      return 'animal'
+    }
+    return isActive
+  }
 
   // faire icons + text => aucun animal / chien trouvé
   return (
@@ -145,9 +147,9 @@ export const Animal = (): React.ReactElement => {
                 <SkeletonCard />
               </View>
             ) : search ? (
-              <View>
-                <Text style={{ textAlign: 'center' }}>Aucun {isActive} trouvé</Text>
-              </View>
+              <Text style={{ textAlign: 'center' }}>
+                {`Aucun ${renderSearchNotFound()} trouvé`}
+              </Text>
             ) : (
               <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
             )

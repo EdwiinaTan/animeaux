@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { HostFamily } from '..'
-import { AnimalUpdate } from '../../Animal/Update/Profile'
 import { HostFamilyInformation } from '../Information'
+import { HostFamilyUpdate } from '../Update'
 import { HostFamilyRouteParams } from './type'
 
 export const HostFamilyRouter: React.FC = () => {
@@ -22,7 +22,7 @@ export const HostFamilyRouter: React.FC = () => {
       />
       <Tab.Screen
         name="hostFamilyUpdate"
-        component={AnimalUpdate} // fix
+        component={HostFamilyUpdate}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

@@ -1,5 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useRef } from 'react'
 import { ActivityIndicator, ImageSourcePropType, Text } from 'react-native'
 import { Image } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
@@ -13,6 +14,7 @@ import email from '../../../../../assets/icons/e-mail.png'
 import jobSeeking from '../../../../../assets/icons/job-seeking.png'
 import play from '../../../../../assets/icons/play.png'
 import smartphone from '../../../../../assets/icons/smartphones.png'
+import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
 
 import {
@@ -30,14 +32,15 @@ export const HostFamilyInformation = (): React.ReactElement => {
     params: { hostFamilyDetails },
   } = route
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
+  const bottomSheetModalRef = useRef(null)
 
   const onClickGoBack = () => {
     return navigation.goBack()
   }
 
-  // const toggleOverlay = () => {
-  //   setVisible(!visible)
-  // }
+  const handlePresentModal = () => {
+    bottomSheetModalRef.current?.present()
+  }
 
   const renderField = (image: ImageSourcePropType, value: string) => {
     if (value) {
@@ -58,7 +61,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
       <HeaderComponent
         onClickGoBack={onClickGoBack}
         title={startsWithVowel(hostFamilyDetails.firstname)}
-        // toggleOverlay={toggleOverlay}
+        toggleOverlay={handlePresentModal}
       />
       <Container>
         <Spacing size="8" />
@@ -92,7 +95,10 @@ export const HostFamilyInformation = (): React.ReactElement => {
         </ContainerDescription>
         {/* <Text>Historique de prise en charge d'animal</Text> */}
       </Container>
-      {/* <BottomSheetAnimal setVisible={setVisible} visible={visible} toggleOverlay={toggleOverlay} /> */}
+      <BottomSheetHostFamily
+        bottomSheetModalRef={bottomSheetModalRef}
+        hostFamilyDetails={hostFamilyDetails}
+      />
     </Layout>
   )
 }

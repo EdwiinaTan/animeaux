@@ -31,3 +31,29 @@ export const getHostFamilyById = (recordId: string) => {
       throw err
     })
 }
+
+export const deleteHostFamilyById = (recordId: string) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
+  axios
+    .delete(url, {
+      headers: header,
+    })
+    .catch((err) => {
+      console.log('err', err)
+    })
+}
+
+export const updateHostFamilyById = (recordId: string, data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
+  axios
+    .patch(
+      url,
+      { fields: { ...data } },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+}

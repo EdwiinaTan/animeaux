@@ -23,13 +23,12 @@ export const Animal = (): React.ReactElement => {
   const listRef = useRef(null)
   const navigation = useNavigation()
   const snapPoints = ['30%']
-  const { status, animal } = useGetAnimals() //useEffect
-  const [filtered, setFiltered] = useState<AnimalClient[]>(animal)
-  const scrollViewRef = useRef(null)
+  const { statusAnimal, animalData } = useGetAnimals() //useEffect
+  const [filtered, setFiltered] = useState<AnimalClient[]>(animalData)
 
   useEffect(() => {
     refacto()
-  }, [search, animal, isActive, status])
+  }, [search, animalData, isActive, statusAnimal])
 
   useEffect(() => {
     navigation.addListener('focus', () => {
@@ -42,13 +41,13 @@ export const Animal = (): React.ReactElement => {
     if (search && search.length > 0) {
       if (isActive === AnimalTypeEnum.ALL) {
         setFiltered(
-          animal.filter(
+          animalData.filter(
             (animalSearch: AnimalClient) =>
               animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
           )
         )
       } else {
-        const all = animal.filter(
+        const all = animalData.filter(
           (animalSearch: AnimalClient) => animalSearch.fields.species === isActive
         )
         setFiltered(
@@ -60,10 +59,12 @@ export const Animal = (): React.ReactElement => {
       }
     } else {
       if (isActive === AnimalTypeEnum.ALL) {
-        setFiltered(animal)
+        setFiltered(animalData)
       } else {
         setFiltered(
-          animal.filter((animalSearch: AnimalClient) => animalSearch.fields.species === isActive)
+          animalData.filter(
+            (animalSearch: AnimalClient) => animalSearch.fields.species === isActive
+          )
         )
       }
     }
@@ -127,7 +128,7 @@ export const Animal = (): React.ReactElement => {
         <HeaderComponent title="Animal" toggleOverlay={handlePresentModal} />
         <SearchBarComponent search={search} setSearch={setSearch} />
         <Spacing size="8" />
-        {status !== FetchStatus.LOADING && (
+        {statusAnimal !== FetchStatus.LOADING && (
           <FilterAnimal setIsActive={setIsActive} isActive={isActive} />
         )}
         <FlatList
@@ -139,7 +140,7 @@ export const Animal = (): React.ReactElement => {
           keyExtractor={(item) => item.id}
           renderItem={renderAnimal}
           ListEmptyComponent={
-            status === FetchStatus.LOADING ? (
+            statusAnimal === FetchStatus.LOADING ? (
               <View>
                 <SkeletonCard />
                 <SkeletonCard />

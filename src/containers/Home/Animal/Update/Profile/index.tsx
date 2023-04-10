@@ -31,6 +31,7 @@ export interface AnimalRequest {
   icadNumber: string
   race: AnimalRaceEnum
   color: AnimalColorEnum
+  publicDescription: string
 }
 export const AnimalUpdate = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -59,6 +60,7 @@ export const AnimalUpdate = () => {
     icadNumber: animalDetails.icadNumber,
     race: animalDetails.race,
     color: animalDetails.color,
+    publicDescription: animalDetails.publicDescription,
   }
 
   const species = [
@@ -193,7 +195,9 @@ export const AnimalUpdate = () => {
                 <Field name="alias">
                   {({ field }) => (
                     <TextInput
+                      focusable
                       {...field}
+                      // autoFocus
                       style={styles.input}
                       placeholder="Veuillez mettre l’alias"
                       onChangeText={handleChange('alias')}
@@ -259,6 +263,23 @@ export const AnimalUpdate = () => {
                     )}
                   </Field>
                 </View>
+                <Spacing size="16" />
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Description public</Text>
+                <Field name="publicDescription">
+                  {({ field }) => (
+                    <TextInput
+                      focusable
+                      {...field}
+                      editable
+                      multiline
+                      style={styles.input}
+                      onChangeText={handleChange('publicDescription')}
+                      onChange={handleChange('publicDescription')}
+                      onBlur={handleBlur('publicDescription')}
+                      value={values.publicDescription}
+                    />
+                  )}
+                </Field>
                 <Spacing size="24" />
                 <Button title="Submit" onPress={() => handleSubmit()} />
               </>

@@ -14,6 +14,7 @@ interface CheckboxProps {
     value: any
   }
   values:
+    | string
     | AnimalTypeEnum
     | AnimalGenderEnum
     | AnimalStatusEnum

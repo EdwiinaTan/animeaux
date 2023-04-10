@@ -1,9 +1,10 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Field, Formik } from 'formik'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
+import { updateAnimalById } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -37,14 +38,16 @@ export const UpdateAnimalSituation = () => {
   }
 
   const initialValues = {
-    status: animalDetails.status,
-    reason: animalDetails.reason,
-    userId: animalDetails.userId,
     hostFamilyId: animalDetails.hostFamilyId,
+    status: animalDetails.status,
     placeCare: animalDetails.placeCare,
-    dogAgreement: animalDetails.dogAgreement,
+    reason: animalDetails.reason,
+    childAgreement: animalDetails.childAgreement,
     catAgreement: animalDetails.catAgreement,
-    kidAgreement: animalDetails.childAgreement,
+    dogAgreement: animalDetails.dogAgreement,
+    userId: animalDetails.userId,
+    privateDescription: animalDetails.privateDescription,
+    isSterilised: animalDetails.isSterilised ? 'Oui' : 'Non',
   }
 
   const statusArray = [
@@ -73,40 +76,65 @@ export const UpdateAnimalSituation = () => {
 
   const placeCareArray = [
     {
-      label: AnimalPlaceCareEnum.COUILLY_PONT_AUX_DAMES,
+      key: AnimalPlaceCareEnum.BAILLY_ROMAINVILLIERS,
+      value: AnimalPlaceCareEnum.BAILLY_ROMAINVILLIERS,
+    },
+    {
+      key: AnimalPlaceCareEnum.BARCY,
+      value: AnimalPlaceCareEnum.BARCY,
+    },
+    {
+      key: AnimalPlaceCareEnum.BEAUMONT_DU_GATINAIS,
+      value: AnimalPlaceCareEnum.BEAUMONT_DU_GATINAIS,
+    },
+    {
+      key: AnimalPlaceCareEnum.CHATENEY_SUR_SEINE,
+      value: AnimalPlaceCareEnum.CHATENEY_SUR_SEINE,
+    },
+    {
+      key: AnimalPlaceCareEnum.CONGIS_SUR_THEROUANNE,
+      value: AnimalPlaceCareEnum.CONGIS_SUR_THEROUANNE,
+    },
+    {
+      key: AnimalPlaceCareEnum.COUILLY_PONT_AUX_DAMES,
       value: AnimalPlaceCareEnum.COUILLY_PONT_AUX_DAMES,
     },
-    { label: AnimalPlaceCareEnum.FAREMOUTIERS, value: AnimalPlaceCareEnum.FAREMOUTIERS },
+    { key: AnimalPlaceCareEnum.FAREMOUTIERS, value: AnimalPlaceCareEnum.FAREMOUTIERS },
     { label: AnimalPlaceCareEnum.JOSSIGNY, value: AnimalPlaceCareEnum.JOSSIGNY },
     {
-      label: AnimalPlaceCareEnum.LA_FERTE_SOUS_JOUARRE,
+      key: AnimalPlaceCareEnum.LA_FERTE_SOUS_JOUARRE,
       value: AnimalPlaceCareEnum.LA_FERTE_SOUS_JOUARRE,
     },
     {
-      label: AnimalPlaceCareEnum.LA_PLESSIS_BELLEVILLE,
+      key: AnimalPlaceCareEnum.LA_PLESSIS_BELLEVILLE,
       value: AnimalPlaceCareEnum.LA_PLESSIS_BELLEVILLE,
     },
-    { label: AnimalPlaceCareEnum.LAGNY_SUR_MARNE, value: AnimalPlaceCareEnum.LAGNY_SUR_MARNE },
-    { label: AnimalPlaceCareEnum.LIZY_SUR_OURCQ, value: AnimalPlaceCareEnum.LIZY_SUR_OURCQ },
-    { label: AnimalPlaceCareEnum.LOGNES, value: AnimalPlaceCareEnum.LOGNES },
-    { label: AnimalPlaceCareEnum.MAREUIL_LES_MEAUX, value: AnimalPlaceCareEnum.MAREUIL_LES_MEAUX },
-    { label: AnimalPlaceCareEnum.MEAUX, value: AnimalPlaceCareEnum.MEAUX },
-    { label: AnimalPlaceCareEnum.MORTERY, value: AnimalPlaceCareEnum.MORTERY },
+    { key: AnimalPlaceCareEnum.LAGNY_SUR_MARNE, value: AnimalPlaceCareEnum.LAGNY_SUR_MARNE },
+    { key: AnimalPlaceCareEnum.LIZY_SUR_OURCQ, value: AnimalPlaceCareEnum.LIZY_SUR_OURCQ },
+    { key: AnimalPlaceCareEnum.LOGNES, value: AnimalPlaceCareEnum.LOGNES },
+    { key: AnimalPlaceCareEnum.MAREUIL_LES_MEAUX, value: AnimalPlaceCareEnum.MAREUIL_LES_MEAUX },
+    { key: AnimalPlaceCareEnum.MEAUX, value: AnimalPlaceCareEnum.MEAUX },
+    { key: AnimalPlaceCareEnum.MORTERY, value: AnimalPlaceCareEnum.MORTERY },
     {
-      label: AnimalPlaceCareEnum.NANTEUIL_LES_MEAUX,
+      key: AnimalPlaceCareEnum.NANTEUIL_LES_MEAUX,
       value: AnimalPlaceCareEnum.NANTEUIL_LES_MEAUX,
     },
-    { label: AnimalPlaceCareEnum.NOISY_LE_GRAND, value: AnimalPlaceCareEnum.NOISY_LE_GRAND },
-    { label: AnimalPlaceCareEnum.PARIS, value: AnimalPlaceCareEnum.PARIS },
-    { label: AnimalPlaceCareEnum.POINCY, value: AnimalPlaceCareEnum.POINCY },
-    { label: AnimalPlaceCareEnum.PROVINS, value: AnimalPlaceCareEnum.PROVINS },
-    { label: AnimalPlaceCareEnum.SAINT_PATHUS, value: AnimalPlaceCareEnum.SAINT_PATHUS },
+    { key: AnimalPlaceCareEnum.NOISY_LE_GRAND, value: AnimalPlaceCareEnum.NOISY_LE_GRAND },
+    { key: AnimalPlaceCareEnum.PARIS, value: AnimalPlaceCareEnum.PARIS },
+    { key: AnimalPlaceCareEnum.POINCY, value: AnimalPlaceCareEnum.POINCY },
+    { key: AnimalPlaceCareEnum.PROVINS, value: AnimalPlaceCareEnum.PROVINS },
+    { key: AnimalPlaceCareEnum.SAINT_PATHUS, value: AnimalPlaceCareEnum.SAINT_PATHUS },
     {
-      label: AnimalPlaceCareEnum.SOIGNOLLES_EN_BRIE,
+      key: AnimalPlaceCareEnum.SOIGNOLLES_EN_BRIE,
       value: AnimalPlaceCareEnum.SOIGNOLLES_EN_BRIE,
     },
-    { label: AnimalPlaceCareEnum.TORCY, value: AnimalPlaceCareEnum.TORCY },
-    { label: AnimalPlaceCareEnum.VILLENOY, value: AnimalPlaceCareEnum.VILLENOY },
+    { key: AnimalPlaceCareEnum.TORCY, value: AnimalPlaceCareEnum.TORCY },
+    { key: AnimalPlaceCareEnum.VILLENOY, value: AnimalPlaceCareEnum.VILLENOY },
+  ]
+
+  const isSterilisedArray = [
+    { label: 'Oui', value: 'Oui' },
+    { label: 'Non', value: 'Non' },
   ]
 
   const hostFamiliesDataList = () => {
@@ -114,7 +142,7 @@ export const UpdateAnimalSituation = () => {
     if (statusHostFamilies === 'success') {
       hostFamiliesData.map((hostFamily) => {
         tab.push({
-          label: hostFamily.fields.id,
+          key: hostFamily.fields.id,
           value: `${hostFamily.fields.firstname} ${hostFamily.fields.lastname}`,
         })
       })
@@ -126,7 +154,7 @@ export const UpdateAnimalSituation = () => {
     if (statusUsers === 'success') {
       usersData.map(({ fields }) => {
         tab.push({
-          label: fields.id,
+          key: fields.id,
           value: `${fields.firstname} ${fields.lastname}`,
         })
       })
@@ -152,6 +180,11 @@ export const UpdateAnimalSituation = () => {
     }
   }
 
+  const updateAnimal = (values) => {
+    updateAnimalById(animalDetails.id, values)
+    navigation.goBack()
+  }
+
   return (
     <Layout>
       <HeaderComponent
@@ -163,7 +196,7 @@ export const UpdateAnimalSituation = () => {
           <Formik
             initialValues={initialValues}
             // validationSchema={validationSchema}
-            onSubmit={(values) => console.log('submit: ', values)}
+            onSubmit={(values) => updateAnimal(values)}
           >
             {({ handleChange, values, handleSubmit, handleBlur }) => (
               <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -194,7 +227,7 @@ export const UpdateAnimalSituation = () => {
                         data={hostFamiliesDataList()}
                         placeholder="Veuillez choisir la famille d’accueil"
                         defaultOption={renderDefaultOptionHostFamily()}
-                        save="value"
+                        save="key"
                         value={values.hostFamilyId}
                       />
                     )}
@@ -213,9 +246,9 @@ export const UpdateAnimalSituation = () => {
                         setSelected={handleChange('userId')}
                         onChange={handleChange('userId')}
                         data={usersDataList()}
-                        placeholder="Veuillez choisir la famille d’accueil"
+                        placeholder="Veuillez choisir l’utilisateur"
                         defaultOption={renderDefaultOptionUser()}
-                        save="value"
+                        save="key"
                         value={values.userId}
                       />
                     )}
@@ -257,6 +290,17 @@ export const UpdateAnimalSituation = () => {
                   />
                 ))}
                 <Spacing size="8" />
+                <Text>{animalDetails.name} est stérilisé ?</Text>
+                <Spacing size="8" />
+                {isSterilisedArray.map((isSterilised, key) => (
+                  <CheckBoxComponent
+                    key={`isSterilised_${key}`}
+                    animal={isSterilised}
+                    values={values.isSterilised}
+                    handleChange={() => handleChange('isSterilised')(isSterilised.value)}
+                  />
+                ))}
+                <Spacing size="8" />
                 <Text>Entente</Text>
                 <Spacing size="8" />
                 <Text>Chien</Text>
@@ -281,15 +325,31 @@ export const UpdateAnimalSituation = () => {
                 ))}
                 <Text>Enfant</Text>
                 <Spacing size="8" />
-                {agreementArray.map((kidAgreement, key) => (
+                {agreementArray.map((childAgreement, key) => (
                   <CheckBoxComponent
-                    key={`catAgreement_${key}`}
-                    animal={kidAgreement}
-                    values={values.kidAgreement}
-                    handleChange={() => handleChange('kidAgreement')(kidAgreement.value)}
+                    key={`childAgreement_${key}`}
+                    animal={childAgreement}
+                    values={values.childAgreement}
+                    handleChange={() => handleChange('childAgreement')(childAgreement.value)}
                   />
                 ))}
                 <Spacing size="8" />
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Description privée</Text>
+                <Field name="privateDescription">
+                  {({ field }) => (
+                    <TextInput
+                      focusable
+                      {...field}
+                      editable
+                      multiline
+                      style={styles.input}
+                      onChangeText={handleChange('privateDescription')}
+                      onChange={handleChange('privateDescription')}
+                      onBlur={handleBlur('privateDescription')}
+                      value={values.privateDescription}
+                    />
+                  )}
+                </Field>
                 <Button title="Submit" onPress={() => handleSubmit()} />
               </View>
             )}

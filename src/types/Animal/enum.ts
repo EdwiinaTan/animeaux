@@ -63,20 +63,25 @@ export enum AnimalColorEnum {
 }
 
 export enum AnimalStatusEnum {
-  LIBRE = 'libre',
-  DECEDE = 'décédé',
   ADOPTABLE = 'adoptable',
+  ADOPTE = 'adopté',
+  DECEDE = 'décédé',
   INDISPONIBLE = 'indisponible',
+  LIBRE = 'libre',
   RESERVABLE = 'réservable',
   RESERVE = 'réservé',
-  ADOPTE = 'adopté',
 }
 
 export enum AnimalPlaceCareEnum {
+  BAILLY_ROMAINVILLIERS = 'Bailly-Romainvilliers',
+  BARCY = 'Barcy',
+  BEAUMONT_DU_GATINAIS = 'Beaumont du Gatinais',
+  CHATENEY_SUR_SEINE = 'Chateney sur Seine',
+  CONGIS_SUR_THEROUANNE = 'Congis-sur-Therouanne',
   COUILLY_PONT_AUX_DAMES = 'Couilly-Pont-aux-Dames',
   FAREMOUTIERS = 'Faremoutiers',
   JOSSIGNY = 'Jossigny',
-  LA_FERTE_SOUS_JOUARRE = 'La ferté sous Jouarre',
+  LA_FERTE_SOUS_JOUARRE = 'La Ferté sous Jouarre',
   LA_PLESSIS_BELLEVILLE = 'La Plessis Belleville',
   LAGNY_SUR_MARNE = 'Lagny-sur-Marne',
   LIZY_SUR_OURCQ = 'Lizy-sur-Ourcq',

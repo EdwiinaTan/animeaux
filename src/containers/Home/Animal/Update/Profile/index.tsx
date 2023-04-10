@@ -5,7 +5,7 @@ import { useRef } from 'react'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
-import { updateAnimalById } from 'src/client/Animal'
+import { updateAnimalByIdTest } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -127,7 +127,7 @@ export const AnimalUpdate = () => {
   ]
 
   const updateAnimal = (values: AnimalRequest) => {
-    updateAnimalById(animalDetails.id, values)
+    updateAnimalByIdTest(animalDetails.id, values)
     navigation.goBack()
   }
 

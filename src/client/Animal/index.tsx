@@ -82,3 +82,23 @@ export const updateAnimalById = (recordId: string, data) => {
       console.log('err', err)
     })
 }
+
+export const updateAnimalByIdTest = (recordId: string, data) => {
+  console.log('data', data)
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
+  axios
+    .patch(
+      url,
+      {
+        fields: {
+          ...data,
+        },
+      },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+}

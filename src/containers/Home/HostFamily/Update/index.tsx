@@ -3,7 +3,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Field, Formik } from 'formik'
 import { StyleSheet, Text, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
+import { Button } from 'react-native-elements'
 import { TextInput } from 'react-native-gesture-handler'
+import { updateHostFamilyById } from 'src/client/HostFamily'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -40,10 +42,11 @@ export const HostFamilyUpdate = () => {
     onBreak: hostFamilyDetails.onBreak,
   }
 
-  // const updateAnimal = (values: AnimalRequest) => {
-  //   updateAnimalByIdTest(animalDetails.id, values)
-  //   navigation.goBack()
-  // }
+  const updateAnimal = (values) => {
+    console.log('value', values)
+    updateHostFamilyById(hostFamilyDetails.id, values)
+    navigation.goBack()
+  }
 
   const animalDataList = () => {
     let tab = []
@@ -69,7 +72,7 @@ export const HostFamilyUpdate = () => {
           <Formik
             initialValues={initialValues}
             onSubmit={(values) => {
-              console.log('value', values)
+              updateAnimal(values)
             }}
           >
             {({ handleChange, values, handleSubmit, handleBlur }) => (
@@ -254,6 +257,7 @@ export const HostFamilyUpdate = () => {
                   </Field>
                 </View>
                 <Spacing size="8" />
+                <Button title="Submit" onPress={() => handleSubmit()} />
               </View>
             )}
           </Formik>

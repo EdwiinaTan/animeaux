@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
 import { Text, View } from 'react-native'
 import { Divider, ListItem, Overlay } from 'react-native-elements'
-import { deleteAnimalById } from 'src/client/Animal'
+import { deleteHostFamilyById } from 'src/client/HostFamily'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -46,8 +46,8 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
     []
   )
 
-  const deleteAnimal = () => {
-    deleteAnimalById(hostFamilyDetails.id)
+  const deleteHostFamily = () => {
+    deleteHostFamilyById(hostFamilyDetails.id)
     navigation.navigate('hostFamilyScreen')
   }
 
@@ -97,7 +97,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
         <Divider />
         <Spacing size="8" />
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Text onPress={deleteAnimal}>Oui</Text>
+          <Text onPress={deleteHostFamily}>Oui</Text>
           <Divider orientation="vertical" />
           <Text onPress={toggleOverlay}>Non</Text>
         </View>

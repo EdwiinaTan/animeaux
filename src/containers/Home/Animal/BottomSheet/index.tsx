@@ -3,25 +3,40 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
 import { Text, View } from 'react-native'
-import { ListItem, Overlay } from 'react-native-elements'
+import { Divider, ListItem, Overlay } from 'react-native-elements'
+import { deleteAnimalById } from 'src/client/Animal'
+import { Spacing } from 'src/components/Layout/Spacing'
 import { IconAntDesign, IconFontAwesome, IconFoundation } from 'src/constant/Icons'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
 import { BottomSheetProps } from './Type'
 
-export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModalRef, params }) => {
-  const snapPoints = ['24%']
+export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
+  bottomSheetModalRef,
+  animalDetails,
+}) => {
+  const snapPoints = ['30%']
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible)
+    if (isOverlayVisible) {
+      bottomSheetModalRef.current.close()
+    }
   }
 
   const handleViewEditProfil = () => {
     bottomSheetModalRef.current.close()
     navigation.navigate('animalUpdateProfil', {
-      animalDetails: params.animalDetails,
+      animalDetails: animalDetails,
+    })
+  }
+
+  const handleViewEditSituation = () => {
+    bottomSheetModalRef.current.close()
+    navigation.navigate('animalUpdateSituation', {
+      animalDetails: animalDetails,
     })
   }
 
@@ -38,11 +53,22 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
     []
   )
 
+  const deleteAnimal = () => {
+    deleteAnimalById(animalDetails.id)
+    navigation.navigate('animalScreen')
+  }
+
   const listBottomSheet = [
     {
       name: 'Éditer le profil',
-      icon: <IconAntDesign name="edit" size={20} style={{ paddingRight: 16 }} />,
+      icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewEditProfil,
+      chevron: true,
+    },
+    {
+      name: 'Éditer la situation',
+      icon: <IconAntDesign name="edit" size={20} style={{ paddingRight: 16 }} />,
+      press: handleViewEditSituation,
       chevron: true,
     },
     {
@@ -77,11 +103,23 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({ bottomSheetModal
           </ListItem>
         ))}
       </View>
-      <Overlay isVisible={isOverlayVisible} onBackdropPress={toggleOverlay}>
+      <Overlay
+        isVisible={isOverlayVisible}
+        overlayStyle={{ marginHorizontal: 40, padding: 16 }}
+        onBackdropPress={toggleOverlay}
+      >
         <Text>{`Etes vous sûre de vouloir supprimer le ${startsWithVowel(
-          params?.animalDetails.name
+          animalDetails.name
         )} ?`}</Text>
-        <Text>Ce choix sera irréversible</Text>
+        <Text>Ce choix sera irréversible.</Text>
+        <Spacing size="8" />
+        <Divider />
+        <Spacing size="8" />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <Text onPress={deleteAnimal}>Oui</Text>
+          <Divider orientation="vertical" />
+          <Text onPress={toggleOverlay}>Non</Text>
+        </View>
       </Overlay>
     </BottomSheetModal>
   )

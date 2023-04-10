@@ -10,3 +10,9 @@ export interface UserType {
   animal: string
   note: string
 }
+
+export interface UserClient {
+  createdTime: string
+  fields: UserType
+  id: string
+}

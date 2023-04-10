@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { View } from 'react-native'
 import { ButtonCheckbox } from 'src/components/ButtonCheckbox'
 import { IconIonicons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { AnimalGenderEnum } from 'src/types/Animal/enum'
+import { ContainerButton } from '../Styled'
 import { ItemProps } from '../Type'
 
 export const ButtonAgreement: React.FC<ItemProps> = ({ animal }) => {
@@ -21,15 +21,7 @@ export const ButtonAgreement: React.FC<ItemProps> = ({ animal }) => {
   }
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        flex: 1,
-        flexWrap: 'wrap',
-        paddingBottom: 16,
-      }}
-    >
+    <ContainerButton>
       <ButtonCheckbox
         title="Male"
         icon={
@@ -56,6 +48,6 @@ export const ButtonAgreement: React.FC<ItemProps> = ({ animal }) => {
         color={renderColorActive(AnimalGenderEnum.FEMALE)}
         onPress={() => handleButtonAnimalType(AnimalGenderEnum.FEMALE)}
       />
-    </View>
+    </ContainerButton>
   )
 }

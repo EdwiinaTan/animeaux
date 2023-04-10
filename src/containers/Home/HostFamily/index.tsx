@@ -52,7 +52,7 @@ export const HostFamily = (): React.ReactElement => {
               <SkeletonCard />
             </View>
           ) : search ? (
-            <Text>Aucune famille d’accueil trouvé</Text>
+            <Text style={{ textAlign: 'center' }}>Aucune famille d’accueil trouvé</Text>
           ) : (
             <Text>Aucune famille d’accueil pour le moment</Text>
           )

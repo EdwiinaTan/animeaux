@@ -1,4 +1,5 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
+import { useNavigation } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, Text, View } from 'react-native'
 import 'react-native-gesture-handler'
@@ -17,15 +18,24 @@ import { FilterAnimal } from './Filter'
 
 export const Animal = (): React.ReactElement => {
   const [search, setSearch] = useState<string>()
-  const [filtered, setFiltered] = useState<AnimalClient[]>()
   const [isActive, setIsActive] = useState<AnimalTypeEnum>(AnimalTypeEnum.ALL)
   const bottomSheetModalRef = useRef(null)
+  const listRef = useRef(null)
+  const navigation = useNavigation()
   const snapPoints = ['30%']
-  const { status, animal } = useGetAnimals()
+  const { status, animal } = useGetAnimals() //useEffect
+  const [filtered, setFiltered] = useState<AnimalClient[]>(animal)
+  const scrollViewRef = useRef(null)
 
   useEffect(() => {
     refacto()
-  }, [search, animal, isActive])
+  }, [search, animal, isActive, status])
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      listRef.current?.scrollToOffset({ offset: 0, animated: false })
+    })
+  }, [navigation])
 
   const refacto = () => {
     // ça marche mais à refacto lol
@@ -103,6 +113,13 @@ export const Animal = (): React.ReactElement => {
     return <CardContainer animal={item.fields} />
   }
 
+  const renderSearchNotFound = () => {
+    if (isActive === AnimalTypeEnum.ALL) {
+      return 'animal'
+    }
+    return isActive
+  }
+
   // faire icons + text => aucun animal / chien trouvé
   return (
     <View>
@@ -115,6 +132,7 @@ export const Animal = (): React.ReactElement => {
         )}
         <FlatList
           style={{ height: '100%' }}
+          ref={listRef}
           data={filtered}
           initialNumToRender={5}
           maxToRenderPerBatch={5}
@@ -129,9 +147,9 @@ export const Animal = (): React.ReactElement => {
                 <SkeletonCard />
               </View>
             ) : search ? (
-              <View>
-                <Text style={{ textAlign: 'center' }}>Aucun {isActive} trouvé</Text>
-              </View>
+              <Text style={{ textAlign: 'center' }}>
+                {`Aucun ${renderSearchNotFound()} trouvé`}
+              </Text>
             ) : (
               <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
             )

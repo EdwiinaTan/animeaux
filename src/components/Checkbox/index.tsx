@@ -13,7 +13,7 @@ export const CheckboxComponent: React.FC<CheckboxProps> = ({
   return (
     <CheckBox
       center
-      title={<Text style={{ paddingLeft: 8, paddingBottom: 10 }}>{title}</Text>}
+      title={<Text style={{ paddingLeft: 4 }}>{title}</Text>}
       checked={isActive}
       onPress={() => setIsActive(!isActive)}
       checkedIcon={<IconMaterialCommunityIcons name={name} size={18} color="grey" />}
@@ -21,11 +21,11 @@ export const CheckboxComponent: React.FC<CheckboxProps> = ({
       containerStyle={{
         borderColor: isActive ? theme.lightColors?.grey0 : theme.lightColors?.greyOutline,
         backgroundColor: theme.lightColors?.white,
-        paddingTop: 8,
-        paddingLeft: 8,
+        // paddingTop: 8,
+        // paddingLeft: 8,
         paddingRight: 8,
         marginRight: 0,
-        marginBottom: 0,
+        // marginBottom: 0,
       }}
       wrapperStyle={{}}
     />

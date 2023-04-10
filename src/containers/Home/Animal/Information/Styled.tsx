@@ -10,6 +10,8 @@ export const ViewImage = styled.View<StyledImageProps>`
   margin-right: ${(props: StyledImageProps) => (props.marginRight ? '8px' : 0)};
   flex: 1;
   align-items: center;
+  height: 60px;
+  padding: 4px
   border-width: 2px;
   border-radius: 8px;
   border-color: ${(props: StyledImageProps) => props.color};
@@ -20,6 +22,7 @@ export const ContainerViewImage = styled.View`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  height: 60px;
   flex: 1;
 `
 

@@ -1,8 +1,10 @@
+import { useRef } from 'react'
 import { SearchBar } from 'react-native-elements'
 import { ContainerSearchBar } from './Styled'
 import { SearchBarProps } from './Type'
 
 export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch }) => {
+  const ref = useRef(null)
   const updateSearch = (text: string): void => {
     setSearch(text)
   }
@@ -13,6 +15,8 @@ export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch
         platform="android"
         onBlur={() => updateSearch}
         placeholder="Rechercher"
+        autoCorrect={false}
+        ref={ref}
         onChangeText={(text: string) => setSearch(text)}
         value={search || ''}
         inputContainerStyle={{

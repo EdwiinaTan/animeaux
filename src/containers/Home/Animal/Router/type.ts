@@ -8,4 +8,7 @@ export type AnimalRouteParams = {
   animalUpdateProfil: {
     animalDetails: AnimalType
   }
+  animalUpdateSituation: {
+    animalDetails: AnimalType
+  }
 }

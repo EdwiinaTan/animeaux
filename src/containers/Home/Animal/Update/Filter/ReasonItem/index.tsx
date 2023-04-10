@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { View } from 'react-native'
 import { ButtonCheckbox } from 'src/components/ButtonCheckbox'
 import { theme } from 'src/constant/Theme'
 import { AnimalReasonEnum } from 'src/types/Animal/enum'
+import { ContainerButton } from '../Styled'
 import { ItemProps } from '../Type'
 
 export const ButtonReason: React.FC<ItemProps> = ({ animal }) => {
@@ -20,15 +20,7 @@ export const ButtonReason: React.FC<ItemProps> = ({ animal }) => {
   }
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        flex: 1,
-        flexWrap: 'wrap',
-        paddingBottom: 16,
-      }}
-    >
+    <ContainerButton>
       <ButtonCheckbox
         title="Abandon"
         color={renderColorActive(AnimalReasonEnum.ABANDON)}
@@ -49,6 +41,6 @@ export const ButtonReason: React.FC<ItemProps> = ({ animal }) => {
         color={renderColorActive(AnimalReasonEnum.ERRANCE)}
         onPress={() => handleButtonAnimalType(AnimalReasonEnum.ERRANCE)}
       />
-    </View>
+    </ContainerButton>
   )
 }

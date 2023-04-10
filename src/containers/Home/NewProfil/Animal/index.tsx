@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
+import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
 
 export const AddAnimal = () => {
@@ -42,8 +43,12 @@ export const AddAnimal = () => {
 
   const [currentPosition, setCurrentPosition] = useState(0)
 
-  const onPageChange = () => {
-    setCurrentPosition(currentPosition + 1)
+  const onPageChange = (value: string) => {
+    if (value === 'next') {
+      currentPosition !== 2 ? setCurrentPosition(currentPosition + 1) : setCurrentPosition(2)
+    } else {
+      currentPosition !== 0 ? setCurrentPosition(currentPosition - 1) : setCurrentPosition(0)
+    }
   }
 
   return (
@@ -57,8 +62,14 @@ export const AddAnimal = () => {
         stepCount={3}
         direction="horizontal"
       />
-      <TouchableOpacity onPress={onPageChange}>
-        <Text>NEXT</Text>
+      {currentPosition !== 0 && (
+        <TouchableOpacity onPress={() => onPageChange('prev')}>
+          <Text>Précédent</Text>
+          <Spacing size="24" />
+        </TouchableOpacity>
+      )}
+      <TouchableOpacity onPress={() => onPageChange('next')}>
+        <Text>Suivant</Text>
       </TouchableOpacity>
     </Layout>
   )

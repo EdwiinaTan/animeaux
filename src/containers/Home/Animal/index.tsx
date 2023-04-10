@@ -25,7 +25,6 @@ export const Animal = (): React.ReactElement => {
   const snapPoints = ['30%']
   const { status, animal } = useGetAnimals() //useEffect
   const [filtered, setFiltered] = useState<AnimalClient[]>(animal)
-  const scrollViewRef = useRef(null)
 
   useEffect(() => {
     refacto()

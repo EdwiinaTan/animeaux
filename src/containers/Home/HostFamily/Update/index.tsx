@@ -77,7 +77,7 @@ export const HostFamilyUpdate = () => {
           >
             {({ handleChange, values, handleSubmit, handleBlur }) => (
               <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Nom de famille</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Nom*</Text>
                 <Field name="lastname">
                   {({ field }) => (
                     <TextInput
@@ -92,7 +92,7 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Prénom</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Prénom*</Text>
                 <Field name="firstname">
                   {({ field }) => (
                     <TextInput
@@ -107,7 +107,7 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse mail</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse mail*</Text>
                 <Field name="email">
                   {({ field }) => (
                     <TextInput
@@ -123,7 +123,7 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Téléphone</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Téléphone*</Text>
                 <Field name="phone">
                   {({ field }) => (
                     <TextInput
@@ -139,7 +139,7 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Code postal</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Code postal*</Text>
                 <Field name="postalCode">
                   {({ field }) => (
                     <TextInput
@@ -155,7 +155,7 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Ville</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Ville*</Text>
                 <Field name="city">
                   {({ field }) => (
                     <TextInput
@@ -170,7 +170,7 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse*</Text>
                 <Field name="address">
                   {({ field }) => (
                     <TextInput
@@ -191,7 +191,7 @@ export const HostFamilyUpdate = () => {
                     <TextInput
                       {...field}
                       style={styles.input}
-                      placeholder="Veuillez mettre la ville"
+                      placeholder="Veuillez mettre un critère"
                       onChangeText={handleChange('criteria')}
                       onChange={handleChange('criteria')}
                       onBlur={handleBlur('criteria')}
@@ -216,13 +216,13 @@ export const HostFamilyUpdate = () => {
                   )}
                 </Field>
                 <Spacing size="8" />
-                <Text style={{ fontSize: 15, marginBottom: 5 }}>En pause</Text>
+                <Text style={{ fontSize: 15, marginBottom: 5 }}>En pause ?</Text>
                 <Field name="onBreak">
                   {({ field }) => (
                     <TextInput
                       {...field}
                       style={styles.input}
-                      placeholder="Veuillez mettre la ville"
+                      placeholder="Veuillez mettre si la FA est en pause"
                       onChangeText={handleChange('onBreak')}
                       onChange={handleChange('onBreak')}
                       onBlur={handleBlur('onBreak')}
@@ -256,7 +256,7 @@ export const HostFamilyUpdate = () => {
                     )}
                   </Field>
                 </View>
-                <Spacing size="8" />
+                <Spacing size="16" />
                 <Button title="Submit" onPress={() => handleSubmit()} />
               </View>
             )}

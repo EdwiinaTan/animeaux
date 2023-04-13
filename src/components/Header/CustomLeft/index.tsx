@@ -12,7 +12,7 @@ export const CustomLeft: React.FC<CustomLeftProps> = ({ onClickGoBack }) => {
       name="arrowleft"
       size={20}
       style={{ paddingTop: 4 }}
-      color={theme.lightColors?.black}
+      color={theme.colors.black}
       onPress={onClickGoBack}
     />
   )

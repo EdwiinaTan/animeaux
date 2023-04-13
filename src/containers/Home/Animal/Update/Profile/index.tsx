@@ -166,7 +166,7 @@ export const AnimalUpdate = () => {
                     {({ field }) => (
                       <SelectList
                         inputStyles={{ padding: 0 }}
-                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
+                        boxStyles={{ width: '100%', borderColor: theme.colors.greyOutline }}
                         {...field}
                         searchPlaceholder="Rechercher"
                         setSelected={handleChange('race')}
@@ -187,7 +187,7 @@ export const AnimalUpdate = () => {
                   <Field name="color">
                     {({ field }) => (
                       <SelectList
-                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
+                        boxStyles={{ width: '100%', borderColor: theme.colors.greyOutline }}
                         {...field}
                         searchPlaceholder="Rechercher"
                         setSelected={handleChange('color')}
@@ -235,9 +235,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     marginBottom: 10,
-    backgroundColor: theme.lightColors.white,
+    backgroundColor: theme.colors.white,
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: theme.lightColors.greyOutline,
+    borderColor: theme.colors.greyOutline,
   },
 })

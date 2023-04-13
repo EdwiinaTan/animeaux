@@ -14,7 +14,7 @@ export const ButtonStatus: React.FC<ItemProps> = ({ animal }) => {
 
   const renderColorActive = (value: string) => {
     if (status === value) {
-      return theme.lightColors.grey0
+      return theme.colors.yellow
     }
     return 'grey'
   }

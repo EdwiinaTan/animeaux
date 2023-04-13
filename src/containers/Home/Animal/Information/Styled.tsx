@@ -40,7 +40,7 @@ export const Container = styled.ScrollView`
 `
 
 export const Description = styled.View`
-  background-color: ${theme.lightColors?.white};
+  background-color: ${theme.colors.white};
   padding: 16px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -51,7 +51,7 @@ export const Description = styled.View`
 `
 
 export const Card = styled.View`
-  background-color: ${theme.lightColors?.white};
+  background-color: ${theme.colors.white};
   padding: 16px;
   border-radius: 8px;
   border: 1px solid #dce1e7;
@@ -75,5 +75,5 @@ export const Illustration = styled.Image`
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  background-color: ${theme.lightColors?.grey4};
+  background-color: ${theme.colors.grey1};
 `

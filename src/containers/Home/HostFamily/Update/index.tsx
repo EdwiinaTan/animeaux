@@ -240,7 +240,7 @@ export const HostFamilyUpdate = () => {
                         inputStyles={{ padding: 0 }}
                         boxStyles={{
                           width: '100%',
-                          borderColor: theme.lightColors.greyOutline,
+                          borderColor: theme.colors.greyOutline,
                         }}
                         label="Animaux"
                         {...field}
@@ -273,9 +273,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     marginBottom: 10,
-    backgroundColor: theme.lightColors.white,
+    backgroundColor: theme.colors.white,
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: theme.lightColors.greyOutline,
+    borderColor: theme.colors.greyOutline,
   },
 })

@@ -1,6 +1,6 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
-import { ThemeProvider } from '@rneui/themed'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ThemeProvider } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { AppContainer } from 'src/containers/App'
 

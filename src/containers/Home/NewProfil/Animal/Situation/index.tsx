@@ -79,7 +79,7 @@ export const AddAnimalSituation: React.FC<AddAnimalSituationProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.lightColors.greyOutline,
+                borderColor: theme.colors.greyOutline,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -102,7 +102,7 @@ export const AddAnimalSituation: React.FC<AddAnimalSituationProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.lightColors.greyOutline,
+                borderColor: theme.colors.greyOutline,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -125,7 +125,7 @@ export const AddAnimalSituation: React.FC<AddAnimalSituationProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.lightColors.greyOutline,
+                borderColor: theme.colors.greyOutline,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -221,9 +221,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     marginBottom: 10,
-    backgroundColor: theme.lightColors.white,
+    backgroundColor: theme.colors.white,
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: theme.lightColors.greyOutline,
+    borderColor: theme.colors.greyOutline,
   },
 })

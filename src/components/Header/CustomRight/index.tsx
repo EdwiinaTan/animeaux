@@ -11,7 +11,7 @@ export const CustomRight: React.FC<CustomRightProps> = ({ toggleOverlay }) => {
     <IconEntypo
       name="dots-three-horizontal"
       size={20}
-      color={theme.lightColors?.black}
+      color={theme.colors.black}
       onPress={toggleOverlay}
       style={{ paddingRight: 8, paddingTop: 4 }}
     />

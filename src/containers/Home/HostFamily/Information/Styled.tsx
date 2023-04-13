@@ -27,7 +27,7 @@ export const ContainerDescription = styled.View`
 `
 
 export const Description = styled.View`
-  background-color: ${theme.lightColors?.white};
+  background-color: ${theme.colors.white};
   padding: 16px;
   border-radius: 8px;
   border: 1px solid #dce1e7;

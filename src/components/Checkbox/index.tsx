@@ -19,8 +19,8 @@ export const CheckboxComponent: React.FC<CheckboxProps> = ({
       checkedIcon={<IconMaterialCommunityIcons name={name} size={18} color="grey" />}
       uncheckedIcon={<IconMaterialCommunityIcons name={name} size={18} color="grey" />}
       containerStyle={{
-        borderColor: isActive ? theme.lightColors?.grey0 : theme.lightColors?.greyOutline,
-        backgroundColor: theme.lightColors?.white,
+        borderColor: isActive ? theme.colors.yellow : theme.colors.greyOutline,
+        backgroundColor: theme.colors.white,
         // paddingTop: 8,
         // paddingLeft: 8,
         paddingRight: 8,

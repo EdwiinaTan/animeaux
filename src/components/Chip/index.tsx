@@ -6,10 +6,10 @@ import { ChipComponentProp } from './Type'
 export const ChipComponent: React.FC<ChipComponentProp> = ({ value }) => {
   return (
     <Chip
-      titleStyle={{ color: theme.lightColors?.black }}
+      titleStyle={{ color: theme.colors.black }}
       title={uppercaseWord(value)}
       buttonStyle={{
-        borderColor: theme.lightColors?.black,
+        borderColor: theme.colors.black,
         padding: 4,
       }}
       type="outline"

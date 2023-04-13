@@ -133,7 +133,7 @@ export const UpdateAnimalSituation = () => {
                     {({ field }) => (
                       <SelectList
                         inputStyles={{ padding: 0 }}
-                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
+                        boxStyles={{ width: '100%', borderColor: theme.colors.greyOutline }}
                         {...field}
                         searchPlaceholder="Rechercher"
                         setSelected={handleChange('hostFamilyId')}
@@ -154,7 +154,7 @@ export const UpdateAnimalSituation = () => {
                     {({ field }) => (
                       <SelectList
                         inputStyles={{ padding: 0 }}
-                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
+                        boxStyles={{ width: '100%', borderColor: theme.colors.greyOutline }}
                         {...field}
                         searchPlaceholder="Rechercher"
                         setSelected={handleChange('userId')}
@@ -175,7 +175,7 @@ export const UpdateAnimalSituation = () => {
                     {({ field }) => (
                       <SelectList
                         inputStyles={{ padding: 0 }}
-                        boxStyles={{ width: '100%', borderColor: theme.lightColors.greyOutline }}
+                        boxStyles={{ width: '100%', borderColor: theme.colors.greyOutline }}
                         {...field}
                         searchPlaceholder="Rechercher"
                         setSelected={handleChange('placeCare')}
@@ -280,9 +280,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     marginBottom: 10,
-    backgroundColor: theme.lightColors.white,
+    backgroundColor: theme.colors.white,
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: theme.lightColors.greyOutline,
+    borderColor: theme.colors.greyOutline,
   },
 })

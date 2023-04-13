@@ -69,11 +69,11 @@ export const AnimalInformation = (): React.ReactElement => {
   const renderAgreement = (value: string) => {
     switch (value) {
       case AnimalAgreement.YES:
-        return theme.lightColors?.grey3
+        return theme.colors.secondary
       case AnimalAgreement.NO:
-        return theme.lightColors?.grey1
+        return theme.colors.red
       default:
-        return theme.lightColors?.background
+        return theme.colors.background
     }
   }
 
@@ -120,7 +120,7 @@ export const AnimalInformation = (): React.ReactElement => {
           <Spacing size="16" />
           <Card>
             <TitleCard>
-              <IconFoundation name="clipboard-notes" size={20} color={theme.lightColors?.grey3} />
+              <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
               <TitleText>Prise en charge </TitleText>
             </TitleCard>
             <Spacing size="8" />
@@ -135,7 +135,7 @@ export const AnimalInformation = (): React.ReactElement => {
                     borderTopRightRadius: 8,
                     resizeMode: 'contain',
                   }}
-                  containerStyle={{ backgroundColor: theme.lightColors?.grey4, borderRadius: 8 }}
+                  containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
                   PlaceholderContent={<ActivityIndicator />}
                 />
               </View>
@@ -155,7 +155,7 @@ export const AnimalInformation = (): React.ReactElement => {
           <Spacing size="16" />
           <Card>
             <TitleCard>
-              <IconEntypo name="heart" size={20} color={theme.lightColors?.grey1} />
+              <IconEntypo name="heart" size={20} color={theme.colors.red} />
               <TitleText>Son histoire</TitleText>
             </TitleCard>
             <Spacing size="8" />
@@ -167,7 +167,7 @@ export const AnimalInformation = (): React.ReactElement => {
               <IconMaterialCommunityIcons
                 name="thumbs-up-down"
                 size={20}
-                color={theme.lightColors?.grey2}
+                color={theme.colors.blue}
               />
               <TitleText>Ententes</TitleText>
             </TitleCard>
@@ -196,7 +196,7 @@ export const AnimalInformation = (): React.ReactElement => {
           <Spacing size="16" />
           <Card>
             <TitleCard>
-              <IconMaterialIcons name="description" size={20} color={theme.lightColors?.grey0} />
+              <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
               <TitleText>Description privé</TitleText>
             </TitleCard>
             <Spacing size="8" />

@@ -21,7 +21,7 @@ export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyTyp
     case 'success':
       return (
         <Text>
-          FA : {hostFamilyData?.firstname} {hostFamilyData?.lastname}
+          FA : {hostFamilyData.firstname} {hostFamilyData.lastname}
         </Text>
       )
     default:

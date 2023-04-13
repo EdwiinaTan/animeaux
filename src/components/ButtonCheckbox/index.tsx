@@ -8,7 +8,7 @@ export const ButtonCheckbox: React.FC<ButtonCheckboxProps> = ({ title, color, on
       icon={icon}
       title={title}
       buttonStyle={{
-        backgroundColor: theme.lightColors.white,
+        backgroundColor: theme.colors.white,
         borderWidth: 1,
         borderColor: color,
         marginRight: 8,

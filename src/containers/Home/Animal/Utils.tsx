@@ -4,6 +4,7 @@ import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { AnimalGenderEnum } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
+import { FetchStatus } from 'src/types/Status'
 
 export const renderAnimalGender = (animal: AnimalType) => {
   if (animal.gender === AnimalGenderEnum.FEMALE) {
@@ -13,15 +14,16 @@ export const renderAnimalGender = (animal: AnimalType) => {
 }
 
 export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyType) => {
+  console.log('aaaa', hostFamilyData)
   switch (statusHostFamily) {
-    case 'error':
+    case FetchStatus.ERROR:
       return <Text>Pas de FA</Text>
-    case 'loading':
+    case FetchStatus.LOADING:
       return <Skeleton animation="pulse" width={200} height={12} />
-    case 'success':
+    case FetchStatus.SUCCESS:
       return (
         <Text>
-          FA : {hostFamilyData?.firstname} {hostFamilyData?.lastname}
+          FA : {hostFamilyData.firstname} {hostFamilyData.lastname}
         </Text>
       )
     default:

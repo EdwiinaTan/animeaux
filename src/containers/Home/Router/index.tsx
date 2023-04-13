@@ -37,7 +37,7 @@ export const HomeRouter: React.FC = () => {
               <IconIonicons
                 name={focused ? 'paw' : 'ios-paw-outline'}
                 size={20}
-                color={focused ? theme.lightColors?.primary : 'grey'}
+                color={focused ? theme.colors.primary : theme.colors.grey0}
               />
             ),
           }}
@@ -51,7 +51,7 @@ export const HomeRouter: React.FC = () => {
                 name={focused ? 'md-home-sharp' : 'md-home-outline'}
                 size={20}
                 style={{ paddingRight: 16 }}
-                color={focused ? theme.lightColors?.primary : 'grey'}
+                color={focused ? theme.colors.primary : theme.colors.grey0}
               />
             ),
           }}
@@ -62,7 +62,7 @@ export const HomeRouter: React.FC = () => {
           options={{
             tabBarButton: () => (
               <ButtomCustom onPress={handlePresentModal}>
-                <IconAntDesign name="plus" size={32} color={theme.lightColors?.white} />
+                <IconAntDesign name="plus" size={32} color={theme.colors.white} />
               </ButtomCustom>
             ),
           }}
@@ -76,7 +76,7 @@ export const HomeRouter: React.FC = () => {
                 name={focused ? 'information-circle' : 'information-circle-outline'}
                 size={24}
                 style={{ paddingLeft: 16 }}
-                color={focused ? theme.lightColors?.primary : 'grey'}
+                color={focused ? theme.colors.primary : theme.colors.grey0}
               />
             ),
           }}
@@ -89,7 +89,7 @@ export const HomeRouter: React.FC = () => {
               <IconOcticons
                 name={focused ? 'person-fill' : 'person'}
                 size={20}
-                color={focused ? theme.lightColors?.primary : 'grey'}
+                color={focused ? theme.colors.primary : theme.colors.grey0}
               />
             ),
           }}

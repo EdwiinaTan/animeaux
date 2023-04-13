@@ -2,7 +2,7 @@ import { theme } from 'src/constant/Theme'
 import styled from 'styled-components/native'
 
 export const ButtomCustom = styled.TouchableOpacity`
-  background-color: ${theme.lightColors?.success};
+  background-color: ${theme.colors.secondary};
   top: -24px;
   justify-content: center;
   width: 56px;

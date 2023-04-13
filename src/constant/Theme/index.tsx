@@ -1,27 +1,28 @@
-import { createTheme } from '@rneui/themed'
-
-export const theme = createTheme({
-  lightColors: {
+export const theme = {
+  colors: {
     primary: '#55BCBE',
-    secondary: 'transparent',
+    secondary: '#9BCF9B',
     white: '#ffffff',
-    background: '#F1F5F9',
     black: '#000000',
-    success: '#9BCF9B',
+    background: '#F1F5F9',
     greyOutline: '#D8DDE3',
-    grey0: '#F7C549',
-    grey1: '#DA4133',
-    grey2: '#3376BA',
-    grey3: '#5CB25B',
-    grey4: '#dce1e7',
+    red: '#DA4133',
+    yellow: '#F7C549',
+    blue: '#3376BA',
+    grey0: '#b5b6b8',
+    grey1: '#dce1e7',
+    // grey1: '#DA4133',
+    // grey2: '#3376BA',
+    // grey3: '#5CB25B',
+    // grey4: '#dce1e7',
+    //b5b7ba
   },
-  mode: 'light',
-  components: {
-    Button: {
-      raised: true,
-    },
-    Text: {
-      style: {},
-    },
+  Button: {
+    // titleStyle: {
+    //   color: 'white',
+    // },
+    // buttonStyle: {
+    //   backgroundColor: '#ff6347',
+    // },
   },
-})
+}

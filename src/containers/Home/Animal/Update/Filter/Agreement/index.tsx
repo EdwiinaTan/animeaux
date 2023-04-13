@@ -15,7 +15,7 @@ export const ButtonAgreement: React.FC<ItemProps> = ({ animal }) => {
 
   const renderColorActive = (value: string) => {
     if (gender === value) {
-      return theme.lightColors.grey0
+      return theme.colors.yellow
     }
     return 'grey'
   }

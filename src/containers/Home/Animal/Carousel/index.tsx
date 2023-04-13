@@ -46,7 +46,7 @@ export const CarouselAnimal: React.FC<CarouselAnimalProps> = ({ animal }) => {
                 resizeMode: 'contain',
               }}
               containerStyle={{
-                backgroundColor: theme.lightColors?.grey4,
+                backgroundColor: theme.colors.grey1,
                 borderTopLeftRadius: 8,
                 borderTopRightRadius: 8,
               }}

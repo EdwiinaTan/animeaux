@@ -14,7 +14,7 @@ export const ButtonReason: React.FC<ItemProps> = ({ animal }) => {
 
   const renderColorActive = (value: string) => {
     if (reason === value) {
-      return theme.lightColors.grey0
+      return theme.colors.yellow
     }
     return 'grey'
   }

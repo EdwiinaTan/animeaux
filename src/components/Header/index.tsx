@@ -14,7 +14,7 @@ export const HeaderComponent: React.FC<HeaderComponentProps> = ({
     <>
       <Header
         containerStyle={{
-          backgroundColor: theme.lightColors?.background,
+          backgroundColor: theme.colors.background,
         }}
       >
         <CustomLeft onClickGoBack={onClickGoBack} />

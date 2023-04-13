@@ -7,7 +7,7 @@ export const Container = styled.ScrollView`
 `
 
 export const Card = styled.View`
-  background-color: ${theme.lightColors?.white};
+  background-color: ${theme.colors.white};
   padding: 16px;
   border-radius: 8px;
   border: 1px solid #dce1e7;

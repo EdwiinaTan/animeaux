@@ -175,19 +175,19 @@ export const AnimalInformation = (): React.ReactElement => {
             <ContainerViewImage>
               <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
                 <Image
-                  source={require('../../../../../assets/icons/chien1.png')}
+                  source={require('/assets/icons/chien1.png')}
                   style={{ width: 50, height: 50 }}
                 />
               </ViewImage>
               <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
                 <Image
-                  source={require('../../../../../assets/icons/chat1.png')}
+                  source={require('/assets/icons/chat1.png')}
                   style={{ width: 50, height: 50 }}
                 />
               </ViewImage>
               <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
                 <Image
-                  source={require('../../../../../assets/icons/kids1.png')}
+                  source={require('/assets/icons/kids1.png')}
                   style={{ width: 50, height: 50 }}
                 />
               </ViewImage>

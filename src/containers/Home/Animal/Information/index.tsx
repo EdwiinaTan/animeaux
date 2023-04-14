@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import moment from 'moment'
 import { useRef } from 'react'
-import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { Image as ImageElement } from 'react-native-elements'
 import { ChipComponent } from 'src/components/Chip'
 import { HeaderComponent } from 'src/components/Header'
@@ -55,16 +55,15 @@ export const AnimalInformation = (): React.ReactElement => {
     return navigation.goBack()
   }
 
-  if (statusUser === FetchStatus.LOADING) {
-    return <Text>loading</Text>
+  const onClick = () => {
+    navigation.navigate('animalUserInCharge', { animalDetails: animalDetails })
   }
 
   const renderIsSterilised = () => {
     if (animalDetails.isSterilised) {
       return <Text>Stérilisé</Text>
-    } else {
-      return <Text>Non stérilisé</Text>
     }
+    return <Text>Non stérilisé</Text>
   }
 
   const renderAgreement = (value: string) => {
@@ -89,124 +88,130 @@ export const AnimalInformation = (): React.ReactElement => {
         toggleOverlay={handlePresentModal}
       />
       <Container>
-        <ScrollView>
-          <CarouselAnimal animal={animalDetails} />
-          <Description>
-            <View>
-              <TitleCard>
-                <Text style={{ paddingRight: 4 }}>{animalDetails.name}</Text>
-                {renderAnimalGender(animalDetails)}
-              </TitleCard>
-              <Spacing size="4" />
-              <Text>{uppercaseWord(animalDetails.species)}</Text>
-              <Spacing size="4" />
-              <Text>Age : {dateA.diff(dateB, 'years')} ans</Text>
-              {animalDetails.icadNumber && (
-                <>
-                  <Spacing size="4" />
-                  <Text>Icad : {animalDetails.icadNumber}</Text>
-                </>
-              )}
-              <Spacing size="4" />
-              <Text>Alias : {animalDetails.alias}</Text>
-              <Spacing size="4" />
-              {renderHostFamily(statusHostFamily, hostFamilyData)}
-            </View>
-            <View style={{ alignItems: 'flex-end' }}>
-              <ChipComponent value={animalDetails.status} />
-              <Spacing size="4" />
-              <Text>{renderIsSterilised()}</Text>
-            </View>
-          </Description>
-          <Spacing size="16" />
-          <Card>
-            <TitleCard>
-              <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
-              <TitleText>Prise en charge </TitleText>
-            </TitleCard>
-            <Spacing size="8" />
-            <InCharge>
-              <View style={{ paddingRight: 8 }}>
-                <ImageElement
-                  source={{ uri: userData.picture[0].url }}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 8,
-                    borderTopRightRadius: 8,
-                    resizeMode: 'contain',
-                  }}
-                  containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
-                  PlaceholderContent={<ActivityIndicator />}
-                />
-              </View>
+        {statusUser === FetchStatus.LOADING ? (
+          <ActivityIndicator size="large" color={theme.colors.blue} />
+        ) : (
+          <ScrollView>
+            <CarouselAnimal animal={animalDetails} />
+            <Description>
               <View>
-                <Text>
-                  {userData.firstname} {userData.lastname}
-                </Text>
+                <TitleCard>
+                  <Text style={{ paddingRight: 4 }}>{animalDetails.name}</Text>
+                  {renderAnimalGender(animalDetails)}
+                </TitleCard>
                 <Spacing size="4" />
-                <Text>Date : {renderDateFormat(animalDetails.dateInCharge)}</Text>
+                <Text>{uppercaseWord(animalDetails.species)}</Text>
                 <Spacing size="4" />
-                <Text>Lieu : {animalDetails.placeCare}</Text>
+                <Text>Age : {dateA.diff(dateB, 'years')} ans</Text>
+                {animalDetails.icadNumber && (
+                  <>
+                    <Spacing size="4" />
+                    <Text>Icad : {animalDetails.icadNumber}</Text>
+                  </>
+                )}
                 <Spacing size="4" />
-                <Text>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Text>
+                <Text>Alias : {animalDetails.alias}</Text>
+                <Spacing size="4" />
+                {renderHostFamily(statusHostFamily, hostFamilyData)}
               </View>
-            </InCharge>
-          </Card>
-          <Spacing size="16" />
-          <Card>
-            <TitleCard>
-              <IconEntypo name="heart" size={20} color={theme.colors.red} />
-              <TitleText>Son histoire</TitleText>
-            </TitleCard>
-            <Spacing size="8" />
-            <Text>{animalDetails.publicDescription}</Text>
-          </Card>
-          <Spacing size="16" />
-          <Card>
-            <BoxViewImage>
+              <View style={{ alignItems: 'flex-end' }}>
+                <ChipComponent value={animalDetails.status} />
+                <Spacing size="4" />
+                <Text>{renderIsSterilised()}</Text>
+              </View>
+            </Description>
+            <Spacing size="16" />
+            <TouchableOpacity onPress={onClick} activeOpacity={1}>
+              <Card>
+                <TitleCard>
+                  <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
+                  <TitleText>Prise en charge </TitleText>
+                </TitleCard>
+                <Spacing size="8" />
+                <InCharge>
+                  <View style={{ paddingRight: 8 }}>
+                    <ImageElement
+                      source={{ uri: userData.picture[0].url }}
+                      style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 8,
+                        borderTopRightRadius: 8,
+                        resizeMode: 'contain',
+                      }}
+                      containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
+                      PlaceholderContent={<ActivityIndicator />}
+                    />
+                  </View>
+                  <View>
+                    <Text>
+                      {userData.firstname} {userData.lastname}
+                    </Text>
+                    <Spacing size="4" />
+                    <Text>Date : {renderDateFormat(animalDetails.dateInCharge)}</Text>
+                    <Spacing size="4" />
+                    <Text>Lieu : {animalDetails.placeCare}</Text>
+                    <Spacing size="4" />
+                    <Text>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Text>
+                  </View>
+                </InCharge>
+              </Card>
+            </TouchableOpacity>
+            <Spacing size="16" />
+            <Card>
               <TitleCard>
-                <IconMaterialCommunityIcons
-                  name="thumbs-up-down"
-                  size={20}
-                  color={theme.colors.blue}
-                />
-                <TitleText>Ententes</TitleText>
+                <IconEntypo name="heart" size={20} color={theme.colors.red} />
+                <TitleText>Son histoire</TitleText>
               </TitleCard>
-              <Spacing size="16" />
-              <ContainerViewImage>
-                <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
-                  <Image
-                    source={require('/assets/icons/chien1.png')}
-                    style={{ width: 50, height: 50 }}
+              <Spacing size="8" />
+              <Text>{animalDetails.publicDescription}</Text>
+            </Card>
+            <Spacing size="16" />
+            <Card>
+              <BoxViewImage>
+                <TitleCard>
+                  <IconMaterialCommunityIcons
+                    name="thumbs-up-down"
+                    size={20}
+                    color={theme.colors.blue}
                   />
-                </ViewImage>
-                <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
-                  <Image
-                    source={require('/assets/icons/chat1.png')}
-                    style={{ width: 50, height: 50 }}
-                  />
-                </ViewImage>
-                <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
-                  <Image
-                    source={require('/assets/icons/kids1.png')}
-                    style={{ width: 50, height: 50 }}
-                  />
-                </ViewImage>
-              </ContainerViewImage>
-            </BoxViewImage>
-          </Card>
-          <Spacing size="16" />
-          <Card>
-            <TitleCard>
-              <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
-              <TitleText>Description privé</TitleText>
-            </TitleCard>
-            <Spacing size="8" />
-            <Text>{animalDetails.privateDescription ?? 'Aucune description pour le moment'}</Text>
-          </Card>
-          <Spacing size="32" />
-        </ScrollView>
+                  <TitleText>Ententes</TitleText>
+                </TitleCard>
+                <Spacing size="16" />
+                <ContainerViewImage>
+                  <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
+                    <Image
+                      source={require('/assets/icons/chien1.png')}
+                      style={{ width: 50, height: 50 }}
+                    />
+                  </ViewImage>
+                  <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
+                    <Image
+                      source={require('/assets/icons/chat1.png')}
+                      style={{ width: 50, height: 50 }}
+                    />
+                  </ViewImage>
+                  <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
+                    <Image
+                      source={require('/assets/icons/kids1.png')}
+                      style={{ width: 50, height: 50 }}
+                    />
+                  </ViewImage>
+                </ContainerViewImage>
+              </BoxViewImage>
+            </Card>
+            <Spacing size="16" />
+            <Card>
+              <TitleCard>
+                <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
+                <TitleText>Description privé</TitleText>
+              </TitleCard>
+              <Spacing size="8" />
+              <Text>{animalDetails.privateDescription ?? 'Aucune description pour le moment'}</Text>
+            </Card>
+            <Spacing size="32" />
+          </ScrollView>
+        )}
       </Container>
       <BottomSheetAnimal bottomSheetModalRef={bottomSheetModalRef} animalDetails={animalDetails} />
     </Layout>

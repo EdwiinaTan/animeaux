@@ -45,15 +45,11 @@ export const AddHostFamily = () => {
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
       <Text>ADD HOST FAMILY</Text>
-      {data ? (
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Text>{item.alias}</Text>}
-        />
-      ) : (
-        <Text>Loading</Text>
-      )}
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+      />
     </Layout>
   )
 }

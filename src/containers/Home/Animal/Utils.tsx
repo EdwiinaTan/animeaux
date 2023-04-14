@@ -14,7 +14,7 @@ export const renderAnimalGender = (animal: AnimalType) => {
   return <IconMaterialCommunityIcons name="gender-male" size={16} color={theme.colors.blue} />
 }
 
-export const renderHostFamily = (statusHostFamily: FetchStatus, hostFamilyData: HostFamilyType) => {
+export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyType) => {
   switch (statusHostFamily) {
     case FetchStatus.ERROR:
       return <Text>Pas de FA</Text>

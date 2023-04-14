@@ -13,6 +13,12 @@ export const Card = styled.View`
   border: 1px solid #dce1e7;
 `
 
+export const Keyboard = styled.KeyboardAvoidingView`
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+`
+
 export const ContainerCheckbox = styled.View`
   display: flex;
   flex-direction: row;

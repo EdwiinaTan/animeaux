@@ -1,14 +1,13 @@
 import { AnimalType } from 'src/types/Animal/Type'
-import { FetchStatus } from 'src/types/Status'
 import { UserClient, UserType } from 'src/types/User/Type'
 
 export interface ReturnUser {
-  statusUser: FetchStatus
+  statusUser: 'error' | 'success' | 'loading'
   userData: UserType
 }
 
 export interface ReturnUsers {
-  statusUsers: FetchStatus
+  statusUsers: 'error' | 'success' | 'loading'
   usersData: UserClient[]
 }
 

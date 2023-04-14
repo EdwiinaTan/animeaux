@@ -17,6 +17,7 @@ import jobSeeking from '/assets/icons/job-seeking.png'
 import play from '/assets/icons/play.png'
 import smartphone from '/assets/icons/smartphones.png'
 
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import {
   Container,
   ContainerDescription,
@@ -32,7 +33,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     params: { hostFamilyDetails },
   } = route
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
-  const bottomSheetModalRef = useRef(null)
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
   const onClickGoBack = () => {
     return navigation.goBack()

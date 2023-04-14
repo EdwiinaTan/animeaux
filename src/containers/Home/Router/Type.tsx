@@ -1,5 +1,7 @@
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
+
 export interface BottomSheetRouterProps {
-  bottomSheetModalRef: React.MutableRefObject<any>
+  bottomSheetModalRef: BottomSheetModal
   changeAdd: (value: string) => void
 }
 

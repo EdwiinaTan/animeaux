@@ -25,6 +25,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
   return (
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card
+        key={`cardAnimal_${animal.id}`}
         containerStyle={{
           borderRadius: 8,
           borderColor: 'transparent',

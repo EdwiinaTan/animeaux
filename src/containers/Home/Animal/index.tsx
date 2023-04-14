@@ -1,4 +1,8 @@
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
+import {
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+  BottomSheetModal,
+} from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, Text, View } from 'react-native'
@@ -19,7 +23,7 @@ import { FilterAnimal } from './Filter'
 export const Animal = (): React.ReactElement => {
   const [search, setSearch] = useState<string>()
   const [isActive, setIsActive] = useState<AnimalTypeEnum>(AnimalTypeEnum.ALL)
-  const bottomSheetModalRef = useRef(null)
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const listRef = useRef(null)
   const navigation = useNavigation()
   const snapPoints = ['30%']
@@ -94,7 +98,7 @@ export const Animal = (): React.ReactElement => {
   // }
 
   const renderBackdrop = useCallback(
-    (props: any) => (
+    (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
         {...props}
         appearsOnIndex={1}

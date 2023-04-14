@@ -1,3 +1,4 @@
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import moment from 'moment'
@@ -40,7 +41,7 @@ import {
 export const AnimalInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
-  const bottomSheetModalRef = useRef(null)
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const {
     params: { animalDetails },
   } = route

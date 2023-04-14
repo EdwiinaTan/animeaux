@@ -7,14 +7,7 @@ import { theme } from 'src/constant/Theme'
 import { CheckBoxComponent } from 'src/containers/Home/Animal/Update/Checkbox'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
 
-interface AddAnimalProfilProps {
-  values: any
-  handleChange: any
-  handleBlur: any
-  handleSubmit: any
-}
-
-export const AddAnimalProfil: React.FC<AddAnimalProfilProps> = ({
+export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
   values,
   handleChange,
   handleBlur,
@@ -111,7 +104,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProfilProps> = ({
               onChange={handleChange('race')}
               data={raceArray}
               placeholder="Veuillez choisir la race"
-              save="value"
+              save="key"
               value={values.race}
             />
           )}
@@ -134,7 +127,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProfilProps> = ({
               onChange={handleChange('color')}
               data={colorArray}
               placeholder="Veuillez choisir la couleur"
-              save="value"
+              save="key"
               value={values.color}
             />
           )}

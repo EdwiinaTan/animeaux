@@ -26,6 +26,7 @@ import { CarouselAnimal } from '../Carousel'
 import { AnimalRouteParams } from '../Router/type'
 import { renderAnimalGender, renderHostFamily } from '../Utils'
 import {
+  BoxViewImage,
   Card,
   Container,
   ContainerViewImage,
@@ -84,7 +85,7 @@ export const AnimalInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={startsWithVowel(animalDetails.name)}
+        title={uppercaseWord(startsWithVowel(animalDetails.name))}
         toggleOverlay={handlePresentModal}
       />
       <Container>
@@ -163,35 +164,37 @@ export const AnimalInformation = (): React.ReactElement => {
           </Card>
           <Spacing size="16" />
           <Card>
-            <TitleCard>
-              <IconMaterialCommunityIcons
-                name="thumbs-up-down"
-                size={20}
-                color={theme.colors.blue}
-              />
-              <TitleText>Ententes</TitleText>
-            </TitleCard>
-            <Spacing size="16" />
-            <ContainerViewImage>
-              <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
-                <Image
-                  source={require('/assets/icons/chien1.png')}
-                  style={{ width: 50, height: 50 }}
+            <BoxViewImage>
+              <TitleCard>
+                <IconMaterialCommunityIcons
+                  name="thumbs-up-down"
+                  size={20}
+                  color={theme.colors.blue}
                 />
-              </ViewImage>
-              <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
-                <Image
-                  source={require('/assets/icons/chat1.png')}
-                  style={{ width: 50, height: 50 }}
-                />
-              </ViewImage>
-              <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
-                <Image
-                  source={require('/assets/icons/kids1.png')}
-                  style={{ width: 50, height: 50 }}
-                />
-              </ViewImage>
-            </ContainerViewImage>
+                <TitleText>Ententes</TitleText>
+              </TitleCard>
+              <Spacing size="16" />
+              <ContainerViewImage>
+                <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
+                  <Image
+                    source={require('/assets/icons/chien1.png')}
+                    style={{ width: 50, height: 50 }}
+                  />
+                </ViewImage>
+                <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
+                  <Image
+                    source={require('/assets/icons/chat1.png')}
+                    style={{ width: 50, height: 50 }}
+                  />
+                </ViewImage>
+                <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
+                  <Image
+                    source={require('/assets/icons/kids1.png')}
+                    style={{ width: 50, height: 50 }}
+                  />
+                </ViewImage>
+              </ContainerViewImage>
+            </BoxViewImage>
           </Card>
           <Spacing size="16" />
           <Card>

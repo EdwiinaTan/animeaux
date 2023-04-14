@@ -12,3 +12,9 @@ export const Card = styled.View`
   border-radius: 8px;
   border: 1px solid #dce1e7;
 `
+
+export const ContainerCheckbox = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`

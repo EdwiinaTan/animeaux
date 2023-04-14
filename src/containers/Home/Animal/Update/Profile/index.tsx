@@ -10,30 +10,15 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
-import {
-  AnimalColorEnum,
-  AnimalGenderEnum,
-  AnimalRaceEnum,
-  AnimalTypeEnum,
-} from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
 import { startsWithVowel } from 'src/utils/Functions'
 import * as Yup from 'yup'
 import { AnimalRouteParams } from '../../Router/type'
 import { CheckBoxComponent } from '../Checkbox'
-import { Card, Container } from './Styled'
+import { Card, Container, ContainerCheckbox } from './Styled'
+import { AnimalRequest } from './Type'
 
-export interface AnimalRequest {
-  species: AnimalTypeEnum
-  gender: AnimalGenderEnum
-  name: string
-  alias: string
-  icadNumber: string
-  race: AnimalRaceEnum
-  color: AnimalColorEnum
-  publicDescription: string
-}
 export const AnimalUpdate = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
@@ -86,7 +71,7 @@ export const AnimalUpdate = () => {
           >
             {({ handleChange, values, handleSubmit, handleBlur }) => (
               <>
-                <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                <ContainerCheckbox>
                   <Text>Espèce</Text>
                   <Spacing size="8" />
                   {specieArray.map((specie, key) => (
@@ -108,7 +93,7 @@ export const AnimalUpdate = () => {
                       handleChange={() => handleChange('gender')(gender.value)}
                     />
                   ))}
-                </View>
+                </ContainerCheckbox>
                 <Spacing size="24" />
                 <Divider />
                 <Spacing size="8" />
@@ -174,7 +159,7 @@ export const AnimalUpdate = () => {
                         data={raceArray}
                         placeholder="Veuillez choisir la race"
                         defaultOption={{ key: animalDetails.race, value: animalDetails.race }}
-                        save="value"
+                        save="key"
                         value={values.race}
                       />
                     )}
@@ -195,7 +180,7 @@ export const AnimalUpdate = () => {
                         data={colorArray}
                         placeholder="Veuillez choisir la couleur"
                         defaultOption={{ key: animalDetails.color, value: animalDetails.color }}
-                        save="value"
+                        save="key"
                         value={values.color}
                       />
                     )}

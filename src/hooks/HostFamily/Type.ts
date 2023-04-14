@@ -1,11 +1,12 @@
 import { HostFamilyClient, HostFamilyType } from 'src/types/HostFamily/Type'
+import { FetchStatus } from 'src/types/Status'
 
 export interface ReturnHostFamily {
-  statusHostFamily: 'error' | 'success' | 'loading'
+  statusHostFamily: FetchStatus
   hostFamilyData: HostFamilyType
 }
 
 export interface ReturnHostFamilies {
-  statusHostFamilies: 'error' | 'success' | 'loading'
+  statusHostFamilies: FetchStatus
   hostFamiliesData: HostFamilyClient[]
 }

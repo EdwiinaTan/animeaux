@@ -1,6 +1,7 @@
 import { Skeleton } from '@rneui/themed'
 import { Text } from 'react-native'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
+import { theme } from 'src/constant/Theme'
 import { AnimalGenderEnum } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
@@ -8,13 +9,12 @@ import { FetchStatus } from 'src/types/Status'
 
 export const renderAnimalGender = (animal: AnimalType) => {
   if (animal.gender === AnimalGenderEnum.FEMALE) {
-    return <IconMaterialCommunityIcons name="gender-female" size={18} color="#F2887E" />
+    return <IconMaterialCommunityIcons name="gender-female" size={18} color={theme.colors.red} />
   }
-  return <IconMaterialCommunityIcons name="gender-male" size={16} color="#3376BA" />
+  return <IconMaterialCommunityIcons name="gender-male" size={16} color={theme.colors.blue} />
 }
 
-export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyType) => {
-  console.log('aaaa', hostFamilyData)
+export const renderHostFamily = (statusHostFamily: FetchStatus, hostFamilyData: HostFamilyType) => {
   switch (statusHostFamily) {
     case FetchStatus.ERROR:
       return <Text>Pas de FA</Text>

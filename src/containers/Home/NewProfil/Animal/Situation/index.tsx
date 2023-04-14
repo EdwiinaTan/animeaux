@@ -15,14 +15,7 @@ import {
   statusArray,
 } from 'src/utils/Animal'
 
-interface AddAnimalSituationProps {
-  values: any
-  handleChange: any
-  handleBlur: any
-  handleSubmit: any
-}
-
-export const AddAnimalSituation: React.FC<AddAnimalSituationProps> = ({
+export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
   values,
   handleChange,
   handleBlur,

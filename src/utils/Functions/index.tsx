@@ -18,7 +18,7 @@ export const startsWithVowel = (word: string): string => {
   const vowels = 'aeiouAEIOU'
 
   if (vowels.indexOf(word[0]) !== -1) {
-    return `Profil d’${word}`
+    return `profil d’${word}`
   }
-  return `Profil de ${word}`
+  return `profil de ${word}`
 }

@@ -49,6 +49,30 @@ export const AddAnimal = () => {
     isSterilised: '',
   }
 
+  const initialValuesStepOne = {
+    species: '',
+    gender: '',
+    name: '',
+    alias: '',
+    icadNumber: '',
+    race: '',
+    color: '',
+    publicDescription: '',
+  }
+
+  const initialValuesStepTwo = {
+    hostFamilyId: '', // step2
+    status: '',
+    placeCare: '',
+    reason: '',
+    childAgreement: '',
+    catAgreement: '',
+    dogAgreement: '',
+    userId: '',
+    privateDescription: '',
+    isSterilised: '',
+  }
+
   return (
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter un animal" />

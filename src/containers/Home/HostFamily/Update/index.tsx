@@ -13,6 +13,7 @@ import { theme } from 'src/constant/Theme'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
+import { FetchStatus } from 'src/types/Status'
 import { startsWithVowel } from 'src/utils/Functions'
 import { Card, Container } from './Styled'
 
@@ -50,7 +51,7 @@ export const HostFamilyUpdate = () => {
 
   const animalDataList = () => {
     let tab = []
-    if (statusAnimal === 'success') {
+    if (statusAnimal === FetchStatus.SUCCESS) {
       animalData.map(({ fields }) => {
         tab.push({
           key: fields.id,

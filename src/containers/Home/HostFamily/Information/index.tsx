@@ -6,7 +6,7 @@ import { Image } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { renderDateFormat, startsWithVowel } from 'src/utils/Functions'
+import { renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
 import address from '/assets/icons/address.png'
@@ -60,7 +60,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={startsWithVowel(hostFamilyDetails.firstname)}
+        title={uppercaseWord(startsWithVowel(hostFamilyDetails.firstname))}
         toggleOverlay={handlePresentModal}
       />
       <Container>

@@ -12,6 +12,7 @@ import { theme } from 'src/constant/Theme'
 import { useGetHostFamilies, useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById, useGetUsers } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
+import { FetchStatus } from 'src/types/Status'
 import {
   agreementArray,
   isSterilisedArray,
@@ -23,7 +24,7 @@ import { AnimalRouteParams } from '../../Router/type'
 import { CheckBoxComponent } from '../Checkbox'
 import { Card, Container } from './Styled'
 
-export const UpdateAnimalSituation = () => {
+export const UpdateAnimalSituation: React.FC = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },
@@ -53,7 +54,7 @@ export const UpdateAnimalSituation = () => {
 
   const hostFamiliesDataList = () => {
     let tab = []
-    if (statusHostFamilies === 'success') {
+    if (statusHostFamilies === FetchStatus.SUCCESS) {
       hostFamiliesData.map((hostFamily) => {
         tab.push({
           key: hostFamily.fields.id,
@@ -65,7 +66,7 @@ export const UpdateAnimalSituation = () => {
   }
   const usersDataList = () => {
     let tab = []
-    if (statusUsers === 'success') {
+    if (statusUsers === FetchStatus.SUCCESS) {
       usersData.map(({ fields }) => {
         tab.push({
           key: fields.id,
@@ -77,7 +78,7 @@ export const UpdateAnimalSituation = () => {
   }
 
   const renderDefaultOptionHostFamily = () => {
-    if (statusHostFamily === 'success') {
+    if (statusHostFamily === FetchStatus.SUCCESS) {
       return {
         key: hostFamilyData.id,
         value: `${hostFamilyData.firstname} ${hostFamilyData.lastname}`,
@@ -86,7 +87,7 @@ export const UpdateAnimalSituation = () => {
   }
 
   const renderDefaultOptionUser = () => {
-    if (statusUser === 'success') {
+    if (statusUser === FetchStatus.SUCCESS) {
       return {
         key: userData.id,
         value: `${userData.firstname} ${userData.lastname}`,

@@ -5,10 +5,10 @@ import { Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
 import { AnimalProfile } from 'src/components/Animal/Profile'
+import { AnimalSituation } from 'src/components/Animal/Situation'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { AddAnimalSituation } from './Situation'
 import { Card, Container, customStyles } from './Styled'
 
 export const AddAnimal = () => {
@@ -28,27 +28,6 @@ export const AddAnimal = () => {
     }
   }
 
-  const initialValues = {
-    species: '',
-    gender: '',
-    name: '',
-    alias: '',
-    icadNumber: '',
-    race: '',
-    color: '',
-    publicDescription: '',
-    hostFamilyId: '', // step2
-    status: '',
-    placeCare: '',
-    reason: '',
-    childAgreement: '',
-    catAgreement: '',
-    dogAgreement: '',
-    userId: '',
-    privateDescription: '',
-    isSterilised: '',
-  }
-
   const initialValuesStepOne = {
     species: '',
     gender: '',
@@ -61,7 +40,7 @@ export const AddAnimal = () => {
   }
 
   const initialValuesStepTwo = {
-    hostFamilyId: '', // step2
+    hostFamilyId: '',
     status: '',
     placeCare: '',
     reason: '',
@@ -87,34 +66,40 @@ export const AddAnimal = () => {
       <Spacing size="8" />
       <Container>
         <Card>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={(values) => {
-              // faudrait currentPosition +1 quand c'est tout good
-              console.log('value', values)
-            }}
-          >
-            {({ handleChange, values, handleSubmit, handleBlur }) => (
-              <>
-                {currentPosition === 0 && (
-                  <AnimalProfile
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                  />
-                )}
-                {currentPosition === 1 && (
-                  <AddAnimalSituation
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                  />
-                )}
-              </>
-            )}
-          </Formik>
+          {currentPosition === 0 && (
+            <Formik
+              initialValues={initialValuesStepOne}
+              onSubmit={(values) => {
+                console.log('valueOne', values)
+              }}
+            >
+              {({ handleChange, values, handleSubmit, handleBlur }) => (
+                <AnimalProfile
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                />
+              )}
+            </Formik>
+          )}
+          {currentPosition === 1 && (
+            <Formik
+              initialValues={initialValuesStepTwo}
+              onSubmit={(values) => {
+                console.log('valueTwo', values)
+              }}
+            >
+              {({ handleChange, values, handleSubmit, handleBlur }) => (
+                <AnimalSituation
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                />
+              )}
+            </Formik>
+          )}
         </Card>
         {currentPosition !== 0 && (
           <TouchableOpacity onPress={() => onPageChange('prev')}>

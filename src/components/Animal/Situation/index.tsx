@@ -1,5 +1,6 @@
 import { Field } from 'formik'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -15,15 +16,43 @@ import {
   reasonArray,
   statusArray,
 } from 'src/utils/Animal'
+import { ContainerCheckbox, styles } from '../Styled'
 
-export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
+export const AnimalSituation: React.FC<AddAnimalProps> = ({
   values,
   handleChange,
   handleBlur,
   handleSubmit,
+  renderDefaultOptionHostFamily,
+  renderDefaultOptionUser,
+  renderDefaultOptionPlace,
 }) => {
   const { statusHostFamilies, hostFamiliesData } = useGetHostFamilies()
   const { statusUsers, usersData } = useGetUsers()
+  const [optionHostFamily, setOptionHostFamily] = useState({})
+  const [optionUser, setOptionUser] = useState({})
+  const [optionPlace, setOptionPlace] = useState({})
+
+  useEffect(() => {
+    if (renderDefaultOptionHostFamily) {
+      setOptionHostFamily({
+        key: renderDefaultOptionHostFamily().key,
+        value: renderDefaultOptionHostFamily().value,
+      })
+      setOptionUser({
+        key: renderDefaultOptionUser().key,
+        value: renderDefaultOptionUser().value,
+      })
+      setOptionPlace({
+        key: renderDefaultOptionPlace().key,
+        value: renderDefaultOptionPlace().value,
+      })
+    } else {
+      setOptionHostFamily({ key: '', value: '' })
+      setOptionUser({ key: '', value: '' })
+      setOptionPlace({ key: '', value: '' })
+    }
+  }, [])
 
   const hostFamiliesDataList = () => {
     let hostFamilyArray = []
@@ -51,7 +80,7 @@ export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
   }
 
   return (
-    <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+    <ContainerCheckbox>
       <Text>Statut</Text>
       <Spacing size="8" />
       {statusArray.map((status, key) => (
@@ -80,6 +109,7 @@ export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
               setSelected={handleChange('hostFamilyId')}
               onChange={handleChange('hostFamilyId')}
               data={hostFamiliesDataList()}
+              defaultOption={optionHostFamily}
               placeholder="Veuillez choisir la famille d’accueil"
               save="key"
               value={values.hostFamilyId}
@@ -103,6 +133,7 @@ export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
               setSelected={handleChange('userId')}
               onChange={handleChange('userId')}
               data={usersDataList()}
+              defaultOption={optionUser}
               placeholder="Veuillez choisir l’utilisateur"
               save="key"
               value={values.userId}
@@ -126,6 +157,7 @@ export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
               setSelected={handleChange('placeCare')}
               onChange={handleChange('placeCare')}
               data={placeCareArray}
+              defaultOption={optionPlace}
               placeholder="Veuillez choisir l’endroit"
               save="value"
               value={values.placeCare}
@@ -201,23 +233,12 @@ export const AddAnimalSituation: React.FC<AddAnimalProps> = ({
             onChangeText={handleChange('privateDescription')}
             onChange={handleChange('privateDescription')}
             onBlur={handleBlur('privateDescription')}
+            placeholder={'Veuillez mettre une description privée'}
             value={values.privateDescription}
           />
         )}
       </Field>
       <Button title="Submit" onPress={() => handleSubmit()} />
-    </View>
+    </ContainerCheckbox>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: theme.colors.greyOutline,
-  },
-})

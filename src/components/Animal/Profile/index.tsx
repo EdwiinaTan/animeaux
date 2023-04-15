@@ -1,14 +1,14 @@
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
 import { CheckBoxComponent } from 'src/containers/Home/Animal/Update/Checkbox'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
+import { ContainerCheckbox, styles } from '../Styled'
 import { AnimalFormProps } from '../Type'
-import { ContainerCheckbox } from './Styled'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({
   values,
@@ -153,7 +153,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description public</Text>
+      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description publique</Text>
       <Field name="publicDescription">
         {({ field }) => (
           <TextInput
@@ -162,6 +162,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             editable
             multiline
             style={styles.input}
+            placeholder={'Veuillez mettre une description publique'}
             onChangeText={handleChange('publicDescription')}
             onChange={handleChange('publicDescription')}
             onBlur={handleBlur('publicDescription')}
@@ -174,15 +175,3 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: theme.colors.grey0,
-  },
-})

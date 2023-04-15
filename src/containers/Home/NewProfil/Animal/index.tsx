@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
+import { AnimalProfile } from 'src/components/Animal/Profile'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { AddAnimalProfil } from './Profile'
 import { AddAnimalSituation } from './Situation'
 import { Card, Container, customStyles } from './Styled'
 
@@ -97,7 +97,7 @@ export const AddAnimal = () => {
             {({ handleChange, values, handleSubmit, handleBlur }) => (
               <>
                 {currentPosition === 0 && (
-                  <AddAnimalProfil
+                  <AnimalProfile
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}

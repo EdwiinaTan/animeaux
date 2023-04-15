@@ -2,9 +2,9 @@ import { Field } from 'formik'
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
+import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
-import { CheckBoxComponent } from 'src/containers/Home/Animal/Update/Checkbox'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
 
 export const AddAnimalProfil: React.FC<AddAnimalProps> = ({

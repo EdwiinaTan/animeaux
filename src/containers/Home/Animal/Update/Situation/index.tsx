@@ -11,7 +11,7 @@ import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
-import { Card, Container } from './Styled'
+import { Card, Container, Keyboard } from './Styled'
 
 export const UpdateAnimalSituation: React.FC = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -74,28 +74,30 @@ export const UpdateAnimalSituation: React.FC = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier la situation de ${animalDetails.name}`}
       />
-      <Container>
-        <Card>
-          <Formik
-            initialValues={initialValues}
-            // validationSchema={validationSchema}
-            onSubmit={(values) => updateAnimal(values)}
-          >
-            {({ handleChange, values, handleSubmit, handleBlur }) => (
-              <AnimalSituation
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                handleSubmit={handleSubmit}
-                renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
-                renderDefaultOptionUser={renderDefaultOptionUser}
-                renderDefaultOptionPlace={renderDefaultOptionPlace}
-              />
-            )}
-          </Formik>
-        </Card>
-        <Spacing size="24" />
-      </Container>
+      <Keyboard behavior="position" enabled>
+        <Container>
+          <Card>
+            <Formik
+              initialValues={initialValues}
+              // validationSchema={validationSchema}
+              onSubmit={(values) => updateAnimal(values)}
+            >
+              {({ handleChange, values, handleSubmit, handleBlur }) => (
+                <AnimalSituation
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
+                  renderDefaultOptionUser={renderDefaultOptionUser}
+                  renderDefaultOptionPlace={renderDefaultOptionPlace}
+                />
+              )}
+            </Formik>
+          </Card>
+          <Spacing size="24" />
+        </Container>
+      </Keyboard>
     </Layout>
   )
 }

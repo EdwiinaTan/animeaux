@@ -9,7 +9,7 @@ import { AnimalSituation } from 'src/components/Animal/Situation'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Card, Container, customStyles } from './Styled'
+import { Card, Container, customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
   const navigation = useNavigation()
@@ -64,54 +64,56 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <Container>
-        <Card>
-          {currentPosition === 0 && (
-            <Formik
-              initialValues={initialValuesStepOne}
-              onSubmit={(values) => {
-                console.log('valueOne', values)
-              }}
-            >
-              {({ handleChange, values, handleSubmit, handleBlur }) => (
-                <AnimalProfile
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                />
-              )}
-            </Formik>
+      <Keyboard behavior="position" enabled>
+        <Container>
+          <Card>
+            {currentPosition === 0 && (
+              <Formik
+                initialValues={initialValuesStepOne}
+                onSubmit={(values) => {
+                  console.log('valueOne', values)
+                }}
+              >
+                {({ handleChange, values, handleSubmit, handleBlur }) => (
+                  <AnimalProfile
+                    values={values}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
+              </Formik>
+            )}
+            {currentPosition === 1 && (
+              <Formik
+                initialValues={initialValuesStepTwo}
+                onSubmit={(values) => {
+                  console.log('valueTwo', values)
+                }}
+              >
+                {({ handleChange, values, handleSubmit, handleBlur }) => (
+                  <AnimalSituation
+                    values={values}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
+              </Formik>
+            )}
+          </Card>
+          {currentPosition !== 0 && (
+            <TouchableOpacity onPress={() => onPageChange('prev')}>
+              <Text>Précédent</Text>
+              <Spacing size="24" />
+            </TouchableOpacity>
           )}
-          {currentPosition === 1 && (
-            <Formik
-              initialValues={initialValuesStepTwo}
-              onSubmit={(values) => {
-                console.log('valueTwo', values)
-              }}
-            >
-              {({ handleChange, values, handleSubmit, handleBlur }) => (
-                <AnimalSituation
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                />
-              )}
-            </Formik>
-          )}
-        </Card>
-        {currentPosition !== 0 && (
-          <TouchableOpacity onPress={() => onPageChange('prev')}>
-            <Text>Précédent</Text>
-            <Spacing size="24" />
+          <TouchableOpacity onPress={() => onPageChange('next')}>
+            <Text>Suivant</Text>
           </TouchableOpacity>
-        )}
-        <TouchableOpacity onPress={() => onPageChange('next')}>
-          <Text>Suivant</Text>
-        </TouchableOpacity>
-        <Spacing size="24" />
-      </Container>
+          <Spacing size="24" />
+        </Container>
+      </Keyboard>
     </Layout>
   )
 }

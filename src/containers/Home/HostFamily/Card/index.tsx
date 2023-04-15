@@ -42,14 +42,15 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
         }}
       >
         <Container>
-          <ContainerImage>
-            <Image
-              source={{ uri: hostFamily?.picture[0]?.url }}
-              style={{ width: 100, height: 100, borderRadius: 8 }}
-              PlaceholderContent={<ActivityIndicator />}
-            />
-            <Image resizeMode="cover" source={{ uri: hostFamily.picture[0]?.url }} />
-          </ContainerImage>
+          {hostFamily.picture && hostFamily.picture[0] && (
+            <ContainerImage>
+              <Image
+                source={{ uri: hostFamily.picture[0].url }}
+                style={{ width: 100, height: 100, borderRadius: 8 }}
+                PlaceholderContent={<ActivityIndicator />}
+              />
+            </ContainerImage>
+          )}
           <View style={{ flexDirection: 'column' }}>
             <Text>
               {hostFamily.firstname} {hostFamily.lastname}

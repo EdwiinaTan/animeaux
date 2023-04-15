@@ -113,6 +113,8 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Spacing size="4" />
                 <Text>Alias : {animalDetails.alias}</Text>
                 <Spacing size="4" />
+                <Text>Race : {uppercaseWord(animalDetails.race)}</Text>
+                <Spacing size="4" />
                 {renderHostFamily(statusHostFamily, hostFamilyData)}
               </View>
               <View style={{ alignItems: 'flex-end' }}>

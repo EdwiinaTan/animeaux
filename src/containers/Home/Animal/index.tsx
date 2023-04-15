@@ -1,8 +1,4 @@
-import {
-  BottomSheetBackdrop,
-  BottomSheetBackdropProps,
-  BottomSheetModal,
-} from '@gorhom/bottom-sheet'
+import { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, Text, View } from 'react-native'
@@ -23,10 +19,8 @@ import { FilterAnimal } from './Filter'
 export const Animal = (): React.ReactElement => {
   const [search, setSearch] = useState<string>()
   const [isActive, setIsActive] = useState<AnimalTypeEnum>(AnimalTypeEnum.ALL)
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const listRef = useRef(null)
   const navigation = useNavigation()
-  const snapPoints = ['30%']
   const { statusAnimal, animalData } = useGetAnimals() //useEffect
   const [filtered, setFiltered] = useState<AnimalClient[]>(animalData)
 
@@ -110,10 +104,6 @@ export const Animal = (): React.ReactElement => {
     []
   )
 
-  const handlePresentModal = () => {
-    bottomSheetModalRef.current?.present()
-  }
-
   const renderAnimal: ListRenderItem<AnimalClient> = ({ item }) => {
     return <CardContainer animal={item.fields} />
   }
@@ -129,7 +119,7 @@ export const Animal = (): React.ReactElement => {
   return (
     <View>
       <Layout>
-        <HeaderComponent title="Animal" toggleOverlay={handlePresentModal} />
+        <HeaderComponent title="Animal" />
         <SearchBarComponent search={search} setSearch={setSearch} />
         <Spacing size="8" />
         {statusAnimal === FetchStatus.LOADING ? (
@@ -162,27 +152,6 @@ export const Animal = (): React.ReactElement => {
             />
           </>
         )}
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={0}
-          backdropComponent={renderBackdrop}
-          snapPoints={snapPoints}
-        >
-          <View>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-          </View>
-        </BottomSheetModal>
       </Layout>
     </View>
   )

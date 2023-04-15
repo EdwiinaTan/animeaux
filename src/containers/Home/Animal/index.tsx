@@ -132,34 +132,36 @@ export const Animal = (): React.ReactElement => {
         <HeaderComponent title="Animal" toggleOverlay={handlePresentModal} />
         <SearchBarComponent search={search} setSearch={setSearch} />
         <Spacing size="8" />
-        {statusAnimal !== FetchStatus.LOADING && (
-          <FilterAnimal setIsActive={setIsActive} isActive={isActive} />
+        {statusAnimal === FetchStatus.LOADING ? (
+          <View>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </View>
+        ) : (
+          <>
+            <FilterAnimal setIsActive={setIsActive} isActive={isActive} />
+            <FlatList
+              style={{ height: '100%' }}
+              ref={listRef}
+              data={filtered}
+              initialNumToRender={5}
+              maxToRenderPerBatch={5}
+              keyExtractor={(item) => item.id}
+              renderItem={renderAnimal}
+              ListEmptyComponent={
+                search ? (
+                  <Text style={{ textAlign: 'center' }}>
+                    {`Aucun ${renderSearchNotFound()} trouvé`}
+                  </Text>
+                ) : (
+                  <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
+                )
+              }
+            />
+          </>
         )}
-        <FlatList
-          style={{ height: '100%' }}
-          ref={listRef}
-          data={filtered}
-          initialNumToRender={5}
-          maxToRenderPerBatch={5}
-          keyExtractor={(item) => item.id}
-          renderItem={renderAnimal}
-          ListEmptyComponent={
-            statusAnimal === FetchStatus.LOADING ? (
-              <View>
-                <SkeletonCard />
-                <SkeletonCard />
-                <SkeletonCard />
-                <SkeletonCard />
-              </View>
-            ) : search ? (
-              <Text style={{ textAlign: 'center' }}>
-                {`Aucun ${renderSearchNotFound()} trouvé`}
-              </Text>
-            ) : (
-              <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
-            )
-          }
-        />
         <BottomSheetModal
           ref={bottomSheetModalRef}
           index={0}

@@ -3,12 +3,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Animal/Profile'
+import { validationAnimalProfile } from 'src/components/Animal/Profile/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
-import * as Yup from 'yup'
 import { AnimalRouteParams } from '../../Router/type'
 import { Card, Container, Keyboard } from './Styled'
 import { AnimalRequest } from './Type'
@@ -20,13 +20,6 @@ export const AnimalUpdate = () => {
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   // const nameRef = useRef(animalDetails.name)
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .required('Le nom doit être requis')
-      .min(2, 'Le nom doit contenir au moins 2 caractères'),
-    alias: Yup.string().min(2, 'L’alias doit contenir au moins 2 caractères'),
-  })
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -59,7 +52,7 @@ export const AnimalUpdate = () => {
           <Card>
             <Formik
               initialValues={initialValues}
-              validationSchema={validationSchema}
+              validationSchema={validationAnimalProfile}
               onSubmit={(values: AnimalRequest) => {
                 updateAnimal(values)
               }}

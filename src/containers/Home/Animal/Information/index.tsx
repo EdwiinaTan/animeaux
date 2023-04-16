@@ -3,8 +3,9 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { CatSvg } from 'assets/svg/cat'
 import { DogSvg } from 'assets/svg/dog'
+import { KidSvg } from 'assets/svg/kid'
 import { useRef } from 'react'
-import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Image as ImageElement } from 'react-native-elements'
 import { ChipComponent } from 'src/components/Chip'
 import { HeaderComponent } from 'src/components/Header'
@@ -183,10 +184,7 @@ export const AnimalInformation = (): React.ReactElement => {
                     <CatSvg />
                   </ViewImage>
                   <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
-                    <Image
-                      source={require('/assets/icons/kids1.png')}
-                      style={{ width: 50, height: 50 }}
-                    />
+                    <KidSvg />
                   </ViewImage>
                 </ContainerViewImage>
               </BoxViewImage>

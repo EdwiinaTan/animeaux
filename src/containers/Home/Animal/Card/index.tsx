@@ -2,12 +2,13 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Skeleton } from '@rneui/themed'
 import { ActivityIndicator, TouchableOpacity } from 'react-native'
-import { Card, Image, Text } from 'react-native-elements'
+import { Card, Image } from 'react-native-elements'
 import { ChipComponent } from 'src/components/Chip'
-import { Spacing } from 'src/components/Layout/Spacing'
+import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
+import { animalAge } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
 import { renderAnimalGender, renderHostFamily } from '../Utils'
 import { AnimalGender, Container, ContainerChip, ContainerImage, Description } from './Styled'
@@ -45,20 +46,17 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
           </ContainerImage>
           <Description>
             <AnimalGender>
-              <Text style={{ paddingRight: 4 }}>{animal.name}</Text>
+              <Body1 paddingRight={4}>{animal.name}</Body1>
               {renderAnimalGender(animal)}
             </AnimalGender>
-            <Spacing size="4" />
-            <Text>2 ans</Text>
-            <Spacing size="4" />
+            <Body1>{animalAge(animal.birthday)}</Body1>
             {statusUser === FetchStatus.LOADING ? (
               <Skeleton animation="pulse" width={200} height={12} />
             ) : (
-              <Text>
+              <Body1>
                 Responsable : {userData?.firstname} {userData?.lastname}
-              </Text>
+              </Body1>
             )}
-            <Spacing size="4" />
             {renderHostFamily(statusHostFamily, hostFamilyData)}
             {/* {statusHostFamily === FetchStatus.FAILED && <Text>failed</Text>}
             {statusHostFamily === FetchStatus.LOADING ? (

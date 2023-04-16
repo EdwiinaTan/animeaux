@@ -1,5 +1,5 @@
 import { Skeleton } from '@rneui/themed'
-import { Text } from 'react-native'
+import { Body1 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { AnimalGenderEnum } from 'src/types/Animal/enum'
@@ -17,16 +17,16 @@ export const renderAnimalGender = (animal: AnimalType) => {
 export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyType) => {
   switch (statusHostFamily) {
     case FetchStatus.ERROR:
-      return <Text>Pas de FA</Text>
+      return <Body1>Pas de FA</Body1>
     case FetchStatus.LOADING:
       return <Skeleton animation="pulse" width={200} height={12} />
     case FetchStatus.SUCCESS:
       return (
-        <Text>
+        <Body1>
           FA : {hostFamilyData.firstname} {hostFamilyData.lastname}
-        </Text>
+        </Body1>
       )
     default:
-      return <Text>Pas de FA</Text>
+      return <Body1>Pas de FA</Body1>
   }
 }

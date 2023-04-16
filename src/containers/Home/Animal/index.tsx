@@ -1,6 +1,5 @@
-import { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, Text, View } from 'react-native'
 import 'react-native-gesture-handler'
 import { HeaderComponent } from 'src/components/Header'
@@ -90,19 +89,6 @@ export const Animal = (): React.ReactElement => {
   //     )
   //   }
   // }
-
-  const renderBackdrop = useCallback(
-    (props: BottomSheetBackdropProps) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={1}
-        animatedIndex={{
-          value: 1,
-        }}
-      />
-    ),
-    []
-  )
 
   const renderAnimal: ListRenderItem<AnimalClient> = ({ item }) => {
     return <CardContainer animal={item.fields} />

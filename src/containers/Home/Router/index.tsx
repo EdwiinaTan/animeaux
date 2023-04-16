@@ -1,3 +1,4 @@
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useRef } from 'react'
 import { IconAntDesign, IconIonicons, IconOcticons } from 'src/constant/Icons'
@@ -14,7 +15,7 @@ import { AddRouteParams, RouteParams } from './Type'
 
 export const HomeRouter: React.FC = () => {
   const Tab = createBottomTabNavigator<RouteParams & AddRouteParams>()
-  const bottomSheetModalRef = useRef(null)
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()

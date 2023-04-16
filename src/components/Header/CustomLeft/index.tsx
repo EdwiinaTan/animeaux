@@ -11,7 +11,7 @@ export const CustomLeft: React.FC<CustomLeftProps> = ({ onClickGoBack }) => {
     <IconAntDesign
       name="arrowleft"
       size={20}
-      style={{ paddingTop: 4 }}
+      style={{ paddingTop: 4, paddingLeft: 4 }}
       color={theme.colors.black}
       onPress={onClickGoBack}
     />

@@ -6,17 +6,18 @@ import { Image } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { renderDateFormat, startsWithVowel } from 'src/utils/Functions'
-import address from '../../../../../assets/icons/address.png'
-import calendar from '../../../../../assets/icons/calendar.png'
-import clipboard from '../../../../../assets/icons/clipboard.png'
-import email from '../../../../../assets/icons/e-mail.png'
-import jobSeeking from '../../../../../assets/icons/job-seeking.png'
-import play from '../../../../../assets/icons/play.png'
-import smartphone from '../../../../../assets/icons/smartphones.png'
+import { renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
+import address from '/assets/icons/address.png'
+import calendar from '/assets/icons/calendar.png'
+import clipboard from '/assets/icons/clipboard.png'
+import email from '/assets/icons/e-mail.png'
+import jobSeeking from '/assets/icons/job-seeking.png'
+import play from '/assets/icons/play.png'
+import smartphone from '/assets/icons/smartphones.png'
 
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import {
   Container,
   ContainerDescription,
@@ -32,7 +33,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     params: { hostFamilyDetails },
   } = route
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
-  const bottomSheetModalRef = useRef(null)
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -60,7 +61,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={startsWithVowel(hostFamilyDetails.firstname)}
+        title={uppercaseWord(startsWithVowel(hostFamilyDetails.firstname))}
         toggleOverlay={handlePresentModal}
       />
       <Container>

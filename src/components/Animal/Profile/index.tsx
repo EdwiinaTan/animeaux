@@ -1,21 +1,38 @@
 import { Field } from 'formik'
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Text, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
+import { ContainerCheckbox, styles } from '../Styled'
+import { AnimalFormProps } from '../Type'
 
-export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
+export const AnimalProfile: React.FC<AnimalFormProps> = ({
   values,
   handleChange,
   handleBlur,
   handleSubmit,
+  animalDetails,
 }) => {
+  const [race, setRace] = useState<string>('')
+  const [color, setColor] = useState<string>('')
+
+  useEffect(() => {
+    if (animalDetails) {
+      setRace(animalDetails.race)
+      setColor(animalDetails.color)
+    } else {
+      setRace('')
+      setColor('')
+    }
+  }, [])
+
   return (
     <>
-      <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+      <ContainerCheckbox>
         <Text>Espèce</Text>
         <Spacing size="8" />
         {specieArray.map((specie, key) => (
@@ -37,7 +54,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
             handleChange={() => handleChange('gender')(gender.value)}
           />
         ))}
-      </View>
+      </ContainerCheckbox>
       <Spacing size="24" />
       <Divider />
       <Spacing size="8" />
@@ -104,6 +121,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
               onChange={handleChange('race')}
               data={raceArray}
               placeholder="Veuillez choisir la race"
+              defaultOption={{ key: race, value: race }}
               save="key"
               value={values.race}
             />
@@ -126,6 +144,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
               setSelected={handleChange('color')}
               onChange={handleChange('color')}
               data={colorArray}
+              defaultOption={{ key: color, value: color }}
               placeholder="Veuillez choisir la couleur"
               save="key"
               value={values.color}
@@ -134,7 +153,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description public</Text>
+      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description publique</Text>
       <Field name="publicDescription">
         {({ field }) => (
           <TextInput
@@ -143,6 +162,7 @@ export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
             editable
             multiline
             style={styles.input}
+            placeholder={'Veuillez mettre une description publique'}
             onChangeText={handleChange('publicDescription')}
             onChange={handleChange('publicDescription')}
             onBlur={handleBlur('publicDescription')}
@@ -155,15 +175,3 @@ export const AddAnimalProfil: React.FC<AddAnimalProps> = ({
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: theme.colors.grey0,
-  },
-})

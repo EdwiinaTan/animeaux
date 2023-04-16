@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { UserInCharge } from 'src/components/User'
 import { Animal } from '..'
 import { AnimalInformation } from '../Information'
 import { AnimalUpdate } from '../Update/Profile'
@@ -19,6 +20,11 @@ export const AnimalRouter: React.FC = () => {
       <Tab.Screen
         name="animalInformation"
         component={AnimalInformation}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Tab.Screen
+        name="animalUserInCharge"
+        component={UserInCharge}
         options={{ animation: 'slide_from_right' }}
       />
       <Tab.Screen

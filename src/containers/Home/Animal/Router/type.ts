@@ -5,6 +5,9 @@ export type AnimalRouteParams = {
   animalInformation: {
     animalDetails: AnimalType
   }
+  animalUserInCharge: {
+    animalDetails: AnimalType
+  }
   animalUpdateProfil: {
     animalDetails: AnimalType
   }

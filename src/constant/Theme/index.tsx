@@ -17,12 +17,12 @@ export const theme = {
     // grey4: '#dce1e7',
     //b5b7ba
   },
-  Button: {
-    // titleStyle: {
-    //   color: 'white',
-    // },
-    // buttonStyle: {
-    //   backgroundColor: '#ff6347',
-    // },
-  },
+  // Button: {
+  //   titleStyle: {
+  //     color: 'white',
+  //   },
+  //   buttonStyle: {
+  //     backgroundColor: '#ff6347',
+  //   },
+  // },
 }

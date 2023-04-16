@@ -38,26 +38,30 @@ export const HostFamily = (): React.ReactElement => {
     <Layout>
       <HeaderComponent title="Famille d’accueil" />
       <SearchBarComponent search={search} setSearch={setSearch} />
-      {statusHostFamilies !== FetchStatus.LOADING && <Spacing size="16" />}
-      <FlatList
-        data={filtered}
-        keyExtractor={(item) => item.id}
-        renderItem={renderAnimal}
-        ListEmptyComponent={
-          statusHostFamilies === FetchStatus.LOADING ? (
-            <View>
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
-            </View>
-          ) : search ? (
-            <Text style={{ textAlign: 'center' }}>Aucune famille d’accueil trouvé</Text>
-          ) : (
-            <Text>Aucune famille d’accueil pour le moment</Text>
-          )
-        }
-      />
+      {statusHostFamilies === FetchStatus.LOADING ? (
+        <View>
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+          <SkeletonCard />
+        </View>
+      ) : (
+        <>
+          <Spacing size="16" />
+          <FlatList
+            data={filtered}
+            keyExtractor={(item) => item.id}
+            renderItem={renderAnimal}
+            ListEmptyComponent={
+              search ? (
+                <Text style={{ textAlign: 'center' }}>Aucune famille d’accueil trouvé</Text>
+              ) : (
+                <Text>Aucune famille d’accueil pour le moment</Text>
+              )
+            }
+          />
+        </>
+      )}
     </Layout>
   )
 }

@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
+import { AnimalProfile } from 'src/components/Animal/Profile'
+import { AnimalSituation } from 'src/components/Animal/Situation'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { AddAnimalProfil } from './Profile'
-import { AddAnimalSituation } from './Situation'
-import { Card, Container, customStyles } from './Styled'
+import { Card, Container, customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
   const navigation = useNavigation()
@@ -28,7 +28,7 @@ export const AddAnimal = () => {
     }
   }
 
-  const initialValues = {
+  const initialValuesStepOne = {
     species: '',
     gender: '',
     name: '',
@@ -37,7 +37,10 @@ export const AddAnimal = () => {
     race: '',
     color: '',
     publicDescription: '',
-    hostFamilyId: '', // step2
+  }
+
+  const initialValuesStepTwo = {
+    hostFamilyId: '',
     status: '',
     placeCare: '',
     reason: '',
@@ -61,48 +64,56 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <Container>
-        <Card>
-          <Formik
-            initialValues={initialValues}
-            onSubmit={(values) => {
-              // faudrait currentPosition +1 quand c'est tout good
-              console.log('value', values)
-            }}
-          >
-            {({ handleChange, values, handleSubmit, handleBlur }) => (
-              <>
-                {currentPosition === 0 && (
-                  <AddAnimalProfil
+      <Keyboard behavior="position" enabled>
+        <Container>
+          <Card>
+            {currentPosition === 0 && (
+              <Formik
+                initialValues={initialValuesStepOne}
+                onSubmit={(values) => {
+                  console.log('valueOne', values)
+                }}
+              >
+                {({ handleChange, values, handleSubmit, handleBlur }) => (
+                  <AnimalProfile
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
                     handleSubmit={handleSubmit}
                   />
                 )}
-                {currentPosition === 1 && (
-                  <AddAnimalSituation
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                  />
-                )}
-              </>
+              </Formik>
             )}
-          </Formik>
-        </Card>
-        {currentPosition !== 0 && (
-          <TouchableOpacity onPress={() => onPageChange('prev')}>
-            <Text>Précédent</Text>
-            <Spacing size="24" />
+            {currentPosition === 1 && (
+              <Formik
+                initialValues={initialValuesStepTwo}
+                onSubmit={(values) => {
+                  console.log('valueTwo', values)
+                }}
+              >
+                {({ handleChange, values, handleSubmit, handleBlur }) => (
+                  <AnimalSituation
+                    values={values}
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
+              </Formik>
+            )}
+          </Card>
+          {currentPosition !== 0 && (
+            <TouchableOpacity onPress={() => onPageChange('prev')}>
+              <Text>Précédent</Text>
+              <Spacing size="24" />
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={() => onPageChange('next')}>
+            <Text>Suivant</Text>
           </TouchableOpacity>
-        )}
-        <TouchableOpacity onPress={() => onPageChange('next')}>
-          <Text>Suivant</Text>
-        </TouchableOpacity>
-        <Spacing size="24" />
-      </Container>
+          <Spacing size="24" />
+        </Container>
+      </Keyboard>
     </Layout>
   )
 }

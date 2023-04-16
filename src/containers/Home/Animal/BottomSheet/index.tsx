@@ -1,4 +1,8 @@
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
+import {
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+  BottomSheetModal,
+} from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
@@ -22,7 +26,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible)
     if (isOverlayVisible) {
-      bottomSheetModalRef.current.close()
+      bottomSheetModalRef
     }
   }
 
@@ -41,7 +45,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
   }
 
   const renderBackdrop = useCallback(
-    (props: any) => (
+    (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
         {...props}
         appearsOnIndex={1}

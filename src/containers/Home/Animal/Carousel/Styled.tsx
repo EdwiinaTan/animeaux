@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import { theme } from 'src/constant/Theme'
 import styled from 'styled-components/native'
 
@@ -22,3 +23,11 @@ export const PaginationText = styled.Text`
 export const Carousel = styled.View`
   position: relative;
 `
+
+export const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})

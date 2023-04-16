@@ -16,6 +16,7 @@ module.exports = function (api) {
           root: ['./'],
           alias: {
             src: './src/',
+            assets: './assets/',
             static: './static/',
           },
           extensions: ['.js', 'jsx', '.ts', '.tsx'],

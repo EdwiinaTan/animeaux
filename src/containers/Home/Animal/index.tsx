@@ -1,4 +1,4 @@
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
+import { BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, Text, View } from 'react-native'
@@ -19,10 +19,8 @@ import { FilterAnimal } from './Filter'
 export const Animal = (): React.ReactElement => {
   const [search, setSearch] = useState<string>()
   const [isActive, setIsActive] = useState<AnimalTypeEnum>(AnimalTypeEnum.ALL)
-  const bottomSheetModalRef = useRef(null)
   const listRef = useRef(null)
   const navigation = useNavigation()
-  const snapPoints = ['30%']
   const { statusAnimal, animalData } = useGetAnimals() //useEffect
   const [filtered, setFiltered] = useState<AnimalClient[]>(animalData)
 
@@ -94,7 +92,7 @@ export const Animal = (): React.ReactElement => {
   // }
 
   const renderBackdrop = useCallback(
-    (props: any) => (
+    (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
         {...props}
         appearsOnIndex={1}
@@ -105,10 +103,6 @@ export const Animal = (): React.ReactElement => {
     ),
     []
   )
-
-  const handlePresentModal = () => {
-    bottomSheetModalRef.current?.present()
-  }
 
   const renderAnimal: ListRenderItem<AnimalClient> = ({ item }) => {
     return <CardContainer animal={item.fields} />
@@ -125,58 +119,39 @@ export const Animal = (): React.ReactElement => {
   return (
     <View>
       <Layout>
-        <HeaderComponent title="Animal" toggleOverlay={handlePresentModal} />
+        <HeaderComponent title="Animal" />
         <SearchBarComponent search={search} setSearch={setSearch} />
         <Spacing size="8" />
-        {statusAnimal !== FetchStatus.LOADING && (
-          <FilterAnimal setIsActive={setIsActive} isActive={isActive} />
-        )}
-        <FlatList
-          style={{ height: '100%' }}
-          ref={listRef}
-          data={filtered}
-          initialNumToRender={5}
-          maxToRenderPerBatch={5}
-          keyExtractor={(item) => item.id}
-          renderItem={renderAnimal}
-          ListEmptyComponent={
-            statusAnimal === FetchStatus.LOADING ? (
-              <View>
-                <SkeletonCard />
-                <SkeletonCard />
-                <SkeletonCard />
-                <SkeletonCard />
-              </View>
-            ) : search ? (
-              <Text style={{ textAlign: 'center' }}>
-                {`Aucun ${renderSearchNotFound()} trouvé`}
-              </Text>
-            ) : (
-              <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
-            )
-          }
-        />
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          index={0}
-          backdropComponent={renderBackdrop}
-          snapPoints={snapPoints}
-        >
+        {statusAnimal === FetchStatus.LOADING ? (
           <View>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
-            <Text>Hellloooooooo</Text>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
           </View>
-        </BottomSheetModal>
+        ) : (
+          <>
+            <FilterAnimal setIsActive={setIsActive} isActive={isActive} />
+            <FlatList
+              style={{ height: '100%' }}
+              ref={listRef}
+              data={filtered}
+              initialNumToRender={5}
+              maxToRenderPerBatch={5}
+              keyExtractor={(item) => item.id}
+              renderItem={renderAnimal}
+              ListEmptyComponent={
+                search ? (
+                  <Text style={{ textAlign: 'center' }}>
+                    {`Aucun ${renderSearchNotFound()} trouvé`}
+                  </Text>
+                ) : (
+                  <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
+                )
+              }
+            />
+          </>
+        )}
       </Layout>
     </View>
   )

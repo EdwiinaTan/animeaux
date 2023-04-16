@@ -1,4 +1,8 @@
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet'
+import {
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+  BottomSheetModal,
+} from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback } from 'react'
@@ -13,7 +17,7 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
   const navigation = useNavigation<NativeStackNavigationProp<AddRouteParams>>()
 
   const renderBackdrop = useCallback(
-    (props: any) => (
+    (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
         {...props}
         appearsOnIndex={1}
@@ -45,7 +49,7 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40 }}>
         <TouchableOpacity onPress={onClickAddAnimal}>
           <Image
-            source={require('../../../../../assets/icons/animal-shelter.png')}
+            source={require('/assets/icons/animal-shelter.png')}
             style={{ width: 100, height: 100 }}
           />
           <Spacing size="8" />
@@ -53,10 +57,7 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
           <Text style={{ textAlign: 'center' }}>un animal</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onClickAddHostFamily}>
-          <Image
-            source={require('../../../../../assets/icons/home.png')}
-            style={{ width: 100, height: 100 }}
-          />
+          <Image source={require('/assets/icons/home.png')} style={{ width: 100, height: 100 }} />
           <Spacing size="8" />
           <Text style={{ textAlign: 'center' }}>Ajouter </Text>
           <Text style={{ textAlign: 'center' }}>Une famille </Text>

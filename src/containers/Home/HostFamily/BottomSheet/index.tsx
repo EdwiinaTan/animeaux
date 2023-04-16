@@ -6,12 +6,11 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
-import { Text } from 'react-native'
 import { Divider, ListItem, Overlay } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { deleteHostFamilyById } from 'src/client/HostFamily'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body1 } from 'src/components/Typo'
+import { Body1, Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -67,7 +66,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       chevron: true,
     },
     {
-      name: <Text style={{ color: theme.colors.red }}>Supprimer le profil</Text>,
+      name: <Title3 color={theme.colors.red}>Supprimer le profil</Title3>,
       icon: (
         <IconFontAwesome
           name="trash-o"

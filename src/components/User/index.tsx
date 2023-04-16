@@ -1,6 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ActivityIndicator, ImageSourcePropType } from 'react-native'
+import { EmailSvg } from 'assets/svg/email'
+import { PhoneSvg } from 'assets/svg/phone'
+import { ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
@@ -12,16 +14,7 @@ import { HeaderComponent } from '../Header'
 import { Layout } from '../Layout'
 import { Spacing } from '../Layout/Spacing'
 import { Body1 } from '../Typo'
-import {
-  Container,
-  ContainerDescription,
-  ContainerImage,
-  Description,
-  Fields,
-  ImageField,
-} from './Styled'
-import email from '/assets/icons/e-mail.png'
-import smartphone from '/assets/icons/smartphones.png'
+import { Container, ContainerDescription, ContainerImage, Description, Fields } from './Styled'
 
 export const UserInCharge = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -35,13 +28,13 @@ export const UserInCharge = () => {
     return navigation.goBack()
   }
 
-  const renderField = (image: ImageSourcePropType, value: string) => {
+  const renderField = (image: React.ReactElement, value: string) => {
     if (value) {
       return (
         <>
           <Spacing size="16" />
           <Fields>
-            <ImageField source={image} />
+            {image}
             <Body1>{value}</Body1>
           </Fields>
         </>
@@ -79,8 +72,8 @@ export const UserInCharge = () => {
                 <Body1>
                   {userData.firstname} {userData.lastname}
                 </Body1>
-                {renderField(smartphone, userData.phone)}
-                {renderField(email, userData.email)}
+                {renderField(<PhoneSvg />, userData.phone)}
+                {renderField(<EmailSvg />, userData.email)}
               </Description>
               {/* animaux en charge avec historique */}
             </ContainerDescription>

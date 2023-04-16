@@ -5,6 +5,7 @@ import { Image } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
 import { useGetUserById } from 'src/hooks/User'
+import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { HeaderComponent } from '../Header'
@@ -26,7 +27,7 @@ export const UserInCharge = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },
-  } = route
+  } = route as { params: { animalDetails: AnimalType } }
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
 
   const onClickGoBack = () => {

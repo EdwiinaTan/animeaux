@@ -2,7 +2,8 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Skeleton } from '@rneui/themed'
 import { ActivityIndicator, TouchableOpacity } from 'react-native'
-import { Card, Image } from 'react-native-elements'
+import { Image } from 'react-native-elements'
+import { Card } from 'src/components/Card'
 import { ChipComponent } from 'src/components/Chip'
 import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
@@ -25,16 +26,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
 
   return (
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
-      <Card
-        key={`cardAnimal_${animal.id}`}
-        containerStyle={{
-          borderRadius: 8,
-          borderColor: 'transparent',
-          position: 'relative',
-          marginTop: 1,
-          marginBottom: 16,
-        }}
-      >
+      <Card key={`cardAnimal_${animal.id}`}>
         <Container>
           <ContainerImage>
             <Image

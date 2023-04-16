@@ -18,6 +18,7 @@ import play from '/assets/icons/play.png'
 import smartphone from '/assets/icons/smartphones.png'
 
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
+import { HostFamilyType } from 'src/types/HostFamily/Type'
 import {
   Container,
   ContainerDescription,
@@ -31,7 +32,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
   const {
     params: { hostFamilyDetails },
-  } = route
+  } = route as { params: { hostFamilyDetails: HostFamilyType } }
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 

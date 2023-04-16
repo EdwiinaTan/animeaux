@@ -4,21 +4,21 @@ export const StyleTitle1 = StyleSheet.create({
   content: {
     fontSize: 26,
     lineHeight: 28,
-    fontWeight: '500',
+    fontWeight: '600',
   },
 })
 
 export const StyleTitle2 = StyleSheet.create({
   content: {
-    fontSize: 24,
+    fontSize: 18,
     lineHeight: 24,
-    fontWeight: '400',
+    fontWeight: '500',
   },
 })
 
 export const StyleTitle3 = StyleSheet.create({
   content: {
-    fontSize: 22,
+    fontSize: 16,
     lineHeight: 20,
     fontWeight: '400',
   },

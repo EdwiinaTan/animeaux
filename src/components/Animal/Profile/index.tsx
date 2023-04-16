@@ -5,7 +5,7 @@ import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body2, Title3 } from 'src/components/Typo'
+import { Body2, Body3, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
 import { ContainerCheckbox, styles, TextRed } from '../Styled'
@@ -17,6 +17,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   handleBlur,
   handleSubmit,
   animalDetails,
+  errors,
+  touched,
 }) => {
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
@@ -81,6 +83,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
+      {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
+      <Spacing size="16" />
       <Body2>Alias</Body2>
       <Field name="alias">
         {({ field }) => (
@@ -97,6 +101,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
+      {errors.alias && touched.alias && <Body3 color={theme.colors.red}>{errors.alias}</Body3>}
+      <Spacing size="16" />
       <Body2>Icad</Body2>
       <Field name="icadNumber">
         {({ field }) => (
@@ -111,6 +117,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
+      <Spacing size="16" />
       <Body2>
         Race<TextRed>*</TextRed>
       </Body2>

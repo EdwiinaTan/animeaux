@@ -5,6 +5,7 @@ import { AddressSvg } from 'assets/svg/address'
 import { CalendarSvg } from 'assets/svg/calendar'
 import { EmailSvg } from 'assets/svg/email'
 import { PhoneSvg } from 'assets/svg/phone'
+import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
@@ -79,7 +80,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
             {renderField(<AddressSvg />, hostFamilyDetails.address)}
             {renderField(<CalendarSvg />, renderDateFormat(hostFamilyDetails.updatedAt))}
             {renderField(<EmailSvg />, hostFamilyDetails.onBreak)}
-            {renderField(<EmailSvg />, hostFamilyDetails.criteria)}
+            {renderField(<WarningSvg />, hostFamilyDetails.criteria)}
             {renderField(<EmailSvg />, hostFamilyDetails.description)}
           </Description>
         </ContainerDescription>

@@ -19,3 +19,7 @@ export const ContainerCheckbox = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
 `
+
+export const TextRed = styled.Text`
+  color: ${theme.colors.red};
+`

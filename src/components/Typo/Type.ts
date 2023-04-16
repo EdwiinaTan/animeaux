@@ -4,7 +4,7 @@ export interface BodyProps {
 
 export interface TypoProps {
   color?: string
-  align?: 'center' | 'left' | 'right'
+  textAlign?: 'center' | 'left' | 'right'
   fontSize?: number
   lineHeight?: number
   fontWeight?: 'normal' | 'bold' | '500' | '600' | '700' | '800' | '900'

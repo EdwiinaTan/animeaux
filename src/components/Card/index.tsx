@@ -1,10 +1,10 @@
 import { Card as CardElement } from 'react-native-elements'
 import { CardProps } from './Type'
 
-export const Card: React.FC<CardProps> = ({ key, children }) => {
+export const Card: React.FC<CardProps> = ({ id, children }) => {
   return (
     <CardElement
-      key={key}
+      key={id}
       containerStyle={{
         borderRadius: 8,
         borderColor: 'transparent',

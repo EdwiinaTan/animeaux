@@ -18,7 +18,7 @@ export const HeaderComponent: React.FC<HeaderComponentProps> = ({
         }}
       >
         <CustomLeft onClickGoBack={onClickGoBack} />
-        <Title1 align="center">{title}</Title1>
+        <Title1 textAlign="center">{title}</Title1>
         <CustomRight toggleOverlay={toggleOverlay} />
       </Header>
     </>

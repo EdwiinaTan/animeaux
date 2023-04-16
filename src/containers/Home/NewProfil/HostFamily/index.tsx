@@ -1,15 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
 import { Field, Formik } from 'formik'
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Button, StyleSheet, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 // import { FlatList } from 'react-native-gesture-handler'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
-import { Card, Container, Keyboard } from './Styled'
+import { Card, Container, Keyboard, TextRed } from './Styled'
 // import { useAirtableAnimal } from 'src/hooks/Animal'
 
 export const AddHostFamily = () => {
@@ -63,7 +64,9 @@ export const AddHostFamily = () => {
             >
               {({ handleChange, values, handleSubmit, handleBlur }) => (
                 <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Nom*</Text>
+                  <Body2>
+                    Nom<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="lastname">
                     {({ field }) => (
                       <TextInput
@@ -78,7 +81,9 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Prénom*</Text>
+                  <Body2>
+                    Prénom<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="firstname">
                     {({ field }) => (
                       <TextInput
@@ -93,7 +98,9 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse mail*</Text>
+                  <Body2>
+                    Adresse mail<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="email">
                     {({ field }) => (
                       <TextInput
@@ -109,7 +116,9 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Téléphone*</Text>
+                  <Body2>
+                    Téléphone<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="phone">
                     {({ field }) => (
                       <TextInput
@@ -125,7 +134,9 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Code postal*</Text>
+                  <Body2>
+                    Code postal<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="postalCode">
                     {({ field }) => (
                       <TextInput
@@ -141,7 +152,9 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Ville*</Text>
+                  <Body2>
+                    Ville<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="city">
                     {({ field }) => (
                       <TextInput
@@ -156,7 +169,9 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse*</Text>
+                  <Body2>
+                    Adresse<TextRed>*</TextRed>
+                  </Body2>
                   <Field name="address">
                     {({ field }) => (
                       <TextInput
@@ -171,7 +186,7 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Critère</Text>
+                  <Body2>Critère</Body2>
                   <Field name="criteria">
                     {({ field }) => (
                       <TextInput
@@ -186,7 +201,7 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Description</Text>
+                  <Body2>Description</Body2>
                   <Field name="description">
                     {({ field }) => (
                       <TextInput
@@ -202,7 +217,7 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>En pause ?</Text>
+                  <Body2>En pause ?</Body2>
                   <Field name="onBreak">
                     {({ field }) => (
                       <TextInput
@@ -217,7 +232,7 @@ export const AddHostFamily = () => {
                     )}
                   </Field>
                   <Spacing size="8" />
-                  <Text style={{ fontSize: 15, marginBottom: 5 }}>Animal recueilli</Text>
+                  <Body2>Animal recueilli</Body2>
                   <View style={{ width: '100%' }}>
                     <Field name="animalId">
                       {({ field }) => (
@@ -226,7 +241,7 @@ export const AddHostFamily = () => {
                           inputStyles={{ padding: 0 }}
                           boxStyles={{
                             width: '100%',
-                            borderColor: theme.colors.greyOutline,
+                            borderColor: theme.colors.grey0,
                           }}
                           label="Animaux"
                           {...field}

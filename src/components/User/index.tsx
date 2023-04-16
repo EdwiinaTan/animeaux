@@ -1,6 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ActivityIndicator, ImageSourcePropType, Text } from 'react-native'
+import { ActivityIndicator, ImageSourcePropType } from 'react-native'
 import { Image } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
@@ -11,6 +11,7 @@ import { startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { HeaderComponent } from '../Header'
 import { Layout } from '../Layout'
 import { Spacing } from '../Layout/Spacing'
+import { Body1 } from '../Typo'
 import {
   Container,
   ContainerDescription,
@@ -41,7 +42,7 @@ export const UserInCharge = () => {
           <Spacing size="16" />
           <Fields>
             <ImageField source={image} />
-            <Text>{value}</Text>
+            <Body1>{value}</Body1>
           </Fields>
         </>
       )
@@ -75,9 +76,9 @@ export const UserInCharge = () => {
             <ContainerDescription>
               <Description>
                 <Spacing size="64" />
-                <Text>
+                <Body1>
                   {userData.firstname} {userData.lastname}
-                </Text>
+                </Body1>
                 {renderField(smartphone, userData.phone)}
                 {renderField(email, userData.email)}
               </Description>

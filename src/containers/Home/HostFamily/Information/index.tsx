@@ -1,24 +1,17 @@
+import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useRef } from 'react'
-import { ActivityIndicator, ImageSourcePropType, Text } from 'react-native'
+import { ActivityIndicator, ImageSourcePropType } from 'react-native'
 import { Image } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body1 } from 'src/components/Typo'
+import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
-import address from '/assets/icons/address.png'
-import calendar from '/assets/icons/calendar.png'
-import clipboard from '/assets/icons/clipboard.png'
-import email from '/assets/icons/e-mail.png'
-import jobSeeking from '/assets/icons/job-seeking.png'
-import play from '/assets/icons/play.png'
-import smartphone from '/assets/icons/smartphones.png'
-
-import { BottomSheetModal } from '@gorhom/bottom-sheet'
-import { HostFamilyType } from 'src/types/HostFamily/Type'
 import {
   Container,
   ContainerDescription,
@@ -27,6 +20,13 @@ import {
   Fields,
   ImageField,
 } from './Styled'
+import address from '/assets/icons/address.png'
+import calendar from '/assets/icons/calendar.png'
+import clipboard from '/assets/icons/clipboard.png'
+import email from '/assets/icons/e-mail.png'
+import jobSeeking from '/assets/icons/job-seeking.png'
+import play from '/assets/icons/play.png'
+import smartphone from '/assets/icons/smartphones.png'
 
 export const HostFamilyInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
@@ -51,7 +51,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
           <Spacing size="16" />
           <Fields>
             <ImageField source={image} />
-            <Text>{value}</Text>
+            <Body1>{value}</Body1>
           </Fields>
         </>
       )
@@ -77,15 +77,13 @@ export const HostFamilyInformation = (): React.ReactElement => {
             }}
             PlaceholderContent={<ActivityIndicator />}
           />
-          <Spacing size="4" />
-          <Text>
+          <Body1>
             {hostFamilyDetails.firstname} {hostFamilyDetails.lastname}
-          </Text>
+          </Body1>
         </ContainerImage>
         <ContainerDescription>
           <Description>
-            <Spacing size="32" />
-            <Spacing size="16" />
+            <Spacing size="48" />
             {renderField(smartphone, hostFamilyDetails.phone)}
             {renderField(email, hostFamilyDetails.email)}
             {renderField(address, hostFamilyDetails.address)}

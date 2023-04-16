@@ -1,13 +1,14 @@
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body2, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
-import { ContainerCheckbox, styles } from '../Styled'
+import { ContainerCheckbox, styles, TextRed } from '../Styled'
 import { AnimalFormProps } from '../Type'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({
@@ -33,7 +34,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   return (
     <>
       <ContainerCheckbox>
-        <Text>Espèce</Text>
+        <Title3>
+          Espèce<TextRed>*</TextRed>
+        </Title3>
         <Spacing size="8" />
         {specieArray.map((specie, key) => (
           <CheckBoxComponent
@@ -44,7 +47,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         ))}
         <Spacing size="24" />
-        <Text>Genre</Text>
+        <Title3>
+          Genre<TextRed>*</TextRed>
+        </Title3>
         <Spacing size="8" />
         {genderArray.map((gender, key) => (
           <CheckBoxComponent
@@ -58,9 +63,11 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       <Spacing size="24" />
       <Divider />
       <Spacing size="8" />
-      <Text>Informations</Text>
+      <Title3>Informations</Title3>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Nom</Text>
+      <Body2>
+        Nom<TextRed>*</TextRed>
+      </Body2>
       <Field name="name">
         {({ field }) => (
           <TextInput
@@ -74,7 +81,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Alias</Text>
+      <Body2>Alias</Body2>
       <Field name="alias">
         {({ field }) => (
           <TextInput
@@ -90,7 +97,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Icad</Text>
+      <Body2>Icad</Body2>
       <Field name="icadNumber">
         {({ field }) => (
           <TextInput
@@ -104,8 +111,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Race</Text>
-      <Spacing size="4" />
+      <Body2>
+        Race<TextRed>*</TextRed>
+      </Body2>
       <View style={{ width: '100%' }}>
         <Field name="race">
           {({ field }) => (
@@ -113,7 +121,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.colors.greyOutline,
+                borderColor: theme.colors.grey0,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -129,15 +137,14 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Couleur</Text>
-      <Spacing size="4" />
+      <Body2>Couleur</Body2>
       <View style={{ width: '100%' }}>
         <Field name="color">
           {({ field }) => (
             <SelectList
               boxStyles={{
                 width: '100%',
-                borderColor: theme.colors.greyOutline,
+                borderColor: theme.colors.grey0,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -153,7 +160,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description publique</Text>
+      <Body2>Description publique</Body2>
       <Field name="publicDescription">
         {({ field }) => (
           <TextInput

@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
 import { useEffect, useRef, useState } from 'react'
-import { FlatList, ListRenderItem, Text, View } from 'react-native'
+import { FlatList, ListRenderItem, View } from 'react-native'
 import 'react-native-gesture-handler'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SearchBarComponent } from 'src/components/SearchBar'
 import { SkeletonCard } from 'src/components/SkeletonCard'
+import { Body1 } from 'src/components/Typo'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { AnimalTypeEnum } from 'src/types/Animal/enum'
 import { AnimalClient } from 'src/types/Animal/Type'
@@ -33,7 +34,7 @@ export const Animal = (): React.ReactElement => {
     })
   }, [navigation])
 
-  const refacto = () => {
+  const refacto = (): void => {
     // ça marche mais à refacto lol
     if (search && search.length > 0) {
       if (isActive === AnimalTypeEnum.ALL) {
@@ -128,11 +129,9 @@ export const Animal = (): React.ReactElement => {
               renderItem={renderAnimal}
               ListEmptyComponent={
                 search ? (
-                  <Text style={{ textAlign: 'center' }}>
-                    {`Aucun ${renderSearchNotFound()} trouvé`}
-                  </Text>
+                  <Body1 textAlign="center">{`Aucun ${renderSearchNotFound()} trouvé`}</Body1>
                 ) : (
-                  <Text style={{ textAlign: 'center' }}>Aucun {isActive} pour le moment</Text>
+                  <Body1 textAlign="center">Aucun {isActive} pour le moment</Body1>
                 )
               }
             />

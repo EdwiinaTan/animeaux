@@ -6,14 +6,15 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Title2 } from 'src/components/Typo'
 import { AddRouteParams } from '../Type'
 import { BottomSheetRouterProps } from './Type'
 
 export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetModalRef }) => {
-  const snapPoints = ['35%']
+  const snapPoints = ['37%']
   const navigation = useNavigation<NativeStackNavigationProp<AddRouteParams>>()
 
   const renderBackdrop = useCallback(
@@ -29,12 +30,12 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
     []
   )
 
-  const onClickAddAnimal = () => {
+  const onClickAddAnimal = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('addAnimal')
   }
 
-  const onClickAddHostFamily = () => {
+  const onClickAddHostFamily = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('addHostFamily')
   }
@@ -53,15 +54,15 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
             style={{ width: 100, height: 100 }}
           />
           <Spacing size="8" />
-          <Text style={{ textAlign: 'center' }}>Ajouter</Text>
-          <Text style={{ textAlign: 'center' }}>un animal</Text>
+          <Title2 textAlign="center">Ajouter</Title2>
+          <Title2 textAlign="center">un animal</Title2>
         </TouchableOpacity>
         <TouchableOpacity onPress={onClickAddHostFamily}>
           <Image source={require('/assets/icons/home.png')} style={{ width: 100, height: 100 }} />
           <Spacing size="8" />
-          <Text style={{ textAlign: 'center' }}>Ajouter </Text>
-          <Text style={{ textAlign: 'center' }}>Une famille </Text>
-          <Text style={{ textAlign: 'center' }}> d'accueil</Text>
+          <Title2 textAlign="center">Ajouter </Title2>
+          <Title2 textAlign="center">une famille </Title2>
+          <Title2 textAlign="center">d'accueil</Title2>
         </TouchableOpacity>
       </View>
     </BottomSheetModal>

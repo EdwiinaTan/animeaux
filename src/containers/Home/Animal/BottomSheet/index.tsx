@@ -8,11 +8,15 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
 import { Text, View } from 'react-native'
 import { Divider, ListItem, Overlay } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { deleteAnimalById } from 'src/client/Animal'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body1 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome, IconFoundation } from 'src/constant/Icons'
+import { theme } from 'src/constant/Theme'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
+import { ContainerButton, TextRed } from './Styled'
 import { BottomSheetProps } from './Type'
 
 export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
@@ -82,8 +86,14 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
       chevron: true,
     },
     {
-      name: <Text style={{ color: 'red' }}>Supprimer le profil</Text>,
-      icon: <IconFontAwesome name="trash-o" size={24} style={{ paddingRight: 16, color: 'red' }} />,
+      name: <Text style={{ color: theme.colors.red }}>Supprimer le profil</Text>,
+      icon: (
+        <IconFontAwesome
+          name="trash-o"
+          size={24}
+          style={{ paddingRight: 16, color: theme.colors.red }}
+        />
+      ),
       press: toggleOverlay,
       chevron: false,
     },
@@ -112,18 +122,24 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
         overlayStyle={{ marginHorizontal: 40, padding: 16 }}
         onBackdropPress={toggleOverlay}
       >
-        <Text>{`Etes vous sûre de vouloir supprimer le ${startsWithVowel(
+        <Body1>{`Êtes vous sûre de vouloir supprimer le ${startsWithVowel(
           animalDetails.name
-        )} ?`}</Text>
-        <Text>Ce choix sera irréversible.</Text>
+        )} ?`}</Body1>
+        <Body1>
+          Ce choix sera <TextRed>irréversible.</TextRed>
+        </Body1>
         <Spacing size="8" />
         <Divider />
         <Spacing size="8" />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Text onPress={deleteAnimal}>Oui</Text>
+        <ContainerButton>
+          <TouchableOpacity onPress={() => deleteAnimal()}>
+            <Body1>Oui</Body1>
+          </TouchableOpacity>
           <Divider orientation="vertical" />
-          <Text onPress={toggleOverlay}>Non</Text>
-        </View>
+          <TouchableOpacity onPress={() => toggleOverlay()}>
+            <Body1>Non</Body1>
+          </TouchableOpacity>
+        </ContainerButton>
       </Overlay>
     </BottomSheetModal>
   )

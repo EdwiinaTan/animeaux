@@ -20,7 +20,7 @@ export const StyleTitle3 = StyleSheet.create({
   content: {
     fontSize: 16,
     lineHeight: 20,
-    fontWeight: '400',
+    fontWeight: '500',
   },
 })
 

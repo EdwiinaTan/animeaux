@@ -33,7 +33,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
 
   return (
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
-      <Card key={`cardHostFamily_${hostFamily.id}`}>
+      <Card id={`cardHostFamily_${hostFamily.id}`}>
         <Container>
           {hostFamily.picture && hostFamily.picture[0] && (
             <ContainerImage>

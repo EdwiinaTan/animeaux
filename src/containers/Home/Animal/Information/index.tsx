@@ -1,6 +1,8 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { CatSvg } from 'assets/svg/cat'
+import { DogSvg } from 'assets/svg/dog'
 import { useRef } from 'react'
 import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Image as ImageElement } from 'react-native-elements'
@@ -175,16 +177,10 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Spacing size="8" />
                 <ContainerViewImage>
                   <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
-                    <Image
-                      source={require('/assets/icons/chien1.png')}
-                      style={{ width: 50, height: 50 }}
-                    />
+                    <DogSvg />
                   </ViewImage>
                   <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
-                    <Image
-                      source={require('/assets/icons/chat1.png')}
-                      style={{ width: 50, height: 50 }}
-                    />
+                    <CatSvg />
                   </ViewImage>
                   <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
                     <Image

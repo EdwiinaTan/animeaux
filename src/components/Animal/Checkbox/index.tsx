@@ -1,34 +1,6 @@
 import { CheckBox } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
-import {
-  AnimalAgreement,
-  AnimalGenderEnum,
-  AnimalReasonEnum,
-  AnimalStatusEnum,
-  AnimalTypeEnum,
-} from 'src/types/Animal/enum'
-
-interface CheckboxProps {
-  animal: {
-    label: string
-    value: any
-  }
-  values:
-    | string
-    | AnimalTypeEnum
-    | AnimalGenderEnum
-    | AnimalStatusEnum
-    | AnimalReasonEnum
-    | AnimalAgreement
-    | AnimalAgreement
-    | AnimalAgreement
-  handleChange: {
-    (e: React.ChangeEvent<any>): void
-    <T = string | React.ChangeEvent<any>>(field: T): T extends React.ChangeEvent<any>
-      ? void
-      : (e: string | React.ChangeEvent<any>) => void
-  }
-}
+import { CheckboxProps } from './Type'
 
 export const CheckBoxComponent: React.FC<CheckboxProps> = ({ animal, values, handleChange }) => {
   return (

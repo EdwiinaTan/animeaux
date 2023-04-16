@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
-import { Card, Image, Text } from 'react-native-elements'
+import { Image } from 'react-native-elements'
+import { Card } from 'src/components/Card'
 import { Layout } from 'src/components/Layout'
-import { Spacing } from 'src/components/Layout/Spacing'
 import { SkeletonCard } from 'src/components/SkeletonCard'
+import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { FetchStatus } from 'src/types/Status'
 import { HostFamilyRouteParams } from '../Router/type'
@@ -32,15 +33,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
 
   return (
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
-      <Card
-        containerStyle={{
-          borderRadius: 8,
-          borderColor: 'transparent',
-          position: 'relative',
-          marginTop: 1,
-          marginBottom: 16,
-        }}
-      >
+      <Card id={`cardHostFamily_${hostFamily.id}`}>
         <Container>
           {hostFamily.picture && hostFamily.picture[0] && (
             <ContainerImage>
@@ -52,15 +45,12 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
             </ContainerImage>
           )}
           <View style={{ flexDirection: 'column' }}>
-            <Text>
+            <Body1>
               {hostFamily.firstname} {hostFamily.lastname}
-            </Text>
-            <Spacing size="4" />
-            <Text>{hostFamily.phone}</Text>
-            <Spacing size="4" />
-            <Text>{hostFamily.email}</Text>
-            <Spacing size="4" />
-            <Text>{hostFamily.city}</Text>
+            </Body1>
+            <Body1>{hostFamily.phone}</Body1>
+            <Body1>{hostFamily.email}</Body1>
+            <Body1>{hostFamily.city}</Body1>
           </View>
         </Container>
       </Card>

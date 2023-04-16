@@ -1,14 +1,14 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import moment from 'moment'
 import { useRef } from 'react'
-import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Image as ImageElement } from 'react-native-elements'
 import { ChipComponent } from 'src/components/Chip'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body1, Body2, Title2 } from 'src/components/Typo'
 import {
   IconEntypo,
   IconFoundation,
@@ -19,9 +19,10 @@ import { theme } from 'src/constant/Theme'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalAgreement } from 'src/types/Animal/enum'
+import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { renderReason } from 'src/utils/Animal'
-import { renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
+import { animalAge, renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetAnimal } from '../BottomSheet'
 import { CarouselAnimal } from '../Carousel'
 import { AnimalRouteParams } from '../Router/type'
@@ -34,7 +35,6 @@ import {
   Description,
   InCharge,
   TitleCard,
-  TitleText,
   ViewImage,
 } from './Styled'
 
@@ -44,7 +44,7 @@ export const AnimalInformation = (): React.ReactElement => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const {
     params: { animalDetails },
-  } = route
+  } = route as { params: { animalDetails: AnimalType } }
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
   const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
 
@@ -62,9 +62,9 @@ export const AnimalInformation = (): React.ReactElement => {
 
   const renderIsSterilised = () => {
     if (animalDetails.isSterilised) {
-      return <Text>Stérilisé</Text>
+      return <Body1>Stérilisé</Body1>
     }
-    return <Text>Non stérilisé</Text>
+    return <Body1>Non stérilisé</Body1>
   }
 
   const renderAgreement = (value: string) => {
@@ -78,8 +78,15 @@ export const AnimalInformation = (): React.ReactElement => {
     }
   }
 
-  const dateA = moment(new Date())
-  const dateB = moment(animalDetails.birthday)
+  const renderField = (key: string, value: string) => {
+    if (value) {
+      return (
+        <Body1>
+          {key} : {value}
+        </Body1>
+      )
+    }
+  }
 
   return (
     <Layout>
@@ -97,30 +104,18 @@ export const AnimalInformation = (): React.ReactElement => {
             <Description>
               <View>
                 <TitleCard>
-                  <Text style={{ paddingRight: 4 }}>{animalDetails.name}</Text>
+                  <Body1 paddingRight={4}>{animalDetails.name}</Body1>
                   {renderAnimalGender(animalDetails)}
                 </TitleCard>
-                <Spacing size="4" />
-                <Text>{uppercaseWord(animalDetails.species)}</Text>
-                <Spacing size="4" />
-                <Text>Age : {dateA.diff(dateB, 'years')} ans</Text>
-                {animalDetails.icadNumber && (
-                  <>
-                    <Spacing size="4" />
-                    <Text>Icad : {animalDetails.icadNumber}</Text>
-                  </>
-                )}
-                <Spacing size="4" />
-                <Text>Alias : {animalDetails.alias}</Text>
-                <Spacing size="4" />
-                <Text>Race : {uppercaseWord(animalDetails.race)}</Text>
-                <Spacing size="4" />
+                <Body1>Age : {animalAge(animalDetails.birthday)}</Body1>
+                {renderField('Icad', animalDetails.icadNumber)}
+                {renderField('Alias', animalDetails.alias)}
+                {renderField('Race', animalDetails.race)}
                 {renderHostFamily(statusHostFamily, hostFamilyData)}
               </View>
               <View style={{ alignItems: 'flex-end' }}>
                 <ChipComponent value={animalDetails.status} />
-                <Spacing size="4" />
-                <Text>{renderIsSterilised()}</Text>
+                <Body1>{renderIsSterilised()}</Body1>
               </View>
             </Description>
             <Spacing size="16" />
@@ -128,7 +123,7 @@ export const AnimalInformation = (): React.ReactElement => {
               <Card>
                 <TitleCard>
                   <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
-                  <TitleText>Prise en charge </TitleText>
+                  <Title2 paddingLeft={8}>Prise en charge </Title2>
                 </TitleCard>
                 <Spacing size="8" />
                 <InCharge>
@@ -147,15 +142,12 @@ export const AnimalInformation = (): React.ReactElement => {
                     />
                   </View>
                   <View>
-                    <Text>
+                    <Body1>
                       {userData.firstname} {userData.lastname}
-                    </Text>
-                    <Spacing size="4" />
-                    <Text>Date : {renderDateFormat(animalDetails.dateInCharge)}</Text>
-                    <Spacing size="4" />
-                    <Text>Lieu : {animalDetails.placeCare}</Text>
-                    <Spacing size="4" />
-                    <Text>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Text>
+                    </Body1>
+                    <Body1>Date : {renderDateFormat(animalDetails.dateInCharge)}</Body1>
+                    <Body1>Lieu : {animalDetails.placeCare}</Body1>
+                    <Body1>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Body1>
                   </View>
                 </InCharge>
               </Card>
@@ -164,10 +156,10 @@ export const AnimalInformation = (): React.ReactElement => {
             <Card>
               <TitleCard>
                 <IconEntypo name="heart" size={20} color={theme.colors.red} />
-                <TitleText>Son histoire</TitleText>
+                <Title2 paddingLeft={8}>Son histoire</Title2>
               </TitleCard>
               <Spacing size="8" />
-              <Text>{animalDetails.publicDescription}</Text>
+              <Body2>{animalDetails.publicDescription}</Body2>
             </Card>
             <Spacing size="16" />
             <Card>
@@ -178,9 +170,9 @@ export const AnimalInformation = (): React.ReactElement => {
                     size={20}
                     color={theme.colors.blue}
                   />
-                  <TitleText>Ententes</TitleText>
+                  <Title2 paddingLeft={8}>Ententes</Title2>
                 </TitleCard>
-                <Spacing size="16" />
+                <Spacing size="8" />
                 <ContainerViewImage>
                   <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
                     <Image
@@ -207,10 +199,12 @@ export const AnimalInformation = (): React.ReactElement => {
             <Card>
               <TitleCard>
                 <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
-                <TitleText>Description privé</TitleText>
+                <Title2 paddingLeft={8}>Description privé</Title2>
               </TitleCard>
               <Spacing size="8" />
-              <Text>{animalDetails.privateDescription ?? 'Aucune description pour le moment'}</Text>
+              <Body2>
+                {animalDetails.privateDescription ?? 'Aucune description pour le moment'}
+              </Body2>
             </Card>
             <Spacing size="32" />
           </ScrollView>

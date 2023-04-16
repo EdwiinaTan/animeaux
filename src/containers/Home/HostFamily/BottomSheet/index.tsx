@@ -6,13 +6,16 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useCallback, useState } from 'react'
-import { Text, View } from 'react-native'
 import { Divider, ListItem, Overlay } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { deleteHostFamilyById } from 'src/client/HostFamily'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body1, Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
+import { theme } from 'src/constant/Theme'
 import { startsWithVowel } from 'src/utils/Functions'
 import { HostFamilyRouteParams } from '../Router/type'
+import { ContainerButton, ListView, TextRed } from './Styled'
 import { BottomSheetProps } from './Type'
 
 export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
@@ -23,14 +26,14 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
 
-  const toggleOverlay = () => {
+  const toggleOverlay = (): void => {
     setIsOverlayVisible(!isOverlayVisible)
     if (isOverlayVisible) {
       bottomSheetModalRef.current.close()
     }
   }
 
-  const handleViewEditProfil = () => {
+  const handleViewEditProfil = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('hostFamilyUpdate', {
       hostFamilyDetails: hostFamilyDetails,
@@ -50,7 +53,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
     []
   )
 
-  const deleteHostFamily = () => {
+  const deleteHostFamily = (): void => {
     deleteHostFamilyById(hostFamilyDetails.id)
     navigation.navigate('hostFamilyScreen')
   }
@@ -63,8 +66,14 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       chevron: true,
     },
     {
-      name: <Text style={{ color: 'red' }}>Supprimer le profil</Text>,
-      icon: <IconFontAwesome name="trash-o" size={24} style={{ paddingRight: 16, color: 'red' }} />,
+      name: <Title3 color={theme.colors.red}>Supprimer le profil</Title3>,
+      icon: (
+        <IconFontAwesome
+          name="trash-o"
+          size={24}
+          style={{ paddingRight: 16, color: theme.colors.red }}
+        />
+      ),
       press: toggleOverlay,
       chevron: false,
     },
@@ -77,7 +86,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
     >
-      <View style={{ paddingHorizontal: 16 }}>
+      <ListView>
         {listBottomSheet.map((list, key) => (
           <ListItem key={`${list.name}_${key}`} onPress={list.press} bottomDivider={list.chevron}>
             {list.icon}
@@ -87,24 +96,30 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
             {list.chevron === true && <ListItem.Chevron />}
           </ListItem>
         ))}
-      </View>
+      </ListView>
       <Overlay
         isVisible={isOverlayVisible}
         overlayStyle={{ marginHorizontal: 40, padding: 16 }}
         onBackdropPress={toggleOverlay}
       >
-        <Text>{`Etes vous sûre de vouloir supprimer le ${startsWithVowel(
+        <Body1>{`Êtes vous sûre de vouloir supprimer le ${startsWithVowel(
           hostFamilyDetails.firstname
-        )} ?`}</Text>
-        <Text>Ce choix sera irréversible.</Text>
+        )} ?`}</Body1>
+        <Body1>
+          Ce choix sera <TextRed>irréversible.</TextRed>
+        </Body1>
         <Spacing size="8" />
         <Divider />
         <Spacing size="8" />
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Text onPress={deleteHostFamily}>Oui</Text>
+        <ContainerButton>
+          <TouchableOpacity onPress={() => deleteHostFamily()}>
+            <Body1>Oui</Body1>
+          </TouchableOpacity>
           <Divider orientation="vertical" />
-          <Text onPress={toggleOverlay}>Non</Text>
-        </View>
+          <TouchableOpacity onPress={() => toggleOverlay()}>
+            <Body1>Non</Body1>
+          </TouchableOpacity>
+        </ContainerButton>
       </Overlay>
     </BottomSheetModal>
   )

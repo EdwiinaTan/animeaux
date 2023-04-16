@@ -1,10 +1,11 @@
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
-import { Text, TextInput, View } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body2, Title2, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { useGetUsers } from 'src/hooks/User'
@@ -16,7 +17,7 @@ import {
   reasonArray,
   statusArray,
 } from 'src/utils/Animal'
-import { ContainerCheckbox, styles } from '../Styled'
+import { ContainerCheckbox, styles, TextRed } from '../Styled'
 
 export const AnimalSituation: React.FC<AddAnimalProps> = ({
   values,
@@ -81,7 +82,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
 
   return (
     <ContainerCheckbox>
-      <Text>Statut</Text>
+      <Title3>
+        Statut<TextRed>*</TextRed>
+      </Title3>
       <Spacing size="8" />
       {statusArray.map((status, key) => (
         <CheckBoxComponent
@@ -92,9 +95,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         />
       ))}
       <Spacing size="8" />
-      <Text>Prise en charge</Text>
+      <Title2>Prise en charge</Title2>
       <Spacing size="8" />
-      <Text>Famille d'accueil</Text>
+      <Body2>Famille d'accueil</Body2>
       <View style={{ width: '100%' }}>
         <Field name="hostFamilyId">
           {({ field }) => (
@@ -102,7 +105,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.colors.greyOutline,
+                borderColor: theme.colors.grey0,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -118,7 +121,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Text>Responsable</Text>
+      <Body2>
+        Responsable<TextRed>*</TextRed>
+      </Body2>
       <View style={{ width: '100%' }}>
         <Field name="userId">
           {({ field }) => (
@@ -126,7 +131,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.colors.greyOutline,
+                borderColor: theme.colors.grey0,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -142,7 +147,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         </Field>
       </View>
       <Spacing size="8" />
-      <Text>Lieu pris en charge</Text>
+      <Body2>
+        Lieu pris en charge<TextRed>*</TextRed>
+      </Body2>
       <View style={{ width: '100%' }}>
         <Field name="placeCare">
           {({ field }) => (
@@ -150,7 +157,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.colors.greyOutline,
+                borderColor: theme.colors.grey0,
               }}
               {...field}
               searchPlaceholder="Rechercher"
@@ -166,7 +173,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         </Field>
       </View>
       <Spacing size="8" />
-      <Text>Raison</Text>
+      <Body2>
+        Raison<TextRed>*</TextRed>
+      </Body2>
       <Spacing size="8" />
       {reasonArray.map((reason, key) => (
         <CheckBoxComponent
@@ -177,7 +186,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         />
       ))}
       <Spacing size="8" />
-      <Text>L’animal est stérilisé ?</Text>
+      <Body2>L’animal est stérilisé ?</Body2>
       <Spacing size="8" />
       {isSterilisedArray.map((isSterilised, key) => (
         <CheckBoxComponent
@@ -188,9 +197,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         />
       ))}
       <Spacing size="8" />
-      <Text>Entente</Text>
+      <Title2>Entente</Title2>
       <Spacing size="8" />
-      <Text>Chien</Text>
+      <Body2>Chien</Body2>
       <Spacing size="8" />
       {agreementArray.map((dogAgreement, key) => (
         <CheckBoxComponent
@@ -200,7 +209,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           handleChange={() => handleChange('dogAgreement')(dogAgreement.value)}
         />
       ))}
-      <Text>Chat</Text>
+      <Body2>Chat</Body2>
       <Spacing size="8" />
       {agreementArray.map((catAgreement, key) => (
         <CheckBoxComponent
@@ -210,7 +219,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           handleChange={() => handleChange('catAgreement')(catAgreement.value)}
         />
       ))}
-      <Text>Enfant</Text>
+      <Body2>Enfant</Body2>
       <Spacing size="8" />
       {agreementArray.map((childAgreement, key) => (
         <CheckBoxComponent
@@ -221,7 +230,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         />
       ))}
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description privée</Text>
+      <Body2>Description privée</Body2>
       <Field name="privateDescription">
         {({ field }) => (
           <TextInput

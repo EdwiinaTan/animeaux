@@ -1,11 +1,13 @@
 import { Field } from 'formik'
-import { Button, Text, TextInput, View } from 'react-native'
+import { Button, TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
 import { styles } from '../Animal/Styled'
 import { Spacing } from '../Layout/Spacing'
+import { Body2 } from '../Typo'
+import { TextRed } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
 export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
@@ -31,7 +33,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
 
   return (
     <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Nom*</Text>
+      <Body2>
+        Nom<TextRed>*</TextRed>
+      </Body2>
       <Field name="lastname">
         {({ field }) => (
           <TextInput
@@ -46,7 +50,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Prénom*</Text>
+      <Body2>
+        Prénom<TextRed>*</TextRed>
+      </Body2>
       <Field name="firstname">
         {({ field }) => (
           <TextInput
@@ -61,7 +67,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse mail*</Text>
+      <Body2>
+        Adresse mail<TextRed>*</TextRed>
+      </Body2>
       <Field name="email">
         {({ field }) => (
           <TextInput
@@ -77,7 +85,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Téléphone*</Text>
+      <Body2>
+        Téléphone<TextRed>*</TextRed>
+      </Body2>
       <Field name="phone">
         {({ field }) => (
           <TextInput
@@ -93,7 +103,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Code postal*</Text>
+      <Body2>
+        Code postal<TextRed>*</TextRed>
+      </Body2>
       <Field name="postalCode">
         {({ field }) => (
           <TextInput
@@ -109,7 +121,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Ville*</Text>
+      <Body2>
+        Ville<TextRed>*</TextRed>
+      </Body2>
       <Field name="city">
         {({ field }) => (
           <TextInput
@@ -124,7 +138,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Adresse*</Text>
+      <Body2>
+        Adresse<TextRed>*</TextRed>
+      </Body2>
       <Field name="address">
         {({ field }) => (
           <TextInput
@@ -139,7 +155,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Critère</Text>
+      <Body2>Critère</Body2>
       <Field name="criteria">
         {({ field }) => (
           <TextInput
@@ -154,7 +170,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Description</Text>
+      <Body2>Description</Body2>
       <Field name="description">
         {({ field }) => (
           <TextInput
@@ -170,7 +186,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>En pause ?</Text>
+      <Body2>En pause ?</Body2>
       <Field name="onBreak">
         {({ field }) => (
           <TextInput
@@ -185,7 +201,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         )}
       </Field>
       <Spacing size="8" />
-      <Text style={{ fontSize: 15, marginBottom: 5 }}>Animal recueilli</Text>
+      <Body2>Animal recueilli</Body2>
       <View style={{ width: '100%' }}>
         <Field name="animalId">
           {({ field }) => (
@@ -194,7 +210,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
               inputStyles={{ padding: 0 }}
               boxStyles={{
                 width: '100%',
-                borderColor: theme.colors.greyOutline,
+                borderColor: theme.colors.grey0,
               }}
               label="Animaux"
               {...field}

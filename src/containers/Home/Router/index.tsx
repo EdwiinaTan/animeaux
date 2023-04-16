@@ -17,7 +17,7 @@ export const HomeRouter: React.FC = () => {
   const Tab = createBottomTabNavigator<RouteParams & AddRouteParams>()
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
-  const handlePresentModal = () => {
+  const handlePresentModal = (): void => {
     bottomSheetModalRef.current?.present()
   }
 

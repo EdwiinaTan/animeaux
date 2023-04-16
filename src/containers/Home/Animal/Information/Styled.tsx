@@ -26,7 +26,7 @@ export const ContainerViewImage = styled.View`
 `
 
 export const BoxViewImage = styled.View`
-  height: 100px;
+  height: 90px;
 `
 
 export const ImageAnimal = styled.Image`
@@ -44,7 +44,10 @@ export const Container = styled.ScrollView`
 
 export const Description = styled.View`
   background-color: ${theme.colors.white};
-  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px
+  padding-right: 16px
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   border: 1px solid #dce1e7;
@@ -56,6 +59,7 @@ export const Description = styled.View`
 export const Card = styled.View`
   background-color: ${theme.colors.white};
   padding: 16px;
+  padding-top: 8px;
   border-radius: 8px;
   border: 1px solid #dce1e7;
 `
@@ -64,6 +68,7 @@ export const TitleCard = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-content: center;
 `
 export const InCharge = styled.View`
   display: flex;

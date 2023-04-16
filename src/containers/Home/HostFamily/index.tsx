@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { FlatList, ListRenderItem, Text, View } from 'react-native'
+import { FlatList, ListRenderItem, View } from 'react-native'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SearchBarComponent } from 'src/components/SearchBar'
 import { SkeletonCard } from 'src/components/SkeletonCard'
+import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { HostFamilyClient } from 'src/types/HostFamily/Type'
 import { FetchStatus } from 'src/types/Status'
@@ -54,9 +55,9 @@ export const HostFamily = (): React.ReactElement => {
             renderItem={renderAnimal}
             ListEmptyComponent={
               search ? (
-                <Text style={{ textAlign: 'center' }}>Aucune famille d’accueil trouvé</Text>
+                <Body1 textAlign="center">Aucune famille d’accueil trouvé</Body1>
               ) : (
-                <Text>Aucune famille d’accueil pour le moment</Text>
+                <Body1>Aucune famille d’accueil pour le moment</Body1>
               )
             }
           />

@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { Formik } from 'formik'
 import { useState } from 'react'
-import { Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
 import { AnimalProfile } from 'src/components/Animal/Profile'
@@ -9,6 +8,7 @@ import { AnimalSituation } from 'src/components/Animal/Situation'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { Body1 } from 'src/components/Typo'
 import { Card, Container, customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
@@ -104,12 +104,12 @@ export const AddAnimal = () => {
           </Card>
           {currentPosition !== 0 && (
             <TouchableOpacity onPress={() => onPageChange('prev')}>
-              <Text>Précédent</Text>
+              <Body1>Précédent</Body1>
               <Spacing size="24" />
             </TouchableOpacity>
           )}
           <TouchableOpacity onPress={() => onPageChange('next')}>
-            <Text>Suivant</Text>
+            <Body1>Suivant</Body1>
           </TouchableOpacity>
           <Spacing size="24" />
         </Container>

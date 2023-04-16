@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
 import { AnimalProfile } from 'src/components/Animal/Profile'
+import { validationAnimalProfile } from 'src/components/Animal/Profile/Utils'
 import { AnimalSituation } from 'src/components/Animal/Situation'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
@@ -70,16 +71,19 @@ export const AddAnimal = () => {
             {currentPosition === 0 && (
               <Formik
                 initialValues={initialValuesStepOne}
+                validationSchema={validationAnimalProfile}
                 onSubmit={(values) => {
                   console.log('valueOne', values)
                 }}
               >
-                {({ handleChange, values, handleSubmit, handleBlur }) => (
+                {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
                   <AnimalProfile
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
                     handleSubmit={handleSubmit}
+                    errors={errors}
+                    touched={touched}
                   />
                 )}
               </Formik>

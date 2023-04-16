@@ -6,4 +6,6 @@ export interface AnimalFormProps {
   handleBlur: any
   handleSubmit: any
   animalDetails?: AnimalType | undefined
+  errors?: any
+  touched?: any
 }

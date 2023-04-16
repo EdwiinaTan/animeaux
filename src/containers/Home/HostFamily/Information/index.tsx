@@ -1,8 +1,13 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { AddressSvg } from 'assets/svg/address'
+import { CalendarSvg } from 'assets/svg/calendar'
+import { EmailSvg } from 'assets/svg/email'
+import { PhoneSvg } from 'assets/svg/phone'
+import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
-import { ActivityIndicator, ImageSourcePropType } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
@@ -12,21 +17,7 @@ import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
-import {
-  Container,
-  ContainerDescription,
-  ContainerImage,
-  Description,
-  Fields,
-  ImageField,
-} from './Styled'
-import address from '/assets/icons/address.png'
-import calendar from '/assets/icons/calendar.png'
-import clipboard from '/assets/icons/clipboard.png'
-import email from '/assets/icons/e-mail.png'
-import jobSeeking from '/assets/icons/job-seeking.png'
-import play from '/assets/icons/play.png'
-import smartphone from '/assets/icons/smartphones.png'
+import { Container, ContainerDescription, ContainerImage, Description, Fields } from './Styled'
 
 export const HostFamilyInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
@@ -44,14 +35,14 @@ export const HostFamilyInformation = (): React.ReactElement => {
     bottomSheetModalRef.current?.present()
   }
 
-  const renderField = (image: ImageSourcePropType, value: string) => {
+  const renderField = (image: React.ReactElement, value: string) => {
     if (value) {
       return (
         <>
           <Spacing size="16" />
           <Fields>
-            <ImageField source={image} />
-            <Body1>{value}</Body1>
+            {image}
+            <Body1 paddingLeft={8}>{value}</Body1>
           </Fields>
         </>
       )
@@ -84,13 +75,13 @@ export const HostFamilyInformation = (): React.ReactElement => {
         <ContainerDescription>
           <Description>
             <Spacing size="48" />
-            {renderField(smartphone, hostFamilyDetails.phone)}
-            {renderField(email, hostFamilyDetails.email)}
-            {renderField(address, hostFamilyDetails.address)}
-            {renderField(calendar, renderDateFormat(hostFamilyDetails.updatedAt))}
-            {renderField(play, hostFamilyDetails.onBreak)}
-            {renderField(clipboard, hostFamilyDetails.criteria)}
-            {renderField(jobSeeking, hostFamilyDetails.description)}
+            {renderField(<PhoneSvg />, hostFamilyDetails.phone)}
+            {renderField(<EmailSvg />, hostFamilyDetails.email)}
+            {renderField(<AddressSvg />, hostFamilyDetails.address)}
+            {renderField(<CalendarSvg />, renderDateFormat(hostFamilyDetails.updatedAt))}
+            {renderField(<EmailSvg />, hostFamilyDetails.onBreak)}
+            {renderField(<WarningSvg />, hostFamilyDetails.criteria)}
+            {renderField(<EmailSvg />, hostFamilyDetails.description)}
           </Description>
         </ContainerDescription>
         {/* <Text>Historique de prise en charge d'animal</Text> */}

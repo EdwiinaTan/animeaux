@@ -1,5 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Animal/Profile'
@@ -24,6 +25,7 @@ export const AnimalUpdate = () => {
   const onClickGoBack = () => {
     return navigation.goBack()
   }
+  const queryClient = useQueryClient()
 
   const initialValues: AnimalRequest = {
     species: animalDetails.species,
@@ -36,8 +38,17 @@ export const AnimalUpdate = () => {
     publicDescription: animalDetails.publicDescription,
   }
 
+  const updateAnimalMutation = useMutation({
+    mutationFn: updateAnimalByIdTest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['animalsUpdate'] })
+    },
+  })
+
   const updateAnimal = (values: AnimalRequest) => {
-    updateAnimalByIdTest(animalDetails.id, values)
+    // updateAnimalByIdTest(animalDetails.id, values)
+    console.log('is', values)
+    updateAnimalMutation.mutate({ ...values })
     navigation.goBack()
   }
 

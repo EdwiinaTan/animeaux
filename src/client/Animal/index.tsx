@@ -83,10 +83,9 @@ export const updateAnimalById = (recordId: string, data) => {
     })
 }
 
-export const updateAnimalByIdTest = (recordId: string, data) => {
-  console.log('data', data)
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
-  axios
+export const updateAnimalByIdTest = (data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/rec3T8eRSZ1XokgvA/`
+  return axios
     .patch(
       url,
       {
@@ -102,3 +101,15 @@ export const updateAnimalByIdTest = (recordId: string, data) => {
       console.log('err', err)
     })
 }
+
+// export const updateAnimalByIdFetch = async (data: AnimalRequest) => {
+//   console.log('data', data)
+//   const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${data.id}/`, {
+//     method: 'PATCH',
+//     headers: header,
+//     body: JSON.stringify(data),
+//   })
+//   const result = res.json()
+//   console.log('patch', result)
+//   return result
+// }

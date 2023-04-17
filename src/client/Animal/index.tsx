@@ -83,8 +83,8 @@ export const updateAnimalById = (recordId: string, data) => {
     })
 }
 
-export const updateAnimalByIdTest = (data) => {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/rec3T8eRSZ1XokgvA/`
+export const updateAnimalByIdTest = (idAnimal, data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${idAnimal}/`
   return axios
     .patch(
       url,

@@ -31,7 +31,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   useEffect(() => {
     if (animalDetails) {
       setRace(animalDetails.race)
-      setColor(animalDetails.color)
+      setColor(animalDetails.couleur)
     } else {
       setRace('')
       setColor('')
@@ -129,16 +129,16 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       {errors.alias && touched.alias && <Body3 color={theme.colors.red}>{errors.alias}</Body3>}
       <Spacing size="16" />
       <Body2>Icad</Body2>
-      <Field name="icadNumber">
+      <Field name="icad">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le numéro icad"
-            onChangeText={handleChange('icadNumber')}
-            onChange={handleChange('icadNumber')}
-            onBlur={handleBlur('icadNumber')}
-            value={values.icadNumber}
+            onChangeText={handleChange('icad')}
+            onChange={handleChange('icad')}
+            onBlur={handleBlur('icad')}
+            value={values.icad}
           />
         )}
       </Field>
@@ -171,7 +171,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       <Spacing size="16" />
       <Body2>Couleur</Body2>
       <View style={{ width: '100%' }}>
-        <Field name="color">
+        <Field name="couleur">
           {({ field }) => (
             <SelectList
               boxStyles={{
@@ -180,13 +180,13 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               }}
               {...field}
               searchPlaceholder="Rechercher"
-              setSelected={handleChange('color')}
-              onChange={handleChange('color')}
+              setSelected={handleChange('couleur')}
+              onChange={handleChange('couleur')}
               data={colorArray}
               defaultOption={{ key: color, value: color }}
               placeholder="Veuillez choisir la couleur"
               save="value"
-              value={values.color}
+              value={values.couleur}
             />
           )}
         </Field>

@@ -16,10 +16,10 @@ export interface AnimalType {
   genre: AnimalGenderEnum
   hostFamilyId?: string
   alias?: string
-  icadNumber: string
+  icad: string
   birthday?: string
   race: AnimalRaceEnum
-  color: AnimalColorEnum
+  couleur: AnimalColorEnum
   publicDescription?: string
   status: AnimalStatusEnum
   placeCare: string

@@ -32,9 +32,9 @@ export const AnimalUpdate = () => {
     genre: animalDetails.genre,
     name: animalDetails.name,
     alias: animalDetails.alias,
-    icadNumber: animalDetails.icadNumber,
+    icad: animalDetails.icad,
     race: animalDetails.race,
-    color: animalDetails.color,
+    couleur: animalDetails.couleur,
     publicDescription: animalDetails.publicDescription,
   }
 

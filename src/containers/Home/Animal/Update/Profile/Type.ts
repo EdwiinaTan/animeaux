@@ -10,8 +10,8 @@ export interface AnimalRequest {
   genre: AnimalGenderEnum
   name: string
   alias: string
-  icadNumber: string
+  icad: string
   race: AnimalRaceEnum
-  color: AnimalColorEnum
+  couleur: AnimalColorEnum
   publicDescription: string
 }

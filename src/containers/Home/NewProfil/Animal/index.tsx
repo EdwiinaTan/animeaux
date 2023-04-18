@@ -34,9 +34,9 @@ export const AddAnimal = () => {
     genre: '',
     name: '',
     alias: '',
-    icadNumber: '',
+    icad: '',
     race: '',
-    color: '',
+    couleur: '',
     publicDescription: '',
   }
 

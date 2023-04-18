@@ -3,7 +3,6 @@ import {
   AnimalColorEnum,
   AnimalGenderEnum,
   AnimalPlaceCareEnum,
-  AnimalRaceEnum,
   AnimalReasonEnum,
   AnimalStatusEnum,
   AnimalTypeEnum,
@@ -35,31 +34,6 @@ export const specieArray = [
 export const genderArray = [
   { label: 'Male', value: AnimalGenderEnum.MALE },
   { label: 'Femelle', value: AnimalGenderEnum.FEMALE },
-]
-
-export const raceArray = [
-  { key: AnimalRaceEnum.BEAGLE, value: 'Beagle' },
-  { key: AnimalRaceEnum.BERGER_ALLEMAND, value: 'Berger allemand' },
-  { key: AnimalRaceEnum.BERGER_SERBE, value: 'Berger serbe' },
-  { key: AnimalRaceEnum.BORDER_COLLIE, value: 'Border collie' },
-  { key: AnimalRaceEnum.BOULEDOGUE_ANGLAIS, value: 'Bouledogue anglais' },
-  { key: AnimalRaceEnum.BOULEDOGUE_FRANCAIS, value: 'Bouledogue français' },
-  { key: AnimalRaceEnum.BOWER, value: 'Bower' },
-  { key: AnimalRaceEnum.CANICHE, value: 'Caniche' },
-  { key: AnimalRaceEnum.COCHON_INDE, value: 'Bouledogue français' },
-  { key: AnimalRaceEnum.CROISE, value: 'Croisé' },
-  { key: AnimalRaceEnum.DOGUE_ARGENTIN, value: 'Dogue argentin' },
-  { key: AnimalRaceEnum.EUROPEEN, value: 'Européen' },
-  { key: AnimalRaceEnum.GRIFFON, value: 'Griffon' },
-  { key: AnimalRaceEnum.JACK_RUSSEL, value: 'Jack russel' },
-  { key: AnimalRaceEnum.LAPIN, value: 'Lapin' },
-  { key: AnimalRaceEnum.MALINOIS, value: 'Malinois' },
-  { key: AnimalRaceEnum.PEKINOIS, value: 'Pékinois' },
-  { key: AnimalRaceEnum.PINSCHER, value: 'Pinscher' },
-  { key: AnimalRaceEnum.ROTTWEILER, value: 'Rottweiler' },
-  { key: AnimalRaceEnum.SIAMOIS, value: 'Siamois' },
-  { key: AnimalRaceEnum.STAFF, value: 'Staff' },
-  { key: AnimalRaceEnum.TECKEL, value: 'Teckel' },
 ]
 
 export const colorArray = [

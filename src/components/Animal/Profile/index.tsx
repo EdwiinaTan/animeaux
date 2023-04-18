@@ -7,7 +7,8 @@ import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
+import { raceArrayTest } from 'src/types/Animal/enum'
+import { colorArray, genderArray, specieArray } from 'src/utils/Animal'
 import { ContainerCheckbox, styles, TextRed } from '../Styled'
 import { AnimalFormProps } from '../Type'
 
@@ -134,7 +135,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               searchPlaceholder="Rechercher"
               setSelected={handleChange('race')}
               onChange={handleChange('race')}
-              data={raceArray}
+              data={raceArrayTest}
               placeholder="Veuillez choisir la race"
               defaultOption={{ key: race, value: race }}
               save="key"

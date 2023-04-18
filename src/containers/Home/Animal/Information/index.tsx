@@ -24,7 +24,6 @@ import { useGetUserById } from 'src/hooks/User'
 import { AnimalAgreement } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
-import { renderReason } from 'src/utils/Animal'
 import { animalAge, renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetAnimal } from '../BottomSheet'
 import { CarouselAnimal } from '../Carousel'
@@ -150,7 +149,7 @@ export const AnimalInformation = (): React.ReactElement => {
                     </Body1>
                     <Body1>Date : {renderDateFormat(animalDetails.dateInCharge)}</Body1>
                     <Body1>Lieu : {animalDetails.placeCare}</Body1>
-                    <Body1>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Body1>
+                    <Body1>Raison : {animalDetails.reason}</Body1>
                   </View>
                 </InCharge>
               </Card>

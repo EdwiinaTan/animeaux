@@ -102,9 +102,9 @@ export enum AnimalPlaceCareEnum {
 
 export enum AnimalReasonEnum {
   ABANDON = 'Abandon',
-  MALTRAITANCE = 'Maltraitance',
   ERRANCE = 'Errance',
   DECES_DU_PROPRIETAIRE = 'Décès du propriétaire',
+  MALTRAITANCE = 'Maltraitance',
   AUTRE_RAISON = 'Autre raison',
 }
 

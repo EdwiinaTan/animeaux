@@ -1,6 +1,5 @@
 import {
   AnimalAgreement,
-  AnimalColorEnum,
   AnimalGenderEnum,
   AnimalPlaceCareEnum,
   AnimalReasonEnum,
@@ -34,31 +33,6 @@ export const specieArray = [
 export const genderArray = [
   { label: 'Male', value: AnimalGenderEnum.MALE },
   { label: 'Femelle', value: AnimalGenderEnum.FEMALE },
-]
-
-export const colorArray = [
-  { key: AnimalColorEnum.BEIGE, value: 'Beige' },
-  { key: AnimalColorEnum.BLANC, value: 'Blanc' },
-  { key: AnimalColorEnum.BLEU, value: 'Bleu' },
-  { key: AnimalColorEnum.BRINGE, value: 'Bringe' },
-  { key: AnimalColorEnum.CHOCOLAT, value: 'Chocolat' },
-  { key: AnimalColorEnum.ECAILLE_DE_TORTUE, value: 'Écaille de tortue' },
-  { key: AnimalColorEnum.FAUVE, value: 'Fauve' },
-  { key: AnimalColorEnum.FAUVE_NOIR, value: 'Fauve noir' },
-  { key: AnimalColorEnum.GRIS, value: 'Gris' },
-  { key: AnimalColorEnum.GRIS_BLANC, value: 'Gris blanc' },
-  { key: AnimalColorEnum.MARRON, value: 'Marron' },
-  { key: AnimalColorEnum.MARRON_BLANC, value: 'Marron blanc' },
-  { key: AnimalColorEnum.NOIR, value: 'Noir' },
-  { key: AnimalColorEnum.ROUX, value: 'Roux' },
-  { key: AnimalColorEnum.ROUX_BLANC, value: 'Roux blanc' },
-  { key: AnimalColorEnum.TIGRE, value: 'Tigre' },
-  { key: AnimalColorEnum.TIBRE_BLANC, value: 'Tigre blanc' },
-  { key: AnimalColorEnum.TIGRE_ROUX, value: 'Tigre roux' },
-  { key: AnimalColorEnum.TRICOLORE, value: 'Tricolore' },
-  { key: AnimalColorEnum.TYPE_SIAMOIS, value: 'Type siamois' },
-  { key: AnimalColorEnum.NOIR_BLANC, value: 'Noir blanc' },
-  { key: AnimalColorEnum.CREME, value: 'Crème' },
 ]
 
 export const statusArray = [

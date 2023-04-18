@@ -1,15 +1,15 @@
 export enum AnimalTypeEnum {
-  ALL = 'tous',
-  DOG = 'chien',
-  CAT = 'chat',
-  BIRD = 'oiseau',
-  REPTILE = 'reptile',
-  RONDENT = 'rongeur',
+  ALL = 'Tous',
+  DOG = 'Chien',
+  CAT = 'Chat',
+  BIRD = 'Oiseau',
+  REPTILE = 'Reptile',
+  RONDENT = 'Rongeur',
 }
 
 export enum AnimalGenderEnum {
-  FEMALE = 'femelle',
-  MALE = 'male',
+  FEMALE = 'Femelle',
+  MALE = 'Male',
 }
 
 export enum AnimalRaceEnum {
@@ -37,44 +37,39 @@ export enum AnimalRaceEnum {
   TECKEL = 'Teckel',
 }
 
-export const raceArrayTest = Object.keys(AnimalRaceEnum).map((key) => ({
-  key: AnimalRaceEnum[key],
-  value: AnimalRaceEnum[key],
-}))
-
 export enum AnimalColorEnum {
-  BEIGE = 'beige',
-  BLANC = 'blanc',
-  BLEU = 'bleu',
-  BRINGE = 'bringé',
-  CHOCOLAT = 'chocolat',
-  ECAILLE_DE_TORTUE = 'ecaille_de_tortue',
-  FAUVE = 'fauve',
-  FAUVE_NOIR = 'fauve_noir',
-  GRIS = 'gris',
-  GRIS_BLANC = 'gris_blanc',
-  MARRON = 'marron',
-  MARRON_BLANC = 'marron_blanc',
-  NOIR = 'noir',
-  ROUX = 'roux',
-  ROUX_BLANC = 'roux_blanc',
-  TIGRE = 'tigré',
-  TIBRE_BLANC = 'tigré_blanc',
-  TIGRE_ROUX = 'tigré_roux',
-  TRICOLORE = 'tricolore',
-  TYPE_SIAMOIS = 'tipé_siamois',
-  NOIR_BLANC = 'noir_blanc',
-  CREME = 'crème',
+  BEIGE = 'Beige',
+  BLANC = 'Blanc',
+  BLEU = 'Bleu',
+  BRINGE = 'Bringé',
+  CHOCOLAT = 'Chocolat',
+  ECAILLE_DE_TORTUE = 'Ecaille de tortue',
+  FAUVE = 'Fauve',
+  FAUVE_NOIR = 'Fauve noir',
+  GRIS = 'Gris',
+  GRIS_BLANC = 'Gris blanc',
+  MARRON = 'Marron',
+  MARRON_BLANC = 'Marron blanc',
+  NOIR = 'Noir',
+  ROUX = 'Roux',
+  ROUX_BLANC = 'Roux blanc',
+  TIGRE = 'Tigré',
+  TIBRE_BLANC = 'Tigré blanc',
+  TIGRE_ROUX = 'Tigré roux',
+  TRICOLORE = 'Tricolore',
+  TYPE_SIAMOIS = 'Tipé siamois',
+  NOIR_BLANC = 'Noir blanc',
+  CREME = 'Crème',
 }
 
 export enum AnimalStatusEnum {
-  ADOPTABLE = 'adoptable',
-  ADOPTE = 'adopté',
-  DECEDE = 'décédé',
-  INDISPONIBLE = 'indisponible',
-  LIBRE = 'libre',
-  RESERVABLE = 'réservable',
-  RESERVE = 'réservé',
+  ADOPTABLE = 'Adoptable',
+  ADOPTE = 'Adopté',
+  DECEDE = 'Décédé',
+  INDISPONIBLE = 'Indisponible',
+  LIBRE = 'Libre',
+  RESERVABLE = 'Réservable',
+  RESERVE = 'Réservé',
 }
 
 export enum AnimalPlaceCareEnum {
@@ -106,15 +101,15 @@ export enum AnimalPlaceCareEnum {
 }
 
 export enum AnimalReasonEnum {
-  ABANDON = 'abandon',
-  MALTRAITANCE = 'maltraitance',
-  ERRANCE = 'errance',
-  DECES_DU_PROPRIETAIRE = 'décès_du_propriétaire',
-  AUTRE_RAISON = 'autre_raison',
+  ABANDON = 'Abandon',
+  MALTRAITANCE = 'Maltraitance',
+  ERRANCE = 'Errance',
+  DECES_DU_PROPRIETAIRE = 'Décès du propriétaire',
+  AUTRE_RAISON = 'Autre raison',
 }
 
 export enum AnimalAgreement {
-  YES = 'oui',
-  NO = 'non',
-  UNKNOW = 'inconnu',
+  YES = 'Oui',
+  NO = 'Non',
+  UNKNOW = 'Inconnu',
 }

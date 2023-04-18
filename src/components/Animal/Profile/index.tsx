@@ -7,8 +7,12 @@ import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { raceArrayTest } from 'src/types/Animal/enum'
-import { colorArray, genderArray, specieArray } from 'src/utils/Animal'
+import {
+  AnimalColorEnum,
+  AnimalGenderEnum,
+  AnimalRaceEnum,
+  AnimalTypeEnum,
+} from 'src/types/Animal/enum'
 import { ContainerCheckbox, styles, TextRed } from '../Styled'
 import { AnimalFormProps } from '../Type'
 
@@ -34,6 +38,26 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     }
   }, [])
 
+  const raceArray = Object.keys(AnimalRaceEnum).map((key) => ({
+    key: key,
+    value: AnimalRaceEnum[key],
+  }))
+
+  const colorArray = Object.keys(AnimalColorEnum).map((key) => ({
+    key: key,
+    value: AnimalColorEnum[key],
+  }))
+
+  const especeArray = Object.keys(AnimalTypeEnum).map((key) => ({
+    label: AnimalTypeEnum[key],
+    value: AnimalTypeEnum[key],
+  }))
+
+  const genreArray = Object.keys(AnimalGenderEnum).map((key) => ({
+    label: AnimalGenderEnum[key],
+    value: AnimalGenderEnum[key],
+  }))
+
   return (
     <>
       <ContainerCheckbox>
@@ -41,7 +65,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Espèce<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {specieArray.map((specie, key) => (
+        {especeArray.map((specie, key) => (
           <CheckBoxComponent
             key={`species_${key}`}
             animal={specie}
@@ -54,7 +78,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Genre<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {genderArray.map((gender, key) => (
+        {genreArray.map((gender, key) => (
           <CheckBoxComponent
             key={`gender_${key}`}
             animal={gender}
@@ -135,10 +159,10 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               searchPlaceholder="Rechercher"
               setSelected={handleChange('race')}
               onChange={handleChange('race')}
-              data={raceArrayTest}
+              data={raceArray}
               placeholder="Veuillez choisir la race"
               defaultOption={{ key: race, value: race }}
-              save="key"
+              save="value"
               value={values.race}
             />
           )}
@@ -161,7 +185,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               data={colorArray}
               defaultOption={{ key: color, value: color }}
               placeholder="Veuillez choisir la couleur"
-              save="key"
+              save="value"
               value={values.color}
             />
           )}

@@ -46,7 +46,7 @@ export const Animal = (): React.ReactElement => {
         )
       } else {
         const all = animalData.filter(
-          (animalSearch: AnimalClient) => animalSearch.fields.species === isActive
+          (animalSearch: AnimalClient) => animalSearch.fields.espece === isActive
         )
         setFiltered(
           all.filter(
@@ -60,9 +60,7 @@ export const Animal = (): React.ReactElement => {
         setFiltered(animalData)
       } else {
         setFiltered(
-          animalData.filter(
-            (animalSearch: AnimalClient) => animalSearch.fields.species === isActive
-          )
+          animalData.filter((animalSearch: AnimalClient) => animalSearch.fields.espece === isActive)
         )
       }
     }
@@ -86,7 +84,7 @@ export const Animal = (): React.ReactElement => {
   //     setFiltered(animal)
   //   } else {
   //     setFiltered(
-  //       animal.filter((animalSearch: AnimalClient) => animalSearch.fields.species === isActive)
+  //       animal.filter((animalSearch: AnimalClient) => animalSearch.fields.espece === isActive)
   //     )
   //   }
   // }

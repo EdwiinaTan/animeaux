@@ -30,8 +30,8 @@ export const AddAnimal = () => {
   }
 
   const initialValuesStepOne = {
-    species: '',
-    gender: '',
+    espece: '',
+    genre: '',
     name: '',
     alias: '',
     icadNumber: '',

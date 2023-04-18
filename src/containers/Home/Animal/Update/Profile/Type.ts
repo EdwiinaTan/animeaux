@@ -6,8 +6,8 @@ import {
 } from 'src/types/Animal/enum'
 
 export interface AnimalRequest {
-  species: AnimalTypeEnum
-  gender: AnimalGenderEnum
+  espece: AnimalTypeEnum
+  genre: AnimalGenderEnum
   name: string
   alias: string
   icadNumber: string

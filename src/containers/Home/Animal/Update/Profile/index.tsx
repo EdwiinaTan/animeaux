@@ -1,6 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { useQueryClient } from '@tanstack/react-query'
+// import { useQueryClient } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Animal/Profile'
@@ -25,11 +25,11 @@ export const AnimalUpdate = () => {
   const onClickGoBack = () => {
     return navigation.goBack()
   }
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
 
   const initialValues: AnimalRequest = {
-    species: animalDetails.species,
-    gender: animalDetails.gender,
+    espece: animalDetails.espece,
+    genre: animalDetails.genre,
     name: animalDetails.name,
     alias: animalDetails.alias,
     icadNumber: animalDetails.icadNumber,

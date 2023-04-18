@@ -65,12 +65,12 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Espèce<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {especeArray.map((specie, key) => (
+        {especeArray.map((espece, key) => (
           <CheckBoxComponent
-            key={`species_${key}`}
-            animal={specie}
-            values={values.species}
-            handleChange={() => handleChange('species')(specie.value)}
+            key={`espece_${key}`}
+            animal={espece}
+            values={values.espece}
+            handleChange={() => handleChange('espece')(espece.value)}
           />
         ))}
         <Spacing size="24" />
@@ -78,12 +78,12 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Genre<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {genreArray.map((gender, key) => (
+        {genreArray.map((genre, key) => (
           <CheckBoxComponent
-            key={`gender_${key}`}
-            animal={gender}
-            values={values.gender}
-            handleChange={() => handleChange('gender')(gender.value)}
+            key={`genre_${key}`}
+            animal={genre}
+            values={values.genre}
+            handleChange={() => handleChange('genre')(genre.value)}
           />
         ))}
       </ContainerCheckbox>

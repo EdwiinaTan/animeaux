@@ -8,7 +8,7 @@ import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { FetchStatus } from 'src/types/Status'
 
 export const renderAnimalGender = (animal: AnimalType) => {
-  if (animal.gender === AnimalGenderEnum.FEMALE) {
+  if (animal.genre === AnimalGenderEnum.FEMALE) {
     return <IconMaterialCommunityIcons name="gender-female" size={18} color={theme.colors.red} />
   }
   return <IconMaterialCommunityIcons name="gender-male" size={16} color={theme.colors.blue} />

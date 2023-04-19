@@ -1,6 +1,7 @@
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
-import { TextInput, View } from 'react-native'
+import { Modal, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Calendar } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
@@ -27,6 +28,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
 }) => {
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [selectedDate, setSelectedDate] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(() => {
     if (animalDetails) {
@@ -57,6 +61,15 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     label: AnimalGenderEnum[key],
     value: AnimalGenderEnum[key],
   }))
+
+  const handlePress = () => {
+    setIsOpen(!isOpen)
+  }
+
+  const handleDateSelect = (day) => {
+    setSelectedDate(day.dateString)
+    setModalVisible(false)
+  }
 
   return (
     <>
@@ -95,19 +108,31 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       <Body2>
         Nom<TextRed>*</TextRed>
       </Body2>
-      <Field name="name">
+      <Field name="nom">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le nom de l’animal"
-            onChangeText={handleChange('name')}
-            onChange={handleChange('name')}
-            onBlur={handleBlur('name')}
-            value={values.name}
+            onChangeText={handleChange('nom')}
+            onChange={handleChange('nom')}
+            onBlur={handleBlur('nom')}
+            value={values.nom}
           />
         )}
       </Field>
+      <Spacing size="16" />
+      <View>
+        <Text>Date de naissance : {selectedDate}</Text>
+        <Button title="Open datepicker" onPress={() => setModalVisible(true)} />
+        <Modal visible={modalVisible} transparent={true} animationType="slide">
+          <View style={style.centeredView}>
+            <View style={style.modalView}>
+              <Calendar onDayPress={handleDateSelect} />
+            </View>
+          </View>
+        </Modal>
+      </View>
       {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
       <Spacing size="16" />
       <Body2>Alias</Body2>
@@ -214,3 +239,28 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     </>
   )
 }
+
+const style = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    width: '90%',
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+})

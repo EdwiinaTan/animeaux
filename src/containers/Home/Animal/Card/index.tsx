@@ -5,6 +5,7 @@ import { ActivityIndicator, TouchableOpacity } from 'react-native'
 import { Image } from 'react-native-elements'
 import { Card } from 'src/components/Card'
 import { ChipComponent } from 'src/components/Chip'
+import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
@@ -43,7 +44,10 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
             </AnimalGender>
             <Body1>{animalAge(animal.dateNaissance)}</Body1>
             {statusUser === FetchStatus.LOADING ? (
-              <Skeleton animation="pulse" width={200} height={12} />
+              <>
+                <Skeleton animation="pulse" width={200} height={12} />
+                <Spacing size="4" />
+              </>
             ) : (
               <Body1>
                 Responsable : {userData?.firstname} {userData?.lastname}

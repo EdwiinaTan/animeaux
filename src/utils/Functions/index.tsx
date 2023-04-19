@@ -34,3 +34,7 @@ export const animalAge = (dateNaissance: string): string => {
   }
   return `${dateA.diff(dateB, 'years')} ${date}`
 }
+
+export const waitTimeOut = (timeout: number) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout))
+}

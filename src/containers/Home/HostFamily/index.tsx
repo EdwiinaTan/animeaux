@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { FlatList, ListRenderItem, View } from 'react-native'
+import { useCallback, useEffect, useState } from 'react'
+import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -9,13 +9,14 @@ import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { HostFamilyClient } from 'src/types/HostFamily/Type'
 import { FetchStatus } from 'src/types/Status'
-import { uppercaseWord } from 'src/utils/Functions'
+import { uppercaseWord, waitTimeOut } from 'src/utils/Functions'
 import CardContainer from './Card'
 
 export const HostFamily = (): React.ReactElement => {
   const [search, setSearch] = useState<string>()
   const [filtered, setFiltered] = useState<HostFamilyClient[]>()
   const { statusHostFamilies, hostFamiliesData } = useGetHostFamilies()
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     if (search && search.length > 0) {
@@ -26,6 +27,11 @@ export const HostFamily = (): React.ReactElement => {
       setFiltered(hostFamiliesData)
     }
   }, [search, hostFamiliesData])
+
+  const handleRefresh = useCallback(() => {
+    setIsRefreshing(true)
+    waitTimeOut(2000).then(() => setIsRefreshing(false))
+  }, [])
 
   const searchHostFamily = (hostFamily: HostFamilyClient) => {
     return hostFamily.fields.firstname.indexOf(uppercaseWord(search)) >= 0
@@ -53,6 +59,7 @@ export const HostFamily = (): React.ReactElement => {
             data={filtered}
             keyExtractor={(item) => item.id}
             renderItem={renderAnimal}
+            refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
             ListEmptyComponent={
               search ? (
                 <Body1 textAlign="center">Aucune famille d’accueil trouvé</Body1>

@@ -28,7 +28,6 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
 }) => {
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedDate, setSelectedDate] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -61,10 +60,6 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     label: AnimalGenderEnum[key],
     value: AnimalGenderEnum[key],
   }))
-
-  const handlePress = () => {
-    setIsOpen(!isOpen)
-  }
 
   const handleDateSelect = (day) => {
     setSelectedDate(day.dateString)

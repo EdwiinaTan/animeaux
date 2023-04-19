@@ -8,10 +8,12 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
+import { AnimalAgreement } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
 import { Card, Container, Keyboard } from './Styled'
+import { AnimalRequest } from './Type'
 
 export const UpdateAnimalSituation: React.FC = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -36,7 +38,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     ententeChien: animalDetails.ententeChien,
     userId: animalDetails.userId,
     descriptionPrivee: animalDetails.descriptionPrivee,
-    isSterilised: animalDetails.isSterilised ? 'Oui' : 'Non',
+    sterilise: animalDetails.sterilise ? AnimalAgreement.YES : AnimalAgreement.NO,
   }
 
   const renderDefaultOptionHostFamily = () => {
@@ -63,7 +65,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     }
   }
 
-  const updateAnimal = (values) => {
+  const updateAnimal = (values: AnimalRequest) => {
     updateAnimalById(animalDetails.id, values)
     navigation.goBack()
   }
@@ -72,7 +74,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier la situation de ${animalDetails.name}`}
+        title={`Modifier la situation de ${animalDetails.nom}`}
       />
       <Keyboard behavior="position" enabled>
         <Container>

@@ -63,7 +63,7 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const renderIsSterilised = () => {
-    if (animalDetails.isSterilised) {
+    if (animalDetails.sterilise) {
       return <Body1>Stérilisé</Body1>
     }
     return <Body1>Non stérilisé</Body1>
@@ -94,7 +94,7 @@ export const AnimalInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={uppercaseWord(startsWithVowel(animalDetails.name))}
+        title={uppercaseWord(startsWithVowel(animalDetails.nom))}
         toggleOverlay={handlePresentModal}
       />
       <Container>
@@ -106,7 +106,7 @@ export const AnimalInformation = (): React.ReactElement => {
             <Description>
               <View>
                 <TitleCard>
-                  <Body1 paddingRight={4}>{animalDetails.name}</Body1>
+                  <Body1 paddingRight={4}>{animalDetails.nom}</Body1>
                   {renderAnimalGender(animalDetails)}
                 </TitleCard>
                 <Body1>Age : {animalAge(animalDetails.dateNaissance)}</Body1>

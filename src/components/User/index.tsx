@@ -56,7 +56,7 @@ export const UserInCharge = () => {
             <Spacing size="8" />
             <ContainerImage>
               <Image
-                source={{ uri: userData?.picture[0]?.url }}
+                source={{ uri: userData?.photo[0]?.url }}
                 style={{
                   width: 100,
                   height: 100,

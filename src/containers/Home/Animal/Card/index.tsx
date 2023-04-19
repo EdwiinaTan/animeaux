@@ -38,7 +38,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
           </ContainerImage>
           <Description>
             <AnimalGender>
-              <Body1 paddingRight={4}>{animal.name}</Body1>
+              <Body1 paddingRight={4}>{animal.nom}</Body1>
               {renderAnimalGender(animal)}
             </AnimalGender>
             <Body1>{animalAge(animal.dateNaissance)}</Body1>

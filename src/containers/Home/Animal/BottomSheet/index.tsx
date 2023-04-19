@@ -123,7 +123,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
         onBackdropPress={toggleOverlay}
       >
         <Body1>{`Êtes vous sûre de vouloir supprimer le ${startsWithVowel(
-          animalDetails.name
+          animalDetails.nom
         )} ?`}</Body1>
         <Body1>
           Ce choix sera <TextRed>irréversible.</TextRed>

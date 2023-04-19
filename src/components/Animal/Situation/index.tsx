@@ -216,8 +216,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <CheckBoxComponent
           key={`isSterilised_${key}`}
           animal={isSterilised}
-          values={values.isSterilised}
-          handleChange={() => handleChange('isSterilised')(isSterilised.value)}
+          values={values.sterilise}
+          handleChange={() => handleChange('sterilise')(isSterilised.value)}
         />
       ))}
       <Spacing size="8" />

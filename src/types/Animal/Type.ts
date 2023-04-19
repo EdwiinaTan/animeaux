@@ -11,7 +11,7 @@ import {
 
 export interface AnimalType {
   id: string
-  name: string
+  nom: string
   espece: AnimalTypeEnum
   genre: AnimalGenderEnum
   hostFamilyId?: string
@@ -27,7 +27,7 @@ export interface AnimalType {
   ententeEnfant: AnimalAgreement
   ententeChat: AnimalAgreement
   ententeChien: AnimalAgreement
-  isSterilised?: boolean
+  sterilise?: boolean
   photos: Picture[]
   userId: string
   descriptionPrivee?: string

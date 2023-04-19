@@ -60,7 +60,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
         <Spacing size="8" />
         <ContainerImage>
           <Image
-            source={{ uri: hostFamilyDetails?.picture[0]?.url }}
+            source={{ uri: hostFamilyDetails?.photo[0]?.url }}
             style={{
               width: 100,
               height: 100,

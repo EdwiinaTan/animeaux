@@ -8,7 +8,7 @@ import {
 export interface AnimalRequest {
   espece: AnimalTypeEnum
   genre: AnimalGenderEnum
-  name: string
+  nom: string
   alias: string
   icad: string
   race: AnimalRaceEnum

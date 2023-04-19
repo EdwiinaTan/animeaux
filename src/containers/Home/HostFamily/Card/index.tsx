@@ -35,10 +35,10 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardHostFamily_${hostFamily.id}`}>
         <Container>
-          {hostFamily.picture && hostFamily.picture[0] && (
+          {hostFamily.photo && hostFamily.photo[0] && (
             <ContainerImage>
               <Image
-                source={{ uri: hostFamily.picture[0].url }}
+                source={{ uri: hostFamily.photo[0].url }}
                 style={{ width: 100, height: 100, borderRadius: 8 }}
                 PlaceholderContent={<ActivityIndicator />}
               />

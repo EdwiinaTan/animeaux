@@ -24,7 +24,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       animalData.map(({ fields }) => {
         animalArray.push({
           key: fields.id,
-          value: fields.name,
+          value: fields.nom,
         })
       })
       return animalArray

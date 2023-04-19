@@ -50,7 +50,7 @@ export const AddAnimal = () => {
     ententeChien: '',
     userId: '',
     descriptionPrivee: '',
-    isSterilised: '',
+    sterilise: '',
   }
 
   return (

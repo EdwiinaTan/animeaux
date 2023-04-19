@@ -41,7 +41,7 @@ export const Animal = (): React.ReactElement => {
         setFiltered(
           animalData.filter(
             (animalSearch: AnimalClient) =>
-              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
+              animalSearch.fields.nom.indexOf(uppercaseWord(search)) >= 0
           )
         )
       } else {
@@ -51,7 +51,7 @@ export const Animal = (): React.ReactElement => {
         setFiltered(
           all.filter(
             (animalSearch: AnimalClient) =>
-              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
+              animalSearch.fields.nom.indexOf(uppercaseWord(search)) >= 0
           )
         )
       }

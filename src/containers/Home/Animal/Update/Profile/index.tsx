@@ -20,7 +20,7 @@ export const AnimalUpdate = () => {
     params: { animalDetails },
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
-  // const nameRef = useRef(animalDetails.name)
+  // const nameRef = useRef(animalDetails.nom)
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -30,7 +30,7 @@ export const AnimalUpdate = () => {
   const initialValues: AnimalRequest = {
     espece: animalDetails.espece,
     genre: animalDetails.genre,
-    name: animalDetails.name,
+    nom: animalDetails.nom,
     alias: animalDetails.alias,
     icad: animalDetails.icad,
     race: animalDetails.race,
@@ -55,7 +55,7 @@ export const AnimalUpdate = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
+        title={`Modifier le ${startsWithVowel(animalDetails.nom)}`}
       />
       <Keyboard behavior="position" enabled>
         <Container>

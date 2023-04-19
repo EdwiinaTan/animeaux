@@ -13,5 +13,5 @@ export interface AnimalRequest {
   icad: string
   race: AnimalRaceEnum
   couleur: AnimalColorEnum
-  publicDescription: string
+  descriptionPublique: string
 }

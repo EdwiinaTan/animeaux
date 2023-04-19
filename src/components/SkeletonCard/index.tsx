@@ -15,7 +15,7 @@ export const SkeletonCard = () => {
     >
       <Container>
         <ContainerImage>
-          <Skeleton animation="pulse" width={100} height={100} />
+          <Skeleton animation="pulse" width={100} height={100} style={{ borderRadius: 8 }} />
         </ContainerImage>
         <Description>
           <Skeleton animation="pulse" width={200} height={12} />

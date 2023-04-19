@@ -23,10 +23,10 @@ export const startsWithVowel = (word: string): string => {
   return `profil de ${word}`
 }
 
-export const animalAge = (birthday: string): string => {
+export const animalAge = (dateNaissance: string): string => {
   let date = ''
   const dateA = moment(new Date())
-  const dateB = moment(birthday)
+  const dateB = moment(dateNaissance)
   dateA.diff(dateB, 'years') === 1 ? (date = 'an') : (date = 'ans')
 
   if (dateA.diff(dateB, 'years') === 0) {

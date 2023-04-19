@@ -109,8 +109,8 @@ export const AnimalInformation = (): React.ReactElement => {
                   <Body1 paddingRight={4}>{animalDetails.name}</Body1>
                   {renderAnimalGender(animalDetails)}
                 </TitleCard>
-                <Body1>Age : {animalAge(animalDetails.birthday)}</Body1>
-                {renderField('Icad', animalDetails.icadNumber)}
+                <Body1>Age : {animalAge(animalDetails.dateNaissance)}</Body1>
+                {renderField('Icad', animalDetails.icad)}
                 {renderField('Alias', animalDetails.alias)}
                 {renderField('Race', animalDetails.race)}
                 {renderHostFamily(statusHostFamily, hostFamilyData)}
@@ -131,7 +131,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 <InCharge>
                   <View style={{ paddingRight: 8 }}>
                     <ImageElement
-                      source={{ uri: userData.picture[0].url }}
+                      source={{ uri: userData.photo[0].url }}
                       style={{
                         width: 100,
                         height: 100,
@@ -147,9 +147,9 @@ export const AnimalInformation = (): React.ReactElement => {
                     <Body1>
                       {userData.firstname} {userData.lastname}
                     </Body1>
-                    <Body1>Date : {renderDateFormat(animalDetails.dateInCharge)}</Body1>
-                    <Body1>Lieu : {animalDetails.placeCare}</Body1>
-                    <Body1>Raison : {animalDetails.reason}</Body1>
+                    <Body1>Date : {renderDateFormat(animalDetails.dateEnCharge)}</Body1>
+                    <Body1>Lieu : {animalDetails.lieuEnCharge}</Body1>
+                    <Body1>Raison : {animalDetails.raison}</Body1>
                   </View>
                 </InCharge>
               </Card>
@@ -161,7 +161,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Title2 paddingLeft={8}>Son histoire</Title2>
               </TitleCard>
               <Spacing size="8" />
-              <Body2>{animalDetails.publicDescription}</Body2>
+              <Body2>{animalDetails.descriptionPublique}</Body2>
             </Card>
             <Spacing size="16" />
             <Card>
@@ -176,13 +176,13 @@ export const AnimalInformation = (): React.ReactElement => {
                 </TitleCard>
                 <Spacing size="8" />
                 <ContainerViewImage>
-                  <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
+                  <ViewImage marginRight color={renderAgreement(animalDetails.ententeChien)}>
                     <DogSvg />
                   </ViewImage>
-                  <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
+                  <ViewImage marginRight color={renderAgreement(animalDetails.ententeChat)}>
                     <CatSvg />
                   </ViewImage>
-                  <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
+                  <ViewImage color={renderAgreement(animalDetails.ententeEnfant)}>
                     <KidSvg />
                   </ViewImage>
                 </ContainerViewImage>
@@ -196,7 +196,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </TitleCard>
               <Spacing size="8" />
               <Body2>
-                {animalDetails.privateDescription ?? 'Aucune description pour le moment'}
+                {animalDetails.descriptionPrivee ?? 'Aucune description pour le moment'}
               </Body2>
             </Card>
             <Spacing size="32" />

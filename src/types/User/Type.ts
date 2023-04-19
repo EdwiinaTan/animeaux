@@ -1,4 +1,4 @@
-import { Pictures } from '..'
+import { Picture } from '..'
 
 export interface UserType {
   id: string
@@ -6,7 +6,7 @@ export interface UserType {
   firstname: string
   email: string
   phone: string
-  picture: Pictures[]
+  photo: Picture[]
   animalId: string
   note: string
 }

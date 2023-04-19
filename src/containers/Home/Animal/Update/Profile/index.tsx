@@ -35,7 +35,7 @@ export const AnimalUpdate = () => {
     icad: animalDetails.icad,
     race: animalDetails.race,
     couleur: animalDetails.couleur,
-    publicDescription: animalDetails.publicDescription,
+    descriptionPublique: animalDetails.descriptionPublique,
   }
 
   // const updateAnimalMutation = useMutation({

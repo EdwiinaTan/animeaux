@@ -29,13 +29,13 @@ export const UpdateAnimalSituation: React.FC = () => {
   const initialValues = {
     hostFamilyId: animalDetails.hostFamilyId,
     status: animalDetails.status,
-    placeCare: animalDetails.placeCare,
-    reason: animalDetails.reason,
-    childAgreement: animalDetails.childAgreement,
-    catAgreement: animalDetails.catAgreement,
-    dogAgreement: animalDetails.dogAgreement,
+    lieuEnCharge: animalDetails.lieuEnCharge,
+    raison: animalDetails.raison,
+    ententeEnfant: animalDetails.ententeEnfant,
+    ententeChat: animalDetails.ententeChat,
+    ententeChien: animalDetails.ententeChien,
     userId: animalDetails.userId,
-    privateDescription: animalDetails.privateDescription,
+    descriptionPrivee: animalDetails.descriptionPrivee,
     isSterilised: animalDetails.isSterilised ? 'Oui' : 'Non',
   }
 
@@ -58,8 +58,8 @@ export const UpdateAnimalSituation: React.FC = () => {
   }
   const renderDefaultOptionPlace = () => {
     return {
-      key: animalDetails.placeCare,
-      value: animalDetails.placeCare,
+      key: animalDetails.lieuEnCharge,
+      value: animalDetails.lieuEnCharge,
     }
   }
 

@@ -37,19 +37,19 @@ export const AddAnimal = () => {
     icad: '',
     race: '',
     couleur: '',
-    publicDescription: '',
+    descriptionPublique: '',
   }
 
   const initialValuesStepTwo = {
     hostFamilyId: '',
     status: '',
-    placeCare: '',
-    reason: '',
-    childAgreement: '',
-    catAgreement: '',
-    dogAgreement: '',
+    lieuEnCharge: '',
+    raison: '',
+    ententeEnfant: '',
+    ententeChat: '',
+    ententeChien: '',
     userId: '',
-    privateDescription: '',
+    descriptionPrivee: '',
     isSterilised: '',
   }
 

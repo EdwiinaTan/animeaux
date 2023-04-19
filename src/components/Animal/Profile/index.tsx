@@ -193,7 +193,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       </View>
       <Spacing size="16" />
       <Body2>Description publique</Body2>
-      <Field name="publicDescription">
+      <Field name="descriptionPublique">
         {({ field }) => (
           <TextInput
             focusable
@@ -202,10 +202,10 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             multiline
             style={styles.input}
             placeholder={'Veuillez mettre une description publique'}
-            onChangeText={handleChange('publicDescription')}
-            onChange={handleChange('publicDescription')}
-            onBlur={handleBlur('publicDescription')}
-            value={values.publicDescription}
+            onChangeText={handleChange('descriptionPublique')}
+            onChange={handleChange('descriptionPublique')}
+            onBlur={handleBlur('descriptionPublique')}
+            value={values.descriptionPublique}
           />
         )}
       </Field>

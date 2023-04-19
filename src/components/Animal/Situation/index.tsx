@@ -175,7 +175,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         Lieu pris en charge<TextRed>*</TextRed>
       </Body2>
       <View style={{ width: '100%' }}>
-        <Field name="placeCare">
+        <Field name="lieuEnCharge">
           {({ field }) => (
             <SelectList
               inputStyles={{ padding: 0 }}
@@ -185,13 +185,13 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               }}
               {...field}
               searchPlaceholder="Rechercher"
-              setSelected={handleChange('placeCare')}
-              onChange={handleChange('placeCare')}
+              setSelected={handleChange('lieuEnCharge')}
+              onChange={handleChange('lieuEnCharge')}
               data={placeCareArray}
               defaultOption={optionPlace}
               placeholder="Veuillez choisir l’endroit"
               save="value"
-              value={values.placeCare}
+              value={values.lieuEnCharge}
             />
           )}
         </Field>
@@ -205,8 +205,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <CheckBoxComponent
           key={`reason_${key}`}
           animal={reason}
-          values={values.reason}
-          handleChange={() => handleChange('reason')(reason.value)}
+          values={values.raison}
+          handleChange={() => handleChange('raison')(reason.value)}
         />
       ))}
       <Spacing size="16" />
@@ -229,8 +229,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <CheckBoxComponent
           key={`dogAgreement_${key}`}
           animal={dogAgreement}
-          values={values.dogAgreement}
-          handleChange={() => handleChange('dogAgreement')(dogAgreement.value)}
+          values={values.ententeChien}
+          handleChange={() => handleChange('ententeChien')(dogAgreement.value)}
         />
       ))}
       <Body2>Chat</Body2>
@@ -239,8 +239,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <CheckBoxComponent
           key={`catAgreement_${key}`}
           animal={catAgreement}
-          values={values.catAgreement}
-          handleChange={() => handleChange('catAgreement')(catAgreement.value)}
+          values={values.ententeChat}
+          handleChange={() => handleChange('ententeChat')(catAgreement.value)}
         />
       ))}
       <Body2>Enfant</Body2>
@@ -249,13 +249,13 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <CheckBoxComponent
           key={`childAgreement_${key}`}
           animal={childAgreement}
-          values={values.childAgreement}
-          handleChange={() => handleChange('childAgreement')(childAgreement.value)}
+          values={values.ententeEnfant}
+          handleChange={() => handleChange('ententeEnfant')(childAgreement.value)}
         />
       ))}
       <Spacing size="16" />
       <Body2>Description privée</Body2>
-      <Field name="privateDescription">
+      <Field name="descriptionPrivee">
         {({ field }) => (
           <TextInput
             focusable
@@ -263,11 +263,11 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             editable
             multiline
             style={styles.input}
-            onChangeText={handleChange('privateDescription')}
-            onChange={handleChange('privateDescription')}
-            onBlur={handleBlur('privateDescription')}
+            onChangeText={handleChange('descriptionPrivee')}
+            onChange={handleChange('descriptionPrivee')}
+            onBlur={handleBlur('descriptionPrivee')}
             placeholder={'Veuillez mettre une description privée'}
-            value={values.privateDescription}
+            value={values.descriptionPrivee}
           />
         )}
       </Field>

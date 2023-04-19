@@ -1,4 +1,4 @@
-import { Pictures } from '..'
+import { Picture } from './../index'
 import {
   AnimalAgreement,
   AnimalColorEnum,
@@ -17,21 +17,21 @@ export interface AnimalType {
   hostFamilyId?: string
   alias?: string
   icad: string
-  birthday?: string
+  dateNaissance?: string
   race: AnimalRaceEnum
   couleur: AnimalColorEnum
-  publicDescription?: string
+  descriptionPublique?: string
   status: AnimalStatusEnum
-  placeCare: string
-  reason: AnimalReasonEnum
-  childAgreement: AnimalAgreement
-  catAgreement: AnimalAgreement
-  dogAgreement: AnimalAgreement
+  lieuEnCharge: string
+  raison: AnimalReasonEnum
+  ententeEnfant: AnimalAgreement
+  ententeChat: AnimalAgreement
+  ententeChien: AnimalAgreement
   isSterilised?: boolean
-  pictures: Pictures[]
+  photos: Picture[]
   userId: string
-  privateDescription?: string
-  dateInCharge: string
+  descriptionPrivee?: string
+  dateEnCharge: string
 }
 
 export interface AnimalClient {

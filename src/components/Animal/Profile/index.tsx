@@ -1,13 +1,16 @@
+import { CalendarSvg } from 'assets/svg/calendar'
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
-import { Modal, StyleSheet, Text, TextInput, View } from 'react-native'
-import { Calendar } from 'react-native-calendars'
+import { Modal, TextInput, View } from 'react-native'
+import { CalendarList } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
+import { ContainerCalendar } from 'src/containers/Home/Animal/Update/Profile/Styled'
 import {
   AnimalColorEnum,
   AnimalGenderEnum,
@@ -16,6 +19,7 @@ import {
 } from 'src/types/Animal/enum'
 import { ContainerCheckbox, styles, TextRed } from '../Styled'
 import { AnimalFormProps } from '../Type'
+import { style } from './Styled'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({
   values,
@@ -25,10 +29,10 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   animalDetails,
   errors,
   touched,
+  setFieldValue,
 }) => {
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
-  const [selectedDate, setSelectedDate] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(() => {
@@ -62,7 +66,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   }))
 
   const handleDateSelect = (day) => {
-    setSelectedDate(day.dateString)
+    setFieldValue('birthday', day.dateString)
     setModalVisible(false)
   }
 
@@ -119,12 +123,54 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
       <Spacing size="16" />
       <View>
-        <Text>Date de naissance : {selectedDate}</Text>
-        <Button title="Open datepicker" onPress={() => setModalVisible(true)} />
+        <Body2>
+          Date de naissance<TextRed>*</TextRed>
+        </Body2>
+        <ContainerCalendar>
+          <Field name="birthday">
+            {({ field }) => (
+              <TextInput
+                {...field}
+                style={styles.inputDate}
+                editable={false}
+                placeholder="Veuillez mettre la date de naissance de l’animal"
+                value={values.birthday}
+              />
+            )}
+          </Field>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <CalendarSvg />
+          </TouchableOpacity>
+        </ContainerCalendar>
         <Modal visible={modalVisible} transparent={true} animationType="slide">
           <View style={style.centeredView}>
             <View style={style.modalView}>
-              <Calendar onDayPress={handleDateSelect} />
+              <CalendarList
+                onDayPress={handleDateSelect}
+                // theme={{
+                //   backgroundColor: '#ffffff',
+                //   calendarBackground: '#ffffff',
+                //   textSectionTitleColor: theme.colors.yellow,
+                //   textSectionTitleDisabledColor: '#d9e1e8',
+                //   selectedDayBackgroundColor: '#00adf5',
+                //   selectedDayTextColor: '#ffffff',
+                //   todayTextColor: theme.colors.red,
+                //   dayTextColor: '#3d6e94',
+                //   textDisabledColor: '#d9e1e8',
+                //   dotColor: '#00adf5',
+                //   selectedDotColor: '#ffffff',
+                //   arrowColor: 'orange',
+                //   disabledArrowColor: '#d9e1e8',
+                //   monthTextColor: 'blue',
+                //   indicatorColor: 'blue',
+                //   textDayFontWeight: '300',
+                //   textMonthFontWeight: 'bold',
+                //   textDayHeaderFontWeight: '300',
+                //   textDayFontSize: 16,
+                //   textMonthFontSize: 16,
+                //   textDayHeaderFontSize: 16,
+                // }}
+              />
             </View>
           </View>
         </Modal>
@@ -189,7 +235,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Body2>color</Body2>
+      <Body2>Couleur</Body2>
       <View style={{ width: '100%' }}>
         <Field name="color">
           {({ field }) => (
@@ -234,28 +280,3 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     </>
   )
 }
-
-const style = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    width: '90%',
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-})

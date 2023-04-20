@@ -37,6 +37,7 @@ export const AddAnimal = () => {
     alias: '',
     icad: '',
     race: '',
+    birthday: '',
     color: '',
     publicDescription: '',
   }

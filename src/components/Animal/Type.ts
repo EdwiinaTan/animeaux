@@ -8,4 +8,5 @@ export interface AnimalFormProps {
   animalDetails?: AnimalType | undefined
   errors?: any
   touched?: any
+  setFieldValue?: any
 }

@@ -12,6 +12,15 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: theme.colors.grey0,
   },
+  inputDate: {
+    width: '86%',
+    padding: 10,
+    marginBottom: 4,
+    backgroundColor: theme.colors.white,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: theme.colors.grey0,
+  },
 })
 
 export const ContainerCheckbox = styled.View`

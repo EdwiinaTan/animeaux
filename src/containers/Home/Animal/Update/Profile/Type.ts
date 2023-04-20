@@ -14,4 +14,5 @@ export interface AnimalRequest {
   race: AnimalRaceEnum
   color: AnimalColorEnum
   publicDescription: string
+  birthday: string
 }

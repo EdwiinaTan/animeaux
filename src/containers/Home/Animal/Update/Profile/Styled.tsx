@@ -24,3 +24,10 @@ export const ContainerCheckbox = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
 `
+
+export const ContainerCalendar = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`

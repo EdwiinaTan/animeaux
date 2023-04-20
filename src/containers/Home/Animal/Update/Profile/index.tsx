@@ -21,17 +21,18 @@ export const AnimalUpdate = () => {
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   // const nameRef = useRef(animalDetails.name)
+  // const queryClient = useQueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
   }
-  // const queryClient = useQueryClient()
 
   const initialValues: AnimalRequest = {
     species: animalDetails.species,
     gender: animalDetails.gender,
     name: animalDetails.name,
     alias: animalDetails.alias,
+    birthday: animalDetails.birthday,
     icad: animalDetails.icad,
     race: animalDetails.race,
     color: animalDetails.color,
@@ -48,7 +49,7 @@ export const AnimalUpdate = () => {
   const updateAnimal = (values: AnimalRequest) => {
     updateAnimalByIdTest(animalDetails.id, values)
     // updateAnimalMutation.mutate({ ...values })
-    navigation.goBack()
+    navigation.navigate('animalScreen')
   }
 
   return (
@@ -67,7 +68,15 @@ export const AnimalUpdate = () => {
                 updateAnimal(values)
               }}
             >
-              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
                 <AnimalProfile
                   values={values}
                   handleChange={handleChange}
@@ -76,6 +85,7 @@ export const AnimalUpdate = () => {
                   animalDetails={animalDetails}
                   errors={errors}
                   touched={touched}
+                  setFieldValue={setFieldValue}
                 />
               )}
             </Formik>

@@ -47,17 +47,17 @@ export const Animal = (): React.ReactElement => {
         setFiltered(
           animalData.filter(
             (animalSearch: AnimalClient) =>
-              animalSearch.fields.nom.indexOf(uppercaseWord(search)) >= 0
+              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
           )
         )
       } else {
         const all = animalData.filter(
-          (animalSearch: AnimalClient) => animalSearch.fields.espece === isActive
+          (animalSearch: AnimalClient) => animalSearch.fields.species === isActive
         )
         setFiltered(
           all.filter(
             (animalSearch: AnimalClient) =>
-              animalSearch.fields.nom.indexOf(uppercaseWord(search)) >= 0
+              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
           )
         )
       }
@@ -66,7 +66,9 @@ export const Animal = (): React.ReactElement => {
         setFiltered(animalData)
       } else {
         setFiltered(
-          animalData.filter((animalSearch: AnimalClient) => animalSearch.fields.espece === isActive)
+          animalData.filter(
+            (animalSearch: AnimalClient) => animalSearch.fields.species === isActive
+          )
         )
       }
     }
@@ -90,7 +92,7 @@ export const Animal = (): React.ReactElement => {
   //     setFiltered(animal)
   //   } else {
   //     setFiltered(
-  //       animal.filter((animalSearch: AnimalClient) => animalSearch.fields.espece === isActive)
+  //       animal.filter((animalSearch: AnimalClient) => animalSearch.fields.species === isActive)
   //     )
   //   }
   // }

@@ -51,12 +51,12 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     value: AnimalColorEnum[key],
   }))
 
-  const especeArray = Object.keys(AnimalTypeEnum).map((key) => ({
+  const speciesArray = Object.keys(AnimalTypeEnum).map((key) => ({
     label: AnimalTypeEnum[key],
     value: AnimalTypeEnum[key],
   }))
 
-  const genreArray = Object.keys(AnimalGenderEnum).map((key) => ({
+  const genderArray = Object.keys(AnimalGenderEnum).map((key) => ({
     label: AnimalGenderEnum[key],
     value: AnimalGenderEnum[key],
   }))
@@ -73,12 +73,12 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Espèce<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {especeArray.map((espece, key) => (
+        {speciesArray.map((specie, key) => (
           <CheckBoxComponent
-            key={`espece_${key}`}
-            animal={espece}
-            values={values.espece}
-            handleChange={() => handleChange('espece')(espece.value)}
+            key={`species_${key}`}
+            animal={specie}
+            values={values.species}
+            handleChange={() => handleChange('species')(specie.value)}
           />
         ))}
         <Spacing size="24" />
@@ -86,12 +86,12 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Genre<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {genreArray.map((genre, key) => (
+        {genderArray.map((gender, key) => (
           <CheckBoxComponent
-            key={`genre_${key}`}
-            animal={genre}
-            values={values.genre}
-            handleChange={() => handleChange('genre')(genre.value)}
+            key={`gender_${key}`}
+            animal={gender}
+            values={values.gender}
+            handleChange={() => handleChange('gender')(gender.value)}
           />
         ))}
       </ContainerCheckbox>
@@ -103,19 +103,20 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       <Body2>
         Nom<TextRed>*</TextRed>
       </Body2>
-      <Field name="nom">
+      <Field name="name">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le nom de l’animal"
-            onChangeText={handleChange('nom')}
-            onChange={handleChange('nom')}
-            onBlur={handleBlur('nom')}
-            value={values.nom}
+            onChangeText={handleChange('name')}
+            onChange={handleChange('name')}
+            onBlur={handleBlur('name')}
+            value={values.name}
           />
         )}
       </Field>
+      {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
       <Spacing size="16" />
       <View>
         <Text>Date de naissance : {selectedDate}</Text>
@@ -128,7 +129,6 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           </View>
         </Modal>
       </View>
-      {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
       <Spacing size="16" />
       <Body2>Alias</Body2>
       <Field name="alias">

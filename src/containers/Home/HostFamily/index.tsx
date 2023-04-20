@@ -34,7 +34,7 @@ export const HostFamily = (): React.ReactElement => {
   }, [])
 
   const searchHostFamily = (hostFamily: HostFamilyClient) => {
-    return hostFamily.fields.firstname.indexOf(uppercaseWord(search)) >= 0
+    return hostFamily.fields.prenom.indexOf(uppercaseWord(search)) >= 0
   }
 
   const renderAnimal: ListRenderItem<HostFamilyClient> = ({ item }) => {

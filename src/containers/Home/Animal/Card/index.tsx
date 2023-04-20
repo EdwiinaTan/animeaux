@@ -39,7 +39,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
           </ContainerImage>
           <Description>
             <AnimalGender>
-              <Body1 paddingRight={4}>{animal.nom}</Body1>
+              <Body1 paddingRight={4}>{animal.name}</Body1>
               {renderAnimalGender(animal)}
             </AnimalGender>
             <Body1>{animalAge(animal.dateNaissance)}</Body1>
@@ -50,7 +50,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
               </>
             ) : (
               <Body1>
-                Responsable : {userData?.firstname} {userData?.lastname}
+                Responsable : {userData?.prenom} {userData?.nom}
               </Body1>
             )}
             {renderHostFamily(statusHostFamily, hostFamilyData)}
@@ -59,9 +59,9 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
               <Skeleton animation="pulse" width={200} height={12} />
             ) : (
               hostFamilyData &&
-              hostFamilyData?.firstname && (
+              hostFamilyData?.prenom && (
                 <Text>
-                  FA : {hostFamilyData?.firstname} {hostFamilyData?.lastname}
+                  FA : {hostFamilyData?.prenom} {hostFamilyData?.nom}
                 </Text>
               )
             )} */}

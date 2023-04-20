@@ -45,7 +45,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     if (statusHostFamily === FetchStatus.SUCCESS) {
       return {
         key: hostFamilyData.id,
-        value: `${hostFamilyData.firstname} ${hostFamilyData.lastname}`,
+        value: `${hostFamilyData.prenom} ${hostFamilyData.nom}`,
       }
     }
   }
@@ -54,7 +54,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     if (statusUser === FetchStatus.SUCCESS) {
       return {
         key: userData.id,
-        value: `${userData.firstname} ${userData.lastname}`,
+        value: `${userData.prenom} ${userData.nom}`,
       }
     }
   }
@@ -74,7 +74,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier la situation de ${animalDetails.nom}`}
+        title={`Modifier la situation de ${animalDetails.name}`}
       />
       <Keyboard behavior="position" enabled>
         <Container>

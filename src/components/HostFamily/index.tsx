@@ -24,7 +24,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       animalData.map(({ fields }) => {
         animalArray.push({
           key: fields.id,
-          value: fields.nom,
+          value: fields.name,
         })
       })
       return animalArray
@@ -36,16 +36,16 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       <Body2>
         Nom<TextRed>*</TextRed>
       </Body2>
-      <Field name="lastname">
+      <Field name="nom">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le nom de famille"
-            onChangeText={handleChange('lastname')}
-            onChange={handleChange('lastname')}
-            onBlur={handleBlur('lastname')}
-            value={values.lastname}
+            onChangeText={handleChange('nom')}
+            onChange={handleChange('nom')}
+            onBlur={handleBlur('nom')}
+            value={values.nom}
           />
         )}
       </Field>
@@ -53,16 +53,16 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       <Body2>
         Prénom<TextRed>*</TextRed>
       </Body2>
-      <Field name="firstname">
+      <Field name="prenom">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le prénom"
-            onChangeText={handleChange('firstname')}
-            onChange={handleChange('firstname')}
-            onBlur={handleBlur('firstname')}
-            value={values.firstname}
+            onChangeText={handleChange('prenom')}
+            onChange={handleChange('prenom')}
+            onBlur={handleBlur('prenom')}
+            value={values.prenom}
           />
         )}
       </Field>

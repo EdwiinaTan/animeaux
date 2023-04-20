@@ -2,8 +2,8 @@ import { Picture } from '..'
 
 export interface HostFamilyType {
   id: string
-  lastname: string
-  firstname: string
+  nom: string
+  prenom: string
   email: string
   phone: string
   postalCode: string

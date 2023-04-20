@@ -94,7 +94,7 @@ export const AnimalInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={uppercaseWord(startsWithVowel(animalDetails.nom))}
+        title={uppercaseWord(startsWithVowel(animalDetails.name))}
         toggleOverlay={handlePresentModal}
       />
       <Container>
@@ -106,7 +106,7 @@ export const AnimalInformation = (): React.ReactElement => {
             <Description>
               <View>
                 <TitleCard>
-                  <Body1 paddingRight={4}>{animalDetails.nom}</Body1>
+                  <Body1 paddingRight={4}>{animalDetails.name}</Body1>
                   {renderAnimalGender(animalDetails)}
                 </TitleCard>
                 <Body1>Age : {animalAge(animalDetails.dateNaissance)}</Body1>
@@ -145,7 +145,7 @@ export const AnimalInformation = (): React.ReactElement => {
                   </View>
                   <View>
                     <Body1>
-                      {userData.firstname} {userData.lastname}
+                      {userData.prenom} {userData.nom}
                     </Body1>
                     <Body1>Date : {renderDateFormat(animalDetails.dateEnCharge)}</Body1>
                     <Body1>Lieu : {animalDetails.lieuEnCharge}</Body1>

@@ -11,9 +11,9 @@ import {
 
 export interface AnimalType {
   id: string
-  nom: string
-  espece: AnimalTypeEnum
-  genre: AnimalGenderEnum
+  name: string
+  species: AnimalTypeEnum
+  gender: AnimalGenderEnum
   hostFamilyId?: string
   alias?: string
   icad: string

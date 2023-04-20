@@ -60,7 +60,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
       hostFamiliesData.map((hostFamily) => {
         hostFamilyArray.push({
           key: hostFamily.fields.id,
-          value: `${hostFamily.fields.firstname} ${hostFamily.fields.lastname}`,
+          value: `${hostFamily.fields.prenom} ${hostFamily.fields.nom}`,
         })
       })
       return hostFamilyArray
@@ -72,7 +72,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
       usersData.map(({ fields }) => {
         userArray.push({
           key: fields.id,
-          value: `${fields.firstname} ${fields.lastname}`,
+          value: `${fields.prenom} ${fields.nom}`,
         })
       })
       return userArray

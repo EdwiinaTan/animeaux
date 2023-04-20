@@ -53,7 +53,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={uppercaseWord(startsWithVowel(hostFamilyDetails.firstname))}
+        title={uppercaseWord(startsWithVowel(hostFamilyDetails.prenom))}
         toggleOverlay={handlePresentModal}
       />
       <Container>
@@ -69,7 +69,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
             PlaceholderContent={<ActivityIndicator />}
           />
           <Body1>
-            {hostFamilyDetails.firstname} {hostFamilyDetails.lastname}
+            {hostFamilyDetails.prenom} {hostFamilyDetails.nom}
           </Body1>
         </ContainerImage>
         <ContainerDescription>

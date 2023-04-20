@@ -34,8 +34,8 @@ export const AnimalUpdate = () => {
     alias: animalDetails.alias,
     icad: animalDetails.icad,
     race: animalDetails.race,
-    couleur: animalDetails.couleur,
-    descriptionPublique: animalDetails.descriptionPublique,
+    color: animalDetails.color,
+    publicDescription: animalDetails.publicDescription,
   }
 
   // const updateAnimalMutation = useMutation({
@@ -57,7 +57,7 @@ export const AnimalUpdate = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
       />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             <Formik

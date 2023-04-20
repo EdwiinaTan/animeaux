@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
 import 'react-native-gesture-handler'
+import { getAnimals } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -37,7 +38,12 @@ export const Animal = (): React.ReactElement => {
 
   const handleRefresh = useCallback(() => {
     setIsRefreshing(true)
-    waitTimeOut(2000).then(() => setIsRefreshing(false))
+    getAnimals().then((value: AnimalClient[]) =>
+      waitTimeOut(1000).then(() => {
+        setFiltered(value)
+        setIsRefreshing(false)
+      })
+    )
   }, [])
 
   const refacto = (): void => {

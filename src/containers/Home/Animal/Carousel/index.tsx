@@ -21,7 +21,7 @@ export const CarouselAnimal: React.FC<CarouselAnimalProps> = ({ animal }) => {
   return (
     <Carousel>
       <FlatList
-        data={animal.photos}
+        data={animal.pictures}
         renderItem={({ item }) => (
           <View style={[style.container, { width: newWidth }]}>
             <Image
@@ -61,7 +61,7 @@ export const CarouselAnimal: React.FC<CarouselAnimalProps> = ({ animal }) => {
       />
       <ContainerPagination>
         <PaginationText>
-          {currentIndex + 1}/{animal.photos.length}
+          {currentIndex + 1}/{animal.pictures.length}
         </PaginationText>
       </ContainerPagination>
     </Carousel>

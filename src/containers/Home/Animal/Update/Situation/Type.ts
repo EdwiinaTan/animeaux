@@ -3,12 +3,12 @@ import { AnimalAgreement, AnimalReasonEnum, AnimalStatusEnum } from 'src/types/A
 export interface AnimalRequest {
   hostFamilyId: string
   status: AnimalStatusEnum
-  lieuEnCharge: string
-  raison: AnimalReasonEnum
-  ententeEnfant: AnimalAgreement
-  ententeChat: AnimalAgreement
-  ententeChien: AnimalAgreement
+  placeAssigned: string
+  reason: AnimalReasonEnum
+  childAgreement: AnimalAgreement
+  catAgreement: AnimalAgreement
+  dogAgreement: AnimalAgreement
   userId: string
-  descriptionPrivee: string
-  sterilise: string
+  privateDescription: string
+  isSterilized: string
 }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
+import { getHostFamilies } from 'src/client/HostFamily'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -30,11 +31,14 @@ export const HostFamily = (): React.ReactElement => {
 
   const handleRefresh = useCallback(() => {
     setIsRefreshing(true)
-    waitTimeOut(2000).then(() => setIsRefreshing(false))
+    getHostFamilies().then((value: HostFamilyClient[]) => {
+      setFiltered(value)
+      waitTimeOut(1000).then(() => setIsRefreshing(false))
+    })
   }, [])
 
   const searchHostFamily = (hostFamily: HostFamilyClient) => {
-    return hostFamily.fields.prenom.indexOf(uppercaseWord(search)) >= 0
+    return hostFamily.fields.firstName.indexOf(uppercaseWord(search)) >= 0
   }
 
   const renderAnimal: ListRenderItem<HostFamilyClient> = ({ item }) => {

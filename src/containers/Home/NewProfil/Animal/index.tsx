@@ -6,6 +6,7 @@ import StepIndicator from 'react-native-step-indicator'
 import { AnimalProfile } from 'src/components/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Animal/Profile/Utils'
 import { AnimalSituation } from 'src/components/Animal/Situation'
+import { validationAnimalSituation } from 'src/components/Animal/Situation/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -36,21 +37,21 @@ export const AddAnimal = () => {
     alias: '',
     icad: '',
     race: '',
-    couleur: '',
-    descriptionPublique: '',
+    color: '',
+    publicDescription: '',
   }
 
   const initialValuesStepTwo = {
     hostFamilyId: '',
     status: '',
-    lieuEnCharge: '',
-    raison: '',
-    ententeEnfant: '',
-    ententeChat: '',
-    ententeChien: '',
+    placeAssigned: '',
+    reason: '',
+    childAgreement: '',
+    catAgreement: '',
+    dogAgreement: '',
     userId: '',
-    descriptionPrivee: '',
-    sterilise: '',
+    privateDescription: '',
+    isSterilized: '',
   }
 
   return (
@@ -65,7 +66,7 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             {currentPosition === 0 && (
@@ -91,6 +92,7 @@ export const AddAnimal = () => {
             {currentPosition === 1 && (
               <Formik
                 initialValues={initialValuesStepTwo}
+                validationSchema={validationAnimalSituation}
                 onSubmit={(values) => {
                   console.log('valueTwo', values)
                 }}

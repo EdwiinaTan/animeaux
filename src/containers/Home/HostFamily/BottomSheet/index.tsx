@@ -103,7 +103,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
         onBackdropPress={toggleOverlay}
       >
         <Body1>{`Êtes vous sûre de vouloir supprimer le ${startsWithVowel(
-          hostFamilyDetails.prenom
+          hostFamilyDetails.firstName
         )} ?`}</Body1>
         <Body1>
           Ce choix sera <TextRed>irréversible.</TextRed>

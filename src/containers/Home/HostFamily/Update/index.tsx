@@ -25,8 +25,8 @@ export const HostFamilyUpdate = () => {
   }
 
   const initialValues = {
-    nom: hostFamilyDetails.nom,
-    prenom: hostFamilyDetails.prenom,
+    firstName: hostFamilyDetails.firstName,
+    lastName: hostFamilyDetails.lastName,
     email: hostFamilyDetails.email,
     phone: hostFamilyDetails.phone,
     postalCode: hostFamilyDetails.postalCode,
@@ -48,9 +48,9 @@ export const HostFamilyUpdate = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier le ${startsWithVowel(hostFamilyDetails.prenom)}`}
+        title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             <Formik

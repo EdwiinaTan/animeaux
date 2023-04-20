@@ -45,7 +45,7 @@ export const UserInCharge = () => {
   return (
     <Layout>
       <HeaderComponent
-        title={uppercaseWord(startsWithVowel(userData.prenom))}
+        title={uppercaseWord(startsWithVowel(userData.firstName))}
         onClickGoBack={onClickGoBack}
       />
       <Container>
@@ -56,7 +56,7 @@ export const UserInCharge = () => {
             <Spacing size="8" />
             <ContainerImage>
               <Image
-                source={{ uri: userData?.photo[0]?.url }}
+                source={{ uri: userData?.picture[0]?.url }}
                 style={{
                   width: 100,
                   height: 100,
@@ -70,7 +70,7 @@ export const UserInCharge = () => {
               <Description>
                 <Spacing size="64" />
                 <Body1>
-                  {userData.prenom} {userData.nom}
+                  {userData.firstName} {userData.lastName}
                 </Body1>
                 {renderField(<PhoneSvg />, userData.phone)}
                 {renderField(<EmailSvg />, userData.email)}

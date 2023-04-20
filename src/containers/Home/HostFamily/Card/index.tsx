@@ -35,10 +35,10 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardHostFamily_${hostFamily.id}`}>
         <Container>
-          {hostFamily.photo && hostFamily.photo[0] && (
+          {hostFamily.picture && hostFamily.picture[0] && (
             <ContainerImage>
               <Image
-                source={{ uri: hostFamily.photo[0].url }}
+                source={{ uri: hostFamily.picture[0].url }}
                 style={{ width: 100, height: 100, borderRadius: 8 }}
                 PlaceholderContent={<ActivityIndicator />}
               />
@@ -46,7 +46,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
           )}
           <View style={{ flexDirection: 'column' }}>
             <Body1>
-              {hostFamily.prenom} {hostFamily.nom}
+              {hostFamily.firstName} {hostFamily.lastName}
             </Body1>
             <Body1>{hostFamily.phone}</Body1>
             <Body1>{hostFamily.email}</Body1>

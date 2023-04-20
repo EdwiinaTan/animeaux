@@ -23,7 +23,7 @@ export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyTyp
     case FetchStatus.SUCCESS:
       return (
         <Body1>
-          FA : {hostFamilyData.prenom} {hostFamilyData.nom}
+          FA : {hostFamilyData.firstName} {hostFamilyData.lastName}
         </Body1>
       )
     default:

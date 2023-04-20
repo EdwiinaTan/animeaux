@@ -17,21 +17,21 @@ export interface AnimalType {
   hostFamilyId?: string
   alias?: string
   icad: string
-  dateNaissance?: string
+  birthday?: string
   race: AnimalRaceEnum
-  couleur: AnimalColorEnum
-  descriptionPublique?: string
+  color: AnimalColorEnum
+  publicDescription?: string
   status: AnimalStatusEnum
-  lieuEnCharge: string
-  raison: AnimalReasonEnum
-  ententeEnfant: AnimalAgreement
-  ententeChat: AnimalAgreement
-  ententeChien: AnimalAgreement
-  sterilise?: boolean
-  photos: Picture[]
+  placeAssigned: string
+  reason: AnimalReasonEnum
+  childAgreement: AnimalAgreement
+  catAgreement: AnimalAgreement
+  dogAgreement: AnimalAgreement
+  isSterilized?: boolean
+  pictures: Picture[]
   userId: string
-  descriptionPrivee?: string
-  dateEnCharge: string
+  privateDescription?: string
+  dateAssigned: string
 }
 
 export interface AnimalClient {

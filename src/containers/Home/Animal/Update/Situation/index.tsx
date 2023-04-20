@@ -31,21 +31,21 @@ export const UpdateAnimalSituation: React.FC = () => {
   const initialValues = {
     hostFamilyId: animalDetails.hostFamilyId,
     status: animalDetails.status,
-    lieuEnCharge: animalDetails.lieuEnCharge,
-    raison: animalDetails.raison,
-    ententeEnfant: animalDetails.ententeEnfant,
-    ententeChat: animalDetails.ententeChat,
-    ententeChien: animalDetails.ententeChien,
+    placeAssigned: animalDetails.placeAssigned,
+    reason: animalDetails.reason,
+    childAgreement: animalDetails.childAgreement,
+    catAgreement: animalDetails.catAgreement,
+    dogAgreement: animalDetails.dogAgreement,
     userId: animalDetails.userId,
-    descriptionPrivee: animalDetails.descriptionPrivee,
-    sterilise: animalDetails.sterilise ? AnimalAgreement.YES : AnimalAgreement.NO,
+    privateDescription: animalDetails.privateDescription,
+    isSterilized: animalDetails.isSterilized ? AnimalAgreement.YES : AnimalAgreement.NO,
   }
 
   const renderDefaultOptionHostFamily = () => {
     if (statusHostFamily === FetchStatus.SUCCESS) {
       return {
         key: hostFamilyData.id,
-        value: `${hostFamilyData.prenom} ${hostFamilyData.nom}`,
+        value: `${hostFamilyData.firstName} ${hostFamilyData.lastName}`,
       }
     }
   }
@@ -54,14 +54,14 @@ export const UpdateAnimalSituation: React.FC = () => {
     if (statusUser === FetchStatus.SUCCESS) {
       return {
         key: userData.id,
-        value: `${userData.prenom} ${userData.nom}`,
+        value: `${userData.firstName} ${userData.lastName}`,
       }
     }
   }
   const renderDefaultOptionPlace = () => {
     return {
-      key: animalDetails.lieuEnCharge,
-      value: animalDetails.lieuEnCharge,
+      key: animalDetails.placeAssigned,
+      value: animalDetails.placeAssigned,
     }
   }
 
@@ -76,7 +76,7 @@ export const UpdateAnimalSituation: React.FC = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier la situation de ${animalDetails.name}`}
       />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             <Formik

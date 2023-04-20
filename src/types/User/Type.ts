@@ -2,8 +2,8 @@ import { Picture } from '..'
 
 export interface UserType {
   id: string
-  nom: string
-  prenom: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
   photo: Picture[]

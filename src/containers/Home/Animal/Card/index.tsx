@@ -31,18 +31,18 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
         <Container>
           <ContainerImage>
             <Image
-              source={{ uri: animal?.photos[0]?.url }}
+              source={{ uri: animal?.pictures[0]?.url }}
               style={{ width: 100, height: 100, borderRadius: 8 }}
               PlaceholderContent={<ActivityIndicator />}
             />
-            <Image resizeMode="cover" source={{ uri: animal?.photos[0]?.url }} />
+            <Image resizeMode="cover" source={{ uri: animal?.pictures[0]?.url }} />
           </ContainerImage>
           <Description>
             <AnimalGender>
               <Body1 paddingRight={4}>{animal.name}</Body1>
               {renderAnimalGender(animal)}
             </AnimalGender>
-            <Body1>{animalAge(animal.dateNaissance)}</Body1>
+            <Body1>{animalAge(animal.birthday)}</Body1>
             {statusUser === FetchStatus.LOADING ? (
               <>
                 <Skeleton animation="pulse" width={200} height={12} />
@@ -50,7 +50,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
               </>
             ) : (
               <Body1>
-                Responsable : {userData?.prenom} {userData?.nom}
+                Responsable : {userData?.firstName} {userData?.lastName}
               </Body1>
             )}
             {renderHostFamily(statusHostFamily, hostFamilyData)}
@@ -59,9 +59,9 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
               <Skeleton animation="pulse" width={200} height={12} />
             ) : (
               hostFamilyData &&
-              hostFamilyData?.prenom && (
+              hostFamilyData?.firstName && (
                 <Text>
-                  FA : {hostFamilyData?.prenom} {hostFamilyData?.nom}
+                  FA : {hostFamilyData?.firstName} {hostFamilyData?.lastName}
                 </Text>
               )
             )} */}

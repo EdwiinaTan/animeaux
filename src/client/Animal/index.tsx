@@ -54,8 +54,8 @@ export const deleteAnimalById = (recordId: string) => {
 // ])
 
 export const updateAnimalById = (recordId: string, data) => {
-  const returnIsSterilised = () => {
-    if (data.isSterilised === 'Oui') {
+  const returnIsSterilized = () => {
+    if (data.isSterilized === 'Oui') {
       return true
     }
     return false
@@ -71,7 +71,7 @@ export const updateAnimalById = (recordId: string, data) => {
           ...data,
           hostFamilyId: [data.hostFamilyId],
           userId: [data.userId],
-          isSterilised: returnIsSterilised(),
+          isSterilized: returnIsSterilized(),
         },
       },
       {

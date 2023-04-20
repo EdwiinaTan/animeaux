@@ -36,16 +36,16 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       <Body2>
         Nom<TextRed>*</TextRed>
       </Body2>
-      <Field name="nom">
+      <Field name="lastName">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le nom de famille"
-            onChangeText={handleChange('nom')}
-            onChange={handleChange('nom')}
-            onBlur={handleBlur('nom')}
-            value={values.nom}
+            onChangeText={handleChange('lastName')}
+            onChange={handleChange('lastName')}
+            onBlur={handleBlur('lastName')}
+            value={values.lastName}
           />
         )}
       </Field>
@@ -53,16 +53,16 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       <Body2>
         Prénom<TextRed>*</TextRed>
       </Body2>
-      <Field name="prenom">
+      <Field name="firstName">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le prénom"
-            onChangeText={handleChange('prenom')}
-            onChange={handleChange('prenom')}
-            onBlur={handleBlur('prenom')}
-            value={values.prenom}
+            onChangeText={handleChange('firstName')}
+            onChange={handleChange('firstName')}
+            onBlur={handleBlur('firstName')}
+            value={values.firstName}
           />
         )}
       </Field>

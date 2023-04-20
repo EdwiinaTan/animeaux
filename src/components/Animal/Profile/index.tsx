@@ -34,7 +34,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   useEffect(() => {
     if (animalDetails) {
       setRace(animalDetails.race)
-      setColor(animalDetails.couleur)
+      setColor(animalDetails.color)
     } else {
       setRace('')
       setColor('')
@@ -189,9 +189,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Body2>Couleur</Body2>
+      <Body2>color</Body2>
       <View style={{ width: '100%' }}>
-        <Field name="couleur">
+        <Field name="color">
           {({ field }) => (
             <SelectList
               boxStyles={{
@@ -200,20 +200,20 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               }}
               {...field}
               searchPlaceholder="Rechercher"
-              setSelected={handleChange('couleur')}
-              onChange={handleChange('couleur')}
+              setSelected={handleChange('color')}
+              onChange={handleChange('color')}
               data={colorArray}
               defaultOption={{ key: color, value: color }}
-              placeholder="Veuillez choisir la couleur"
+              placeholder="Veuillez choisir la color"
               save="value"
-              value={values.couleur}
+              value={values.color}
             />
           )}
         </Field>
       </View>
       <Spacing size="16" />
       <Body2>Description publique</Body2>
-      <Field name="descriptionPublique">
+      <Field name="publicDescription">
         {({ field }) => (
           <TextInput
             focusable
@@ -222,10 +222,10 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             multiline
             style={styles.input}
             placeholder={'Veuillez mettre une description publique'}
-            onChangeText={handleChange('descriptionPublique')}
-            onChange={handleChange('descriptionPublique')}
-            onBlur={handleBlur('descriptionPublique')}
-            value={values.descriptionPublique}
+            onChangeText={handleChange('publicDescription')}
+            onChange={handleChange('publicDescription')}
+            onBlur={handleBlur('publicDescription')}
+            value={values.publicDescription}
           />
         )}
       </Field>

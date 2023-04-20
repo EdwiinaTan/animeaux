@@ -62,8 +62,8 @@ export const AnimalInformation = (): React.ReactElement => {
     navigation.navigate('animalUserInCharge', { animalDetails: animalDetails })
   }
 
-  const renderIsSterilised = () => {
-    if (animalDetails.sterilise) {
+  const renderIsSterilized = () => {
+    if (animalDetails.isSterilized) {
       return <Body1>Stérilisé</Body1>
     }
     return <Body1>Non stérilisé</Body1>
@@ -109,7 +109,7 @@ export const AnimalInformation = (): React.ReactElement => {
                   <Body1 paddingRight={4}>{animalDetails.name}</Body1>
                   {renderAnimalGender(animalDetails)}
                 </TitleCard>
-                <Body1>Age : {animalAge(animalDetails.dateNaissance)}</Body1>
+                <Body1>Age : {animalAge(animalDetails.birthday)}</Body1>
                 {renderField('Icad', animalDetails.icad)}
                 {renderField('Alias', animalDetails.alias)}
                 {renderField('Race', animalDetails.race)}
@@ -117,7 +117,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </View>
               <View style={{ alignItems: 'flex-end' }}>
                 <ChipComponent value={animalDetails.status} />
-                <Body1>{renderIsSterilised()}</Body1>
+                <Body1>{renderIsSterilized()}</Body1>
               </View>
             </Description>
             <Spacing size="16" />
@@ -131,7 +131,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 <InCharge>
                   <View style={{ paddingRight: 8 }}>
                     <ImageElement
-                      source={{ uri: userData.photo[0].url }}
+                      source={{ uri: userData.picture[0].url }}
                       style={{
                         width: 100,
                         height: 100,
@@ -145,11 +145,11 @@ export const AnimalInformation = (): React.ReactElement => {
                   </View>
                   <View>
                     <Body1>
-                      {userData.prenom} {userData.nom}
+                      {userData.firstName} {userData.lastName}
                     </Body1>
-                    <Body1>Date : {renderDateFormat(animalDetails.dateEnCharge)}</Body1>
-                    <Body1>Lieu : {animalDetails.lieuEnCharge}</Body1>
-                    <Body1>Raison : {animalDetails.raison}</Body1>
+                    <Body1>Date : {renderDateFormat(animalDetails.dateAssigned)}</Body1>
+                    <Body1>Lieu : {animalDetails.placeAssigned}</Body1>
+                    <Body1>Raison : {animalDetails.reason}</Body1>
                   </View>
                 </InCharge>
               </Card>
@@ -161,7 +161,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Title2 paddingLeft={8}>Son histoire</Title2>
               </TitleCard>
               <Spacing size="8" />
-              <Body2>{animalDetails.descriptionPublique}</Body2>
+              <Body2>{animalDetails.publicDescription}</Body2>
             </Card>
             <Spacing size="16" />
             <Card>
@@ -176,13 +176,13 @@ export const AnimalInformation = (): React.ReactElement => {
                 </TitleCard>
                 <Spacing size="8" />
                 <ContainerViewImage>
-                  <ViewImage marginRight color={renderAgreement(animalDetails.ententeChien)}>
+                  <ViewImage marginRight color={renderAgreement(animalDetails.dogAgreement)}>
                     <DogSvg />
                   </ViewImage>
-                  <ViewImage marginRight color={renderAgreement(animalDetails.ententeChat)}>
+                  <ViewImage marginRight color={renderAgreement(animalDetails.catAgreement)}>
                     <CatSvg />
                   </ViewImage>
-                  <ViewImage color={renderAgreement(animalDetails.ententeEnfant)}>
+                  <ViewImage color={renderAgreement(animalDetails.childAgreement)}>
                     <KidSvg />
                   </ViewImage>
                 </ContainerViewImage>
@@ -196,7 +196,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </TitleCard>
               <Spacing size="8" />
               <Body2>
-                {animalDetails.descriptionPrivee ?? 'Aucune description pour le moment'}
+                {animalDetails.privateDescription ?? 'Aucune description pour le moment'}
               </Body2>
             </Card>
             <Spacing size="32" />

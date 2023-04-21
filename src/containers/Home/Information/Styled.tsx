@@ -12,3 +12,12 @@ export const Container = styled.ScrollView`
   padding-left: 16px;
   padding-right: 16px;
 `
+
+export const colors = [
+  theme.colors.primary,
+  theme.colors.red,
+  theme.colors.blue,
+  theme.colors.yellow,
+  theme.colors.secondary,
+  theme.colors.grey2,
+]

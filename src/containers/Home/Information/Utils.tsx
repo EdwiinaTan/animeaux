@@ -1,4 +1,5 @@
 import { theme } from 'src/constant/Theme'
+import { colors } from './Styled'
 
 export const chartConfig = {
   backgroundColor: '#e26a00',
@@ -18,6 +19,13 @@ export const chartConfig = {
   },
 }
 
+export const labelDate = (labelDataSpecies: {}) => {
+  return {
+    label: Object.keys(labelDataSpecies),
+    data: Object.values(labelDataSpecies) as number[],
+  }
+}
+
 export const dataBarChart = (label: string[], data: number[]) => {
   return {
     labels: label,
@@ -31,11 +39,14 @@ export const dataBarChart = (label: string[], data: number[]) => {
   }
 }
 
-export const colors = [
-  theme.colors.primary,
-  theme.colors.red,
-  theme.colors.blue,
-  theme.colors.yellow,
-  theme.colors.secondary,
-  theme.colors.grey2,
-]
+export const dataPieChart = (items: {}) => {
+  return Object.keys(items).map((item, index) => {
+    return {
+      name: item,
+      color: colors[index],
+      legendFontColor: theme.colors.grey2,
+      legendFontSize: 12,
+      item: Object.values(items)[index] as number,
+    }
+  })
+}

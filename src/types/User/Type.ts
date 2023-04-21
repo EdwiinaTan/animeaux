@@ -6,7 +6,7 @@ export interface UserType {
   lastName: string
   email: string
   phone: string
-  photo: Picture[]
+  picture: Picture[]
   animalId: string
   note: string
 }

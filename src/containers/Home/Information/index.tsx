@@ -49,7 +49,13 @@ export const Information = (): React.ReactElement => {
             onPress={(value) => {
               setSelectedIndex(value)
             }}
-            containerStyle={{ marginBottom: 8, marginTop: 0 }}
+            containerStyle={{
+              marginBottom: 8,
+              marginTop: 0,
+              borderRadius: 8,
+              marginLeft: 16,
+              marginRight: 16,
+            }}
           />
           <Container>
             <Card>

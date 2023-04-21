@@ -5,7 +5,7 @@ import { Body1 } from 'src/components/Typo'
 import { chartConfig, dataBarChart, labelDate } from 'src/containers/Home/Information/Utils'
 import { ChartProps } from '../Type'
 
-export const BarChartComponent: React.FC<ChartProps> = ({ title, data }) => {
+export const BarChartComponent: React.FC<ChartProps> = ({ title, data, suffix }) => {
   const { width } = useWindowDimensions()
   const newWidth = width - 64
 
@@ -22,7 +22,7 @@ export const BarChartComponent: React.FC<ChartProps> = ({ title, data }) => {
         fromZero
         chartConfig={chartConfig}
         yAxisLabel=""
-        yAxisSuffix=""
+        yAxisSuffix={suffix}
       />
     </>
   )

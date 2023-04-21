@@ -17,7 +17,7 @@ export interface FormInscriptionType {
   phoneTwo?: string
   email: string
   proSituation: string
-  absenceHours: string
+  absenceHours: number
   remoteWork?: string
   vehicle: FormAgreementEnum
   rescheduleVeterinary: string

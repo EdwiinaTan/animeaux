@@ -58,6 +58,7 @@ export const Information = (): React.ReactElement => {
 
   const labelSpecies = Object.keys(labelDataSpecies)
   const dataSpecies: number[] = Object.values(labelDataSpecies)
+  const max = Math.max(...dataSpecies)
 
   const labelGender = Object.keys(labelDataGender)
   const dataGender: number[] = Object.values(labelDataGender)
@@ -93,7 +94,7 @@ export const Information = (): React.ReactElement => {
       <HeaderComponent title="Information" />
       <Container>
         <Card>
-          <Title2>Sur {animalData.length} animaux</Title2>
+          <Title2>Sur les {animalData.length} animaux</Title2>
           <Spacing size="8" />
           <Body1>Espèce</Body1>
           <Spacing size="4" />
@@ -101,7 +102,7 @@ export const Information = (): React.ReactElement => {
             data={dataBarChart(labelSpecies, dataSpecies)}
             width={newWidth}
             height={220}
-            fromNumber={8} //fix
+            fromNumber={max + 5}
             fromZero={true}
             chartConfig={chartConfig}
             yAxisLabel=""
@@ -151,6 +152,7 @@ export const Information = (): React.ReactElement => {
             yAxisSuffix=""
           />
         </Card>
+        <Spacing size="16" />
       </Container>
     </Layout>
   )

@@ -9,7 +9,7 @@ import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
 import { Card, Container } from './Styled'
-import { chartConfig } from './Utils'
+import { chartConfig, colors, dataBarChart } from './Utils'
 
 export const Information = (): React.ReactElement => {
   const { width } = useWindowDimensions()
@@ -68,82 +68,25 @@ export const Information = (): React.ReactElement => {
   const labelReason = Object.keys(labelDataReason)
   const dataReason: number[] = Object.values(labelDataReason)
 
-  const dataChartStatus = [
-    {
-      name: labelStatus[0],
-      status: dataStatus[0],
-      color: theme.colors.primary,
+  let dataChartStatus = labelStatus.map((status, index) => {
+    return {
+      name: status,
+      color: colors[index],
       legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-    {
-      name: labelStatus[1],
-      status: dataStatus[1],
-      color: theme.colors.red,
-      legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-    {
-      name: labelStatus[2],
-      status: dataStatus[2],
-      color: theme.colors.blue,
-      legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-    {
-      name: labelStatus[3],
-      status: dataStatus[3],
-      color: theme.colors.yellow,
-      legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-    {
-      name: labelStatus[4],
-      status: dataStatus[4],
-      color: theme.colors.secondary,
-      legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-  ]
+      legendFontSize: 12,
+      status: dataStatus[index],
+    }
+  })
 
-  const dataChartSpecies = {
-    labels: labelSpecies,
-    datasets: [
-      {
-        data: dataSpecies,
-        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
-        strokeWidth: 2,
-      },
-    ],
-  }
-
-  const dataChartReason = {
-    labels: labelReason,
-    datasets: [
-      {
-        data: dataReason,
-        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`,
-        strokeWidth: 2,
-      },
-    ],
-  }
-
-  const dataChartGender = [
-    {
-      name: labelGender[0],
-      gender: dataGender[0],
-      color: theme.colors.primary,
+  let dataChartGender = labelGender.map((gender, index) => {
+    return {
+      name: gender,
+      gender: dataGender[index],
+      color: colors[index],
       legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-    {
-      name: labelGender[1],
-      gender: dataGender[1],
-      color: theme.colors.red,
-      legendFontColor: theme.colors.grey2,
-      legendFontSize: 15,
-    },
-  ]
+      legendFontSize: 12,
+    }
+  })
 
   return (
     <Layout>
@@ -155,7 +98,7 @@ export const Information = (): React.ReactElement => {
           <Body1>Espèce</Body1>
           <Spacing size="4" />
           <BarChart
-            data={dataChartSpecies}
+            data={dataBarChart(labelSpecies, dataSpecies)}
             width={newWidth}
             height={220}
             fromNumber={8} //fix
@@ -176,7 +119,7 @@ export const Information = (): React.ReactElement => {
             chartConfig={chartConfig}
             accessor="gender"
             backgroundColor="transparent"
-            paddingLeft="15"
+            paddingLeft="8"
             // absolute
           />
           <Spacing size="16" />
@@ -191,14 +134,14 @@ export const Information = (): React.ReactElement => {
             chartConfig={chartConfig}
             accessor="status"
             backgroundColor="transparent"
-            paddingLeft="15"
+            paddingLeft="8"
           />
           <Divider />
           <Spacing size="8" />
           <Body1>Raison</Body1>
           <Spacing size="4" />
           <BarChart
-            data={dataChartReason}
+            data={dataBarChart(labelReason, dataReason)}
             width={newWidth}
             height={220}
             fromNumber={8} //fix

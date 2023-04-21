@@ -78,7 +78,15 @@ export const AddAnimal = () => {
                   console.log('valueOne', values)
                 }}
               >
-                {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
+                {({
+                  handleChange,
+                  values,
+                  handleSubmit,
+                  handleBlur,
+                  errors,
+                  touched,
+                  setFieldValue,
+                }) => (
                   <AnimalProfile
                     values={values}
                     handleChange={handleChange}
@@ -86,6 +94,7 @@ export const AddAnimal = () => {
                     handleSubmit={handleSubmit}
                     errors={errors}
                     touched={touched}
+                    setFieldValue={setFieldValue}
                   />
                 )}
               </Formik>

@@ -1,4 +1,4 @@
-export interface Pictures {
+export interface Picture {
   filename: string
   height: number
   id: string

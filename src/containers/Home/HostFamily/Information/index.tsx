@@ -35,14 +35,17 @@ export const HostFamilyInformation = (): React.ReactElement => {
     bottomSheetModalRef.current?.present()
   }
 
-  const renderField = (image: React.ReactElement, value: string) => {
+  const renderField = (image: React.ReactElement, value: string, moreValue?: string) => {
     if (value) {
       return (
         <>
           <Spacing size="16" />
           <Fields>
             {image}
-            <Body1 paddingLeft={8}>{value}</Body1>
+            <Body1 paddingLeft={8}>
+              {moreValue}
+              {value}
+            </Body1>
           </Fields>
         </>
       )
@@ -53,7 +56,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={uppercaseWord(startsWithVowel(hostFamilyDetails.firstname))}
+        title={uppercaseWord(startsWithVowel(hostFamilyDetails.firstName))}
         toggleOverlay={handlePresentModal}
       />
       <Container>
@@ -69,7 +72,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
             PlaceholderContent={<ActivityIndicator />}
           />
           <Body1>
-            {hostFamilyDetails.firstname} {hostFamilyDetails.lastname}
+            {hostFamilyDetails.firstName} {hostFamilyDetails.lastName}
           </Body1>
         </ContainerImage>
         <ContainerDescription>
@@ -78,7 +81,11 @@ export const HostFamilyInformation = (): React.ReactElement => {
             {renderField(<PhoneSvg />, hostFamilyDetails.phone)}
             {renderField(<EmailSvg />, hostFamilyDetails.email)}
             {renderField(<AddressSvg />, hostFamilyDetails.address)}
-            {renderField(<CalendarSvg />, renderDateFormat(hostFamilyDetails.updatedAt))}
+            {renderField(
+              <CalendarSvg />,
+              renderDateFormat(hostFamilyDetails.updatedAt),
+              'Inscrit le '
+            )}
             {renderField(<EmailSvg />, hostFamilyDetails.onBreak)}
             {renderField(<WarningSvg />, hostFamilyDetails.criteria)}
             {renderField(<EmailSvg />, hostFamilyDetails.description)}

@@ -23,8 +23,8 @@ export const AddHostFamily = () => {
   }
 
   const initialValues = {
-    lastname: '',
-    firstname: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     postalCode: '',
@@ -52,7 +52,7 @@ export const AddHostFamily = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             <Formik
@@ -67,16 +67,16 @@ export const AddHostFamily = () => {
                   <Body2>
                     Nom<TextRed>*</TextRed>
                   </Body2>
-                  <Field name="lastname">
+                  <Field name="lastName">
                     {({ field }) => (
                       <TextInput
                         {...field}
                         style={styles.input}
                         placeholder="Veuillez mettre le nom de famille"
-                        onChangeText={handleChange('lastname')}
-                        onChange={handleChange('lastname')}
-                        onBlur={handleBlur('lastname')}
-                        value={values.lastname}
+                        onChangeText={handleChange('lastName')}
+                        onChange={handleChange('lastName')}
+                        onBlur={handleBlur('lastName')}
+                        value={values.lastName}
                       />
                     )}
                   </Field>
@@ -84,16 +84,16 @@ export const AddHostFamily = () => {
                   <Body2>
                     Prénom<TextRed>*</TextRed>
                   </Body2>
-                  <Field name="firstname">
+                  <Field name="firstName">
                     {({ field }) => (
                       <TextInput
                         {...field}
                         style={styles.input}
                         placeholder="Veuillez mettre le prénom"
-                        onChangeText={handleChange('firstname')}
-                        onChange={handleChange('firstname')}
-                        onBlur={handleBlur('firstname')}
-                        value={values.firstname}
+                        onChangeText={handleChange('firstName')}
+                        onChange={handleChange('firstName')}
+                        onBlur={handleBlur('firstName')}
+                        value={values.firstName}
                       />
                     )}
                   </Field>

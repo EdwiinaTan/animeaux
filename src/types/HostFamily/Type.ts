@@ -1,15 +1,15 @@
-import { Pictures } from '..'
+import { Picture } from '..'
 
 export interface HostFamilyType {
   id: string
-  lastname: string
-  firstname: string
+  firstName: string
+  lastName: string
   email: string
   phone: string
   postalCode: string
   city: string
   address?: string
-  picture: Pictures[]
+  picture: Picture[]
   updatedAt: string
   createdAt: string
   animalId: string

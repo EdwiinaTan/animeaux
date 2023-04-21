@@ -1,5 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+// import { useQueryClient } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Animal/Profile'
@@ -20,6 +21,7 @@ export const AnimalUpdate = () => {
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   // const nameRef = useRef(animalDetails.name)
+  // const queryClient = useQueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -30,15 +32,24 @@ export const AnimalUpdate = () => {
     gender: animalDetails.gender,
     name: animalDetails.name,
     alias: animalDetails.alias,
-    icadNumber: animalDetails.icadNumber,
+    birthday: animalDetails.birthday,
+    icad: animalDetails.icad,
     race: animalDetails.race,
     color: animalDetails.color,
     publicDescription: animalDetails.publicDescription,
   }
 
+  // const updateAnimalMutation = useMutation({
+  //   mutationFn: updateAnimalByIdTest,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: ['animalsUpdate'] })
+  //   },
+  // })
+
   const updateAnimal = (values: AnimalRequest) => {
     updateAnimalByIdTest(animalDetails.id, values)
-    navigation.goBack()
+    // updateAnimalMutation.mutate({ ...values })
+    navigation.navigate('animalScreen')
   }
 
   return (
@@ -47,7 +58,7 @@ export const AnimalUpdate = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
       />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             <Formik
@@ -57,7 +68,15 @@ export const AnimalUpdate = () => {
                 updateAnimal(values)
               }}
             >
-              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
                 <AnimalProfile
                   values={values}
                   handleChange={handleChange}
@@ -66,6 +85,7 @@ export const AnimalUpdate = () => {
                   animalDetails={animalDetails}
                   errors={errors}
                   touched={touched}
+                  setFieldValue={setFieldValue}
                 />
               )}
             </Formik>

@@ -46,7 +46,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
           )}
           <View style={{ flexDirection: 'column' }}>
             <Body1>
-              {hostFamily.firstname} {hostFamily.lastname}
+              {hostFamily.firstName} {hostFamily.lastName}
             </Body1>
             <Body1>{hostFamily.phone}</Body1>
             <Body1>{hostFamily.email}</Body1>

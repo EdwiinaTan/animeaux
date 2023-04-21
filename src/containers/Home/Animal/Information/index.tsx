@@ -24,7 +24,6 @@ import { useGetUserById } from 'src/hooks/User'
 import { AnimalAgreement } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
-import { renderReason } from 'src/utils/Animal'
 import { animalAge, renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { BottomSheetAnimal } from '../BottomSheet'
 import { CarouselAnimal } from '../Carousel'
@@ -63,8 +62,8 @@ export const AnimalInformation = (): React.ReactElement => {
     navigation.navigate('animalUserInCharge', { animalDetails: animalDetails })
   }
 
-  const renderIsSterilised = () => {
-    if (animalDetails.isSterilised) {
+  const renderIsSterilized = () => {
+    if (animalDetails.isSterilized) {
       return <Body1>Stérilisé</Body1>
     }
     return <Body1>Non stérilisé</Body1>
@@ -111,14 +110,15 @@ export const AnimalInformation = (): React.ReactElement => {
                   {renderAnimalGender(animalDetails)}
                 </TitleCard>
                 <Body1>Age : {animalAge(animalDetails.birthday)}</Body1>
-                {renderField('Icad', animalDetails.icadNumber)}
+                {renderField('Icad', animalDetails.icad)}
                 {renderField('Alias', animalDetails.alias)}
                 {renderField('Race', animalDetails.race)}
                 {renderHostFamily(statusHostFamily, hostFamilyData)}
               </View>
               <View style={{ alignItems: 'flex-end' }}>
                 <ChipComponent value={animalDetails.status} />
-                <Body1>{renderIsSterilised()}</Body1>
+                <Spacing size="4" />
+                <Body1>{renderIsSterilized()}</Body1>
               </View>
             </Description>
             <Spacing size="16" />
@@ -146,11 +146,11 @@ export const AnimalInformation = (): React.ReactElement => {
                   </View>
                   <View>
                     <Body1>
-                      {userData.firstname} {userData.lastname}
+                      {userData.firstName} {userData.lastName}
                     </Body1>
-                    <Body1>Date : {renderDateFormat(animalDetails.dateInCharge)}</Body1>
-                    <Body1>Lieu : {animalDetails.placeCare}</Body1>
-                    <Body1>Raison : {uppercaseWord(renderReason(animalDetails.reason))}</Body1>
+                    <Body1>Date : {renderDateFormat(animalDetails.dateAssigned)}</Body1>
+                    <Body1>Lieu : {animalDetails.placeAssigned}</Body1>
+                    <Body1>Raison : {animalDetails.reason}</Body1>
                   </View>
                 </InCharge>
               </Card>

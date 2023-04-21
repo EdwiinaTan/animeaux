@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
-import { useEffect, useRef, useState } from 'react'
-import { FlatList, ListRenderItem, View } from 'react-native'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
 import 'react-native-gesture-handler'
+import { getAnimals } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -12,7 +13,7 @@ import { useGetAnimals } from 'src/hooks/Animal'
 import { AnimalTypeEnum } from 'src/types/Animal/enum'
 import { AnimalClient } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
-import { uppercaseWord } from 'src/utils/Functions'
+import { uppercaseWord, waitTimeOut } from 'src/utils/Functions'
 import CardContainer from './Card'
 import { FilterAnimal } from './Filter'
 
@@ -23,6 +24,7 @@ export const Animal = (): React.ReactElement => {
   const navigation = useNavigation()
   const { statusAnimal, animalData } = useGetAnimals() //useEffect
   const [filtered, setFiltered] = useState<AnimalClient[]>(animalData)
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     refacto()
@@ -33,6 +35,16 @@ export const Animal = (): React.ReactElement => {
       listRef.current?.scrollToOffset({ offset: 0, animated: false })
     })
   }, [navigation])
+
+  const handleRefresh = useCallback(() => {
+    setIsRefreshing(true)
+    getAnimals().then((value: AnimalClient[]) =>
+      waitTimeOut(1000).then(() => {
+        setFiltered(value)
+        setIsRefreshing(false)
+      })
+    )
+  }, [])
 
   const refacto = (): void => {
     // ça marche mais à refacto lol
@@ -127,6 +139,9 @@ export const Animal = (): React.ReactElement => {
               maxToRenderPerBatch={5}
               keyExtractor={(item) => item.id}
               renderItem={renderAnimal}
+              refreshControl={
+                <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+              }
               ListEmptyComponent={
                 search ? (
                   <Body1 textAlign="center">{`Aucun ${renderSearchNotFound()} trouvé`}</Body1>

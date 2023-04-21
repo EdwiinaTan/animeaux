@@ -1,4 +1,4 @@
-import { Pictures } from '..'
+import { Picture } from './../index'
 import {
   AnimalAgreement,
   AnimalColorEnum,
@@ -16,22 +16,22 @@ export interface AnimalType {
   gender: AnimalGenderEnum
   hostFamilyId?: string
   alias?: string
-  icadNumber: string
+  icad: string
   birthday?: string
   race: AnimalRaceEnum
   color: AnimalColorEnum
   publicDescription?: string
   status: AnimalStatusEnum
-  placeCare: string
+  placeAssigned: string
   reason: AnimalReasonEnum
   childAgreement: AnimalAgreement
   catAgreement: AnimalAgreement
   dogAgreement: AnimalAgreement
-  isSterilised?: boolean
-  pictures: Pictures[]
+  isSterilized?: boolean
+  pictures: Picture[]
   userId: string
   privateDescription?: string
-  dateInCharge: string
+  dateAssigned: string
 }
 
 export interface AnimalClient {

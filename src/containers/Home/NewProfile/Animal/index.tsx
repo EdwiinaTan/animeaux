@@ -6,6 +6,7 @@ import StepIndicator from 'react-native-step-indicator'
 import { AnimalProfile } from 'src/components/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Animal/Profile/Utils'
 import { AnimalSituation } from 'src/components/Animal/Situation'
+import { validationAnimalSituation } from 'src/components/Animal/Situation/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -31,11 +32,12 @@ export const AddAnimal = () => {
 
   const initialValuesStepOne = {
     species: '',
-    gender: '',
+    genre: '',
     name: '',
     alias: '',
-    icadNumber: '',
+    icad: '',
     race: '',
+    birthday: '',
     color: '',
     publicDescription: '',
   }
@@ -43,14 +45,14 @@ export const AddAnimal = () => {
   const initialValuesStepTwo = {
     hostFamilyId: '',
     status: '',
-    placeCare: '',
+    placeAssigned: '',
     reason: '',
     childAgreement: '',
     catAgreement: '',
     dogAgreement: '',
     userId: '',
     privateDescription: '',
-    isSterilised: '',
+    isSterilized: '',
   }
 
   return (
@@ -65,7 +67,7 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             {currentPosition === 0 && (
@@ -76,7 +78,15 @@ export const AddAnimal = () => {
                   console.log('valueOne', values)
                 }}
               >
-                {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
+                {({
+                  handleChange,
+                  values,
+                  handleSubmit,
+                  handleBlur,
+                  errors,
+                  touched,
+                  setFieldValue,
+                }) => (
                   <AnimalProfile
                     values={values}
                     handleChange={handleChange}
@@ -84,6 +94,7 @@ export const AddAnimal = () => {
                     handleSubmit={handleSubmit}
                     errors={errors}
                     touched={touched}
+                    setFieldValue={setFieldValue}
                   />
                 )}
               </Formik>
@@ -91,6 +102,7 @@ export const AddAnimal = () => {
             {currentPosition === 1 && (
               <Formik
                 initialValues={initialValuesStepTwo}
+                validationSchema={validationAnimalSituation}
                 onSubmit={(values) => {
                   console.log('valueTwo', values)
                 }}

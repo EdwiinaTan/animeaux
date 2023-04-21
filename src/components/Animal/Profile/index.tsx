@@ -1,15 +1,25 @@
+import { CalendarSvg } from 'assets/svg/calendar'
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
-import { TextInput, View } from 'react-native'
+import { Modal, TextInput, View } from 'react-native'
+import { Calendar } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { colorArray, genderArray, raceArray, specieArray } from 'src/utils/Animal'
+import { ContainerCalendar } from 'src/containers/Home/Animal/Update/Profile/Styled'
+import {
+  AnimalColorEnum,
+  AnimalGenderEnum,
+  AnimalRaceEnum,
+  AnimalTypeEnum,
+} from 'src/types/Animal/enum'
 import { ContainerCheckbox, styles, TextRed } from '../Styled'
 import { AnimalFormProps } from '../Type'
+import { style } from './Styled'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({
   values,
@@ -19,9 +29,11 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
   animalDetails,
   errors,
   touched,
+  setFieldValue,
 }) => {
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
+  const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(() => {
     if (animalDetails) {
@@ -33,6 +45,31 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     }
   }, [])
 
+  const raceArray = Object.keys(AnimalRaceEnum).map((key) => ({
+    key: key,
+    value: AnimalRaceEnum[key],
+  }))
+
+  const colorArray = Object.keys(AnimalColorEnum).map((key) => ({
+    key: key,
+    value: AnimalColorEnum[key],
+  }))
+
+  const speciesArray = Object.keys(AnimalTypeEnum).map((key) => ({
+    label: AnimalTypeEnum[key],
+    value: AnimalTypeEnum[key],
+  }))
+
+  const genderArray = Object.keys(AnimalGenderEnum).map((key) => ({
+    label: AnimalGenderEnum[key],
+    value: AnimalGenderEnum[key],
+  }))
+
+  const handleDateSelect = (day) => {
+    setFieldValue('birthday', day.dateString)
+    setModalVisible(false)
+  }
+
   return (
     <>
       <ContainerCheckbox>
@@ -40,7 +77,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           Espèce<TextRed>*</TextRed>
         </Title3>
         <Spacing size="8" />
-        {specieArray.map((specie, key) => (
+        {speciesArray.map((specie, key) => (
           <CheckBoxComponent
             key={`species_${key}`}
             animal={specie}
@@ -85,6 +122,46 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       </Field>
       {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
       <Spacing size="16" />
+      <View>
+        <Body2>
+          Date de naissance<TextRed>*</TextRed>
+        </Body2>
+        <ContainerCalendar>
+          <Field name="birthday">
+            {({ field }) => (
+              <>
+                <TextInput
+                  {...field}
+                  style={styles.inputDate}
+                  editable={false}
+                  placeholder="Veuillez mettre la date de naissance de l’animal"
+                  value={values.birthday}
+                />
+                <Modal visible={modalVisible} transparent={true} animationType="slide">
+                  <View style={style.centeredView}>
+                    <View style={style.modalView}>
+                      <Calendar
+                        onDayPress={handleDateSelect}
+                        hideExtraDays
+                        markedDates={{
+                          [values.birthday]: {
+                            selected: true,
+                            selectedColor: theme.colors.blue,
+                          },
+                        }}
+                      />
+                    </View>
+                  </View>
+                </Modal>
+              </>
+            )}
+          </Field>
+          <TouchableOpacity onPress={() => setModalVisible(true)}>
+            <CalendarSvg />
+          </TouchableOpacity>
+        </ContainerCalendar>
+      </View>
+      <Spacing size="16" />
       <Body2>Alias</Body2>
       <Field name="alias">
         {({ field }) => (
@@ -104,16 +181,16 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       {errors.alias && touched.alias && <Body3 color={theme.colors.red}>{errors.alias}</Body3>}
       <Spacing size="16" />
       <Body2>Icad</Body2>
-      <Field name="icadNumber">
+      <Field name="icad">
         {({ field }) => (
           <TextInput
             {...field}
             style={styles.input}
             placeholder="Veuillez mettre le numéro icad"
-            onChangeText={handleChange('icadNumber')}
-            onChange={handleChange('icadNumber')}
-            onBlur={handleBlur('icadNumber')}
-            value={values.icadNumber}
+            onChangeText={handleChange('icad')}
+            onChange={handleChange('icad')}
+            onBlur={handleBlur('icad')}
+            value={values.icad}
           />
         )}
       </Field>
@@ -137,7 +214,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               data={raceArray}
               placeholder="Veuillez choisir la race"
               defaultOption={{ key: race, value: race }}
-              save="key"
+              save="value"
               value={values.race}
             />
           )}
@@ -159,8 +236,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
               onChange={handleChange('color')}
               data={colorArray}
               defaultOption={{ key: color, value: color }}
-              placeholder="Veuillez choisir la couleur"
-              save="key"
+              placeholder="Veuillez choisir la color"
+              save="value"
               value={values.color}
             />
           )}

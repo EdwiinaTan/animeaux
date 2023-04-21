@@ -9,14 +9,13 @@ import { Body2, Title2, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { useGetUsers } from 'src/hooks/User'
-import { FetchStatus } from 'src/types/Status'
 import {
-  agreementArray,
-  isSterilisedArray,
-  placeCareArray,
-  reasonArray,
-  statusArray,
-} from 'src/utils/Animal'
+  AnimalAgreement,
+  AnimalPlaceCareEnum,
+  AnimalReasonEnum,
+  AnimalStatusEnum,
+} from 'src/types/Animal/enum'
+import { FetchStatus } from 'src/types/Status'
 import { ContainerCheckbox, styles, TextRed } from '../Styled'
 
 export const AnimalSituation: React.FC<AddAnimalProps> = ({
@@ -61,7 +60,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
       hostFamiliesData.map((hostFamily) => {
         hostFamilyArray.push({
           key: hostFamily.fields.id,
-          value: `${hostFamily.fields.firstname} ${hostFamily.fields.lastname}`,
+          value: `${hostFamily.fields.firstName} ${hostFamily.fields.lastName}`,
         })
       })
       return hostFamilyArray
@@ -73,12 +72,37 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
       usersData.map(({ fields }) => {
         userArray.push({
           key: fields.id,
-          value: `${fields.firstname} ${fields.lastname}`,
+          value: `${fields.firstName} ${fields.lastName}`,
         })
       })
       return userArray
     }
   }
+
+  const statusArray = Object.keys(AnimalStatusEnum).map((key) => ({
+    label: AnimalStatusEnum[key],
+    value: AnimalStatusEnum[key],
+  }))
+
+  const reasonArray = Object.keys(AnimalReasonEnum).map((key) => ({
+    label: AnimalReasonEnum[key],
+    value: AnimalReasonEnum[key],
+  }))
+
+  const agreementArray = Object.keys(AnimalAgreement).map((key) => ({
+    label: AnimalAgreement[key],
+    value: AnimalAgreement[key],
+  }))
+
+  const placeCareArray = Object.keys(AnimalPlaceCareEnum).map((key) => ({
+    key: key,
+    value: AnimalPlaceCareEnum[key],
+  }))
+
+  const isSterilizedArray = [
+    { label: AnimalAgreement.YES, value: AnimalAgreement.YES },
+    { label: AnimalAgreement.NO, value: AnimalAgreement.NO },
+  ]
 
   return (
     <ContainerCheckbox>
@@ -146,12 +170,12 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           )}
         </Field>
       </View>
-      <Spacing size="8" />
+      <Spacing size="16" />
       <Body2>
         Lieu pris en charge<TextRed>*</TextRed>
       </Body2>
       <View style={{ width: '100%' }}>
-        <Field name="placeCare">
+        <Field name="placeAssigned">
           {({ field }) => (
             <SelectList
               inputStyles={{ padding: 0 }}
@@ -161,22 +185,22 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               }}
               {...field}
               searchPlaceholder="Rechercher"
-              setSelected={handleChange('placeCare')}
-              onChange={handleChange('placeCare')}
+              setSelected={handleChange('placeAssigned')}
+              onChange={handleChange('placeAssigned')}
               data={placeCareArray}
               defaultOption={optionPlace}
               placeholder="Veuillez choisir l’endroit"
               save="value"
-              value={values.placeCare}
+              value={values.placeAssigned}
             />
           )}
         </Field>
       </View>
-      <Spacing size="8" />
+      <Spacing size="16" />
       <Body2>
         Raison<TextRed>*</TextRed>
       </Body2>
-      <Spacing size="8" />
+      <Spacing size="4" />
       {reasonArray.map((reason, key) => (
         <CheckBoxComponent
           key={`reason_${key}`}
@@ -185,15 +209,15 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           handleChange={() => handleChange('reason')(reason.value)}
         />
       ))}
-      <Spacing size="8" />
+      <Spacing size="16" />
       <Body2>L’animal est stérilisé ?</Body2>
-      <Spacing size="8" />
-      {isSterilisedArray.map((isSterilised, key) => (
+      <Spacing size="4" />
+      {isSterilizedArray.map((isSterilized, key) => (
         <CheckBoxComponent
-          key={`isSterilised_${key}`}
-          animal={isSterilised}
-          values={values.isSterilised}
-          handleChange={() => handleChange('isSterilised')(isSterilised.value)}
+          key={`isSterilized_${key}`}
+          animal={isSterilized}
+          values={values.isSterilized}
+          handleChange={() => handleChange('isSterilized')(isSterilized.value)}
         />
       ))}
       <Spacing size="8" />
@@ -229,7 +253,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           handleChange={() => handleChange('childAgreement')(childAgreement.value)}
         />
       ))}
-      <Spacing size="8" />
+      <Spacing size="16" />
       <Body2>Description privée</Body2>
       <Field name="privateDescription">
         {({ field }) => (
@@ -247,6 +271,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           />
         )}
       </Field>
+      <Spacing size="16" />
       <Button title="Submit" onPress={() => handleSubmit()} />
     </ContainerCheckbox>
   )

@@ -8,10 +8,12 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
+import { AnimalAgreement } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
 import { Card, Container, Keyboard } from './Styled'
+import { AnimalRequest } from './Type'
 
 export const UpdateAnimalSituation: React.FC = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -29,21 +31,21 @@ export const UpdateAnimalSituation: React.FC = () => {
   const initialValues = {
     hostFamilyId: animalDetails.hostFamilyId,
     status: animalDetails.status,
-    placeCare: animalDetails.placeCare,
+    placeAssigned: animalDetails.placeAssigned,
     reason: animalDetails.reason,
     childAgreement: animalDetails.childAgreement,
     catAgreement: animalDetails.catAgreement,
     dogAgreement: animalDetails.dogAgreement,
     userId: animalDetails.userId,
     privateDescription: animalDetails.privateDescription,
-    isSterilised: animalDetails.isSterilised ? 'Oui' : 'Non',
+    isSterilized: animalDetails.isSterilized ? AnimalAgreement.YES : AnimalAgreement.NO,
   }
 
   const renderDefaultOptionHostFamily = () => {
     if (statusHostFamily === FetchStatus.SUCCESS) {
       return {
         key: hostFamilyData.id,
-        value: `${hostFamilyData.firstname} ${hostFamilyData.lastname}`,
+        value: `${hostFamilyData.firstName} ${hostFamilyData.lastName}`,
       }
     }
   }
@@ -52,18 +54,18 @@ export const UpdateAnimalSituation: React.FC = () => {
     if (statusUser === FetchStatus.SUCCESS) {
       return {
         key: userData.id,
-        value: `${userData.firstname} ${userData.lastname}`,
+        value: `${userData.firstName} ${userData.lastName}`,
       }
     }
   }
   const renderDefaultOptionPlace = () => {
     return {
-      key: animalDetails.placeCare,
-      value: animalDetails.placeCare,
+      key: animalDetails.placeAssigned,
+      value: animalDetails.placeAssigned,
     }
   }
 
-  const updateAnimal = (values) => {
+  const updateAnimal = (values: AnimalRequest) => {
     updateAnimalById(animalDetails.id, values)
     navigation.goBack()
   }
@@ -74,7 +76,7 @@ export const UpdateAnimalSituation: React.FC = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier la situation de ${animalDetails.name}`}
       />
-      <Keyboard behavior="position" enabled>
+      <Keyboard behavior="padding" enabled>
         <Container>
           <Card>
             <Formik

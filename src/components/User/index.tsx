@@ -45,7 +45,7 @@ export const UserInCharge = () => {
   return (
     <Layout>
       <HeaderComponent
-        title={uppercaseWord(startsWithVowel(userData.firstname))}
+        title={uppercaseWord(startsWithVowel(userData.firstName))}
         onClickGoBack={onClickGoBack}
       />
       <Container>
@@ -70,7 +70,7 @@ export const UserInCharge = () => {
               <Description>
                 <Spacing size="64" />
                 <Body1>
-                  {userData.firstname} {userData.lastname}
+                  {userData.firstName} {userData.lastName}
                 </Body1>
                 {renderField(<PhoneSvg />, userData.phone)}
                 {renderField(<EmailSvg />, userData.email)}

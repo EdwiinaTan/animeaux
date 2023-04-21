@@ -59,6 +59,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     label: AnimalTypeEnum[key],
     value: AnimalTypeEnum[key],
   }))
+  const firstProp = Object.keys(speciesArray)[0]
+  delete speciesArray[firstProp]
 
   const genderArray = Object.keys(AnimalGenderEnum).map((key) => ({
     label: AnimalGenderEnum[key],
@@ -85,6 +87,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             handleChange={() => handleChange('species')(specie.value)}
           />
         ))}
+        {errors.species && touched.species && (
+          <Body3 color={theme.colors.red}>{errors.species}</Body3>
+        )}
         <Spacing size="24" />
         <Title3>
           Genre<TextRed>*</TextRed>
@@ -98,6 +103,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             handleChange={() => handleChange('gender')(gender.value)}
           />
         ))}
+        {errors.gender && touched.gender && <Body3 color={theme.colors.red}>{errors.gender}</Body3>}
       </ContainerCheckbox>
       <Spacing size="24" />
       <Divider />
@@ -191,9 +197,11 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             onChange={handleChange('icad')}
             onBlur={handleBlur('icad')}
             value={values.icad}
+            keyboardType="numeric"
           />
         )}
       </Field>
+      {errors.icad && touched.icad && <Body3 color={theme.colors.red}>{errors.icad}</Body3>}
       <Spacing size="16" />
       <Body2>
         Race<TextRed>*</TextRed>
@@ -220,6 +228,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           )}
         </Field>
       </View>
+      {errors.race && touched.race && <Body3 color={theme.colors.red}>{errors.race}</Body3>}
       <Spacing size="16" />
       <Body2>Couleur</Body2>
       <View style={{ width: '100%' }}>
@@ -262,7 +271,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         )}
       </Field>
       <Spacing size="24" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} />
     </>
   )
 }

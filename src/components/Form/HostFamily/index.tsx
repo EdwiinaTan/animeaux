@@ -1,12 +1,13 @@
 import { Field } from 'formik'
-import { Button, TextInput, View } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
+import { Button } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
+import { Spacing } from '../../Layout/Spacing'
+import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
-import { Spacing } from '../Layout/Spacing'
-import { Body2 } from '../Typo'
 import { TextRed } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
@@ -15,6 +16,8 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
   handleChange,
   handleBlur,
   handleSubmit,
+  errors,
+  touched,
 }) => {
   const { statusAnimal, animalData } = useGetAnimals()
 
@@ -49,6 +52,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.lastName && touched.lastName && (
+        <Body3 color={theme.colors.red}>{errors.lastName}</Body3>
+      )}
       <Spacing size="8" />
       <Body2>
         Prénom<TextRed>*</TextRed>
@@ -66,6 +72,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.firstName && touched.firstName && (
+        <Body3 color={theme.colors.red}>{errors.firstName}</Body3>
+      )}
       <Spacing size="8" />
       <Body2>
         Adresse mail<TextRed>*</TextRed>
@@ -84,6 +93,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.email && touched.email && <Body3 color={theme.colors.red}>{errors.email}</Body3>}
       <Spacing size="8" />
       <Body2>
         Téléphone<TextRed>*</TextRed>
@@ -102,6 +112,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.phone && touched.phone && <Body3 color={theme.colors.red}>{errors.phone}</Body3>}
       <Spacing size="8" />
       <Body2>
         Code postal<TextRed>*</TextRed>
@@ -120,6 +131,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.postalCode && touched.postalCode && (
+        <Body3 color={theme.colors.red}>{errors.postalCode}</Body3>
+      )}
       <Spacing size="8" />
       <Body2>
         Ville<TextRed>*</TextRed>
@@ -137,6 +151,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.city && touched.city && <Body3 color={theme.colors.red}>{errors.city}</Body3>}
       <Spacing size="8" />
       <Body2>
         Adresse<TextRed>*</TextRed>
@@ -154,6 +169,9 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           />
         )}
       </Field>
+      {errors.address && touched.address && (
+        <Body3 color={theme.colors.red}>{errors.address}</Body3>
+      )}
       <Spacing size="8" />
       <Body2>Critère</Body2>
       <Field name="criteria">
@@ -227,7 +245,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} />
     </View>
   )
 }

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
-import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
+import { CheckBoxComponent } from 'src/components/Form/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body2, Title2, Title3 } from 'src/components/Typo'
+import { Body2, Body3, Title2, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { useGetUsers } from 'src/hooks/User'
@@ -23,6 +23,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   handleChange,
   handleBlur,
   handleSubmit,
+  errors,
+  touched,
   renderDefaultOptionHostFamily,
   renderDefaultOptionUser,
   renderDefaultOptionPlace,
@@ -34,7 +36,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   const [optionPlace, setOptionPlace] = useState({})
 
   useEffect(() => {
-    if (renderDefaultOptionHostFamily) {
+    if (renderDefaultOptionHostFamily()) {
       setOptionHostFamily({
         key: renderDefaultOptionHostFamily().key,
         value: renderDefaultOptionHostFamily().value,
@@ -118,7 +120,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           handleChange={() => handleChange('status')(status.value)}
         />
       ))}
-      <Spacing size="8" />
+      {errors.status && touched.status && <Body3 color={theme.colors.red}>{errors.status}</Body3>}
+      <Spacing size="16" />
       <Title2>Prise en charge</Title2>
       <Spacing size="8" />
       <Body2>Famille d'accueil</Body2>
@@ -169,6 +172,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             />
           )}
         </Field>
+        {errors.userId && touched.userId && <Body3 color={theme.colors.red}>{errors.userId}</Body3>}
       </View>
       <Spacing size="16" />
       <Body2>
@@ -195,6 +199,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             />
           )}
         </Field>
+        {errors.placeAssigned && touched.placeAssigned && (
+          <Body3 color={theme.colors.red}>{errors.placeAssigned}</Body3>
+        )}
       </View>
       <Spacing size="16" />
       <Body2>
@@ -272,7 +279,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         )}
       </Field>
       <Spacing size="16" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} />
     </ContainerCheckbox>
   )
 }

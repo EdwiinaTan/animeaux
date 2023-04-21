@@ -1,5 +1,4 @@
 import { theme } from 'src/constant/Theme'
-import { colors } from './Styled'
 
 export const chartConfig = {
   backgroundColor: '#e26a00',
@@ -39,6 +38,15 @@ export const dataBarChart = (label: string[], data: number[]) => {
   }
 }
 
+export const colors = [
+  theme.colors.primary,
+  theme.colors.red,
+  theme.colors.blue,
+  theme.colors.yellow,
+  theme.colors.secondary,
+  theme.colors.grey2,
+]
+
 export const dataPieChart = (items: {}) => {
   return Object.keys(items).map((item, index) => {
     return {
@@ -49,18 +57,4 @@ export const dataPieChart = (items: {}) => {
       item: Object.values(items)[index] as number,
     }
   })
-}
-
-export const getLabelDataReduce = (formData: any[], field: string) => {
-  if (formData) {
-    return formData.reduce((accumulator, form) => {
-      const item = form.fields[field]
-      if (!accumulator[item]) {
-        accumulator[item] = 1
-      } else {
-        accumulator[item]++
-      }
-      return accumulator
-    }, {})
-  }
 }

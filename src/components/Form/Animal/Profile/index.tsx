@@ -6,7 +6,7 @@ import { Calendar } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
+import { CheckBoxComponent } from 'src/components/Form/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
@@ -59,6 +59,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     label: AnimalTypeEnum[key],
     value: AnimalTypeEnum[key],
   }))
+  const firstProp = Object.keys(speciesArray)[0]
+  delete speciesArray[firstProp]
 
   const genderArray = Object.keys(AnimalGenderEnum).map((key) => ({
     label: AnimalGenderEnum[key],
@@ -85,6 +87,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             handleChange={() => handleChange('species')(specie.value)}
           />
         ))}
+        {errors.species && touched.species && (
+          <Body3 color={theme.colors.red}>{errors.species}</Body3>
+        )}
         <Spacing size="24" />
         <Title3>
           Genre<TextRed>*</TextRed>
@@ -98,6 +103,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             handleChange={() => handleChange('gender')(gender.value)}
           />
         ))}
+        {errors.gender && touched.gender && <Body3 color={theme.colors.red}>{errors.gender}</Body3>}
       </ContainerCheckbox>
       <Spacing size="24" />
       <Divider />
@@ -178,7 +184,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      {errors.alias && touched.alias && <Body3 color={theme.colors.red}>{errors.alias}</Body3>}
+      {errors.alias && touched.alias && <Body3 color={theme.colors.orange}>{errors.alias}</Body3>}
       <Spacing size="16" />
       <Body2>Icad</Body2>
       <Field name="icad">
@@ -191,9 +197,11 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             onChange={handleChange('icad')}
             onBlur={handleBlur('icad')}
             value={values.icad}
+            keyboardType="numeric"
           />
         )}
       </Field>
+      {errors.icad && touched.icad && <Body3 color={theme.colors.orange}>{errors.icad}</Body3>}
       <Spacing size="16" />
       <Body2>
         Race<TextRed>*</TextRed>
@@ -220,6 +228,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           )}
         </Field>
       </View>
+      {errors.race && touched.race && <Body3 color={theme.colors.red}>{errors.race}</Body3>}
       <Spacing size="16" />
       <Body2>Couleur</Body2>
       <View style={{ width: '100%' }}>
@@ -261,8 +270,11 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
+      {errors.gender && touched.gender && (
+        <Body3 color={theme.colors.orange}>{errors.gender}</Body3>
+      )}
       <Spacing size="24" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} />
     </>
   )
 }

@@ -44,7 +44,7 @@ export const Information = (): React.ReactElement => {
       ) : (
         <>
           <ButtonGroup
-            buttons={['Statistique', 'Formulaire FA']}
+            buttons={['Statistiques', 'Formulaires FA']}
             selectedIndex={selectedIndex}
             onPress={(value) => {
               setSelectedIndex(value)

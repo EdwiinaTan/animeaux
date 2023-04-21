@@ -15,4 +15,6 @@ interface AddAnimalProps {
     key: string
     value: string
   }
+  errors?: any
+  touched?: any
 }

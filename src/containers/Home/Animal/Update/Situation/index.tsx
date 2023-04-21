@@ -84,12 +84,14 @@ export const UpdateAnimalSituation: React.FC = () => {
               // validationSchema={validationSchema}
               onSubmit={(values) => updateAnimal(values)}
             >
-              {({ handleChange, values, handleSubmit, handleBlur }) => (
+              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
                 <AnimalSituation
                   values={values}
                   handleChange={handleChange}
                   handleBlur={handleBlur}
                   handleSubmit={handleSubmit}
+                  errors={errors}
+                  touched={touched}
                   renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
                   renderDefaultOptionUser={renderDefaultOptionUser}
                   renderDefaultOptionPlace={renderDefaultOptionPlace}

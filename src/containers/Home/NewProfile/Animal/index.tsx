@@ -107,12 +107,14 @@ export const AddAnimal = () => {
                   console.log('valueTwo', values)
                 }}
               >
-                {({ handleChange, values, handleSubmit, handleBlur }) => (
+                {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
                   <AnimalSituation
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
                     handleSubmit={handleSubmit}
+                    errors={errors}
+                    touched={touched}
                   />
                 )}
               </Formik>

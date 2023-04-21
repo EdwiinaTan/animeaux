@@ -184,7 +184,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      {errors.alias && touched.alias && <Body3 color={theme.colors.red}>{errors.alias}</Body3>}
+      {errors.alias && touched.alias && <Body3 color={theme.colors.orange}>{errors.alias}</Body3>}
       <Spacing size="16" />
       <Body2>Icad</Body2>
       <Field name="icad">
@@ -201,7 +201,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      {errors.icad && touched.icad && <Body3 color={theme.colors.red}>{errors.icad}</Body3>}
+      {errors.icad && touched.icad && <Body3 color={theme.colors.orange}>{errors.icad}</Body3>}
       <Spacing size="16" />
       <Body2>
         Race<TextRed>*</TextRed>
@@ -270,6 +270,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
+      {errors.gender && touched.gender && (
+        <Body3 color={theme.colors.orange}>{errors.gender}</Body3>
+      )}
       <Spacing size="24" />
       <Button title="Valider" onPress={() => handleSubmit()} />
     </>

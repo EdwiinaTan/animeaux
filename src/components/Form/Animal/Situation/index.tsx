@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
-import { CheckBoxComponent } from 'src/components/Animal/Checkbox'
+import { CheckBoxComponent } from 'src/components/Form/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title2, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
@@ -279,7 +279,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         )}
       </Field>
       <Spacing size="16" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} />
     </ContainerCheckbox>
   )
 }

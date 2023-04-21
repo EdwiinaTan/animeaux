@@ -4,7 +4,7 @@ import {
   AnimalReasonEnum,
   AnimalStatusEnum,
   AnimalTypeEnum,
-} from './../../../types/Animal/enum'
+} from '../../../../types/Animal/enum'
 
 export interface CheckboxProps {
   animal: {

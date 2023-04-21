@@ -4,9 +4,9 @@ import { SelectList } from 'react-native-dropdown-select-list'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
+import { Spacing } from '../../Layout/Spacing'
+import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
-import { Spacing } from '../Layout/Spacing'
-import { Body2, Body3 } from '../Typo'
 import { TextRed } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
@@ -244,7 +244,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
         </Field>
       </View>
       <Spacing size="16" />
-      <Button title="Submit" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} />
     </View>
   )
 }

@@ -153,7 +153,31 @@ export const Information = (): React.ReactElement => {
           />
         </Card>
         <Spacing size="16" />
+        <Card>
+          <Title2>
+            Sur les {animalData.length} réponses fournies pour devenir famille d'accueil
+          </Title2>
+          <Spacing size="8" />
+          <Body1>Espèce</Body1>
+          <Spacing size="4" />
+          <BarChart
+            data={dataBarChart(labelSpecies, dataSpecies)}
+            width={newWidth}
+            height={220}
+            fromNumber={max + 5}
+            fromZero={true}
+            chartConfig={chartConfig}
+            yAxisLabel=""
+            yAxisSuffix=""
+          />
+          <Spacing size="16" />
+          <Divider />
+          <Spacing size="16" />
+          <Body1>Genre </Body1>
+          <Spacing size="4" />
+        </Card>
       </Container>
+      <Spacing size="16" />
     </Layout>
   )
 }

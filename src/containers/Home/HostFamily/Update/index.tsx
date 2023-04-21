@@ -5,6 +5,7 @@ import { StyleSheet } from 'react-native'
 import { updateHostFamilyById } from 'src/client/HostFamily'
 import { HeaderComponent } from 'src/components/Header'
 import { HostFamilyProfile } from 'src/components/HostFamily'
+import { validationHostFamily } from 'src/components/HostFamily/Utils'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
@@ -38,7 +39,7 @@ export const HostFamilyUpdate = () => {
     onBreak: hostFamilyDetails.onBreak,
   }
 
-  const updateAnimal = (values) => {
+  const updateHostFamily = (values) => {
     console.log('value', values)
     updateHostFamilyById(hostFamilyDetails.id, values)
     navigation.goBack()
@@ -54,17 +55,20 @@ export const HostFamilyUpdate = () => {
         <Container>
           <Card>
             <Formik
+              validationSchema={validationHostFamily}
               initialValues={initialValues}
               onSubmit={(values) => {
-                updateAnimal(values)
+                updateHostFamily(values)
               }}
             >
-              {({ handleChange, values, handleSubmit, handleBlur }) => (
+              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
                 <HostFamilyProfile
                   values={values}
                   handleSubmit={handleSubmit}
                   handleBlur={handleBlur}
                   handleChange={handleChange}
+                  errors={errors}
+                  touched={touched}
                 />
               )}
             </Formik>

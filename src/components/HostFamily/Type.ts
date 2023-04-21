@@ -3,4 +3,6 @@ export interface HostFamilyFormProps {
   handleChange: any
   handleBlur: any
   handleSubmit: any
+  errors: any
+  touched: any
 }

@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import { updateAnimalById } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Animal/Situation'
+import { validationAnimalSituation } from 'src/components/Animal/Situation/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -81,7 +82,7 @@ export const UpdateAnimalSituation: React.FC = () => {
           <Card>
             <Formik
               initialValues={initialValues}
-              // validationSchema={validationSchema}
+              validationSchema={validationAnimalSituation}
               onSubmit={(values) => updateAnimal(values)}
             >
               {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (

@@ -43,6 +43,7 @@ export const Information = (): React.ReactElement => {
           <Card>
             <Title2>Sur les {animalData.length} animaux</Title2>
             <BarChartComponent title="Espèce" data={labelDataSpecies} />
+            <Spacing size="16" />
             <Divider width={2} color={theme.colors.greyOutline} />
             <PieChartComponent title="Genre" data={labelDataGender} noLeft />
             <Divider width={2} color={theme.colors.greyOutline} />
@@ -57,10 +58,12 @@ export const Information = (): React.ReactElement => {
             </Title2>
             <Spacing size="8" />
             <BarChartComponent title="Type de résidence" data={labelDataResidenceType} />
+            <Spacing size="16" />
             <Divider width={2} color={theme.colors.greyOutline} />
             <PieChartComponent title="Véhiculé" data={labelDataVehicle} />
             <Divider width={2} color={theme.colors.greyOutline} />
             <LineChartComponent title="Résidence" data={labelDataResidence} />
+            <Spacing size="16" />
             <Divider width={2} color={theme.colors.greyOutline} />
             <PieChartComponent title="Jardin" data={labelDataGarden} />
             <Divider width={2} color={theme.colors.greyOutline} />

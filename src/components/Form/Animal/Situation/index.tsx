@@ -36,7 +36,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   const [optionPlace, setOptionPlace] = useState({})
 
   useEffect(() => {
-    if (renderDefaultOptionHostFamily()) {
+    if (renderDefaultOptionHostFamily) {
       setOptionHostFamily({
         key: renderDefaultOptionHostFamily().key,
         value: renderDefaultOptionHostFamily().value,

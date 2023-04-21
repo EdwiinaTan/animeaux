@@ -1,5 +1,5 @@
 import { ActivityIndicator, useWindowDimensions } from 'react-native'
-import { BarChart, PieChart } from 'react-native-chart-kit'
+import { BarChart, LineChart, PieChart } from 'react-native-chart-kit'
 import { Divider } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
@@ -10,7 +10,7 @@ import { useGetAnimals } from 'src/hooks/Animal'
 import { useGetFormInscriptions } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
 import { Card, Container } from './Styled'
-import { chartConfig, dataBarChart, dataPieChart, labelDate } from './Utils'
+import { chartConfig, dataBarChart, dataPieChart, getLabelDataReduce, labelDate } from './Utils'
 
 export const Information = (): React.ReactElement => {
   const { width } = useWindowDimensions()
@@ -22,62 +22,16 @@ export const Information = (): React.ReactElement => {
     return <ActivityIndicator size="large" color={theme.colors.blue} />
   }
 
-  const labelDataSpecies = animalData.reduce((accumulator, { fields: { species } }) => {
-    if (!accumulator[species]) {
-      accumulator[species] = 1
-    } else {
-      accumulator[species]++
-    }
-    return accumulator
-  }, {})
+  const labelDataSpecies = getLabelDataReduce(animalData, 'species')
+  const labelDataGender = getLabelDataReduce(animalData, 'gender')
+  const labelDataStatus = getLabelDataReduce(animalData, 'status')
+  const labelDataReason = getLabelDataReduce(animalData, 'reason')
 
-  const labelDataGender = animalData.reduce((accumulator, { fields: { gender } }) => {
-    if (!accumulator[gender]) {
-      accumulator[gender] = 1
-    } else {
-      accumulator[gender]++
-    }
-    return accumulator
-  }, {})
-
-  const labelDataStatus = animalData.reduce((accumulator, { fields: { status } }) => {
-    if (!accumulator[status]) {
-      accumulator[status] = 1
-    } else {
-      accumulator[status]++
-    }
-    return accumulator
-  }, {})
-
-  const labelDataReason = animalData.reduce((accumulator, { fields: { reason } }) => {
-    if (!accumulator[reason]) {
-      accumulator[reason] = 1
-    } else {
-      accumulator[reason]++
-    }
-    return accumulator
-  }, {})
-
-  const labelDataResidenceType = formInscriptionData.reduce(
-    (accumulator, { fields: { residenceType } }) => {
-      if (!accumulator[residenceType]) {
-        accumulator[residenceType] = 1
-      } else {
-        accumulator[residenceType]++
-      }
-      return accumulator
-    },
-    {}
-  )
-
-  const labelDataVehicle = formInscriptionData.reduce((accumulator, { fields: { vehicle } }) => {
-    if (!accumulator[vehicle]) {
-      accumulator[vehicle] = 1
-    } else {
-      accumulator[vehicle]++
-    }
-    return accumulator
-  }, {})
+  const labelDataVehicle = getLabelDataReduce(formInscriptionData, 'vehicle')
+  const labelDataResidence = getLabelDataReduce(formInscriptionData, 'residence')
+  const labelDataResidenceType = getLabelDataReduce(formInscriptionData, 'residenceType')
+  const labelDataGarden = getLabelDataReduce(formInscriptionData, 'garden')
+  const labelDataBalcony = getLabelDataReduce(formInscriptionData, 'balcony')
 
   return (
     <Layout>
@@ -136,7 +90,7 @@ export const Information = (): React.ReactElement => {
             width={newWidth}
             height={220}
             fromNumber={8} //fix
-            fromZero={true}
+            fromZero
             chartConfig={chartConfig}
             yAxisLabel=""
             yAxisSuffix=""
@@ -148,7 +102,7 @@ export const Information = (): React.ReactElement => {
             Sur les {formInscriptionData.length} réponses fournies pour devenir famille d'accueil
           </Title2>
           <Spacing size="8" />
-          <Body1>Ils sont (proprio/loca/autre)</Body1>
+          <Body1>Type de résidence</Body1>
           <Spacing size="4" />
           <BarChart
             data={dataBarChart(
@@ -158,7 +112,7 @@ export const Information = (): React.ReactElement => {
             width={newWidth}
             height={220}
             fromNumber={10}
-            fromZero={true}
+            fromZero
             chartConfig={chartConfig}
             yAxisLabel=""
             yAxisSuffix=""
@@ -166,8 +120,63 @@ export const Information = (): React.ReactElement => {
           <Spacing size="16" />
           <Divider />
           <Spacing size="16" />
-          <Body1>Genre </Body1>
+          <Body1>Véhiculé</Body1>
           <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataVehicle)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Spacing size="16" />
+          <Divider />
+          <Spacing size="16" />
+          <Body1>Résidence</Body1>
+          <Spacing size="4" />
+          <LineChart
+            data={dataBarChart(
+              labelDate(labelDataResidence).label,
+              labelDate(labelDataResidence).data
+            )}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+          />
+          <Spacing size="16" />
+          <Divider />
+          <Spacing size="16" />
+          <Body1>Jardin</Body1>
+          <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataGarden)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Spacing size="16" />
+          <Divider />
+          <Spacing size="16" />
+          <Body1>Balcon</Body1>
+          <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataBalcony)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Spacing size="16" />
         </Card>
       </Container>
       <Spacing size="16" />

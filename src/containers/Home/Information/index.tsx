@@ -32,6 +32,10 @@ export const Information = (): React.ReactElement => {
   const labelDataResidenceType = getLabelDataReduce(formInscriptionData, 'residenceType')
   const labelDataGarden = getLabelDataReduce(formInscriptionData, 'garden')
   const labelDataBalcony = getLabelDataReduce(formInscriptionData, 'balcony')
+  const labelDataHasChild = getLabelDataReduce(formInscriptionData, 'hasChild')
+  const labelDataHasAnimal = getLabelDataReduce(formInscriptionData, 'hasAnimal')
+  const labelDataHasEducKnowledge = getLabelDataReduce(formInscriptionData, 'educationalKnowledge')
+  const labelDataAllergy = getLabelDataReduce(formInscriptionData, 'allergy')
 
   return (
     <Layout>
@@ -53,7 +57,7 @@ export const Information = (): React.ReactElement => {
             yAxisSuffix=""
           />
           <Spacing size="16" />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="16" />
           <Body1>Genre </Body1>
           <Spacing size="4" />
@@ -68,7 +72,7 @@ export const Information = (): React.ReactElement => {
             // absolute
           />
           <Spacing size="16" />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="16" />
           <Body1>Statut</Body1>
           <Spacing size="4" />
@@ -81,7 +85,7 @@ export const Information = (): React.ReactElement => {
             backgroundColor="transparent"
             paddingLeft="8"
           />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="8" />
           <Body1>Raison</Body1>
           <Spacing size="4" />
@@ -118,7 +122,7 @@ export const Information = (): React.ReactElement => {
             yAxisSuffix=""
           />
           <Spacing size="16" />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="16" />
           <Body1>Véhiculé</Body1>
           <Spacing size="4" />
@@ -133,7 +137,7 @@ export const Information = (): React.ReactElement => {
             // absolute
           />
           <Spacing size="16" />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="16" />
           <Body1>Résidence</Body1>
           <Spacing size="4" />
@@ -144,10 +148,11 @@ export const Information = (): React.ReactElement => {
             )}
             width={newWidth}
             height={220}
+            fromZero
             chartConfig={chartConfig}
           />
           <Spacing size="16" />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="16" />
           <Body1>Jardin</Body1>
           <Spacing size="4" />
@@ -162,12 +167,68 @@ export const Information = (): React.ReactElement => {
             // absolute
           />
           <Spacing size="16" />
-          <Divider />
+          <Divider width={2} color={theme.colors.greyOutline} />
           <Spacing size="16" />
           <Body1>Balcon</Body1>
           <Spacing size="4" />
           <PieChart
             data={dataPieChart(labelDataBalcony)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Divider width={2} color={theme.colors.greyOutline} />
+          <Spacing size="16" />
+          <Body1>Enfants</Body1>
+          <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataHasChild)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Divider width={2} color={theme.colors.greyOutline} />
+          <Spacing size="16" />
+          <Body1>Animaux</Body1>
+          <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataHasAnimal)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Divider width={2} color={theme.colors.greyOutline} />
+          <Spacing size="16" />
+          <Body1>Connaissance en animal</Body1>
+          <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataHasEducKnowledge)}
+            width={newWidth}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="item"
+            backgroundColor="transparent"
+            paddingLeft="32"
+            // absolute
+          />
+          <Divider width={2} color={theme.colors.greyOutline} />
+          <Spacing size="16" />
+          <Body1>Allergie</Body1>
+          <Spacing size="4" />
+          <PieChart
+            data={dataPieChart(labelDataAllergy)}
             width={newWidth}
             height={220}
             chartConfig={chartConfig}

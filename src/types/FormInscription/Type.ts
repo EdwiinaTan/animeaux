@@ -1,4 +1,5 @@
 import { Picture } from './../index'
+import { FormAgreementEnum, FormResidenceEnum, FormResidenceTypeEnum } from './enum'
 
 export interface FormInscriptionType {
   id: string
@@ -18,24 +19,24 @@ export interface FormInscriptionType {
   proSituation: string
   absenceHours: string
   remoteWork?: string
-  vehicle: string
+  vehicle: FormAgreementEnum
   rescheduleVeterinary: string
-  residenceType: string
-  residence: string
-  surfaceArea: string
-  quarantineRoom: string
-  garden: string
-  balcony: string
+  residenceType: FormResidenceEnum
+  residence: FormResidenceTypeEnum
+  surfaceArea: number
+  quarantineRoom: FormAgreementEnum
+  garden: FormAgreementEnum
+  balcony: FormAgreementEnum
   authorizedRooms: string
-  hasChild: string
-  hasAnimal: string
-  educationalKnowledge: string
+  hasChild: FormAgreementEnum
+  hasAnimal: FormAgreementEnum
+  educationalKnowledge: FormAgreementEnum
   agreeableFamily: string
   food: string
   animalSleeping: string
   animalNotPresent: string
   animalHoliday: string
-  allergy: string
+  allergy: FormAgreementEnum
   animalBehaviorProblem: string
   freeUpTime: string
   vetName?: string

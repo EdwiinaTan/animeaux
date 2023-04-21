@@ -2,7 +2,7 @@ import { CalendarSvg } from 'assets/svg/calendar'
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
 import { Modal, TextInput, View } from 'react-native'
-import { CalendarList } from 'react-native-calendars'
+import { Calendar } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button, Divider } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -129,51 +129,37 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
         <ContainerCalendar>
           <Field name="birthday">
             {({ field }) => (
-              <TextInput
-                {...field}
-                style={styles.inputDate}
-                editable={false}
-                placeholder="Veuillez mettre la date de naissance de l’animal"
-                value={values.birthday}
-              />
+              <>
+                <TextInput
+                  {...field}
+                  style={styles.inputDate}
+                  editable={false}
+                  placeholder="Veuillez mettre la date de naissance de l’animal"
+                  value={values.birthday}
+                />
+                <Modal visible={modalVisible} transparent={true} animationType="slide">
+                  <View style={style.centeredView}>
+                    <View style={style.modalView}>
+                      <Calendar
+                        onDayPress={handleDateSelect}
+                        hideExtraDays
+                        markedDates={{
+                          [values.birthday]: {
+                            selected: true,
+                            selectedColor: theme.colors.blue,
+                          },
+                        }}
+                      />
+                    </View>
+                  </View>
+                </Modal>
+              </>
             )}
           </Field>
           <TouchableOpacity onPress={() => setModalVisible(true)}>
             <CalendarSvg />
           </TouchableOpacity>
         </ContainerCalendar>
-        <Modal visible={modalVisible} transparent={true} animationType="slide">
-          <View style={style.centeredView}>
-            <View style={style.modalView}>
-              <CalendarList
-                onDayPress={handleDateSelect}
-                // theme={{
-                //   backgroundColor: '#ffffff',
-                //   calendarBackground: '#ffffff',
-                //   textSectionTitleColor: theme.colors.yellow,
-                //   textSectionTitleDisabledColor: '#d9e1e8',
-                //   selectedDayBackgroundColor: '#00adf5',
-                //   selectedDayTextColor: '#ffffff',
-                //   todayTextColor: theme.colors.red,
-                //   dayTextColor: '#3d6e94',
-                //   textDisabledColor: '#d9e1e8',
-                //   dotColor: '#00adf5',
-                //   selectedDotColor: '#ffffff',
-                //   arrowColor: 'orange',
-                //   disabledArrowColor: '#d9e1e8',
-                //   monthTextColor: 'blue',
-                //   indicatorColor: 'blue',
-                //   textDayFontWeight: '300',
-                //   textMonthFontWeight: 'bold',
-                //   textDayHeaderFontWeight: '300',
-                //   textDayFontSize: 16,
-                //   textMonthFontSize: 16,
-                //   textDayHeaderFontSize: 16,
-                // }}
-              />
-            </View>
-          </View>
-        </Modal>
       </View>
       <Spacing size="16" />
       <Body2>Alias</Body2>

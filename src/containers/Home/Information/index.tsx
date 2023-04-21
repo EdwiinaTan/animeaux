@@ -88,7 +88,7 @@ export const Information = (): React.ReactElement => {
             data={data}
             width={newWidth}
             height={220}
-            fromNumber={8}
+            fromNumber={8} //fix
             fromZero={true}
             chartConfig={chartConfig}
             yAxisLabel=""

@@ -117,6 +117,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </View>
               <View style={{ alignItems: 'flex-end' }}>
                 <ChipComponent value={animalDetails.status} />
+                <Spacing size="4" />
                 <Body1>{renderIsSterilized()}</Body1>
               </View>
             </Description>

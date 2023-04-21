@@ -1,26 +1,22 @@
-import { ActivityIndicator, useWindowDimensions } from 'react-native'
-import { BarChart, LineChart, PieChart } from 'react-native-chart-kit'
+import { ActivityIndicator } from 'react-native'
 import { Divider } from 'react-native-elements'
+import { BarChartComponent } from 'src/components/Chart/BarChart'
+import { LineChartComponent } from 'src/components/Chart/LineChart'
+import { PieChartComponent } from 'src/components/Chart/PieChart'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body1, Title2 } from 'src/components/Typo'
+import { Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { useGetFormInscriptions } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
 import { Card, Container } from './Styled'
-import { chartConfig, dataBarChart, dataPieChart, getLabelDataReduce, labelDate } from './Utils'
+import { getLabelDataReduce } from './Utils'
 
 export const Information = (): React.ReactElement => {
-  const { width } = useWindowDimensions()
-  const newWidth = width - 64
   const { statusAnimal, animalData } = useGetAnimals()
   const { statusFormInscription, formInscriptionData } = useGetFormInscriptions()
-
-  if (statusAnimal === FetchStatus.LOADING || statusFormInscription === FetchStatus.LOADING) {
-    return <ActivityIndicator size="large" color={theme.colors.blue} />
-  }
 
   const labelDataSpecies = getLabelDataReduce(animalData, 'species')
   const labelDataGender = getLabelDataReduce(animalData, 'gender')
@@ -40,206 +36,46 @@ export const Information = (): React.ReactElement => {
   return (
     <Layout>
       <HeaderComponent title="Information" />
-      <Container>
-        <Card>
-          <Title2>Sur les {animalData.length} animaux</Title2>
-          <Spacing size="8" />
-          <Body1>Espèce</Body1>
-          <Spacing size="4" />
-          <BarChart
-            data={dataBarChart(labelDate(labelDataSpecies).label, labelDate(labelDataSpecies).data)}
-            width={newWidth}
-            height={220}
-            fromNumber={8}
-            fromZero={true}
-            chartConfig={chartConfig}
-            yAxisLabel=""
-            yAxisSuffix=""
-          />
+      {statusAnimal === FetchStatus.LOADING || statusFormInscription === FetchStatus.LOADING ? (
+        <ActivityIndicator size="large" color={theme.colors.blue} />
+      ) : (
+        <Container>
+          <Card>
+            <Title2>Sur les {animalData.length} animaux</Title2>
+            <BarChartComponent title="Espèce" data={labelDataSpecies} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Genre" data={labelDataGender} noLeft />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Statut" data={labelDataStatus} noLeft />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <BarChartComponent title="Raison" data={labelDataReason} />
+          </Card>
           <Spacing size="16" />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Genre </Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataGender)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="8"
-            // absolute
-          />
-          <Spacing size="16" />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Statut</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataStatus)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="8"
-          />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="8" />
-          <Body1>Raison</Body1>
-          <Spacing size="4" />
-          <BarChart
-            data={dataBarChart(labelDate(labelDataReason).label, labelDate(labelDataReason).data)}
-            width={newWidth}
-            height={220}
-            fromNumber={8} //fix
-            fromZero
-            chartConfig={chartConfig}
-            yAxisLabel=""
-            yAxisSuffix=""
-          />
-        </Card>
-        <Spacing size="16" />
-        <Card>
-          <Title2>
-            Sur les {formInscriptionData.length} réponses fournies pour devenir famille d'accueil
-          </Title2>
-          <Spacing size="8" />
-          <Body1>Type de résidence</Body1>
-          <Spacing size="4" />
-          <BarChart
-            data={dataBarChart(
-              labelDate(labelDataResidenceType).label,
-              labelDate(labelDataResidenceType).data
-            )}
-            width={newWidth}
-            height={220}
-            fromNumber={10}
-            fromZero
-            chartConfig={chartConfig}
-            yAxisLabel=""
-            yAxisSuffix=""
-          />
-          <Spacing size="16" />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Véhiculé</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataVehicle)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Spacing size="16" />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Résidence</Body1>
-          <Spacing size="4" />
-          <LineChart
-            data={dataBarChart(
-              labelDate(labelDataResidence).label,
-              labelDate(labelDataResidence).data
-            )}
-            width={newWidth}
-            height={220}
-            fromZero
-            chartConfig={chartConfig}
-          />
-          <Spacing size="16" />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Jardin</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataGarden)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Spacing size="16" />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Balcon</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataBalcony)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Enfants</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataHasChild)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Animaux</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataHasAnimal)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Connaissance en animal</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataHasEducKnowledge)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Divider width={2} color={theme.colors.greyOutline} />
-          <Spacing size="16" />
-          <Body1>Allergie</Body1>
-          <Spacing size="4" />
-          <PieChart
-            data={dataPieChart(labelDataAllergy)}
-            width={newWidth}
-            height={220}
-            chartConfig={chartConfig}
-            accessor="item"
-            backgroundColor="transparent"
-            paddingLeft="32"
-            // absolute
-          />
-          <Spacing size="16" />
-        </Card>
-      </Container>
+          <Card>
+            <Title2>
+              Sur les {formInscriptionData.length} réponses fournies pour devenir famille d'accueil
+            </Title2>
+            <Spacing size="8" />
+            <BarChartComponent title="Type de résidence" data={labelDataResidenceType} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Véhiculé" data={labelDataVehicle} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <LineChartComponent title="Résidence" data={labelDataResidence} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Jardin" data={labelDataGarden} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Balcon" data={labelDataBalcony} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Enfants" data={labelDataHasChild} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Possession d'animaux" data={labelDataHasAnimal} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Connaissance en animal" data={labelDataHasEducKnowledge} />
+            <Divider width={2} color={theme.colors.greyOutline} />
+            <PieChartComponent title="Allergie" data={labelDataAllergy} />
+          </Card>
+        </Container>
+      )}
       <Spacing size="16" />
     </Layout>
   )

@@ -2,8 +2,8 @@ import { useWindowDimensions } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
-import { chartConfig, dataBarChart, labelDate } from 'src/containers/Home/Information/Utils'
 import { ChartProps } from '../Type'
+import { chartConfig, dataBarChart, labelDate } from '../Utils'
 
 export const LineChartComponent: React.FC<ChartProps> = ({ title, data }) => {
   const { width } = useWindowDimensions()

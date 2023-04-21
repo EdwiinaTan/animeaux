@@ -2,8 +2,8 @@ import { useWindowDimensions } from 'react-native'
 import { PieChart } from 'react-native-chart-kit'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
-import { chartConfig, dataPieChart } from 'src/containers/Home/Information/Utils'
 import { ChartProps } from '../Type'
+import { chartConfig, dataPieChart } from '../Utils'
 
 export const PieChartComponent: React.FC<ChartProps> = ({ title, data, noLeft }) => {
   const { width } = useWindowDimensions()

@@ -1,6 +1,7 @@
 import { Field } from 'formik'
-import { Button, TextInput, View } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
+import { Button } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'

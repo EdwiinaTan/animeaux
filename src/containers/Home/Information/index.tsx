@@ -1,40 +1,20 @@
 import { useState } from 'react'
 import { ActivityIndicator } from 'react-native'
-import { ButtonGroup, Divider } from 'react-native-elements'
-import { BarChartComponent } from 'src/components/Chart/BarChart'
-import { LineChartComponent } from 'src/components/Chart/LineChart'
-import { PieChartComponent } from 'src/components/Chart/PieChart'
+import { ButtonGroup } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { useGetFormInscriptions } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
-import { Card, Container } from './Styled'
-import { getLabelDataReduce } from './Utils'
+import { InfoFormHostFamily } from './FormHostFamily'
+import { Statistics } from './Statistics'
 
 export const Information = (): React.ReactElement => {
   const { statusAnimal, animalData } = useGetAnimals()
   const { statusFormInscription, formInscriptionData } = useGetFormInscriptions()
   const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const labelDataSpecies = getLabelDataReduce(animalData, 'species')
-  const labelDataGender = getLabelDataReduce(animalData, 'gender')
-  const labelDataStatus = getLabelDataReduce(animalData, 'status')
-  const labelDataReason = getLabelDataReduce(animalData, 'reason')
-
-  const labelDataVehicle = getLabelDataReduce(formInscriptionData, 'vehicle')
-  const labelDataResidence = getLabelDataReduce(formInscriptionData, 'residence')
-  const labelDataResidenceType = getLabelDataReduce(formInscriptionData, 'residenceType')
-  const labelDataGarden = getLabelDataReduce(formInscriptionData, 'garden')
-  const labelDataBalcony = getLabelDataReduce(formInscriptionData, 'balcony')
-  const labelDataHasChild = getLabelDataReduce(formInscriptionData, 'hasChild')
-  const labelDataHasAnimal = getLabelDataReduce(formInscriptionData, 'hasAnimal')
-  const labelDataHasEducKnowledge = getLabelDataReduce(formInscriptionData, 'educationalKnowledge')
-  const labelDataAllergy = getLabelDataReduce(formInscriptionData, 'allergy')
-  const labelDataAbsence = getLabelDataReduce(formInscriptionData, 'absenceHours')
 
   return (
     <Layout>
@@ -57,54 +37,11 @@ export const Information = (): React.ReactElement => {
               marginRight: 16,
             }}
           />
-          <Container>
-            <Card>
-              <Title2>Sur les {animalData.length} animaux</Title2>
-              <BarChartComponent title="Espèce" data={labelDataSpecies} />
-              <Spacing size="16" />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Genre" data={labelDataGender} noLeft />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Statut" data={labelDataStatus} noLeft />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <BarChartComponent title="Raison" data={labelDataReason} />
-            </Card>
-            <Spacing size="16" />
-            <Card>
-              <Title2>
-                Sur les {formInscriptionData.length} réponses fournies pour devenir famille
-                d'accueil
-              </Title2>
-              <Spacing size="8" />
-              <BarChartComponent title="Type de résidence" data={labelDataResidenceType} />
-              <Spacing size="16" />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Véhiculé" data={labelDataVehicle} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <LineChartComponent title="Résidence" data={labelDataResidence} />
-              <Spacing size="16" />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Jardin" data={labelDataGarden} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Balcon" data={labelDataBalcony} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Enfants" data={labelDataHasChild} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <BarChartComponent
-                title="Nombre d'heures d'absence"
-                data={labelDataAbsence}
-                suffix="h"
-              />
-              <Spacing size="16" />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Possession d'animaux" data={labelDataHasAnimal} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Connaissance en animal" data={labelDataHasEducKnowledge} />
-              <Divider width={2} color={theme.colors.greyOutline} />
-              <PieChartComponent title="Allergie" data={labelDataAllergy} />
-            </Card>
-          </Container>
+          {selectedIndex === 0 ? (
+            <Statistics animalData={animalData} formInscriptionData={formInscriptionData} />
+          ) : (
+            <InfoFormHostFamily />
+          )}
         </>
       )}
       <Spacing size="8" />

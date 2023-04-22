@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NoPictureSvg } from 'assets/svg/noPicture'
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
 import { Image } from 'react-native-elements'
 import { Card } from 'src/components/Card'
@@ -36,7 +37,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardHostFamily_${hostFamily.id}`}>
         <Container>
-          {hostFamily.picture && hostFamily.picture[0] && (
+          {hostFamily.picture ? (
             <ContainerImage>
               <Image
                 source={{ uri: hostFamily.picture[0].url }}
@@ -44,6 +45,10 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
                 PlaceholderContent={<ActivityIndicator />}
               />
             </ContainerImage>
+          ) : (
+            <View style={{ paddingRight: 16 }}>
+              <NoPictureSvg />
+            </View>
           )}
           <View style={{ flexDirection: 'column' }}>
             <Body1>

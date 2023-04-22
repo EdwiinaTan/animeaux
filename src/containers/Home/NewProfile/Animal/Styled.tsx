@@ -10,7 +10,7 @@ export const Card = styled.View`
   background-color: ${theme.colors.white};
   padding: 16px;
   border-radius: 8px;
-  border: 1px solid #dce1e7;
+  border: 1px solid ${theme.colors.grey1};
 `
 
 export const Keyboard = styled.KeyboardAvoidingView`
@@ -27,9 +27,9 @@ export const customStyles = {
   stepStrokeCurrentColor: theme.colors.primary,
   stepStrokeWidth: 3,
   stepStrokeFinishedColor: theme.colors.primary,
-  stepStrokeUnFinishedColor: '#aaaaaa',
+  stepStrokeUnFinishedColor: theme.colors.grey3,
   separatorFinishedColor: theme.colors.primary,
-  separatorUnFinishedColor: '#aaaaaa',
+  separatorUnFinishedColor: theme.colors.grey3,
   stepIndicatorFinishedColor: theme.colors.primary,
   stepIndicatorUnFinishedColor: theme.colors.white,
   stepIndicatorCurrentColor: theme.colors.white,
@@ -37,8 +37,8 @@ export const customStyles = {
   currentStepIndicatorLabelFontSize: 13,
   stepIndicatorLabelCurrentColor: theme.colors.primary,
   stepIndicatorLabelFinishedColor: theme.colors.white,
-  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-  labelColor: '#999999',
+  stepIndicatorLabelUnFinishedColor: theme.colors.grey3,
+  labelColor: theme.colors.grey4,
   labelSize: 13,
   currentStepLabelColor: theme.colors.primary,
 }

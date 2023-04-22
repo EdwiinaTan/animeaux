@@ -2,14 +2,7 @@ import { Path, Svg } from 'react-native-svg'
 
 export const PhoneSvg = (): React.ReactElement => {
   return (
-    <Svg
-      width="30px"
-      height="30px"
-      viewBox="0 0 1024 1024"
-      class="icon"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <Svg width="30px" height="30px" viewBox="0 0 1024 1024">
       <Path
         d="M128 768V170.666667c0-46.933333 38.4-85.333333 85.333333-85.333334h298.666667c46.933333 0 85.333333 38.4 85.333333 85.333334v597.333333c0 46.933333-38.4 85.333333-85.333333 85.333333H213.333333c-46.933333 0-85.333333-38.4-85.333333-85.333333z"
         fill="#37474F"

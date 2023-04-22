@@ -19,6 +19,29 @@ export const getHostFamilies = () => {
     })
 }
 
+export const postHostFamily = (data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
+  return axios
+    .post(
+      url,
+      { fields: { ...data } },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+}
+
+export const postHostFamilyFetch = (data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
+  return fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }).then((res) => res.json())
+}
+
 export const getHostFamilyById = (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
   return axios

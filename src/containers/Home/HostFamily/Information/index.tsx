@@ -95,7 +95,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
             {renderField(<AddressSvg />, hostFamilyDetails.address)}
             {renderField(
               <CalendarSvg />,
-              renderDateFormat(hostFamilyDetails.updatedAt),
+              renderDateFormat(hostFamilyDetails.createdAt),
               'Inscrit le '
             )}
             {renderField(<EmailSvg />, hostFamilyDetails.onBreak)}

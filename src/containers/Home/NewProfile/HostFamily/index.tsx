@@ -40,18 +40,14 @@ export const AddHostFamily = () => {
       navigation.goBack()
       queryClient.invalidateQueries(['hostFamilies'])
     },
+    onError: (err) => {
+      console.log('err', err)
+    },
   })
 
   const addHostFamily = (values) => {
-    try {
-      if (values) {
-        console.log('value', values)
-        mutation.mutate(values)
-        // postHostFamily(values)
-      }
-    } catch (err) {
-      console.log('err', err)
-    }
+    mutation.mutate(values)
+    // postHostFamily(values)
   }
 
   return (

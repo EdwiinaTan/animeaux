@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Information } from '..'
-import { InformationFormHostFamily } from '../../HostFamily/Information'
+import { ResultForm } from '../FormHostFamily/ResultForm'
 import { InformationRouteParams } from './type'
 
 export const InformationRouter: React.FC = () => {
@@ -16,7 +16,7 @@ export const InformationRouter: React.FC = () => {
       <Tab.Screen name="informationScreen" component={Information} />
       <Tab.Screen
         name="informationForm"
-        component={InformationFormHostFamily}
+        component={ResultForm}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

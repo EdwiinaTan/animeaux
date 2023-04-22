@@ -24,7 +24,7 @@ import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
 import { Container, ContainerDescription, ContainerImage, Description, Fields } from './Styled'
 
-export const InformationFormHostFamily = (): React.ReactElement => {
+export const HostFamilyInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
   const {
     params: { hostFamilyDetails },

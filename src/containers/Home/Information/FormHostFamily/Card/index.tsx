@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
 import { Image } from 'react-native-elements'
 import { Card } from 'src/components/Card'
@@ -7,15 +9,16 @@ import { Body1 } from 'src/components/Typo'
 import { useGetFormInscriptionById } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber } from 'src/utils/Functions'
+import { InformationRouteParams } from '../../Router/type'
 import { Container, ContainerImage } from './Styled'
 import { CardComponentProps } from './Type'
 
 const CardContainer: React.FC<CardComponentProps> = ({ formHostFamily }) => {
   const { statusFormInscription } = useGetFormInscriptionById(formHostFamily.id)
-  // const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
+  const navigation = useNavigation<NativeStackNavigationProp<InformationRouteParams>>()
 
   const onClick = () => {
-    // navigation.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamily })
+    navigation.navigate('informationForm', { informationId: formHostFamily.id })
   }
 
   if (statusFormInscription === FetchStatus.LOADING) {

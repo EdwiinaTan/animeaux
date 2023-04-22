@@ -7,7 +7,6 @@ import { FormInscriptionClient } from 'src/types/FormInscription/Type'
 import { FetchStatus } from 'src/types/Status'
 import { waitTimeOut } from 'src/utils/Functions'
 import CardContainer from './Card'
-import { Container } from './Styled'
 import { InfoFormProps } from './Type'
 
 export const InfoFormHostFamily: React.FC<InfoFormProps> = ({ data, status }) => {
@@ -30,7 +29,7 @@ export const InfoFormHostFamily: React.FC<InfoFormProps> = ({ data, status }) =>
   }
 
   return (
-    <Container>
+    <>
       {status === FetchStatus.LOADING ? (
         <View>
           <SkeletonCard />
@@ -49,6 +48,6 @@ export const InfoFormHostFamily: React.FC<InfoFormProps> = ({ data, status }) =>
           ListEmptyComponent={<Body1 textAlign="center">Aucune réponse pour le moment</Body1>}
         />
       )}
-    </Container>
+    </>
   )
 }

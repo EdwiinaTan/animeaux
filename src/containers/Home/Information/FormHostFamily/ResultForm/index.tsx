@@ -52,7 +52,10 @@ export const ResultForm = () => {
 
   return (
     <Layout>
-      <HeaderComponent title="Résultat du formulaire" onClickGoBack={onClickGoBack} />
+      <HeaderComponent
+        title={`Formulaire de ${formInscriptionData.firstName} ${formInscriptionData.lastName}`}
+        onClickGoBack={onClickGoBack}
+      />
       <Container>
         <Card>
           <Spacing size="8" />

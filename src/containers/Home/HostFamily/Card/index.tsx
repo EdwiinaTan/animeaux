@@ -8,6 +8,7 @@ import { SkeletonCard } from 'src/components/SkeletonCard'
 import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { FetchStatus } from 'src/types/Status'
+import { formatPhoneNumber } from 'src/utils/Functions'
 import { HostFamilyRouteParams } from '../Router/type'
 import { Container, ContainerImage } from './Styled'
 import { CardComponentProps } from './Type'
@@ -48,7 +49,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
             <Body1>
               {hostFamily.firstName} {hostFamily.lastName}
             </Body1>
-            <Body1>{hostFamily.phone}</Body1>
+            <Body1>{formatPhoneNumber(hostFamily.phone)}</Body1>
             <Body1>{hostFamily.email}</Body1>
             <Body1>{hostFamily.city}</Body1>
           </View>

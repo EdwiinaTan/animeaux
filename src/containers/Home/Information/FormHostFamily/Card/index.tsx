@@ -6,6 +6,7 @@ import { SkeletonCard } from 'src/components/SkeletonCard'
 import { Body1 } from 'src/components/Typo'
 import { useGetFormInscriptionById } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
+import { formatPhoneNumber } from 'src/utils/Functions'
 import { Container, ContainerImage } from './Styled'
 import { CardComponentProps } from './Type'
 
@@ -13,7 +14,6 @@ const CardContainer: React.FC<CardComponentProps> = ({ formHostFamily }) => {
   const { statusFormInscription } = useGetFormInscriptionById(formHostFamily.id)
   // const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
 
-  console.log('form', formHostFamily)
   const onClick = () => {
     // navigation.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamily })
   }
@@ -46,7 +46,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ formHostFamily }) => {
             <Body1>
               {formHostFamily.firstName} {formHostFamily.lastName}
             </Body1>
-            <Body1>{formHostFamily.phoneOne}</Body1>
+            <Body1>{formatPhoneNumber(formHostFamily.phoneOne)}</Body1>
             <Body1>{formHostFamily.email}</Body1>
             <Body1>{formHostFamily.city}</Body1>
           </View>

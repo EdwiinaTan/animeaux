@@ -25,7 +25,7 @@ export const getFormInscriptionById = (recordId: string) => {
     .get(url, {
       headers: header,
     })
-    .then((result) => result.data.records)
+    .then((result) => result.data.fields)
     .catch((err) => {
       console.log('err', err)
       throw err

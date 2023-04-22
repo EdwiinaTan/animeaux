@@ -1,6 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-// import { useQueryClient } from '@tanstack/react-query'
+import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
@@ -20,8 +20,8 @@ export const AnimalUpdate = () => {
     params: { animalDetails },
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
+  const queryClient = new QueryClient()
   // const nameRef = useRef(animalDetails.name)
-  // const queryClient = useQueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -39,17 +39,40 @@ export const AnimalUpdate = () => {
     publicDescription: animalDetails.publicDescription,
   }
 
-  // const updateAnimalMutation = useMutation({
-  //   mutationFn: updateAnimalByIdTest,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ['animalsUpdate'] })
-  //   },
-  // })
+  const mutation = useMutation({
+    mutationFn: updateAnimalByIdTest,
+    onSuccess: (data) => {
+      // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
+      // queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
+      queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalRequest) =>
+        oldData
+          ? {
+              ...oldData,
+              data,
+            }
+          : oldData
+      )
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
 
-  const updateAnimal = (values: AnimalRequest) => {
-    updateAnimalByIdTest(animalDetails.id, values)
-    // updateAnimalMutation.mutate({ ...values })
-    navigation.navigate('animalScreen')
+  const updateAnimal = async (values: AnimalRequest) => {
+    // updateAnimalByIdTest(animalDetails.id, values) - ancien
+    const data = {
+      id: animalDetails.id,
+      values,
+    }
+    try {
+      if (values) {
+        mutation.mutateAsync(data)
+      }
+    } catch (err) {
+      console.log('err', err)
+    } finally {
+      navigation.navigate('animalScreen')
+    }
   }
 
   return (

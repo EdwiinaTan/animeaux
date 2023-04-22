@@ -24,7 +24,7 @@ export const Information = (): React.ReactElement => {
       ) : (
         <>
           <ButtonGroup
-            buttons={['Statistiques', 'Formulaires FA']}
+            buttons={['Formulaires FA', 'Statistiques']}
             selectedIndex={selectedIndex}
             onPress={(value) => {
               setSelectedIndex(value)
@@ -38,9 +38,9 @@ export const Information = (): React.ReactElement => {
             }}
           />
           {selectedIndex === 0 ? (
-            <Statistics animalData={animalData} formInscriptionData={formInscriptionsData} />
-          ) : (
             <InfoFormHostFamily status={statusFormInscription} data={formInscriptionsData} />
+          ) : (
+            <Statistics animalData={animalData} formInscriptionData={formInscriptionsData} />
           )}
         </>
       )}

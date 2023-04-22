@@ -29,13 +29,18 @@ export const HostFamily = (): React.ReactElement => {
     }
   }, [search, hostFamiliesData])
 
-  const handleRefresh = useCallback(() => {
+  const handleRefresh = useCallback(async () => {
     setIsRefreshing(true)
-    getHostFamilies().then((value: HostFamilyClient[]) => {
+    try {
+      const value = await getHostFamilies()
+      await waitTimeOut(1000)
       setFiltered(value)
-      waitTimeOut(1000).then(() => setIsRefreshing(false))
-    })
-  }, [])
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsRefreshing(false)
+    }
+  }, [getHostFamilies])
 
   const searchHostFamily = (hostFamily: HostFamilyClient) => {
     return hostFamily.fields.firstName.indexOf(uppercaseWord(search)) >= 0

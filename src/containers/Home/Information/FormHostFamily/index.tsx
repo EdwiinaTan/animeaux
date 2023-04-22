@@ -14,15 +14,18 @@ export const InfoFormHostFamily: React.FC<InfoFormProps> = ({ data, status }) =>
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [result, setResult] = useState<FormInscriptionClient[]>(data)
 
-  const handleRefresh = useCallback(() => {
+  const handleRefresh = useCallback(async () => {
     setIsRefreshing(true)
-    getFormInscriptions().then((value: FormInscriptionClient[]) =>
-      waitTimeOut(1000).then(() => {
-        setIsRefreshing(false)
-        setResult(value)
-      })
-    )
-  }, [])
+    try {
+      const value = await getFormInscriptions()
+      await waitTimeOut(1000)
+      setResult(value)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsRefreshing(false)
+    }
+  }, [getFormInscriptions])
 
   const renderFormHostFamily: ListRenderItem<FormInscriptionClient> = ({ item }) => {
     return <CardContainer formHostFamily={item.fields} />

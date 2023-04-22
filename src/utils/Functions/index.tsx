@@ -38,3 +38,15 @@ export const animalAge = (birthday: string): string => {
 export const waitTimeOut = (timeout: number) => {
   return new Promise((resolve) => setTimeout(resolve, timeout))
 }
+
+export const formatPhoneNumber = (phoneNumber: string) => {
+  phoneNumber = phoneNumber.replace(/\D/g, '')
+  if (phoneNumber == '' || phoneNumber == null) {
+    return ''
+  }
+  const formattedPhoneNumber = phoneNumber.replace(
+    /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
+    '$1 $2 $3 $4 $5'
+  )
+  return formattedPhoneNumber
+}

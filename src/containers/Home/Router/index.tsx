@@ -5,7 +5,7 @@ import { IconAntDesign, IconIonicons, IconOcticons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { AnimalRouter } from '../Animal/Router'
 import { HostFamilyRouter } from '../HostFamily/Router'
-import { Information } from '../Information'
+import { InformationRouter } from '../Information/Router'
 import { AddAnimal } from '../NewProfile/Animal'
 import { AddHostFamily } from '../NewProfile/HostFamily'
 import { Profile } from '../Profile'
@@ -70,7 +70,7 @@ export const HomeRouter: React.FC = () => {
         />
         <Tab.Screen
           name="information"
-          component={Information}
+          component={InformationRouter}
           options={{
             tabBarIcon: ({ focused }) => (
               <IconIonicons

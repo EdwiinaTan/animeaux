@@ -18,3 +18,16 @@ export const getFormInscriptions = () => {
       throw err
     })
 }
+
+export const getFormInscriptionById = (recordId: string) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/formInscription/${recordId}/`
+  return axios
+    .get(url, {
+      headers: header,
+    })
+    .then((result) => result.data.fields)
+    .catch((err) => {
+      console.log('err', err)
+      throw err
+    })
+}

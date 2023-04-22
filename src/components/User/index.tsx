@@ -9,7 +9,7 @@ import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
-import { startsWithVowel, uppercaseWord } from 'src/utils/Functions'
+import { formatPhoneNumber, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { HeaderComponent } from '../Header'
 import { Layout } from '../Layout'
 import { Spacing } from '../Layout/Spacing'
@@ -72,7 +72,7 @@ export const UserInCharge = () => {
                 <Body1>
                   {userData.firstName} {userData.lastName}
                 </Body1>
-                {renderField(<PhoneSvg />, userData.phone)}
+                {renderField(<PhoneSvg />, formatPhoneNumber(userData.phone))}
                 {renderField(<EmailSvg />, userData.email)}
               </Description>
               {/* animaux en charge avec historique */}

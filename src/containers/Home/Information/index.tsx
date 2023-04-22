@@ -3,7 +3,6 @@ import { ActivityIndicator } from 'react-native'
 import { ButtonGroup } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
-import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { useGetFormInscriptions } from 'src/hooks/FormInscription'
@@ -13,7 +12,7 @@ import { Statistics } from './Statistics'
 
 export const Information = (): React.ReactElement => {
   const { statusAnimal, animalData } = useGetAnimals()
-  const { statusFormInscription, formInscriptionData } = useGetFormInscriptions()
+  const { statusFormInscription, formInscriptionsData } = useGetFormInscriptions()
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   return (
@@ -24,7 +23,7 @@ export const Information = (): React.ReactElement => {
       ) : (
         <>
           <ButtonGroup
-            buttons={['Statistiques', 'Formulaires FA']}
+            buttons={['Formulaires FA', 'Statistiques']}
             selectedIndex={selectedIndex}
             onPress={(value) => {
               setSelectedIndex(value)
@@ -38,13 +37,12 @@ export const Information = (): React.ReactElement => {
             }}
           />
           {selectedIndex === 0 ? (
-            <Statistics animalData={animalData} formInscriptionData={formInscriptionData} />
+            <InfoFormHostFamily status={statusFormInscription} data={formInscriptionsData} />
           ) : (
-            <InfoFormHostFamily />
+            <Statistics animalData={animalData} formInscriptionData={formInscriptionsData} />
           )}
         </>
       )}
-      <Spacing size="8" />
     </Layout>
   )
 }

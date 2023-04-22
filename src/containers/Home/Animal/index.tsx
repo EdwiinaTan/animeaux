@@ -36,15 +36,18 @@ export const Animal = (): React.ReactElement => {
     })
   }, [navigation])
 
-  const handleRefresh = useCallback(() => {
+  const handleRefresh = useCallback(async () => {
     setIsRefreshing(true)
-    getAnimals().then((value: AnimalClient[]) =>
-      waitTimeOut(1000).then(() => {
-        setFiltered(value)
-        setIsRefreshing(false)
-      })
-    )
-  }, [])
+    try {
+      const value = await getAnimals()
+      await waitTimeOut(1000)
+      setFiltered(value)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsRefreshing(false)
+    }
+  }, [getAnimals])
 
   const refacto = (): void => {
     // ça marche mais à refacto lol

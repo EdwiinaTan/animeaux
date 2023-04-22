@@ -6,22 +6,22 @@ import { Card } from 'src/components/Card'
 import { Layout } from 'src/components/Layout'
 import { SkeletonCard } from 'src/components/SkeletonCard'
 import { Body1 } from 'src/components/Typo'
-import { useGetHostFamilyById } from 'src/hooks/HostFamily'
+import { useGetFormInscriptionById } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber } from 'src/utils/Functions'
-import { HostFamilyRouteParams } from '../Router/type'
+import { InformationRouteParams } from '../../Router/type'
 import { Container, ContainerImage } from './Styled'
 import { CardComponentProps } from './Type'
 
-const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
-  const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
-  const { statusHostFamily } = useGetHostFamilyById(hostFamily.id)
+const CardContainer: React.FC<CardComponentProps> = ({ formHostFamily }) => {
+  const { statusFormInscription } = useGetFormInscriptionById(formHostFamily.id)
+  const navigation = useNavigation<NativeStackNavigationProp<InformationRouteParams>>()
 
   const onClick = () => {
-    navigation.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamily })
+    navigation.navigate('informationForm', { informationId: formHostFamily.id })
   }
 
-  if (statusHostFamily === FetchStatus.LOADING) {
+  if (statusFormInscription === FetchStatus.LOADING) {
     return (
       <Layout>
         <SkeletonCard />
@@ -34,12 +34,12 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
 
   return (
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
-      <Card id={`cardHostFamily_${hostFamily.id}`}>
+      <Card id={`cardFormHostFamily_${formHostFamily.id}`}>
         <Container>
-          {hostFamily.picture && hostFamily.picture[0] && (
+          {formHostFamily.picture && formHostFamily.picture[0] && (
             <ContainerImage>
               <Image
-                source={{ uri: hostFamily.picture[0].url }}
+                source={{ uri: formHostFamily.picture[0].url }}
                 style={{ width: 100, height: 100, borderRadius: 8 }}
                 PlaceholderContent={<ActivityIndicator />}
               />
@@ -47,11 +47,11 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
           )}
           <View style={{ flexDirection: 'column' }}>
             <Body1>
-              {hostFamily.firstName} {hostFamily.lastName}
+              {formHostFamily.firstName} {formHostFamily.lastName}
             </Body1>
-            <Body1>{formatPhoneNumber(hostFamily.phone)}</Body1>
-            <Body1>{hostFamily.email}</Body1>
-            <Body1>{hostFamily.city}</Body1>
+            <Body1>{formatPhoneNumber(formHostFamily.phoneOne)}</Body1>
+            <Body1>{formHostFamily.email}</Body1>
+            <Body1>{formHostFamily.city}</Body1>
           </View>
         </Container>
       </Card>

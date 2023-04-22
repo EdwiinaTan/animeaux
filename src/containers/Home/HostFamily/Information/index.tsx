@@ -14,7 +14,12 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
-import { renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
+import {
+  formatPhoneNumber,
+  renderDateFormat,
+  startsWithVowel,
+  uppercaseWord,
+} from 'src/utils/Functions'
 import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
 import { Container, ContainerDescription, ContainerImage, Description, Fields } from './Styled'
@@ -78,7 +83,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
         <ContainerDescription>
           <Description>
             <Spacing size="48" />
-            {renderField(<PhoneSvg />, hostFamilyDetails.phone)}
+            {renderField(<PhoneSvg />, formatPhoneNumber(hostFamilyDetails.phone))}
             {renderField(<EmailSvg />, hostFamilyDetails.email)}
             {renderField(<AddressSvg />, hostFamilyDetails.address)}
             {renderField(

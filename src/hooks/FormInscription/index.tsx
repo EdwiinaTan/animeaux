@@ -1,10 +1,23 @@
 import { useQuery } from '@tanstack/react-query'
-import { getFormInscriptions } from 'src/client/FormInscription'
-import { FormInscriptionClient } from 'src/types/FormInscription/Type'
-import { ReturnFormInscription } from './Type'
+import { getFormInscriptionById, getFormInscriptions } from 'src/client/FormInscription'
+import { FormInscriptionClient, FormInscriptionType } from 'src/types/FormInscription/Type'
+import { ReturnFormInscription, ReturnFormInscriptions } from './Type'
 
-export const useGetFormInscriptions = (): ReturnFormInscription => {
-  const { status: statusFormInscription, data: formInscriptionData } = useQuery<
+export const useGetFormInscriptionById = (dataId: string): ReturnFormInscription => {
+  const { status: statusFormInscription, data: formInscriptionData } =
+    useQuery<FormInscriptionType>({
+      queryKey: ['formInscription', dataId],
+      queryFn: () => getFormInscriptionById(dataId || ''),
+    })
+
+  return {
+    statusFormInscription,
+    formInscriptionData,
+  }
+}
+
+export const useGetFormInscriptions = (): ReturnFormInscriptions => {
+  const { status: statusFormInscription, data: formInscriptionsData } = useQuery<
     FormInscriptionClient[]
   >({
     queryKey: ['formInscriptions'],
@@ -13,6 +26,6 @@ export const useGetFormInscriptions = (): ReturnFormInscription => {
 
   return {
     statusFormInscription,
-    formInscriptionData,
+    formInscriptionsData,
   }
 }

@@ -13,7 +13,7 @@ import { Statistics } from './Statistics'
 
 export const Information = (): React.ReactElement => {
   const { statusAnimal, animalData } = useGetAnimals()
-  const { statusFormInscription, formInscriptionData } = useGetFormInscriptions()
+  const { statusFormInscription, formInscriptionsData } = useGetFormInscriptions()
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   return (
@@ -38,9 +38,9 @@ export const Information = (): React.ReactElement => {
             }}
           />
           {selectedIndex === 0 ? (
-            <Statistics animalData={animalData} formInscriptionData={formInscriptionData} />
+            <Statistics animalData={animalData} formInscriptionData={formInscriptionsData} />
           ) : (
-            <InfoFormHostFamily />
+            <InfoFormHostFamily status={statusFormInscription} data={formInscriptionsData} />
           )}
         </>
       )}

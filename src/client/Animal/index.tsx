@@ -61,7 +61,7 @@ export const updateAnimalById = (recordId: string, data) => {
     return false
   }
 
-  console.log('data', data)
+  // console.log('data', data)
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   axios
     .patch(

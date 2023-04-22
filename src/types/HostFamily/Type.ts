@@ -10,7 +10,6 @@ export interface HostFamilyType {
   city: string
   address?: string
   picture: Picture[]
-  updatedAt: string
   createdAt: string
   animalId: string
   criteria: string

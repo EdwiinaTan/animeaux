@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AddressSvg } from 'assets/svg/address'
 import { CalendarSvg } from 'assets/svg/calendar'
 import { EmailSvg } from 'assets/svg/email'
+import { NoPictureSvg } from 'assets/svg/noPicture'
 import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
@@ -65,21 +66,27 @@ export const HostFamilyInformation = (): React.ReactElement => {
         toggleOverlay={handlePresentModal}
       />
       <Container>
-        <Spacing size="8" />
-        <ContainerImage>
-          <Image
-            source={{ uri: hostFamilyDetails?.picture[0]?.url }}
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 8,
-            }}
-            PlaceholderContent={<ActivityIndicator />}
-          />
-          <Body1>
-            {hostFamilyDetails.firstName} {hostFamilyDetails.lastName}
-          </Body1>
-        </ContainerImage>
+        <>
+          <Spacing size="8" />
+          <ContainerImage>
+            {hostFamilyDetails.picture ? (
+              <Image
+                source={{ uri: hostFamilyDetails.picture[0]?.url }}
+                style={{
+                  width: 100,
+                  height: 100,
+                  borderRadius: 8,
+                }}
+                PlaceholderContent={<ActivityIndicator />}
+              />
+            ) : (
+              <NoPictureSvg />
+            )}
+            <Body1>
+              {hostFamilyDetails.firstName} {hostFamilyDetails.lastName}
+            </Body1>
+          </ContainerImage>
+        </>
         <ContainerDescription>
           <Description>
             <Spacing size="48" />
@@ -88,7 +95,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
             {renderField(<AddressSvg />, hostFamilyDetails.address)}
             {renderField(
               <CalendarSvg />,
-              renderDateFormat(hostFamilyDetails.updatedAt),
+              renderDateFormat(hostFamilyDetails.createdAt),
               'Inscrit le '
             )}
             {renderField(<EmailSvg />, hostFamilyDetails.onBreak)}

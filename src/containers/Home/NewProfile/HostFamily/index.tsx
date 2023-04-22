@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
+import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { StyleSheet } from 'react-native'
+import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
@@ -30,10 +32,22 @@ export const AddHostFamily = () => {
     onBreak: '',
   }
 
+  const queryClient = new QueryClient()
+
+  const mutation = useMutation({
+    mutationFn: postHostFamily,
+    onSuccess: () => {
+      navigation.goBack()
+      queryClient.invalidateQueries(['hostFamilies'])
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
   const addHostFamily = (values) => {
-    console.log('value', values)
-    // updateHostFamilyById(hostFamilyDetails.id, values)
-    navigation.goBack()
+    mutation.mutate(values)
+    // postHostFamily(values)
   }
 
   return (

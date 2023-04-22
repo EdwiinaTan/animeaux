@@ -19,6 +19,21 @@ export const getAnimals = () => {
     })
 }
 
+export const postAnimal = (data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
+  return axios
+    .post(
+      url,
+      { fields: { ...data } },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err.response.data)
+    })
+}
+
 export const getAnimalById = (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   return axios

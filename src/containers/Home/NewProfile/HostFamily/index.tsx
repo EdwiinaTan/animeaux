@@ -1,19 +1,18 @@
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
-import { StyleSheet } from 'react-native'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { theme } from 'src/constant/Theme'
+import { HostFamilyRouteParams } from '../../HostFamily/Router/type'
 import { Card, Container, Keyboard } from './Styled'
 
 export const AddHostFamily = () => {
-  const navigation = useNavigation()
-
+  const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const onClickGoBack = () => {
     return navigation.goBack()
   }
@@ -37,7 +36,7 @@ export const AddHostFamily = () => {
   const mutation = useMutation({
     mutationFn: postHostFamily,
     onSuccess: () => {
-      navigation.goBack()
+      navigation.navigate('hostFamilyScreen')
       queryClient.invalidateQueries(['hostFamilies'])
     },
     onError: (err) => {
@@ -46,7 +45,7 @@ export const AddHostFamily = () => {
   })
 
   const addHostFamily = (values) => {
-    mutation.mutate(values)
+    mutation.mutate({ ...values, animalId: [values.animalId] })
     // postHostFamily(values)
   }
 
@@ -81,15 +80,3 @@ export const AddHostFamily = () => {
     </Layout>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: theme.colors.greyOutline,
-  },
-})

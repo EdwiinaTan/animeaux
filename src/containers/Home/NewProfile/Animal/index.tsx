@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
+import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
+import { postAnimal } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Utils'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
@@ -17,6 +19,8 @@ export const AddAnimal = () => {
   const navigation = useNavigation()
   const labels = ['Profil', 'Situation', 'Photos']
   const [currentPosition, setCurrentPosition] = useState(0)
+  const [valueProfile, setValueProfile] = useState()
+  const [valueSituation, setValueSituation] = useState()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -55,11 +59,39 @@ export const AddAnimal = () => {
     isSterilized: '',
   }
 
-  const handleSubmitPage = (handleSubmit, errors) => {
-    handleSubmit()
-    if (Object.keys(errors).length === 0) {
-      onPageChange('next')
-    }
+  const onSubmitProfile = (values) => {
+    setValueProfile(values)
+    onPageChange('next')
+    // if (Object.keys(errors).length === 0) {
+    //   onPageChange('next')
+    // }
+  }
+
+  const onSubmitSituation = (values) => {
+    setValueSituation(values)
+    onPageChange('next')
+    // if (Object.keys(errors).length === 0) {
+    //   onPageChange('next')
+    // }
+  }
+
+  const queryClient = new QueryClient()
+
+  const mutation = useMutation({
+    mutationFn: postAnimal,
+    onSuccess: () => {
+      navigation.goBack()
+      queryClient.invalidateQueries(['animals'])
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
+  const validation = () => {
+    const values = Object.assign({}, valueProfile, valueSituation)
+    console.log('values', values)
+    mutation.mutate(values)
   }
 
   return (
@@ -88,7 +120,7 @@ export const AddAnimal = () => {
                 initialValues={initialValuesStepOne}
                 validationSchema={validationAnimalProfile}
                 onSubmit={(values) => {
-                  console.log('valueOne', values)
+                  onSubmitProfile(values)
                 }}
               >
                 {({
@@ -104,7 +136,7 @@ export const AddAnimal = () => {
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
-                    handleSubmit={() => handleSubmitPage(handleSubmit, errors)}
+                    handleSubmit={handleSubmit}
                     errors={errors}
                     touched={touched}
                     setFieldValue={setFieldValue}
@@ -117,7 +149,7 @@ export const AddAnimal = () => {
                 initialValues={initialValuesStepTwo}
                 validationSchema={validationAnimalSituation}
                 onSubmit={(values) => {
-                  console.log('valueTwo', values)
+                  onSubmitSituation(values)
                 }}
               >
                 {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
@@ -125,7 +157,7 @@ export const AddAnimal = () => {
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
-                    handleSubmit={() => handleSubmitPage(handleSubmit, errors)}
+                    handleSubmit={handleSubmit}
                     errors={errors}
                     touched={touched}
                   />
@@ -133,6 +165,12 @@ export const AddAnimal = () => {
               </Formik>
             )}
           </Card>
+          {currentPosition === 2 && (
+            <TouchableOpacity onPress={() => validation()}>
+              <Body1>Suivant</Body1>
+              <Spacing size="8" />
+            </TouchableOpacity>
+          )}
           <Spacing size="24" />
         </Container>
       </Keyboard>

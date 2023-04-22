@@ -69,6 +69,7 @@ export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscript
         <Divider width={2} color={theme.colors.greyOutline} />
         <PieChartComponent title="Allergie" data={labelDataAllergy} />
       </Card>
+      <Spacing size="16" />
     </Container>
   )
 }

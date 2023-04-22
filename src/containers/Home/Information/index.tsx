@@ -3,7 +3,6 @@ import { ActivityIndicator } from 'react-native'
 import { ButtonGroup } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
-import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { useGetFormInscriptions } from 'src/hooks/FormInscription'
@@ -44,7 +43,6 @@ export const Information = (): React.ReactElement => {
           )}
         </>
       )}
-      <Spacing size="8" />
     </Layout>
   )
 }

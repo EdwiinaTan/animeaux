@@ -107,179 +107,189 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   ]
 
   return (
-    <ContainerCheckbox>
-      <Title3>
-        Statut<TextRed>*</TextRed>
-      </Title3>
-      <Spacing size="8" />
-      {statusArray.map((status, key) => (
-        <CheckBoxComponent
-          key={`status_${key}`}
-          animal={status}
-          values={values.status}
-          handleChange={() => handleChange('status')(status.value)}
-        />
-      ))}
-      {errors.status && touched.status && <Body3 color={theme.colors.red}>{errors.status}</Body3>}
-      <Spacing size="16" />
-      <Title2>Prise en charge</Title2>
-      <Spacing size="8" />
-      <Body2>Famille d'accueil</Body2>
-      <View style={{ width: '100%' }}>
-        <Field name="hostFamilyId">
-          {({ field }) => (
-            <SelectList
-              inputStyles={{ padding: 0 }}
-              boxStyles={{
-                width: '100%',
-                borderColor: theme.colors.grey0,
-              }}
-              {...field}
-              searchPlaceholder="Rechercher"
-              setSelected={handleChange('hostFamilyId')}
-              onChange={handleChange('hostFamilyId')}
-              data={hostFamiliesDataList()}
-              defaultOption={optionHostFamily}
-              placeholder="Veuillez choisir la famille d’accueil"
-              save="key"
-              value={values.hostFamilyId}
-            />
-          )}
-        </Field>
-      </View>
-      <Spacing size="16" />
-      <Body2>
-        Responsable<TextRed>*</TextRed>
-      </Body2>
-      <View style={{ width: '100%' }}>
-        <Field name="userId">
-          {({ field }) => (
-            <SelectList
-              inputStyles={{ padding: 0 }}
-              boxStyles={{
-                width: '100%',
-                borderColor: theme.colors.grey0,
-              }}
-              {...field}
-              searchPlaceholder="Rechercher"
-              setSelected={handleChange('userId')}
-              onChange={handleChange('userId')}
-              data={usersDataList()}
-              defaultOption={optionUser}
-              placeholder="Veuillez choisir l’utilisateur"
-              save="key"
-              value={values.userId}
-            />
-          )}
-        </Field>
-        {errors.userId && touched.userId && <Body3 color={theme.colors.red}>{errors.userId}</Body3>}
-      </View>
-      <Spacing size="16" />
-      <Body2>
-        Lieu pris en charge<TextRed>*</TextRed>
-      </Body2>
-      <View style={{ width: '100%' }}>
-        <Field name="placeAssigned">
-          {({ field }) => (
-            <SelectList
-              inputStyles={{ padding: 0 }}
-              boxStyles={{
-                width: '100%',
-                borderColor: theme.colors.grey0,
-              }}
-              {...field}
-              searchPlaceholder="Rechercher"
-              setSelected={handleChange('placeAssigned')}
-              onChange={handleChange('placeAssigned')}
-              data={placeCareArray}
-              defaultOption={optionPlace}
-              placeholder="Veuillez choisir l’endroit"
-              save="value"
-              value={values.placeAssigned}
-            />
-          )}
-        </Field>
-        {errors.placeAssigned && touched.placeAssigned && (
-          <Body3 color={theme.colors.red}>{errors.placeAssigned}</Body3>
-        )}
-      </View>
-      <Spacing size="16" />
-      <Body2>
-        Raison<TextRed>*</TextRed>
-      </Body2>
-      <Spacing size="4" />
-      {reasonArray.map((reason, key) => (
-        <CheckBoxComponent
-          key={`reason_${key}`}
-          animal={reason}
-          values={values.reason}
-          handleChange={() => handleChange('reason')(reason.value)}
-        />
-      ))}
-      <Spacing size="16" />
-      <Body2>L’animal est stérilisé ?</Body2>
-      <Spacing size="4" />
-      {isSterilizedArray.map((isSterilized, key) => (
-        <CheckBoxComponent
-          key={`isSterilized_${key}`}
-          animal={isSterilized}
-          values={values.isSterilized}
-          handleChange={() => handleChange('isSterilized')(isSterilized.value)}
-        />
-      ))}
-      <Spacing size="8" />
-      <Title2>Entente</Title2>
-      <Spacing size="8" />
-      <Body2>Chien</Body2>
-      <Spacing size="8" />
-      {agreementArray.map((dogAgreement, key) => (
-        <CheckBoxComponent
-          key={`dogAgreement_${key}`}
-          animal={dogAgreement}
-          values={values.dogAgreement}
-          handleChange={() => handleChange('dogAgreement')(dogAgreement.value)}
-        />
-      ))}
-      <Body2>Chat</Body2>
-      <Spacing size="8" />
-      {agreementArray.map((catAgreement, key) => (
-        <CheckBoxComponent
-          key={`catAgreement_${key}`}
-          animal={catAgreement}
-          values={values.catAgreement}
-          handleChange={() => handleChange('catAgreement')(catAgreement.value)}
-        />
-      ))}
-      <Body2>Enfant</Body2>
-      <Spacing size="8" />
-      {agreementArray.map((childAgreement, key) => (
-        <CheckBoxComponent
-          key={`childAgreement_${key}`}
-          animal={childAgreement}
-          values={values.childAgreement}
-          handleChange={() => handleChange('childAgreement')(childAgreement.value)}
-        />
-      ))}
-      <Spacing size="16" />
-      <Body2>Description privée</Body2>
-      <Field name="privateDescription">
-        {({ field }) => (
-          <TextInput
-            focusable
-            {...field}
-            editable
-            multiline
-            style={styles.input}
-            onChangeText={handleChange('privateDescription')}
-            onChange={handleChange('privateDescription')}
-            onBlur={handleBlur('privateDescription')}
-            placeholder={'Veuillez mettre une description privée'}
-            value={values.privateDescription}
+    <>
+      <ContainerCheckbox>
+        <Title3>
+          Statut<TextRed>*</TextRed>
+        </Title3>
+        <Spacing size="8" />
+        {statusArray.map((status, key) => (
+          <CheckBoxComponent
+            key={`status_${key}`}
+            animal={status}
+            values={values.status}
+            handleChange={() => handleChange('status')(status.value)}
           />
+        ))}
+        {errors.status && touched.status && (
+          <>
+            <Spacing size="4" />
+            <Body3 color={theme.colors.red}>{errors.status}</Body3>
+          </>
         )}
-      </Field>
-      <Spacing size="16" />
+        <Spacing size="16" />
+        <Title2>Prise en charge</Title2>
+        <Spacing size="8" />
+        <Body2>Famille d'accueil</Body2>
+        <View style={{ width: '100%' }}>
+          <Field name="hostFamilyId">
+            {({ field }) => (
+              <SelectList
+                inputStyles={{ padding: 0 }}
+                boxStyles={{
+                  width: '100%',
+                  borderColor: theme.colors.grey0,
+                }}
+                {...field}
+                searchPlaceholder="Rechercher"
+                setSelected={handleChange('hostFamilyId')}
+                onChange={handleChange('hostFamilyId')}
+                data={hostFamiliesDataList()}
+                defaultOption={optionHostFamily}
+                placeholder="Veuillez choisir la famille d’accueil"
+                save="key"
+                value={values.hostFamilyId}
+              />
+            )}
+          </Field>
+        </View>
+        <Spacing size="16" />
+        <Body2>
+          Responsable<TextRed>*</TextRed>
+        </Body2>
+        <View style={{ width: '100%' }}>
+          <Field name="userId">
+            {({ field }) => (
+              <SelectList
+                inputStyles={{ padding: 0 }}
+                boxStyles={{
+                  width: '100%',
+                  borderColor: theme.colors.grey0,
+                }}
+                {...field}
+                searchPlaceholder="Rechercher"
+                setSelected={handleChange('userId')}
+                onChange={handleChange('userId')}
+                data={usersDataList()}
+                defaultOption={optionUser}
+                placeholder="Veuillez choisir l’utilisateur"
+                save="key"
+                value={values.userId}
+              />
+            )}
+          </Field>
+          {errors.userId && touched.userId && (
+            <Body3 color={theme.colors.red}>{errors.userId}</Body3>
+          )}
+        </View>
+        <Spacing size="16" />
+        <Body2>
+          Lieu pris en charge<TextRed>*</TextRed>
+        </Body2>
+        <View style={{ width: '100%' }}>
+          <Field name="placeAssigned">
+            {({ field }) => (
+              <SelectList
+                inputStyles={{ padding: 0 }}
+                boxStyles={{
+                  width: '100%',
+                  borderColor: theme.colors.grey0,
+                }}
+                {...field}
+                searchPlaceholder="Rechercher"
+                setSelected={handleChange('placeAssigned')}
+                onChange={handleChange('placeAssigned')}
+                data={placeCareArray}
+                defaultOption={optionPlace}
+                placeholder="Veuillez choisir l’endroit"
+                save="value"
+                value={values.placeAssigned}
+              />
+            )}
+          </Field>
+          {errors.placeAssigned && touched.placeAssigned && (
+            <Body3 color={theme.colors.red}>{errors.placeAssigned}</Body3>
+          )}
+        </View>
+        <Spacing size="16" />
+        <Body2>
+          Raison<TextRed>*</TextRed>
+        </Body2>
+        <Spacing size="4" />
+        {reasonArray.map((reason, key) => (
+          <CheckBoxComponent
+            key={`reason_${key}`}
+            animal={reason}
+            values={values.reason}
+            handleChange={() => handleChange('reason')(reason.value)}
+          />
+        ))}
+        {errors.reason && touched.reason && <Body3 color={theme.colors.red}>{errors.reason}</Body3>}
+        <Spacing size="16" />
+        <Body2>L’animal est stérilisé ?</Body2>
+        <Spacing size="4" />
+        {isSterilizedArray.map((isSterilized, key) => (
+          <CheckBoxComponent
+            key={`isSterilized_${key}`}
+            animal={isSterilized}
+            values={values.isSterilized}
+            handleChange={() => handleChange('isSterilized')(isSterilized.value)}
+          />
+        ))}
+        <Spacing size="8" />
+        <Title2>Entente</Title2>
+        <Spacing size="8" />
+        <Body2>Chien</Body2>
+        <Spacing size="8" />
+        {agreementArray.map((dogAgreement, key) => (
+          <CheckBoxComponent
+            key={`dogAgreement_${key}`}
+            animal={dogAgreement}
+            values={values.dogAgreement}
+            handleChange={() => handleChange('dogAgreement')(dogAgreement.value)}
+          />
+        ))}
+        <Body2>Chat</Body2>
+        <Spacing size="8" />
+        {agreementArray.map((catAgreement, key) => (
+          <CheckBoxComponent
+            key={`catAgreement_${key}`}
+            animal={catAgreement}
+            values={values.catAgreement}
+            handleChange={() => handleChange('catAgreement')(catAgreement.value)}
+          />
+        ))}
+        <Body2>Enfant</Body2>
+        <Spacing size="8" />
+        {agreementArray.map((childAgreement, key) => (
+          <CheckBoxComponent
+            key={`childAgreement_${key}`}
+            animal={childAgreement}
+            values={values.childAgreement}
+            handleChange={() => handleChange('childAgreement')(childAgreement.value)}
+          />
+        ))}
+        <Spacing size="16" />
+        <Body2>Description privée</Body2>
+        <Field name="privateDescription">
+          {({ field }) => (
+            <TextInput
+              focusable
+              {...field}
+              editable
+              multiline
+              style={styles.input}
+              onChangeText={handleChange('privateDescription')}
+              onChange={handleChange('privateDescription')}
+              onBlur={handleBlur('privateDescription')}
+              placeholder={'Veuillez mettre une description privée'}
+              value={values.privateDescription}
+            />
+          )}
+        </Field>
+        <Spacing size="16" />
+      </ContainerCheckbox>
       <Button title="Valider" onPress={() => handleSubmit()} />
-    </ContainerCheckbox>
+    </>
   )
 }

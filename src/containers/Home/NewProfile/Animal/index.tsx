@@ -57,7 +57,7 @@ export const AddAnimal = () => {
 
   const handleSubmitPage = (handleSubmit, errors) => {
     handleSubmit()
-    if (!errors) {
+    if (Object.keys(errors).length === 0) {
       onPageChange('next')
     }
   }
@@ -76,6 +76,12 @@ export const AddAnimal = () => {
       <Spacing size="8" />
       <Keyboard behavior="padding" enabled>
         <Container>
+          {currentPosition !== 0 && (
+            <TouchableOpacity onPress={() => onPageChange('prev')}>
+              <Body1>Précédent</Body1>
+              <Spacing size="8" />
+            </TouchableOpacity>
+          )}
           <Card>
             {currentPosition === 0 && (
               <Formik
@@ -119,7 +125,7 @@ export const AddAnimal = () => {
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
+                    handleSubmit={() => handleSubmitPage(handleSubmit, errors)}
                     errors={errors}
                     touched={touched}
                   />
@@ -127,15 +133,6 @@ export const AddAnimal = () => {
               </Formik>
             )}
           </Card>
-          {currentPosition !== 0 && (
-            <TouchableOpacity onPress={() => onPageChange('prev')}>
-              <Body1>Précédent</Body1>
-              <Spacing size="24" />
-            </TouchableOpacity>
-          )}
-          <TouchableOpacity onPress={() => onPageChange('next')}>
-            <Body1>Suivant</Body1>
-          </TouchableOpacity>
           <Spacing size="24" />
         </Container>
       </Keyboard>

@@ -166,6 +166,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             <CalendarSvg />
           </TouchableOpacity>
         </ContainerCalendar>
+        {errors.birthday && touched.birthday && (
+          <Body3 color={theme.colors.red}>{errors.birthday}</Body3>
+        )}
       </View>
       <Spacing size="16" />
       <Body2>Alias</Body2>
@@ -270,8 +273,8 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           />
         )}
       </Field>
-      {errors.gender && touched.gender && (
-        <Body3 color={theme.colors.orange}>{errors.gender}</Body3>
+      {errors.publicDescription && touched.publicDescription && (
+        <Body3 color={theme.colors.orange}>{errors.publicDescription}</Body3>
       )}
       <Spacing size="24" />
       <Button title="Valider" onPress={() => handleSubmit()} />

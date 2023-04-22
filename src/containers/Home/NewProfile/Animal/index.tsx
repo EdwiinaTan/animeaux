@@ -32,7 +32,7 @@ export const AddAnimal = () => {
 
   const initialValuesStepOne = {
     species: '',
-    genre: '',
+    gender: '',
     name: '',
     alias: '',
     icad: '',
@@ -53,6 +53,13 @@ export const AddAnimal = () => {
     userId: '',
     privateDescription: '',
     isSterilized: '',
+  }
+
+  const handleSubmitPage = (handleSubmit, errors) => {
+    handleSubmit()
+    if (!errors) {
+      onPageChange('next')
+    }
   }
 
   return (
@@ -91,7 +98,7 @@ export const AddAnimal = () => {
                     values={values}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
+                    handleSubmit={() => handleSubmitPage(handleSubmit, errors)}
                     errors={errors}
                     touched={touched}
                     setFieldValue={setFieldValue}

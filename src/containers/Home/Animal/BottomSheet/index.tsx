@@ -37,7 +37,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
 
   const handleViewEditProfil = () => {
     bottomSheetModalRef.current.close()
-    navigation.navigate('animalUpdateProfil', {
+    navigation.navigate('animalUpdateProfile', {
       animalDetails: animalDetails,
     })
   }
@@ -45,6 +45,13 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
   const handleViewEditSituation = () => {
     bottomSheetModalRef.current.close()
     navigation.navigate('animalUpdateSituation', {
+      animalDetails: animalDetails,
+    })
+  }
+
+  const handleViewEditPhoto = () => {
+    bottomSheetModalRef.current.close()
+    navigation.navigate('animalUpdatePhoto', {
       animalDetails: animalDetails,
     })
   }
@@ -83,7 +90,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
     {
       name: 'Éditer les photos',
       icon: <IconFoundation name="photo" size={22} style={{ paddingRight: 16 }} />,
-      press: handleViewEditProfil,
+      press: handleViewEditPhoto,
       chevron: true,
     },
     {

@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Skeleton } from '@rneui/themed'
-import { ActivityIndicator, TouchableOpacity } from 'react-native'
+import { NoPictureSvg } from 'assets/svg/noPicture'
+import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
 import { Image } from 'react-native-elements'
 import { Card } from 'src/components/Card'
 import { ChipComponent } from 'src/components/Chip'
@@ -29,14 +30,20 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardAnimal_${animal.id}`}>
         <Container>
-          <ContainerImage>
-            <Image
-              source={{ uri: animal?.pictures[0]?.url }}
-              style={{ width: 100, height: 100, borderRadius: 8 }}
-              PlaceholderContent={<ActivityIndicator />}
-            />
-            <Image resizeMode="cover" source={{ uri: animal?.pictures[0]?.url }} />
-          </ContainerImage>
+          {animal.pictures ? (
+            <ContainerImage>
+              <Image
+                source={{ uri: animal.pictures[0]?.url }}
+                style={{ width: 100, height: 100, borderRadius: 8 }}
+                PlaceholderContent={<ActivityIndicator />}
+              />
+              <Image resizeMode="cover" source={{ uri: animal.pictures[0]?.url }} />
+            </ContainerImage>
+          ) : (
+            <View style={{ paddingRight: 16 }}>
+              <NoPictureSvg />
+            </View>
+          )}
           <Description>
             <AnimalGender>
               <Body1 paddingRight={4}>{animal.name}</Body1>

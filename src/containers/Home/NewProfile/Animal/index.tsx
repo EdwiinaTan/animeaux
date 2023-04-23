@@ -13,6 +13,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
+import { AnimalType } from 'src/types/Animal/Type'
 import { Card, Container, customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
@@ -89,9 +90,22 @@ export const AddAnimal = () => {
   })
 
   const validation = () => {
-    const values = Object.assign({}, valueProfile, valueSituation)
-    console.log('values', values)
-    mutation.mutate(values)
+    const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
+    console.log('values', {
+      ...values,
+      userId: [values.userId],
+      hostFamilyId: [values.hostFamilyId],
+    })
+    const data = {
+      ...values,
+      hostFamilyId: [values.hostFamilyId],
+      userId: [values.userId],
+    }
+    // if (values.hostFamilyId.length === 1) {
+    mutation.mutate(data)
+    // } else {
+    //   mutation.mutate({ ...values, userId: [values.userId] })
+    // }
   }
 
   return (

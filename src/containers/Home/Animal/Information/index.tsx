@@ -63,10 +63,13 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const renderIsSterilized = () => {
-    if (animalDetails.isSterilized) {
+    if (animalDetails.isSterilized === AnimalAgreement.YES) {
       return <Body1>Stérilisé</Body1>
+    } else if (animalDetails.isSterilized === AnimalAgreement.NO) {
+      return <Body1>Non stérilisé</Body1>
+    } else {
+      return <Body1>Stérilisé ?</Body1>
     }
-    return <Body1>Non stérilisé</Body1>
   }
 
   const renderAgreement = (value: string) => {
@@ -102,7 +105,7 @@ export const AnimalInformation = (): React.ReactElement => {
           <ActivityIndicator size="large" color={theme.colors.blue} />
         ) : (
           <ScrollView>
-            <CarouselAnimal animal={animalDetails} />
+            {animalDetails.pictures && <CarouselAnimal animal={animalDetails} />}
             <Description>
               <View>
                 <TitleCard>
@@ -162,7 +165,9 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Title2 paddingLeft={8}>Son histoire</Title2>
               </TitleCard>
               <Spacing size="8" />
-              <Body2>{animalDetails.publicDescription}</Body2>
+              <Body2>
+                {animalDetails.publicDescription ?? 'Aucune description publique pour le moment'}
+              </Body2>
             </Card>
             <Spacing size="16" />
             <Card>
@@ -197,7 +202,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </TitleCard>
               <Spacing size="8" />
               <Body2>
-                {animalDetails.privateDescription ?? 'Aucune description pour le moment'}
+                {animalDetails.privateDescription ?? 'Aucune description privée pour le moment'}
               </Body2>
             </Card>
             <Spacing size="32" />

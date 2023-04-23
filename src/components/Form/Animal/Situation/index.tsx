@@ -101,11 +101,6 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
     value: AnimalPlaceCareEnum[key],
   }))
 
-  const isSterilizedArray = [
-    { label: AnimalAgreement.YES, value: AnimalAgreement.YES },
-    { label: AnimalAgreement.NO, value: AnimalAgreement.NO },
-  ]
-
   return (
     <>
       <ContainerCheckbox>
@@ -152,6 +147,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               />
             )}
           </Field>
+          {errors.hostFamilyId && touched.hostFamilyId && (
+            <Body3 color={theme.colors.red}>{errors.hostFamilyId}</Body3>
+          )}
         </View>
         <Spacing size="16" />
         <Body2>
@@ -228,7 +226,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <Spacing size="16" />
         <Body2>L’animal est stérilisé ?</Body2>
         <Spacing size="4" />
-        {isSterilizedArray.map((isSterilized, key) => (
+        {agreementArray.map((isSterilized, key) => (
           <CheckBoxComponent
             key={`isSterilized_${key}`}
             animal={isSterilized}

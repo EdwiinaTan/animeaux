@@ -9,7 +9,6 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
-import { AnimalAgreement } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
@@ -39,7 +38,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     dogAgreement: animalDetails.dogAgreement,
     userId: animalDetails.userId,
     privateDescription: animalDetails.privateDescription,
-    isSterilized: animalDetails.isSterilized ? AnimalAgreement.YES : AnimalAgreement.NO,
+    isSterilized: animalDetails.isSterilized,
   }
 
   const renderDefaultOptionHostFamily = () => {

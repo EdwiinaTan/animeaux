@@ -32,6 +32,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     hostFamilyId: animalDetails.hostFamilyId,
     status: animalDetails.status,
     placeAssigned: animalDetails.placeAssigned,
+    dateAssigned: animalDetails.dateAssigned,
     reason: animalDetails.reason,
     childAgreement: animalDetails.childAgreement,
     catAgreement: animalDetails.catAgreement,
@@ -70,6 +71,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     navigation.goBack()
   }
 
+  //utiliser (field) au lieu de tout passer en param comme ça lol
   return (
     <Layout>
       <HeaderComponent
@@ -84,7 +86,15 @@ export const UpdateAnimalSituation: React.FC = () => {
               validationSchema={validationAnimalSituation}
               onSubmit={(values) => updateAnimal(values)}
             >
-              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
                 <AnimalSituation
                   values={values}
                   handleChange={handleChange}
@@ -95,6 +105,7 @@ export const UpdateAnimalSituation: React.FC = () => {
                   renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
                   renderDefaultOptionUser={renderDefaultOptionUser}
                   renderDefaultOptionPlace={renderDefaultOptionPlace}
+                  setFieldValue={setFieldValue}
                 />
               )}
             </Formik>

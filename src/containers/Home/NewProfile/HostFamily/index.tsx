@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { postHostFamily } from 'src/client/HostFamily'
@@ -8,11 +7,11 @@ import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { HostFamilyRouteParams } from '../../HostFamily/Router/type'
 import { Card, Container, Keyboard } from './Styled'
 
 export const AddHostFamily = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
+  const navigation = useNavigation()
+
   const onClickGoBack = () => {
     return navigation.goBack()
   }
@@ -36,7 +35,7 @@ export const AddHostFamily = () => {
   const mutation = useMutation({
     mutationFn: postHostFamily,
     onSuccess: () => {
-      navigation.navigate('hostFamilyScreen')
+      onClickGoBack()
       queryClient.invalidateQueries(['hostFamilies'])
     },
     onError: (err) => {

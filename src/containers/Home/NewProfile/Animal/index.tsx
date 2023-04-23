@@ -22,6 +22,7 @@ export const AddAnimal = () => {
   const [currentPosition, setCurrentPosition] = useState(0)
   const [valueProfile, setValueProfile] = useState()
   const [valueSituation, setValueSituation] = useState()
+  const queryClient = new QueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -51,6 +52,7 @@ export const AddAnimal = () => {
     hostFamilyId: '',
     status: '',
     placeAssigned: '',
+    dateAssigned: '',
     reason: '',
     childAgreement: '',
     catAgreement: '',
@@ -63,20 +65,12 @@ export const AddAnimal = () => {
   const onSubmitProfile = (values) => {
     setValueProfile(values)
     onPageChange('next')
-    // if (Object.keys(errors).length === 0) {
-    //   onPageChange('next')
-    // }
   }
 
   const onSubmitSituation = (values) => {
     setValueSituation(values)
     onPageChange('next')
-    // if (Object.keys(errors).length === 0) {
-    //   onPageChange('next')
-    // }
   }
-
-  const queryClient = new QueryClient()
 
   const mutation = useMutation({
     mutationFn: postAnimal,
@@ -91,21 +85,13 @@ export const AddAnimal = () => {
 
   const validation = () => {
     const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
-    console.log('values', {
-      ...values,
-      userId: [values.userId],
-      hostFamilyId: [values.hostFamilyId],
-    })
     const data = {
       ...values,
       hostFamilyId: [values.hostFamilyId],
       userId: [values.userId],
     }
-    // if (values.hostFamilyId.length === 1) {
+    console.log('values', data)
     mutation.mutate(data)
-    // } else {
-    //   mutation.mutate({ ...values, userId: [values.userId] })
-    // }
   }
 
   return (
@@ -166,7 +152,15 @@ export const AddAnimal = () => {
                   onSubmitSituation(values)
                 }}
               >
-                {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
+                {({
+                  handleChange,
+                  values,
+                  handleSubmit,
+                  handleBlur,
+                  errors,
+                  touched,
+                  setFieldValue,
+                }) => (
                   <AnimalSituation
                     values={values}
                     handleChange={handleChange}
@@ -174,6 +168,7 @@ export const AddAnimal = () => {
                     handleSubmit={handleSubmit}
                     errors={errors}
                     touched={touched}
+                    setFieldValue={setFieldValue}
                   />
                 )}
               </Formik>

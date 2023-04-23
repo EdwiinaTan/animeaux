@@ -17,9 +17,8 @@ import {
   AnimalRaceEnum,
   AnimalTypeEnum,
 } from 'src/types/Animal/enum'
-import { ContainerCheckbox, styles, TextRed } from '../Styled'
+import { ContainerCheckbox, style, styles, TextRed } from '../Styled'
 import { AnimalFormProps } from '../Type'
-import { style } from './Styled'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({
   values,
@@ -103,7 +102,6 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             handleChange={() => handleChange('gender')(gender.value)}
           />
         ))}
-        {errors.gender && touched.gender && <Body3 color={theme.colors.red}>{errors.gender}</Body3>}
       </ContainerCheckbox>
       <Spacing size="24" />
       <Divider />

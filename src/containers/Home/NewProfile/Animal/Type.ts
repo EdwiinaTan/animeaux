@@ -17,4 +17,5 @@ interface AddAnimalProps {
   }
   errors?: any
   touched?: any
+  setFieldValue?: any
 }

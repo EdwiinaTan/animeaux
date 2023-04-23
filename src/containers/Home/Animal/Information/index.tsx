@@ -133,23 +133,25 @@ export const AnimalInformation = (): React.ReactElement => {
                 </TitleCard>
                 <Spacing size="8" />
                 <InCharge>
-                  <View style={{ paddingRight: 8 }}>
-                    <ImageElement
-                      source={{ uri: userData.picture[0].url }}
-                      style={{
-                        width: 100,
-                        height: 100,
-                        borderRadius: 8,
-                        borderTopRightRadius: 8,
-                        resizeMode: 'contain',
-                      }}
-                      containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
-                      PlaceholderContent={<ActivityIndicator />}
-                    />
-                  </View>
+                  {userData.picture && (
+                    <View style={{ paddingRight: 8 }}>
+                      <ImageElement
+                        source={{ uri: userData.picture[0].url }}
+                        style={{
+                          width: 100,
+                          height: 100,
+                          borderRadius: 8,
+                          borderTopRightRadius: 8,
+                          resizeMode: 'contain',
+                        }}
+                        containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
+                        PlaceholderContent={<ActivityIndicator />}
+                      />
+                    </View>
+                  )}
                   <View>
                     <Body1>
-                      {userData.firstName} {userData.lastName}
+                      Par : {userData.firstName} {userData.lastName}
                     </Body1>
                     <Body1>Date : {renderDateFormat(animalDetails.dateAssigned)}</Body1>
                     <Body1>Lieu : {animalDetails.placeAssigned}</Body1>

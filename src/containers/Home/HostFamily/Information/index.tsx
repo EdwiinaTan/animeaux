@@ -71,7 +71,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
           <ContainerImage>
             {hostFamilyDetails.picture ? (
               <Image
-                source={{ uri: hostFamilyDetails.picture[0]?.url }}
+                source={{ uri: hostFamilyDetails.picture[0].url }}
                 style={{
                   width: 100,
                   height: 100,

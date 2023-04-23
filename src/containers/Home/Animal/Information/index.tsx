@@ -36,6 +36,7 @@ import {
   ContainerViewImage,
   Description,
   InCharge,
+  PaddingRight,
   TitleCard,
   ViewImage,
 } from './Styled'
@@ -134,7 +135,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Spacing size="8" />
                 <InCharge>
                   {userData.picture ? (
-                    <View style={{ paddingRight: 8 }}>
+                    <PaddingRight>
                       <ImageElement
                         source={{ uri: userData.picture[0].url }}
                         style={{
@@ -147,11 +148,11 @@ export const AnimalInformation = (): React.ReactElement => {
                         containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
                         PlaceholderContent={<ActivityIndicator />}
                       />
-                    </View>
+                    </PaddingRight>
                   ) : (
-                    <View>
+                    <PaddingRight>
                       <NoPictureSvg />
-                    </View>
+                    </PaddingRight>
                   )}
                   <View>
                     <Body1>

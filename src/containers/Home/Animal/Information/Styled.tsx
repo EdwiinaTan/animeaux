@@ -34,7 +34,7 @@ export const ImageAnimal = styled.Image`
   height: 250px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  background-color: #dce1e7; ;
+  background-color: ${theme.colors.grey1};
 `
 
 export const Description = styled.View`
@@ -45,7 +45,7 @@ export const Description = styled.View`
   padding-right: 16px
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  border: 1px solid #dce1e7;
+  border: 1px solid ${theme.colors.grey1};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -71,4 +71,8 @@ export const Illustration = styled.Image`
   height: 100px;
   border-radius: 8px;
   background-color: ${theme.colors.grey1};
+`
+
+export const PaddingRight = styled.View`
+  padding-right: 16px;
 `

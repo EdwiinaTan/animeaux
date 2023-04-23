@@ -1,6 +1,7 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { EmailSvg } from 'assets/svg/email'
+import { NoPictureSvg } from 'assets/svg/noPicture'
 import { PhoneSvg } from 'assets/svg/phone'
 import { ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
@@ -55,8 +56,8 @@ export const UserInCharge = () => {
         ) : (
           <>
             <Spacing size="8" />
-            {userData.picture && (
-              <ContainerImage>
+            <ContainerImage>
+              {userData.picture ? (
                 <Image
                   source={{ uri: userData.picture[0].url }}
                   style={{
@@ -66,9 +67,13 @@ export const UserInCharge = () => {
                   }}
                   PlaceholderContent={<ActivityIndicator />}
                 />
-                <Spacing size="4" />
-              </ContainerImage>
-            )}
+              ) : (
+                <NoPictureSvg />
+              )}
+              <Body1>
+                {userData.firstName} {userData.lastName}
+              </Body1>
+            </ContainerImage>
             <ContainerDescription>
               <Description>
                 <Spacing size="64" />

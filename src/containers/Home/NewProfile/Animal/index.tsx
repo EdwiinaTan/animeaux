@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
+import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
 import { useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
+import { postAnimal } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Utils'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
@@ -11,12 +13,17 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
-import { Card, Container, customStyles, Keyboard } from './Styled'
+import { ContainerStyle } from 'src/constant/Theme/Styled'
+import { AnimalType } from 'src/types/Animal/Type'
+import { customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
   const navigation = useNavigation()
   const labels = ['Profil', 'Situation', 'Photos']
   const [currentPosition, setCurrentPosition] = useState(0)
+  const [valueProfile, setValueProfile] = useState()
+  const [valueSituation, setValueSituation] = useState()
+  const queryClient = new QueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -46,6 +53,7 @@ export const AddAnimal = () => {
     hostFamilyId: '',
     status: '',
     placeAssigned: '',
+    dateAssigned: '',
     reason: '',
     childAgreement: '',
     catAgreement: '',
@@ -55,11 +63,36 @@ export const AddAnimal = () => {
     isSterilized: '',
   }
 
-  const handleSubmitPage = (handleSubmit, errors) => {
-    handleSubmit()
-    if (!errors) {
-      onPageChange('next')
+  const onSubmitProfile = (values) => {
+    setValueProfile(values)
+    onPageChange('next')
+  }
+
+  const onSubmitSituation = (values) => {
+    setValueSituation(values)
+    onPageChange('next')
+  }
+
+  const mutation = useMutation({
+    mutationFn: postAnimal,
+    onSuccess: () => {
+      navigation.goBack()
+      queryClient.invalidateQueries(['animals'])
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
+  const validation = () => {
+    const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
+    const data = {
+      ...values,
+      userId: [values.userId],
     }
+
+    console.log('values', data)
+    mutation.mutate(data)
   }
 
   return (
@@ -75,69 +108,79 @@ export const AddAnimal = () => {
       />
       <Spacing size="8" />
       <Keyboard behavior="padding" enabled>
-        <Container>
-          <Card>
-            {currentPosition === 0 && (
-              <Formik
-                initialValues={initialValuesStepOne}
-                validationSchema={validationAnimalProfile}
-                onSubmit={(values) => {
-                  console.log('valueOne', values)
-                }}
-              >
-                {({
-                  handleChange,
-                  values,
-                  handleSubmit,
-                  handleBlur,
-                  errors,
-                  touched,
-                  setFieldValue,
-                }) => (
-                  <AnimalProfile
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={() => handleSubmitPage(handleSubmit, errors)}
-                    errors={errors}
-                    touched={touched}
-                    setFieldValue={setFieldValue}
-                  />
-                )}
-              </Formik>
-            )}
-            {currentPosition === 1 && (
-              <Formik
-                initialValues={initialValuesStepTwo}
-                validationSchema={validationAnimalSituation}
-                onSubmit={(values) => {
-                  console.log('valueTwo', values)
-                }}
-              >
-                {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
-                  <AnimalSituation
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                    errors={errors}
-                    touched={touched}
-                  />
-                )}
-              </Formik>
-            )}
-          </Card>
+        <ContainerStyle>
           {currentPosition !== 0 && (
             <TouchableOpacity onPress={() => onPageChange('prev')}>
               <Body1>Précédent</Body1>
-              <Spacing size="24" />
+              <Spacing size="8" />
             </TouchableOpacity>
           )}
-          <TouchableOpacity onPress={() => onPageChange('next')}>
-            <Body1>Suivant</Body1>
-          </TouchableOpacity>
+          {currentPosition === 0 && (
+            <Formik
+              initialValues={initialValuesStepOne}
+              validationSchema={validationAnimalProfile}
+              onSubmit={(values) => {
+                onSubmitProfile(values)
+              }}
+            >
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
+                <AnimalProfile
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+            </Formik>
+          )}
+          {currentPosition === 1 && (
+            <Formik
+              initialValues={initialValuesStepTwo}
+              validationSchema={validationAnimalSituation}
+              onSubmit={(values) => {
+                onSubmitSituation(values)
+              }}
+            >
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
+                <AnimalSituation
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+            </Formik>
+          )}
+          {currentPosition === 2 && (
+            <TouchableOpacity onPress={() => validation()}>
+              <Body1>Suivant</Body1>
+              <Spacing size="8" />
+            </TouchableOpacity>
+          )}
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )

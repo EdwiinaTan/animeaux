@@ -5,7 +5,7 @@ import { PieChartComponent } from 'src/components/Chart/PieChart'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { Card, Container } from './Styled'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { StatisticsProps } from './Type'
 import { getLabelDataReduce } from './Utils'
 
@@ -27,8 +27,8 @@ export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscript
   const labelDataAbsence = getLabelDataReduce(formInscriptionData, 'absenceHours')
 
   return (
-    <Container>
-      <Card>
+    <ContainerStyle>
+      <CardStyle>
         <Title2>Sur les {animalData.length} animaux</Title2>
         <BarChartComponent title="Espèce" data={labelDataSpecies} />
         <Spacing size="16" />
@@ -38,11 +38,11 @@ export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscript
         <PieChartComponent title="Statut" data={labelDataStatus} noLeft />
         <Divider width={2} color={theme.colors.greyOutline} />
         <BarChartComponent title="Raison" data={labelDataReason} />
-      </Card>
+      </CardStyle>
       <Spacing size="16" />
-      <Card>
+      <CardStyle>
         <Title2>
-          Sur les {formInscriptionData.length} réponses fournies pour devenir famille d'accueil
+          Sur les {formInscriptionData.length} réponses fournies pour être famille d'accueil
         </Title2>
         <Spacing size="8" />
         <BarChartComponent title="Type de résidence" data={labelDataResidenceType} />
@@ -68,8 +68,8 @@ export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscript
         <PieChartComponent title="Connaissance en animal" data={labelDataHasEducKnowledge} />
         <Divider width={2} color={theme.colors.greyOutline} />
         <PieChartComponent title="Allergie" data={labelDataAllergy} />
-      </Card>
+      </CardStyle>
       <Spacing size="16" />
-    </Container>
+    </ContainerStyle>
   )
 }

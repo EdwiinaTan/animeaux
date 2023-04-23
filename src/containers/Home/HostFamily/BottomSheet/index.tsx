@@ -13,9 +13,10 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
+import { TextRed } from 'src/constant/Theme/Styled'
 import { startsWithVowel } from 'src/utils/Functions'
 import { HostFamilyRouteParams } from '../Router/type'
-import { ContainerButton, ListView, TextRed } from './Styled'
+import { ContainerButton, ListView } from './Styled'
 import { BottomSheetProps } from './Type'
 
 export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({

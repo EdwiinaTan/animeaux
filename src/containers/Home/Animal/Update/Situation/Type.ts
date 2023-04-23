@@ -10,5 +10,5 @@ export interface AnimalRequest {
   dogAgreement: AnimalAgreement
   userId: string
   privateDescription: string
-  isSterilized: string
+  isSterilized: AnimalAgreement
 }

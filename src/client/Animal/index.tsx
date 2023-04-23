@@ -19,6 +19,21 @@ export const getAnimals = () => {
     })
 }
 
+export const postAnimal = (data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
+  return axios
+    .post(
+      url,
+      { fields: { ...data } },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err.response.data)
+    })
+}
+
 export const getAnimalById = (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   return axios
@@ -54,12 +69,12 @@ export const deleteAnimalById = (recordId: string) => {
 // ])
 
 export const updateAnimalById = (recordId: string, data) => {
-  const returnIsSterilized = () => {
-    if (data.isSterilized === 'Oui') {
-      return true
-    }
-    return false
-  }
+  // const returnIsSterilized = () => {
+  //   if (data.isSterilized === 'Oui') {
+  //     return true
+  //   }
+  //   return false
+  // }
 
   // console.log('data', data)
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
@@ -71,7 +86,7 @@ export const updateAnimalById = (recordId: string, data) => {
           ...data,
           hostFamilyId: [data.hostFamilyId],
           userId: [data.userId],
-          isSterilized: returnIsSterilized(),
+          // isSterilized: returnIsSterilized(),
         },
       },
       {

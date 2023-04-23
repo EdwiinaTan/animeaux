@@ -27,7 +27,7 @@ export interface AnimalType {
   childAgreement: AnimalAgreement
   catAgreement: AnimalAgreement
   dogAgreement: AnimalAgreement
-  isSterilized?: boolean
+  isSterilized?: AnimalAgreement
   pictures: Picture[]
   userId: string
   privateDescription?: string

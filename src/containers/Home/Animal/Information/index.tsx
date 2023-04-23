@@ -19,6 +19,7 @@ import {
   IconMaterialIcons,
 } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalAgreement } from 'src/types/Animal/enum'
@@ -31,8 +32,6 @@ import { AnimalRouteParams } from '../Router/type'
 import { renderAnimalGender, renderHostFamily } from '../Utils'
 import {
   BoxViewImage,
-  Card,
-  Container,
   ContainerViewImage,
   Description,
   InCharge,
@@ -63,10 +62,13 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const renderIsSterilized = () => {
-    if (animalDetails.isSterilized) {
+    if (animalDetails.isSterilized === AnimalAgreement.YES) {
       return <Body1>Stérilisé</Body1>
+    } else if (animalDetails.isSterilized === AnimalAgreement.NO) {
+      return <Body1>Non stérilisé</Body1>
+    } else {
+      return <Body1>Stérilisé ?</Body1>
     }
-    return <Body1>Non stérilisé</Body1>
   }
 
   const renderAgreement = (value: string) => {
@@ -97,12 +99,12 @@ export const AnimalInformation = (): React.ReactElement => {
         title={uppercaseWord(startsWithVowel(animalDetails.name))}
         toggleOverlay={handlePresentModal}
       />
-      <Container>
+      <ContainerStyle>
         {statusUser === FetchStatus.LOADING ? (
           <ActivityIndicator size="large" color={theme.colors.blue} />
         ) : (
           <ScrollView>
-            <CarouselAnimal animal={animalDetails} />
+            {animalDetails.pictures && <CarouselAnimal animal={animalDetails} />}
             <Description>
               <View>
                 <TitleCard>
@@ -123,49 +125,53 @@ export const AnimalInformation = (): React.ReactElement => {
             </Description>
             <Spacing size="16" />
             <TouchableOpacity onPress={onClick} activeOpacity={1}>
-              <Card>
+              <CardStyle>
                 <TitleCard>
                   <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
                   <Title2 paddingLeft={8}>Prise en charge </Title2>
                 </TitleCard>
                 <Spacing size="8" />
                 <InCharge>
-                  <View style={{ paddingRight: 8 }}>
-                    <ImageElement
-                      source={{ uri: userData.picture[0].url }}
-                      style={{
-                        width: 100,
-                        height: 100,
-                        borderRadius: 8,
-                        borderTopRightRadius: 8,
-                        resizeMode: 'contain',
-                      }}
-                      containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
-                      PlaceholderContent={<ActivityIndicator />}
-                    />
-                  </View>
+                  {userData.picture && (
+                    <View style={{ paddingRight: 8 }}>
+                      <ImageElement
+                        source={{ uri: userData.picture[0].url }}
+                        style={{
+                          width: 100,
+                          height: 100,
+                          borderRadius: 8,
+                          borderTopRightRadius: 8,
+                          resizeMode: 'contain',
+                        }}
+                        containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
+                        PlaceholderContent={<ActivityIndicator />}
+                      />
+                    </View>
+                  )}
                   <View>
                     <Body1>
-                      {userData.firstName} {userData.lastName}
+                      Par : {userData.firstName} {userData.lastName}
                     </Body1>
                     <Body1>Date : {renderDateFormat(animalDetails.dateAssigned)}</Body1>
                     <Body1>Lieu : {animalDetails.placeAssigned}</Body1>
                     <Body1>Raison : {animalDetails.reason}</Body1>
                   </View>
                 </InCharge>
-              </Card>
+              </CardStyle>
             </TouchableOpacity>
             <Spacing size="16" />
-            <Card>
+            <CardStyle>
               <TitleCard>
                 <IconEntypo name="heart" size={20} color={theme.colors.red} />
                 <Title2 paddingLeft={8}>Son histoire</Title2>
               </TitleCard>
               <Spacing size="8" />
-              <Body2>{animalDetails.publicDescription}</Body2>
-            </Card>
+              <Body2>
+                {animalDetails.publicDescription ?? 'Aucune description publique pour le moment'}
+              </Body2>
+            </CardStyle>
             <Spacing size="16" />
-            <Card>
+            <CardStyle>
               <BoxViewImage>
                 <TitleCard>
                   <IconMaterialCommunityIcons
@@ -188,22 +194,22 @@ export const AnimalInformation = (): React.ReactElement => {
                   </ViewImage>
                 </ContainerViewImage>
               </BoxViewImage>
-            </Card>
+            </CardStyle>
             <Spacing size="16" />
-            <Card>
+            <CardStyle>
               <TitleCard>
                 <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
                 <Title2 paddingLeft={8}>Description privé</Title2>
               </TitleCard>
               <Spacing size="8" />
               <Body2>
-                {animalDetails.privateDescription ?? 'Aucune description pour le moment'}
+                {animalDetails.privateDescription ?? 'Aucune description privée pour le moment'}
               </Body2>
-            </Card>
+            </CardStyle>
             <Spacing size="32" />
           </ScrollView>
         )}
-      </Container>
+      </ContainerStyle>
       <BottomSheetAnimal bottomSheetModalRef={bottomSheetModalRef} animalDetails={animalDetails} />
     </Layout>
   )

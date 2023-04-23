@@ -14,9 +14,10 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome, IconFoundation } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
+import { TextRed } from 'src/constant/Theme/Styled'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
-import { ContainerButton, TextRed } from './Styled'
+import { ContainerButton } from './Styled'
 import { BottomSheetProps } from './Type'
 
 export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({

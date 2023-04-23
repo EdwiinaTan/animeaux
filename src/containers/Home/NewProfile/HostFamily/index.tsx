@@ -1,15 +1,14 @@
 import { useNavigation } from '@react-navigation/native'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
-import { StyleSheet } from 'react-native'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { theme } from 'src/constant/Theme'
-import { Card, Container, Keyboard } from './Styled'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { Keyboard } from './Styled'
 
 export const AddHostFamily = () => {
   const navigation = useNavigation()
@@ -37,7 +36,7 @@ export const AddHostFamily = () => {
   const mutation = useMutation({
     mutationFn: postHostFamily,
     onSuccess: () => {
-      navigation.goBack()
+      onClickGoBack()
       queryClient.invalidateQueries(['hostFamilies'])
     },
     onError: (err) => {
@@ -46,7 +45,7 @@ export const AddHostFamily = () => {
   })
 
   const addHostFamily = (values) => {
-    mutation.mutate(values)
+    mutation.mutate({ ...values, animalId: [values.animalId] })
     // postHostFamily(values)
   }
 
@@ -54,8 +53,8 @@ export const AddHostFamily = () => {
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
       <Keyboard behavior="padding" enabled>
-        <Container>
-          <Card>
+        <ContainerStyle>
+          <CardStyle>
             <Formik
               validationSchema={validationHostFamily}
               initialValues={initialValues}
@@ -74,22 +73,10 @@ export const AddHostFamily = () => {
                 />
               )}
             </Formik>
-          </Card>
+          </CardStyle>
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: theme.colors.greyOutline,
-  },
-})

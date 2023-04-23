@@ -1,6 +1,7 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { EmailSvg } from 'assets/svg/email'
+import { NoPictureSvg } from 'assets/svg/noPicture'
 import { PhoneSvg } from 'assets/svg/phone'
 import { ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
@@ -56,16 +57,22 @@ export const UserInCharge = () => {
           <>
             <Spacing size="8" />
             <ContainerImage>
-              <Image
-                source={{ uri: userData?.picture[0]?.url }}
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 8,
-                }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-              <Spacing size="4" />
+              {userData.picture ? (
+                <Image
+                  source={{ uri: userData.picture[0].url }}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 8,
+                  }}
+                  PlaceholderContent={<ActivityIndicator />}
+                />
+              ) : (
+                <NoPictureSvg />
+              )}
+              <Body1>
+                {userData.firstName} {userData.lastName}
+              </Body1>
             </ContainerImage>
             <ContainerDescription>
               <Description>
@@ -73,7 +80,7 @@ export const UserInCharge = () => {
                 <Body1>
                   {userData.firstName} {userData.lastName}
                 </Body1>
-                {renderField(<PhoneSvg />, formatPhoneNumber(userData.phone))}
+                {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
                 {renderField(<EmailSvg />, userData.email)}
               </Description>
               {/* animaux en charge avec historique */}

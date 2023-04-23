@@ -33,11 +33,10 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
           {animal.pictures ? (
             <ContainerImage>
               <Image
-                source={{ uri: animal.pictures[0]?.url }}
+                source={{ uri: animal.pictures[0].url }}
                 style={{ width: 100, height: 100, borderRadius: 8 }}
                 PlaceholderContent={<ActivityIndicator />}
               />
-              <Image resizeMode="cover" source={{ uri: animal.pictures[0]?.url }} />
             </ContainerImage>
           ) : (
             <View style={{ paddingRight: 16 }}>

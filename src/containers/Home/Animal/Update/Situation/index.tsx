@@ -1,7 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik } from 'formik'
-import { updateAnimalById } from 'src/client/Animal'
+import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
 import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/Utils'
 import { HeaderComponent } from 'src/components/Header'
@@ -24,6 +25,7 @@ export const UpdateAnimalSituation: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
+  const queryClient = new QueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -67,9 +69,36 @@ export const UpdateAnimalSituation: React.FC = () => {
     }
   }
 
-  const updateAnimal = (values: AnimalRequest) => {
-    updateAnimalById(animalDetails.id, values)
-    navigation.goBack()
+  const mutation = useMutation({
+    mutationFn: updateAnimalByIdTest,
+    onSuccess: (data) => {
+      navigation.navigate('animalScreen')
+      // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
+      // queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
+      queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalRequest) =>
+        oldData
+          ? {
+              ...oldData,
+              data,
+            }
+          : oldData
+      )
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
+  const updateAnimal = async (values: AnimalRequest) => {
+    // updateAnimalById(animalDetails.id, values)
+    if (values) {
+      const data = {
+        ...values,
+        userId: [values.userId],
+        hostFamilyId: [values.hostFamilyId],
+      }
+      mutation.mutateAsync({ id: animalDetails.id, values: data })
+    }
   }
 
   //utiliser (field) au lieu de tout passer en param comme ça lol

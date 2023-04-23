@@ -6,9 +6,9 @@ export const header = {
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 }
 
-export const getAnimals = () => {
+export const getAnimals = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })
@@ -68,15 +68,8 @@ export const deleteAnimalById = (recordId: string) => {
 //     },
 // ])
 
+//mauvais
 export const updateAnimalById = (recordId: string, data) => {
-  // const returnIsSterilized = () => {
-  //   if (data.isSterilized === 'Oui') {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  // console.log('data', data)
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   axios
     .patch(
@@ -86,7 +79,6 @@ export const updateAnimalById = (recordId: string, data) => {
           ...data,
           hostFamilyId: [data.hostFamilyId],
           userId: [data.userId],
-          // isSterilized: returnIsSterilized(),
         },
       },
       {
@@ -118,14 +110,15 @@ export const updateAnimalByIdTest = (data) => {
     })
 }
 
-// export const updateAnimalByIdFetch = async (data: AnimalRequest) => {
-//   console.log('data', data)
-//   const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${data.id}/`, {
-//     method: 'PATCH',
-//     headers: header,
-//     body: JSON.stringify(data),
-//   })
-//   const result = res.json()
-//   console.log('patch', result)
-//   return result
-// }
+export const updateAnimalByIdFetch = async (data) => {
+  const { id, values } = data
+
+  console.log('data', data)
+  const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${id}/`, {
+    method: 'PATCH',
+    headers: header,
+    body: JSON.stringify({ fields: { ...values } }),
+  })
+  const result = res.json()
+  return result
+}

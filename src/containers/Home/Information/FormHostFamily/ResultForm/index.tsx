@@ -59,7 +59,9 @@ export const ResultForm = () => {
       <ContainerStyle>
         <CardStyle>
           <Spacing size="8" />
-          <Title3>IDENTITÉ DE L'ANIMAL À ACCUEILLIR</Title3>
+          <Title3>
+            <TextLine>1. IDENTITÉ DE L'ANIMAL À ACCUEILLIR</TextLine>
+          </Title3>
           <Spacing size="8" />
           <Body1>Nom : {renderOptionalField(formInscriptionData.animalName)}</Body1>
           <Body1>Prénom : {renderOptionalField(formInscriptionData.animalRace)}</Body1>
@@ -67,7 +69,9 @@ export const ResultForm = () => {
         </CardStyle>
         <Spacing size="16" />
         <CardStyle>
-          <Title3>IDENTITÉ DE LA FAMILLE D’ACCUEIL</Title3>
+          <Title3>
+            <TextLine>2. IDENTITÉ DE LA FAMILLE</TextLine>
+          </Title3>
           <Spacing size="8" />
           <Body1>
             <TextLine>Nom</TextLine> : {formInscriptionData.firstName}
@@ -230,7 +234,9 @@ export const ResultForm = () => {
         <Spacing size="16" />
         <CardStyle>
           <Spacing size="8" />
-          <Title3>IDENTITE DE VOTRE VÉTÉRINAIRE</Title3>
+          <Title3>
+            <TextLine>3. IDENTITE DE VOTRE VÉTÉRINAIRE</TextLine>
+          </Title3>
           <Spacing size="8" />
           <Body1>Nom : {renderOptionalField(formInscriptionData.vetName)}</Body1>
           <Body1>Adresse : {renderOptionalField(formInscriptionData.vetAddress)}</Body1>

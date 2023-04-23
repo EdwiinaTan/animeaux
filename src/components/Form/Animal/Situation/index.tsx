@@ -145,9 +145,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           <TextLine>2. Prise en charge</TextLine>
         </Title2>
         <Spacing size="8" />
-        <Body2>
-          Famille d'accueil<TextRed>*</TextRed>
-        </Body2>
+        <Body2>Famille d'accueil</Body2>
         <View style={{ width: '100%' }}>
           <Field name="hostFamilyId">
             {({ field }) => (
@@ -169,9 +167,6 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
               />
             )}
           </Field>
-          {errors.hostFamilyId && touched.hostFamilyId && (
-            <Body3 color={theme.colors.red}>{errors.hostFamilyId}</Body3>
-          )}
         </View>
         <Spacing size="16" />
         <Body2>

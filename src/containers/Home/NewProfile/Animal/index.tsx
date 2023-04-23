@@ -13,7 +13,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
-import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { customStyles, Keyboard } from './Styled'
 
@@ -88,9 +88,9 @@ export const AddAnimal = () => {
     const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
     const data = {
       ...values,
-      hostFamilyId: [values.hostFamilyId],
       userId: [values.userId],
     }
+
     console.log('values', data)
     mutation.mutate(data)
   }
@@ -145,35 +145,33 @@ export const AddAnimal = () => {
             </Formik>
           )}
           {currentPosition === 1 && (
-            <CardStyle>
-              <Formik
-                initialValues={initialValuesStepTwo}
-                validationSchema={validationAnimalSituation}
-                onSubmit={(values) => {
-                  onSubmitSituation(values)
-                }}
-              >
-                {({
-                  handleChange,
-                  values,
-                  handleSubmit,
-                  handleBlur,
-                  errors,
-                  touched,
-                  setFieldValue,
-                }) => (
-                  <AnimalSituation
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                    errors={errors}
-                    touched={touched}
-                    setFieldValue={setFieldValue}
-                  />
-                )}
-              </Formik>
-            </CardStyle>
+            <Formik
+              initialValues={initialValuesStepTwo}
+              validationSchema={validationAnimalSituation}
+              onSubmit={(values) => {
+                onSubmitSituation(values)
+              }}
+            >
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
+                <AnimalSituation
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+            </Formik>
           )}
           {currentPosition === 2 && (
             <TouchableOpacity onPress={() => validation()}>

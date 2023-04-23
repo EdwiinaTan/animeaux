@@ -29,10 +29,6 @@ export const ContainerCheckbox = styled.View`
   flex-wrap: wrap;
 `
 
-export const TextRed = styled.Text`
-  color: ${theme.colors.red};
-`
-
 export const ContainerCalendar = styled.View`
   display: flex;
   flex-direction: row;

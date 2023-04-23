@@ -9,7 +9,7 @@ import { CheckBoxComponent } from 'src/components/Form/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, TextLine } from 'src/constant/Theme/Styled'
+import { CardStyle, TextLine, TextRed } from 'src/constant/Theme/Styled'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { useGetUsers } from 'src/hooks/User'
 import {
@@ -19,7 +19,7 @@ import {
   AnimalStatusEnum,
 } from 'src/types/Animal/enum'
 import { FetchStatus } from 'src/types/Status'
-import { ContainerCalendar, ContainerCheckbox, style, styles, TextRed } from '../Styled'
+import { ContainerCalendar, ContainerCheckbox, style, styles } from '../Styled'
 
 export const AnimalSituation: React.FC<AddAnimalProps> = ({
   values,

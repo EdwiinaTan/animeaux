@@ -3,12 +3,12 @@ import { TextInput, View } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
+import { TextRed } from 'src/constant/Theme/Styled'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
 import { Spacing } from '../../Layout/Spacing'
 import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
-import { TextRed } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
 export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({

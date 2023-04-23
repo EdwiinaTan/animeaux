@@ -8,16 +8,16 @@ import { Button } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { CheckBoxComponent } from 'src/components/Form/Animal/Checkbox'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body2, Body3, Title3 } from 'src/components/Typo'
+import { Body2, Body3, Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, ContainerCalendar } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerCalendar, TextLine, TextRed } from 'src/constant/Theme/Styled'
 import {
   AnimalColorEnum,
   AnimalGenderEnum,
   AnimalRaceEnum,
   AnimalTypeEnum,
 } from 'src/types/Animal/enum'
-import { ContainerCheckbox, style, styles, TextRed } from '../Styled'
+import { ContainerCheckbox, style, styles } from '../Styled'
 import { AnimalFormProps } from '../Type'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({
@@ -75,9 +75,13 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
     <>
       <CardStyle>
         <ContainerCheckbox>
-          <Title3>
-            Espèce<TextRed>*</TextRed>
-          </Title3>
+          <Title2>
+            <TextLine>1. Espèce</TextLine>
+          </Title2>
+          <Spacing size="8" />
+          <Body2>
+            Catégorie<TextRed>*</TextRed>
+          </Body2>
           <Spacing size="8" />
           {speciesArray.map((specie, key) => (
             <CheckBoxComponent
@@ -95,9 +99,13 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       <Spacing size="16" />
       <CardStyle>
         <ContainerCheckbox>
-          <Title3>
-            Genre<TextRed>*</TextRed>
-          </Title3>
+          <Title2>
+            <TextLine>2. Genre</TextLine>
+          </Title2>
+          <Spacing size="8" />
+          <Body2>
+            Sexe<TextRed>*</TextRed>
+          </Body2>
           <Spacing size="8" />
           {genderArray.map((gender, key) => (
             <CheckBoxComponent
@@ -112,7 +120,9 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
       <Spacing size="16" />
       <CardStyle>
         <ContainerCheckbox>
-          <Title3>Informations</Title3>
+          <Title2>
+            <TextLine>3. Informations</TextLine>
+          </Title2>
           <Spacing size="8" />
           <Body2>
             Nom<TextRed>*</TextRed>

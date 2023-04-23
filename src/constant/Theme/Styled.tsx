@@ -23,3 +23,7 @@ export const ContainerStyle = styled.ScrollView`
 export const TextLine = styled.Text`
   text-decoration: underline;
 `
+
+export const TextRed = styled.Text`
+  color: ${theme.colors.red};
+`

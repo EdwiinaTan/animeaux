@@ -3,12 +3,15 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
-import { Image, View } from 'react-native'
-import { Button } from 'react-native-elements'
+import { ActivityIndicator, Image, View } from 'react-native'
+import { Button, Divider, Image as ImageElement } from 'react-native-elements'
+
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
+import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { AnimalRouteParams } from '../../Router/type'
 
@@ -41,7 +44,7 @@ export const AnimalPhoto = () => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      base64: true,
+      // base64: true,
     })
 
     console.log(result)
@@ -90,25 +93,62 @@ export const AnimalPhoto = () => {
     }
   }
 
+  const renderPictures = () => {
+    return animalDetails.pictures.map((picture, key) => {
+      return (
+        <View key={`pictureEdit_${key}`} style={{ paddingTop: 8 }}>
+          <ImageElement
+            source={{ uri: picture.url }}
+            style={{ width: 150, height: 150, borderRadius: 8 }}
+            PlaceholderContent={<ActivityIndicator />}
+          />
+        </View>
+      )
+    })
+  }
+
   return (
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
         title={`Modifier les photos de ${animalDetails.name}`}
       />
-      {hasGalleryPermission ? (
-        <>
-          <Button title="VALIDER" onPress={updateAnimalPhoto} />
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
-            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-          </View>
-        </>
-      ) : (
-        <Body1 textAlign="center">
-          Vous devez tout d'abord accepter l'autorisation pour envoyer des images
-        </Body1>
-      )}
+      <ContainerStyle>
+        <CardStyle>
+          {hasGalleryPermission ? (
+            <>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                }}
+              >
+                {renderPictures()}
+              </View>
+              <Spacing size="16" />
+              {!imagePush ? (
+                <Button title="Ajouter une photo" onPress={pickImage} />
+              ) : (
+                <Divider width={2} />
+              )}
+              <Spacing size="16" />
+              {image && (
+                <View style={{ alignItems: 'center' }}>
+                  <Image source={{ uri: image }} style={{ width: 150, height: 150 }} />
+                </View>
+              )}
+              <Spacing size="16" />
+              {imagePush && <Button title="Valider l'image" onPress={updateAnimalPhoto} />}
+            </>
+          ) : (
+            <Body1 textAlign="center">
+              Vous devez tout d'abord accepter l'autorisation pour envoyer des images
+            </Body1>
+          )}
+        </CardStyle>
+      </ContainerStyle>
     </Layout>
   )
 }

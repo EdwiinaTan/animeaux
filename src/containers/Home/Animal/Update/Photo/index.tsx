@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
-import { ActivityIndicator, Image, View } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 import { Button, Divider, Image as ImageElement } from 'react-native-elements'
 
 import { updateAnimalByIdTest } from 'src/client/Animal'
@@ -44,7 +44,6 @@ export const AnimalPhoto = () => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      // base64: true,
     })
 
     console.log(result)
@@ -133,14 +132,22 @@ export const AnimalPhoto = () => {
               ) : (
                 <Divider width={2} />
               )}
-              <Spacing size="16" />
               {image && (
                 <View style={{ alignItems: 'center' }}>
-                  <Image source={{ uri: image }} style={{ width: 150, height: 150 }} />
+                  <Spacing size="16" />
+                  <ImageElement
+                    source={{ uri: image }}
+                    style={{ width: 200, height: 200, borderRadius: 8 }}
+                    PlaceholderContent={<ActivityIndicator />}
+                  />
                 </View>
               )}
-              <Spacing size="16" />
-              {imagePush && <Button title="Valider l'image" onPress={updateAnimalPhoto} />}
+              {imagePush && (
+                <>
+                  <Spacing size="16" />
+                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
+                </>
+              )}
             </>
           ) : (
             <Body1 textAlign="center">

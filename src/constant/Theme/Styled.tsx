@@ -19,3 +19,7 @@ export const ContainerStyle = styled.ScrollView`
   padding-left: 16px;
   padding-right: 16px;
 `
+
+export const TextLine = styled.Text`
+  text-decoration: underline;
+`

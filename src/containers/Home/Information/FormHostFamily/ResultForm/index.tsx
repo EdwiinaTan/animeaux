@@ -7,12 +7,11 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, TextLine } from 'src/constant/Theme/Styled'
 import { useGetFormInscriptionById } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber } from 'src/utils/Functions'
 import { InformationRouteParams } from '../../Router/type'
-import { TextLine } from './Styled'
 
 export const ResultForm = () => {
   const route = useRoute<RouteProp<InformationRouteParams>>()

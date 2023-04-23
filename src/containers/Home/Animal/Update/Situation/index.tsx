@@ -7,7 +7,7 @@ import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
@@ -81,36 +81,34 @@ export const UpdateAnimalSituation: React.FC = () => {
       />
       <Keyboard behavior="padding" enabled>
         <ContainerStyle>
-          <CardStyle>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationAnimalSituation}
-              onSubmit={(values) => updateAnimal(values)}
-            >
-              {({
-                handleChange,
-                values,
-                handleSubmit,
-                handleBlur,
-                errors,
-                touched,
-                setFieldValue,
-              }) => (
-                <AnimalSituation
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                  errors={errors}
-                  touched={touched}
-                  renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
-                  renderDefaultOptionUser={renderDefaultOptionUser}
-                  renderDefaultOptionPlace={renderDefaultOptionPlace}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-            </Formik>
-          </CardStyle>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationAnimalSituation}
+            onSubmit={(values) => updateAnimal(values)}
+          >
+            {({
+              handleChange,
+              values,
+              handleSubmit,
+              handleBlur,
+              errors,
+              touched,
+              setFieldValue,
+            }) => (
+              <AnimalSituation
+                values={values}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                touched={touched}
+                renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
+                renderDefaultOptionUser={renderDefaultOptionUser}
+                renderDefaultOptionPlace={renderDefaultOptionPlace}
+                setFieldValue={setFieldValue}
+              />
+            )}
+          </Formik>
           <Spacing size="24" />
         </ContainerStyle>
       </Keyboard>

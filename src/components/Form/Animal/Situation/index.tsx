@@ -397,7 +397,6 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           )}
         </Field>
       </CardStyle>
-
       <Spacing size="16" />
       <Button title="Valider" onPress={() => handleSubmit()} />
     </>

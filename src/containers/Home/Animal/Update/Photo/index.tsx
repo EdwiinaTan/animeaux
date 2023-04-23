@@ -106,6 +106,11 @@ export const AnimalPhoto = () => {
     })
   }
 
+  const resetPicture = () => {
+    setImagePush('')
+    setImage('')
+  }
+
   return (
     <Layout>
       <HeaderComponent
@@ -146,6 +151,8 @@ export const AnimalPhoto = () => {
                 <>
                   <Spacing size="16" />
                   <Button title="Valider l'image" onPress={updateAnimalPhoto} />
+                  <Spacing size="8" />
+                  <Button title="Supprimer l'image" onPress={resetPicture} />
                 </>
               )}
             </>

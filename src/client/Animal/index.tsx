@@ -110,14 +110,15 @@ export const updateAnimalByIdTest = (data) => {
     })
 }
 
-// export const updateAnimalByIdFetch = async (data: AnimalRequest) => {
-//   console.log('data', data)
-//   const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${data.id}/`, {
-//     method: 'PATCH',
-//     headers: header,
-//     body: JSON.stringify(data),
-//   })
-//   const result = res.json()
-//   console.log('patch', result)
-//   return result
-// }
+export const updateAnimalByIdFetch = async (data) => {
+  const { id, values } = data
+
+  console.log('data', data)
+  const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${id}/`, {
+    method: 'PATCH',
+    headers: header,
+    body: JSON.stringify({ fields: { ...values } }),
+  })
+  const result = res.json()
+  return result
+}

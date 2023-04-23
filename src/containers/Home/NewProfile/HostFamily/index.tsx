@@ -7,7 +7,8 @@ import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Card, Container, Keyboard } from './Styled'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { Keyboard } from './Styled'
 
 export const AddHostFamily = () => {
   const navigation = useNavigation()
@@ -52,8 +53,8 @@ export const AddHostFamily = () => {
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
       <Keyboard behavior="padding" enabled>
-        <Container>
-          <Card>
+        <ContainerStyle>
+          <CardStyle>
             <Formik
               validationSchema={validationHostFamily}
               initialValues={initialValues}
@@ -72,9 +73,9 @@ export const AddHostFamily = () => {
                 />
               )}
             </Formik>
-          </Card>
+          </CardStyle>
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )

@@ -9,10 +9,11 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { theme } from 'src/constant/Theme'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { startsWithVowel } from 'src/utils/Functions'
-import { Card, Container, Keyboard } from './Styled'
+import { Keyboard } from './Styled'
 
 export const HostFamilyUpdate = () => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
@@ -52,8 +53,8 @@ export const HostFamilyUpdate = () => {
         title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
       <Keyboard behavior="padding" enabled>
-        <Container>
-          <Card>
+        <ContainerStyle>
+          <CardStyle>
             <Formik
               validationSchema={validationHostFamily}
               initialValues={initialValues}
@@ -72,9 +73,9 @@ export const HostFamilyUpdate = () => {
                 />
               )}
             </Formik>
-          </Card>
+          </CardStyle>
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )

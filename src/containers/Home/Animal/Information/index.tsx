@@ -19,6 +19,7 @@ import {
   IconMaterialIcons,
 } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalAgreement } from 'src/types/Animal/enum'
@@ -31,8 +32,6 @@ import { AnimalRouteParams } from '../Router/type'
 import { renderAnimalGender, renderHostFamily } from '../Utils'
 import {
   BoxViewImage,
-  Card,
-  Container,
   ContainerViewImage,
   Description,
   InCharge,
@@ -100,7 +99,7 @@ export const AnimalInformation = (): React.ReactElement => {
         title={uppercaseWord(startsWithVowel(animalDetails.name))}
         toggleOverlay={handlePresentModal}
       />
-      <Container>
+      <ContainerStyle>
         {statusUser === FetchStatus.LOADING ? (
           <ActivityIndicator size="large" color={theme.colors.blue} />
         ) : (
@@ -126,7 +125,7 @@ export const AnimalInformation = (): React.ReactElement => {
             </Description>
             <Spacing size="16" />
             <TouchableOpacity onPress={onClick} activeOpacity={1}>
-              <Card>
+              <CardStyle>
                 <TitleCard>
                   <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
                   <Title2 paddingLeft={8}>Prise en charge </Title2>
@@ -158,10 +157,10 @@ export const AnimalInformation = (): React.ReactElement => {
                     <Body1>Raison : {animalDetails.reason}</Body1>
                   </View>
                 </InCharge>
-              </Card>
+              </CardStyle>
             </TouchableOpacity>
             <Spacing size="16" />
-            <Card>
+            <CardStyle>
               <TitleCard>
                 <IconEntypo name="heart" size={20} color={theme.colors.red} />
                 <Title2 paddingLeft={8}>Son histoire</Title2>
@@ -170,9 +169,9 @@ export const AnimalInformation = (): React.ReactElement => {
               <Body2>
                 {animalDetails.publicDescription ?? 'Aucune description publique pour le moment'}
               </Body2>
-            </Card>
+            </CardStyle>
             <Spacing size="16" />
-            <Card>
+            <CardStyle>
               <BoxViewImage>
                 <TitleCard>
                   <IconMaterialCommunityIcons
@@ -195,9 +194,9 @@ export const AnimalInformation = (): React.ReactElement => {
                   </ViewImage>
                 </ContainerViewImage>
               </BoxViewImage>
-            </Card>
+            </CardStyle>
             <Spacing size="16" />
-            <Card>
+            <CardStyle>
               <TitleCard>
                 <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
                 <Title2 paddingLeft={8}>Description privé</Title2>
@@ -206,11 +205,11 @@ export const AnimalInformation = (): React.ReactElement => {
               <Body2>
                 {animalDetails.privateDescription ?? 'Aucune description privée pour le moment'}
               </Body2>
-            </Card>
+            </CardStyle>
             <Spacing size="32" />
           </ScrollView>
         )}
-      </Container>
+      </ContainerStyle>
       <BottomSheetAnimal bottomSheetModalRef={bottomSheetModalRef} animalDetails={animalDetails} />
     </Layout>
   )

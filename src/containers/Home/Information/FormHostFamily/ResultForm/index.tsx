@@ -7,11 +7,12 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetFormInscriptionById } from 'src/hooks/FormInscription'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber } from 'src/utils/Functions'
 import { InformationRouteParams } from '../../Router/type'
-import { Card, Container, TextLine } from './Styled'
+import { TextLine } from './Styled'
 
 export const ResultForm = () => {
   const route = useRoute<RouteProp<InformationRouteParams>>()
@@ -56,17 +57,17 @@ export const ResultForm = () => {
         title={`Formulaire de ${formInscriptionData.firstName} ${formInscriptionData.lastName}`}
         onClickGoBack={onClickGoBack}
       />
-      <Container>
-        <Card>
+      <ContainerStyle>
+        <CardStyle>
           <Spacing size="8" />
           <Title3>IDENTITÉ DE L'ANIMAL À ACCUEILLIR</Title3>
           <Spacing size="8" />
           <Body1>Nom : {renderOptionalField(formInscriptionData.animalName)}</Body1>
           <Body1>Prénom : {renderOptionalField(formInscriptionData.animalRace)}</Body1>
           <Body1>Sexe : {renderOptionalField(formInscriptionData.animalGender)}</Body1>
-        </Card>
+        </CardStyle>
         <Spacing size="16" />
-        <Card>
+        <CardStyle>
           <Title3>IDENTITÉ DE LA FAMILLE D’ACCUEIL</Title3>
           <Spacing size="8" />
           <Body1>
@@ -226,9 +227,9 @@ export const ResultForm = () => {
             </TextLine>
           </Body1>
           <Body1>{formInscriptionData.freeUpTime}</Body1>
-        </Card>
+        </CardStyle>
         <Spacing size="16" />
-        <Card>
+        <CardStyle>
           <Spacing size="8" />
           <Title3>IDENTITE DE VOTRE VÉTÉRINAIRE</Title3>
           <Spacing size="8" />
@@ -236,9 +237,9 @@ export const ResultForm = () => {
           <Body1>Adresse : {renderOptionalField(formInscriptionData.vetAddress)}</Body1>
           <Body1>Numéro de téléphone : {renderOptionalField(formInscriptionData.vetPhone)}</Body1>
           <Body1>Adresse mail : {renderOptionalField(formInscriptionData.vetEmail)}</Body1>
-        </Card>
+        </CardStyle>
         <Spacing size="16" />
-      </Container>
+      </ContainerStyle>
     </Layout>
   )
 }

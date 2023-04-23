@@ -11,7 +11,7 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../../Router/type'
-import { Card, Container, Keyboard } from './Styled'
+import { Container, Keyboard } from './Styled'
 import { AnimalRequest } from './Type'
 
 export const AnimalUpdate = () => {
@@ -83,36 +83,34 @@ export const AnimalUpdate = () => {
       />
       <Keyboard behavior="padding" enabled>
         <Container>
-          <Card>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationAnimalProfile}
-              onSubmit={(values: AnimalRequest) => {
-                updateAnimal(values)
-              }}
-            >
-              {({
-                handleChange,
-                values,
-                handleSubmit,
-                handleBlur,
-                errors,
-                touched,
-                setFieldValue,
-              }) => (
-                <AnimalProfile
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                  animalDetails={animalDetails}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-            </Formik>
-          </Card>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationAnimalProfile}
+            onSubmit={(values: AnimalRequest) => {
+              updateAnimal(values)
+            }}
+          >
+            {({
+              handleChange,
+              values,
+              handleSubmit,
+              handleBlur,
+              errors,
+              touched,
+              setFieldValue,
+            }) => (
+              <AnimalProfile
+                values={values}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                handleSubmit={handleSubmit}
+                animalDetails={animalDetails}
+                errors={errors}
+                touched={touched}
+                setFieldValue={setFieldValue}
+              />
+            )}
+          </Formik>
           <Spacing size="24" />
         </Container>
       </Keyboard>

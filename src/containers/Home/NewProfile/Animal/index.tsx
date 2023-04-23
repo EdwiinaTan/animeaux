@@ -13,8 +13,9 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
-import { Card, Container, customStyles, Keyboard } from './Styled'
+import { customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
   const navigation = useNavigation()
@@ -107,44 +108,44 @@ export const AddAnimal = () => {
       />
       <Spacing size="8" />
       <Keyboard behavior="padding" enabled>
-        <Container>
+        <ContainerStyle>
           {currentPosition !== 0 && (
             <TouchableOpacity onPress={() => onPageChange('prev')}>
               <Body1>Précédent</Body1>
               <Spacing size="8" />
             </TouchableOpacity>
           )}
-          <Card>
-            {currentPosition === 0 && (
-              <Formik
-                initialValues={initialValuesStepOne}
-                validationSchema={validationAnimalProfile}
-                onSubmit={(values) => {
-                  onSubmitProfile(values)
-                }}
-              >
-                {({
-                  handleChange,
-                  values,
-                  handleSubmit,
-                  handleBlur,
-                  errors,
-                  touched,
-                  setFieldValue,
-                }) => (
-                  <AnimalProfile
-                    values={values}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
-                    handleSubmit={handleSubmit}
-                    errors={errors}
-                    touched={touched}
-                    setFieldValue={setFieldValue}
-                  />
-                )}
-              </Formik>
-            )}
-            {currentPosition === 1 && (
+          {currentPosition === 0 && (
+            <Formik
+              initialValues={initialValuesStepOne}
+              validationSchema={validationAnimalProfile}
+              onSubmit={(values) => {
+                onSubmitProfile(values)
+              }}
+            >
+              {({
+                handleChange,
+                values,
+                handleSubmit,
+                handleBlur,
+                errors,
+                touched,
+                setFieldValue,
+              }) => (
+                <AnimalProfile
+                  values={values}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  handleSubmit={handleSubmit}
+                  errors={errors}
+                  touched={touched}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+            </Formik>
+          )}
+          {currentPosition === 1 && (
+            <CardStyle>
               <Formik
                 initialValues={initialValuesStepTwo}
                 validationSchema={validationAnimalSituation}
@@ -172,8 +173,8 @@ export const AddAnimal = () => {
                   />
                 )}
               </Formik>
-            )}
-          </Card>
+            </CardStyle>
+          )}
           {currentPosition === 2 && (
             <TouchableOpacity onPress={() => validation()}>
               <Body1>Suivant</Body1>
@@ -181,7 +182,7 @@ export const AddAnimal = () => {
             </TouchableOpacity>
           )}
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )

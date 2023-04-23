@@ -37,11 +37,6 @@ export const ImageAnimal = styled.Image`
   background-color: #dce1e7; ;
 `
 
-export const Container = styled.ScrollView`
-  padding-left: 16px;
-  padding-right: 16px;
-`
-
 export const Description = styled.View`
   background-color: ${theme.colors.white};
   padding-top: 8px;
@@ -54,14 +49,6 @@ export const Description = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`
-
-export const Card = styled.View`
-  background-color: ${theme.colors.white};
-  padding: 16px;
-  padding-top: 8px;
-  border-radius: 8px;
-  border: 1px solid #dce1e7;
 `
 
 export const TitleCard = styled.View`

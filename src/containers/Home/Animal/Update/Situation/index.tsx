@@ -7,12 +7,13 @@ import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
-import { Card, Container, Keyboard } from './Styled'
+import { Keyboard } from './Styled'
 import { AnimalRequest } from './Type'
 
 export const UpdateAnimalSituation: React.FC = () => {
@@ -79,8 +80,8 @@ export const UpdateAnimalSituation: React.FC = () => {
         title={`Modifier la situation de ${animalDetails.name}`}
       />
       <Keyboard behavior="padding" enabled>
-        <Container>
-          <Card>
+        <ContainerStyle>
+          <CardStyle>
             <Formik
               initialValues={initialValues}
               validationSchema={validationAnimalSituation}
@@ -109,9 +110,9 @@ export const UpdateAnimalSituation: React.FC = () => {
                 />
               )}
             </Formik>
-          </Card>
+          </CardStyle>
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )

@@ -5,6 +5,7 @@ import { PhoneSvg } from 'assets/svg/phone'
 import { ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
+import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
@@ -14,7 +15,7 @@ import { HeaderComponent } from '../Header'
 import { Layout } from '../Layout'
 import { Spacing } from '../Layout/Spacing'
 import { Body1 } from '../Typo'
-import { Container, ContainerDescription, ContainerImage, Description, Fields } from './Styled'
+import { ContainerDescription, ContainerImage, Description, Fields } from './Styled'
 
 export const UserInCharge = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -48,7 +49,7 @@ export const UserInCharge = () => {
         title={uppercaseWord(startsWithVowel(userData.firstName))}
         onClickGoBack={onClickGoBack}
       />
-      <Container>
+      <ContainerStyle>
         {statusUser === FetchStatus.LOADING ? (
           <ActivityIndicator size="large" color={theme.colors.blue} />
         ) : (
@@ -79,7 +80,7 @@ export const UserInCharge = () => {
             </ContainerDescription>
           </>
         )}
-      </Container>
+      </ContainerStyle>
     </Layout>
   )
 }

@@ -6,9 +6,9 @@ export const header = {
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 }
 
-export const getAnimals = () => {
+export const getAnimals = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })
@@ -68,15 +68,8 @@ export const deleteAnimalById = (recordId: string) => {
 //     },
 // ])
 
+//mauvais
 export const updateAnimalById = (recordId: string, data) => {
-  // const returnIsSterilized = () => {
-  //   if (data.isSterilized === 'Oui') {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  // console.log('data', data)
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   axios
     .patch(
@@ -86,7 +79,6 @@ export const updateAnimalById = (recordId: string, data) => {
           ...data,
           hostFamilyId: [data.hostFamilyId],
           userId: [data.userId],
-          // isSterilized: returnIsSterilized(),
         },
       },
       {

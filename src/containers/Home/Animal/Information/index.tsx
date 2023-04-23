@@ -4,6 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { CatSvg } from 'assets/svg/cat'
 import { DogSvg } from 'assets/svg/dog'
 import { KidSvg } from 'assets/svg/kid'
+import { NoPictureSvg } from 'assets/svg/noPicture'
 import { useRef } from 'react'
 import { ActivityIndicator, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Image as ImageElement } from 'react-native-elements'
@@ -132,7 +133,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 </TitleCard>
                 <Spacing size="8" />
                 <InCharge>
-                  {userData.picture && (
+                  {userData.picture ? (
                     <View style={{ paddingRight: 8 }}>
                       <ImageElement
                         source={{ uri: userData.picture[0].url }}
@@ -146,6 +147,10 @@ export const AnimalInformation = (): React.ReactElement => {
                         containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
                         PlaceholderContent={<ActivityIndicator />}
                       />
+                    </View>
+                  ) : (
+                    <View>
+                      <NoPictureSvg />
                     </View>
                   )}
                   <View>

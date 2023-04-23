@@ -84,14 +84,12 @@ export const AddAnimal = () => {
     },
   })
 
-  const validation = () => {
+  const validationForm = () => {
     const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
     const data = {
       ...values,
       userId: [values.userId],
     }
-
-    console.log('values', data)
     mutation.mutate(data)
   }
 
@@ -174,7 +172,7 @@ export const AddAnimal = () => {
             </Formik>
           )}
           {currentPosition === 2 && (
-            <TouchableOpacity onPress={() => validation()}>
+            <TouchableOpacity onPress={validationForm}>
               <Body1>Suivant</Body1>
               <Spacing size="8" />
             </TouchableOpacity>

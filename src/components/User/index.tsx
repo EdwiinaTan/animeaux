@@ -55,25 +55,27 @@ export const UserInCharge = () => {
         ) : (
           <>
             <Spacing size="8" />
-            <ContainerImage>
-              <Image
-                source={{ uri: userData?.picture[0]?.url }}
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 8,
-                }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-              <Spacing size="4" />
-            </ContainerImage>
+            {userData.picture && (
+              <ContainerImage>
+                <Image
+                  source={{ uri: userData.picture[0].url }}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    borderRadius: 8,
+                  }}
+                  PlaceholderContent={<ActivityIndicator />}
+                />
+                <Spacing size="4" />
+              </ContainerImage>
+            )}
             <ContainerDescription>
               <Description>
                 <Spacing size="64" />
                 <Body1>
                   {userData.firstName} {userData.lastName}
                 </Body1>
-                {renderField(<PhoneSvg />, formatPhoneNumber(userData.phone))}
+                {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
                 {renderField(<EmailSvg />, userData.email)}
               </Description>
               {/* animaux en charge avec historique */}

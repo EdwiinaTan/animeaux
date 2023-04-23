@@ -8,10 +8,11 @@ import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Util
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../../Router/type'
-import { Container, Keyboard } from './Styled'
+import { Keyboard } from './Styled'
 import { AnimalRequest } from './Type'
 
 export const AnimalUpdate = () => {
@@ -42,6 +43,7 @@ export const AnimalUpdate = () => {
   const mutation = useMutation({
     mutationFn: updateAnimalByIdTest,
     onSuccess: (data) => {
+      navigation.navigate('animalScreen')
       // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
       // queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
       queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalRequest) =>
@@ -60,18 +62,11 @@ export const AnimalUpdate = () => {
 
   const updateAnimal = async (values: AnimalRequest) => {
     // updateAnimalByIdTest(animalDetails.id, values) - ancien
-    const data = {
-      id: animalDetails.id,
-      values,
-    }
-    try {
-      if (values) {
-        mutation.mutateAsync(data)
-      }
-    } catch (err) {
-      console.log('err', err)
-    } finally {
-      navigation.navigate('animalScreen')
+    if (values) {
+      mutation.mutateAsync({
+        id: animalDetails.id,
+        values,
+      })
     }
   }
 
@@ -82,7 +77,7 @@ export const AnimalUpdate = () => {
         title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
       />
       <Keyboard behavior="padding" enabled>
-        <Container>
+        <ContainerStyle>
           <Formik
             initialValues={initialValues}
             validationSchema={validationAnimalProfile}
@@ -112,7 +107,7 @@ export const AnimalUpdate = () => {
             )}
           </Formik>
           <Spacing size="24" />
-        </Container>
+        </ContainerStyle>
       </Keyboard>
     </Layout>
   )

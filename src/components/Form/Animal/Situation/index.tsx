@@ -146,7 +146,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         </Title2>
         <Spacing size="8" />
         <Body2>Famille d'accueil</Body2>
-        <View style={{ width: '100%' }}>
+        <Spacing size="4" />
+        <View>
           <Field name="hostFamilyId">
             {({ field }) => (
               <SelectList
@@ -172,7 +173,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <Body2>
           Responsable<TextRed>*</TextRed>
         </Body2>
-        <View style={{ width: '100%' }}>
+        <Spacing size="4" />
+        <View>
           <Field name="userId">
             {({ field }) => (
               <SelectList
@@ -201,7 +203,8 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         <Body2>
           Lieu pris en charge<TextRed>*</TextRed>
         </Body2>
-        <View style={{ width: '100%' }}>
+        <Spacing size="4" />
+        <View>
           <Field name="placeAssigned">
             {({ field }) => (
               <SelectList
@@ -227,14 +230,11 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           )}
         </View>
         <Spacing size="16" />
-        <View
-          style={{
-            width: '100%',
-          }}
-        >
+        <View>
           <Body2>
             Date de prise en charge<TextRed>*</TextRed>
           </Body2>
+          <Spacing size="4" />
           <ContainerCalendar>
             <Field name="dateAssigned">
               {({ field }) => (
@@ -296,8 +296,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           <TextLine>3. Entente</TextLine>
         </Title2>
         <Spacing size="8" />
-        <Body2>Chien</Body2>
-        <Spacing size="8" />
+        <Body2>
+          Chien<TextRed>*</TextRed>
+        </Body2>
         <ContainerCheckbox>
           {agreementArray.map((dogAgreement, key) => (
             <CheckBoxComponent
@@ -308,8 +309,15 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             />
           ))}
         </ContainerCheckbox>
-        <Body2>Chat</Body2>
-        <Spacing size="8" />
+        {errors.dogAgreement && touched.dogAgreement && (
+          <Body3>
+            <TextRed>{errors.dogAgreement}</TextRed>
+          </Body3>
+        )}
+        <Spacing size="16" />
+        <Body2>
+          Chat<TextRed>*</TextRed>
+        </Body2>
         <ContainerCheckbox>
           {agreementArray.map((catAgreement, key) => (
             <CheckBoxComponent
@@ -320,8 +328,15 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             />
           ))}
         </ContainerCheckbox>
-        <Body2>Enfant</Body2>
-        <Spacing size="8" />
+        {errors.catAgreement && touched.catAgreement && (
+          <Body3>
+            <TextRed>{errors.catAgreement}</TextRed>
+          </Body3>
+        )}
+        <Spacing size="16" />
+        <Body2>
+          Enfant<TextRed>*</TextRed>
+        </Body2>
         <ContainerCheckbox>
           {agreementArray.map((childAgreement, key) => (
             <CheckBoxComponent
@@ -332,6 +347,11 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             />
           ))}
         </ContainerCheckbox>
+        {errors.childAgreement && touched.childAgreement && (
+          <Body3>
+            <TextRed>{errors.childAgreement}</TextRed>
+          </Body3>
+        )}
       </CardStyle>
       <Spacing size="16" />
       <CardStyle>
@@ -339,8 +359,9 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
           <TextLine>4. Descriptif</TextLine>
         </Title2>
         <Spacing size="8" />
-        <Body2>L’animal est stérilisé ?</Body2>
-        <Spacing size="4" />
+        <Body2>
+          L’animal est stérilisé ?<TextRed>*</TextRed>
+        </Body2>
         <ContainerCheckbox>
           {agreementArray.map((isSterilized, key) => (
             <CheckBoxComponent
@@ -351,6 +372,11 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
             />
           ))}
         </ContainerCheckbox>
+        {errors.isSterilized && touched.isSterilized && (
+          <Body3>
+            <TextRed>{errors.isSterilized}</TextRed>
+          </Body3>
+        )}
         <Spacing size="16" />
         <Body2>Description privée</Body2>
         <Spacing size="4" />

@@ -82,7 +82,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           <Body2>
             Catégorie<TextRed>*</TextRed>
           </Body2>
-          <Spacing size="8" />
+          <Spacing size="4" />
           {speciesArray.map((specie, key) => (
             <CheckBoxComponent
               key={`species_${key}`}
@@ -106,7 +106,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           <Body2>
             Sexe<TextRed>*</TextRed>
           </Body2>
-          <Spacing size="8" />
+          <Spacing size="4" />
           {genderArray.map((gender, key) => (
             <CheckBoxComponent
               key={`gender_${key}`}
@@ -127,6 +127,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           <Body2>
             Nom<TextRed>*</TextRed>
           </Body2>
+          <Spacing size="4" />
           <Field name="name">
             {({ field }) => (
               <TextInput
@@ -146,6 +147,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
             <Body2>
               Date de naissance<TextRed>*</TextRed>
             </Body2>
+            <Spacing size="4" />
             <ContainerCalendar>
               <Field name="birthday">
                 {({ field }) => (
@@ -186,6 +188,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           </View>
           <Spacing size="16" />
           <Body2>Alias</Body2>
+          <Spacing size="4" />
           <Field name="alias">
             {({ field }) => (
               <TextInput
@@ -206,6 +209,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           )}
           <Spacing size="16" />
           <Body2>Icad</Body2>
+          <Spacing size="4" />
           <Field name="icad">
             {({ field }) => (
               <TextInput
@@ -225,6 +229,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           <Body2>
             Race<TextRed>*</TextRed>
           </Body2>
+          <Spacing size="4" />
           <View style={{ width: '100%' }}>
             <Field name="race">
               {({ field }) => (
@@ -250,6 +255,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           {errors.race && touched.race && <Body3 color={theme.colors.red}>{errors.race}</Body3>}
           <Spacing size="16" />
           <Body2>Couleur</Body2>
+          <Spacing size="4" />
           <View style={{ width: '100%' }}>
             <Field name="color">
               {({ field }) => (
@@ -273,6 +279,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({
           </View>
           <Spacing size="16" />
           <Body2>Description publique</Body2>
+          <Spacing size="4" />
           <Field name="publicDescription">
             {({ field }) => (
               <TextInput

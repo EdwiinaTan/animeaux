@@ -9,6 +9,7 @@ import { FetchStatus } from 'src/types/Status'
 import { Spacing } from '../../Layout/Spacing'
 import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
+import { ContainerForm } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
 export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
@@ -30,7 +31,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
 
   return (
     <>
-      <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+      <ContainerForm>
         <Body2>
           Nom<TextRed>*</TextRed>
         </Body2>
@@ -251,7 +252,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
           </Field>
         </View>
         <Spacing size="24" />
-      </View>
+      </ContainerForm>
       <Button title="Valider" onPress={() => handleSubmit()} />
     </>
   )

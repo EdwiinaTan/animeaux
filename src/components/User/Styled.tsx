@@ -1,11 +1,6 @@
 import { theme } from 'src/constant/Theme'
 import styled from 'styled-components/native'
 
-export const Container = styled.ScrollView`
-  padding-left: 16px;
-  padding-right: 16px;
-`
-
 export const ContainerImage = styled.View`
   display: flex;
   align-items: center;

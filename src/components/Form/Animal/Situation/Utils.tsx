@@ -1,3 +1,9 @@
+import {
+  AnimalAgreement,
+  AnimalPlaceCareEnum,
+  AnimalReasonEnum,
+  AnimalStatusEnum,
+} from 'src/types/Animal/enum'
 import * as Yup from 'yup'
 
 export const validationAnimalSituation = Yup.object().shape({
@@ -15,3 +21,23 @@ export const validationAnimalSituation = Yup.object().shape({
     'La description privée doit contenir au moins 2 caractères'
   ),
 })
+
+export const statusArray = Object.keys(AnimalStatusEnum).map((key) => ({
+  label: AnimalStatusEnum[key],
+  value: AnimalStatusEnum[key],
+}))
+
+export const reasonArray = Object.keys(AnimalReasonEnum).map((key) => ({
+  label: AnimalReasonEnum[key],
+  value: AnimalReasonEnum[key],
+}))
+
+export const agreementArray = Object.keys(AnimalAgreement).map((key) => ({
+  label: AnimalAgreement[key],
+  value: AnimalAgreement[key],
+}))
+
+export const placeCareArray = Object.keys(AnimalPlaceCareEnum).map((key) => ({
+  key: key,
+  value: AnimalPlaceCareEnum[key],
+}))

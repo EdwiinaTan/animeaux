@@ -19,11 +19,11 @@ export const SkeletonCard = () => {
         </ContainerImage>
         <Description>
           <Skeleton animation="pulse" width={200} height={12} />
-          <Spacing size="4" />
+          <Spacing size="8" />
           <Skeleton animation="pulse" width={200} height={12} />
-          <Spacing size="4" />
+          <Spacing size="8" />
           <Skeleton animation="pulse" width={200} height={12} />
-          <Spacing size="4" />
+          <Spacing size="8" />
           <Skeleton animation="pulse" width={200} height={12} />
         </Description>
       </Container>

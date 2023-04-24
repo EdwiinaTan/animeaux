@@ -37,7 +37,7 @@ export const UserInCharge = () => {
           <Spacing size="16" />
           <Fields>
             {image}
-            <Body1>{value}</Body1>
+            <Body1 paddingLeft={8}>{value}</Body1>
           </Fields>
         </>
       )
@@ -77,9 +77,6 @@ export const UserInCharge = () => {
             <ContainerDescription>
               <Description>
                 <Spacing size="64" />
-                <Body1>
-                  {userData.firstName} {userData.lastName}
-                </Body1>
                 {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
                 {renderField(<EmailSvg />, userData.email)}
               </Description>

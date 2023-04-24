@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { SearchBar } from 'react-native-elements'
-import { ContainerSearchBar } from './Styled'
+import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { SearchBarProps } from './Type'
 
 export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch }) => {
@@ -10,7 +10,7 @@ export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch
   }
 
   return (
-    <ContainerSearchBar>
+    <ContainerStyle>
       <SearchBar
         platform="android"
         onBlur={() => updateSearch}
@@ -46,6 +46,6 @@ export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch
           },
         }}
       />
-    </ContainerSearchBar>
+    </ContainerStyle>
   )
 }

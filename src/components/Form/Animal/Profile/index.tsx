@@ -11,14 +11,10 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerCalendar, TextLine, TextRed } from 'src/constant/Theme/Styled'
-import {
-  AnimalColorEnum,
-  AnimalGenderEnum,
-  AnimalRaceEnum,
-  AnimalTypeEnum,
-} from 'src/types/Animal/enum'
+import { AnimalTypeEnum } from 'src/types/Animal/enum'
 import { ContainerCheckbox, style, styles } from '../Styled'
 import { AnimalFormProps } from '../Type'
+import { colorArray, genderArray, raceArray } from './Utils'
 
 export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field }) => {
   const [race, setRace] = useState<string>('')
@@ -36,27 +32,12 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field 
     }
   }, [])
 
-  const raceArray = Object.keys(AnimalRaceEnum).map((key) => ({
-    key: key,
-    value: AnimalRaceEnum[key],
-  }))
-
-  const colorArray = Object.keys(AnimalColorEnum).map((key) => ({
-    key: key,
-    value: AnimalColorEnum[key],
-  }))
-
   const speciesArray = Object.keys(AnimalTypeEnum).map((key) => ({
     label: AnimalTypeEnum[key],
     value: AnimalTypeEnum[key],
   }))
   const firstProp = Object.keys(speciesArray)[0]
   delete speciesArray[firstProp]
-
-  const genderArray = Object.keys(AnimalGenderEnum).map((key) => ({
-    label: AnimalGenderEnum[key],
-    value: AnimalGenderEnum[key],
-  }))
 
   const handleDateSelect = (day) => {
     setFieldValue('birthday', day.dateString)

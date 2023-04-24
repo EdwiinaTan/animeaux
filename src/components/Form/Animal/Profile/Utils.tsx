@@ -1,3 +1,4 @@
+import { AnimalColorEnum, AnimalGenderEnum, AnimalRaceEnum } from 'src/types/Animal/enum'
 import * as Yup from 'yup'
 
 export const validationAnimalProfile = Yup.object().shape({
@@ -12,3 +13,18 @@ export const validationAnimalProfile = Yup.object().shape({
     .max(15, 'L’icad doit contenir 15 caractères'),
   race: Yup.string().required('Vous devez choisir la race de l’animal'),
 })
+
+export const raceArray = Object.keys(AnimalRaceEnum).map((key) => ({
+  key: key,
+  value: AnimalRaceEnum[key],
+}))
+
+export const colorArray = Object.keys(AnimalColorEnum).map((key) => ({
+  key: key,
+  value: AnimalColorEnum[key],
+}))
+
+export const genderArray = Object.keys(AnimalGenderEnum).map((key) => ({
+  label: AnimalGenderEnum[key],
+  value: AnimalGenderEnum[key],
+}))

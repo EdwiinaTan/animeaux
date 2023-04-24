@@ -5,6 +5,7 @@ import {
 } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useState } from 'react'
 import { View } from 'react-native'
 import { Divider, ListItem, Overlay } from 'react-native-elements'
@@ -27,6 +28,7 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
   const snapPoints = ['30%']
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
+  const queryClient = useQueryClient()
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible)
@@ -69,9 +71,19 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
     []
   )
 
+  const mutation = useMutation({
+    mutationFn: deleteAnimalById,
+    onSuccess: () => {
+      navigation.navigate('animalScreen')
+      queryClient.invalidateQueries({ queryKey: ['animals'] })
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
   const deleteAnimal = () => {
-    deleteAnimalById(animalDetails.id)
-    navigation.navigate('animalScreen')
+    mutation.mutate(animalDetails.id)
   }
 
   const listBottomSheet = [

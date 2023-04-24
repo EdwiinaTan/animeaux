@@ -22,7 +22,6 @@ export const AnimalUpdate = () => {
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const queryClient = useQueryClient()
-  // const nameRef = useRef(animalDetails.name)
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -60,7 +59,6 @@ export const AnimalUpdate = () => {
   })
 
   const updateAnimal = async (values: AnimalRequest) => {
-    // updateAnimalByIdTest(animalDetails.id, values) - ancien
     if (values) {
       mutation.mutateAsync({
         id: animalDetails.id,

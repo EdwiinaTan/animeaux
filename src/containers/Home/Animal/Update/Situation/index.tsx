@@ -73,8 +73,6 @@ export const UpdateAnimalSituation: React.FC = () => {
     mutationFn: updateAnimalByIdTest,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
-      // queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
       queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalRequest) =>
         oldData
           ? {
@@ -91,7 +89,6 @@ export const UpdateAnimalSituation: React.FC = () => {
   })
 
   const updateAnimal = async (values: AnimalRequest) => {
-    // updateAnimalById(animalDetails.id, values)
     if (values) {
       const data = {
         ...values,
@@ -102,7 +99,6 @@ export const UpdateAnimalSituation: React.FC = () => {
     }
   }
 
-  //utiliser (field) au lieu de tout passer en param comme ça lol
   return (
     <Layout>
       <HeaderComponent

@@ -1,19 +1,19 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
-import { StyleSheet } from 'react-native'
-import { updateHostFamilyById } from 'src/client/HostFamily'
+import { updateHostFamilyByIdTest } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { Keyboard } from './Styled'
+import { HostFamilyRequest } from './Type'
 
 export const HostFamilyUpdate = () => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
@@ -21,6 +21,7 @@ export const HostFamilyUpdate = () => {
     params: { hostFamilyDetails },
   } = route as { params: { hostFamilyDetails: HostFamilyType } }
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
+  const queryClient = useQueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -40,10 +41,34 @@ export const HostFamilyUpdate = () => {
     onBreak: hostFamilyDetails.onBreak,
   }
 
-  const updateHostFamily = (values) => {
-    console.log('value', values)
-    updateHostFamilyById(hostFamilyDetails.id, values)
-    navigation.goBack()
+  const mutation = useMutation({
+    mutationFn: updateHostFamilyByIdTest,
+    onSuccess: (data) => {
+      navigation.navigate('hostFamilyScreen')
+      queryClient.setQueryData(
+        ['hostFamily', { id: hostFamilyDetails.id }],
+        (oldData: HostFamilyRequest) =>
+          oldData
+            ? {
+                ...oldData,
+                data,
+              }
+            : oldData
+      )
+      queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
+  const updateHostFamily = async (values: HostFamilyRequest) => {
+    if (values) {
+      const data = {
+        ...values,
+      }
+      mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
+    }
   }
 
   return (
@@ -71,15 +96,3 @@ export const HostFamilyUpdate = () => {
     </Layout>
   )
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: '100%',
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: theme.colors.greyOutline,
-  },
-})

@@ -6,7 +6,7 @@ export interface HostFamilyRequest {
   postalCode: string
   city: string
   address?: string
-  animalId: string
+  animalId: string[]
   criteria: string
   description: string
   onBreak: string

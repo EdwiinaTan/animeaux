@@ -66,6 +66,26 @@ export const deleteHostFamilyById = (recordId: string) => {
     })
 }
 
+export const updateHostFamilyByIdTest = (data) => {
+  const { id, values } = data
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${id}/`
+  return axios
+    .patch(
+      url,
+      {
+        fields: {
+          ...values,
+        },
+      },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+}
+
 export const updateHostFamilyById = (recordId: string, data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
   axios

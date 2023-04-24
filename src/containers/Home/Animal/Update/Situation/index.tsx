@@ -1,8 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { QueryClient, useMutation } from '@tanstack/react-query'
-import { Formik } from 'formik'
-import { updateAnimalByIdTest } from 'src/client/Animal'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { Formik, FormikValues } from 'formik'
+import { updateAnimalById } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
 import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/Utils'
 import { HeaderComponent } from 'src/components/Header'
@@ -15,7 +15,7 @@ import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
-import { AnimalRequest } from './Type'
+import { AnimalSituationRequest } from './Type'
 
 export const UpdateAnimalSituation: React.FC = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -25,7 +25,7 @@ export const UpdateAnimalSituation: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -70,27 +70,27 @@ export const UpdateAnimalSituation: React.FC = () => {
   }
 
   const mutation = useMutation({
-    mutationFn: updateAnimalByIdTest,
+    mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
-      // queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
-      queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalRequest) =>
-        oldData
-          ? {
-              ...oldData,
-              data,
-            }
-          : oldData
+      queryClient.setQueryData(
+        ['animal', { id: animalDetails.id }],
+        (oldData: AnimalSituationRequest) =>
+          oldData
+            ? {
+                ...oldData,
+                data,
+              }
+            : oldData
       )
+      queryClient.invalidateQueries({ queryKey: ['animals'] })
     },
     onError: (err) => {
       console.log('err', err)
     },
   })
 
-  const updateAnimal = async (values: AnimalRequest) => {
-    // updateAnimalById(animalDetails.id, values)
+  const updateAnimal = async (values: AnimalSituationRequest) => {
     if (values) {
       const data = {
         ...values,
@@ -101,7 +101,6 @@ export const UpdateAnimalSituation: React.FC = () => {
     }
   }
 
-  //utiliser (field) au lieu de tout passer en param comme ça lol
   return (
     <Layout>
       <HeaderComponent
@@ -113,28 +112,14 @@ export const UpdateAnimalSituation: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationAnimalSituation}
-            onSubmit={(values) => updateAnimal(values)}
+            onSubmit={(values: AnimalSituationRequest) => updateAnimal(values)}
           >
-            {({
-              handleChange,
-              values,
-              handleSubmit,
-              handleBlur,
-              errors,
-              touched,
-              setFieldValue,
-            }) => (
+            {(field: FormikValues) => (
               <AnimalSituation
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                touched={touched}
+                field={field}
                 renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
                 renderDefaultOptionUser={renderDefaultOptionUser}
                 renderDefaultOptionPlace={renderDefaultOptionPlace}
-                setFieldValue={setFieldValue}
               />
             )}
           </Formik>

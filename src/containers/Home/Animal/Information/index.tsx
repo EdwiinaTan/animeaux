@@ -2,6 +2,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { CatSvg } from 'assets/svg/cat'
+import { ClipboardSvg } from 'assets/svg/clipboard'
 import { DogSvg } from 'assets/svg/dog'
 import { KidSvg } from 'assets/svg/kid'
 import { NoPictureSvg } from 'assets/svg/noPicture'
@@ -13,12 +14,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Body2, Title2 } from 'src/components/Typo'
-import {
-  IconEntypo,
-  IconFoundation,
-  IconMaterialCommunityIcons,
-  IconMaterialIcons,
-} from 'src/constant/Icons'
+import { IconEntypo, IconMaterialCommunityIcons, IconMaterialIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
@@ -129,8 +125,8 @@ export const AnimalInformation = (): React.ReactElement => {
             <TouchableOpacity onPress={onClick} activeOpacity={1}>
               <CardStyle>
                 <TitleCard>
-                  <IconFoundation name="clipboard-notes" size={20} color={theme.colors.secondary} />
-                  <Title2 paddingLeft={8}>Prise en charge </Title2>
+                  <ClipboardSvg />
+                  <Title2 paddingLeft={4}>Prise en charge </Title2>
                 </TitleCard>
                 <Spacing size="8" />
                 <InCharge>

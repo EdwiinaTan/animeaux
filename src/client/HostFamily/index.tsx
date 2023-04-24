@@ -1,14 +1,10 @@
 import axios from 'axios'
-import { AIRTABLE_API_KEY, AIRTABLE_APP_ID } from 'config'
+import { AIRTABLE_APP_ID } from 'config'
+import { header } from '../Utils'
 
-export const header = {
-  'content-type': 'application/json; charset=utf-8',
-  Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-}
-
-export const getHostFamilies = () => {
+export const getHostFamilies = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })
@@ -19,9 +15,9 @@ export const getHostFamilies = () => {
     })
 }
 
-export const postHostFamily = (data) => {
+export const postHostFamily = async (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
-  return axios
+  return await axios
     .post(
       url,
       { fields: { ...data } },
@@ -34,17 +30,9 @@ export const postHostFamily = (data) => {
     })
 }
 
-export const postHostFamilyFetch = (data) => {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
-  return fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-  }).then((res) => res.json())
-}
-
-export const getHostFamilyById = (recordId: string) => {
+export const getHostFamilyById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })
@@ -55,9 +43,9 @@ export const getHostFamilyById = (recordId: string) => {
     })
 }
 
-export const deleteHostFamilyById = (recordId: string) => {
+export const deleteHostFamilyById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
-  axios
+  await axios
     .delete(url, {
       headers: header,
     })
@@ -66,12 +54,17 @@ export const deleteHostFamilyById = (recordId: string) => {
     })
 }
 
-export const updateHostFamilyById = (recordId: string, data) => {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
-  axios
+export const updateHostFamilyById = async (data) => {
+  const { id, values } = data
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${id}/`
+  return await axios
     .patch(
       url,
-      { fields: { ...data } },
+      {
+        fields: {
+          ...values,
+        },
+      },
       {
         headers: header,
       }

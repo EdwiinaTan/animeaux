@@ -1,10 +1,6 @@
 import axios from 'axios'
-import { AIRTABLE_API_KEY, AIRTABLE_APP_ID } from 'config'
-
-export const header = {
-  'content-type': 'application/json; charset=utf-8',
-  Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-}
+import { AIRTABLE_APP_ID } from 'config'
+import { header } from '../Utils'
 
 export const getAnimals = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
@@ -19,9 +15,9 @@ export const getAnimals = async () => {
     })
 }
 
-export const postAnimal = (data) => {
+export const postAnimal = async (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
-  return axios
+  return await axios
     .post(
       url,
       { fields: { ...data } },
@@ -34,9 +30,9 @@ export const postAnimal = (data) => {
     })
 }
 
-export const getAnimalById = (recordId: string) => {
+export const getAnimalById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })
@@ -47,9 +43,9 @@ export const getAnimalById = (recordId: string) => {
     })
 }
 
-export const deleteAnimalById = (recordId: string) => {
+export const deleteAnimalById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
-  axios
+  await axios
     .delete(url, {
       headers: header,
     })
@@ -58,42 +54,10 @@ export const deleteAnimalById = (recordId: string) => {
     })
 }
 
-// createdTime: new Date(),
-// fields: data,
-// id: recordId,
-// const baseAirtable = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_APP_ID)
-// baseAirtable('animal').update([
-//     fields: {
-//       name: 'Bloom',
-//     },
-// ])
-
-//mauvais
-export const updateAnimalById = (recordId: string, data) => {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
-  axios
-    .patch(
-      url,
-      {
-        fields: {
-          ...data,
-          hostFamilyId: [data.hostFamilyId],
-          userId: [data.userId],
-        },
-      },
-      {
-        headers: header,
-      }
-    )
-    .catch((err) => {
-      console.log('err', err)
-    })
-}
-
-export const updateAnimalByIdTest = (data) => {
+export const updateAnimalById = async (data) => {
   const { id, values } = data
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${id}/`
-  return axios
+  return await axios
     .patch(
       url,
       {
@@ -108,17 +72,4 @@ export const updateAnimalByIdTest = (data) => {
     .catch((err) => {
       console.log('err', err)
     })
-}
-
-export const updateAnimalByIdFetch = async (data) => {
-  const { id, values } = data
-
-  console.log('data', data)
-  const res = await fetch(`https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${id}/`, {
-    method: 'PATCH',
-    headers: header,
-    body: JSON.stringify({ fields: { ...values } }),
-  })
-  const result = res.json()
-  return result
 }

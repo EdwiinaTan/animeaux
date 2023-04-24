@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { QueryClient, useMutation } from '@tanstack/react-query'
-import { Formik } from 'formik'
+import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import StepIndicator from 'react-native-step-indicator'
@@ -86,9 +86,18 @@ export const AddAnimal = () => {
 
   const validationForm = () => {
     const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
-    const data = {
-      ...values,
-      userId: [values.userId],
+    let data
+    if (values.hostFamilyId.length === 0) {
+      data = {
+        ...values,
+        userId: [values.userId],
+      }
+    } else {
+      data = {
+        ...values,
+        userId: [values.userId],
+        hostFamilyId: [values.hostFamilyId],
+      }
     }
     mutation.mutate(data)
   }
@@ -121,25 +130,7 @@ export const AddAnimal = () => {
                 onSubmitProfile(values)
               }}
             >
-              {({
-                handleChange,
-                values,
-                handleSubmit,
-                handleBlur,
-                errors,
-                touched,
-                setFieldValue,
-              }) => (
-                <AnimalProfile
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
+              {(field: FormikValues) => <AnimalProfile field={field} />}
             </Formik>
           )}
           {currentPosition === 1 && (
@@ -150,25 +141,7 @@ export const AddAnimal = () => {
                 onSubmitSituation(values)
               }}
             >
-              {({
-                handleChange,
-                values,
-                handleSubmit,
-                handleBlur,
-                errors,
-                touched,
-                setFieldValue,
-              }) => (
-                <AnimalSituation
-                  values={values}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
-                  handleSubmit={handleSubmit}
-                  errors={errors}
-                  touched={touched}
-                  setFieldValue={setFieldValue}
-                />
-              )}
+              {(field: FormikValues) => <AnimalSituation field={field} />}
             </Formik>
           )}
           {currentPosition === 2 && (

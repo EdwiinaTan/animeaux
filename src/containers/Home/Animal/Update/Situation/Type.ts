@@ -1,6 +1,6 @@
 import { AnimalAgreement, AnimalReasonEnum, AnimalStatusEnum } from 'src/types/Animal/enum'
 
-export interface AnimalRequest {
+export interface AnimalSituationRequest {
   hostFamilyId: string
   status: AnimalStatusEnum
   placeAssigned: string

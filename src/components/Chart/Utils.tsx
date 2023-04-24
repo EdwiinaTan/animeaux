@@ -44,7 +44,8 @@ export const colors = [
   theme.colors.blue,
   theme.colors.yellow,
   theme.colors.secondary,
-  theme.colors.grey2,
+  theme.colors.grey4,
+  theme.colors.orange,
 ]
 
 export const dataPieChart = (items: {}) => {

@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
-import { updateHostFamilyByIdTest } from 'src/client/HostFamily'
+import { updateHostFamilyById } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
@@ -27,7 +27,7 @@ export const HostFamilyUpdate = () => {
     return navigation.goBack()
   }
 
-  const initialValues = {
+  const initialValues: HostFamilyRequest = {
     firstName: hostFamilyDetails.firstName,
     lastName: hostFamilyDetails.lastName,
     email: hostFamilyDetails.email,
@@ -42,7 +42,7 @@ export const HostFamilyUpdate = () => {
   }
 
   const mutation = useMutation({
-    mutationFn: updateHostFamilyByIdTest,
+    mutationFn: updateHostFamilyById,
     onSuccess: (data) => {
       navigation.navigate('hostFamilyScreen')
       queryClient.setQueryData(

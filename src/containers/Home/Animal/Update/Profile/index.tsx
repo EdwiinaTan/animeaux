@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
-import { updateAnimalByIdTest } from 'src/client/Animal'
+import { updateAnimalById } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Utils'
 import { HeaderComponent } from 'src/components/Header'
@@ -13,7 +13,7 @@ import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
-import { AnimalRequest } from './Type'
+import { AnimalProfileRequest } from './Type'
 
 export const AnimalUpdate = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -27,7 +27,7 @@ export const AnimalUpdate = () => {
     return navigation.goBack()
   }
 
-  const initialValues: AnimalRequest = {
+  const initialValues: AnimalProfileRequest = {
     species: animalDetails.species,
     gender: animalDetails.gender,
     name: animalDetails.name,
@@ -40,16 +40,18 @@ export const AnimalUpdate = () => {
   }
 
   const mutation = useMutation({
-    mutationFn: updateAnimalByIdTest,
+    mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalRequest) =>
-        oldData
-          ? {
-              ...oldData,
-              data,
-            }
-          : oldData
+      queryClient.setQueryData(
+        ['animal', { id: animalDetails.id }],
+        (oldData: AnimalProfileRequest) =>
+          oldData
+            ? {
+                ...oldData,
+                data,
+              }
+            : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['animals'] })
     },
@@ -58,7 +60,7 @@ export const AnimalUpdate = () => {
     },
   })
 
-  const updateAnimal = async (values: AnimalRequest) => {
+  const updateAnimal = async (values: AnimalProfileRequest) => {
     if (values) {
       mutation.mutateAsync({
         id: animalDetails.id,
@@ -78,7 +80,7 @@ export const AnimalUpdate = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationAnimalProfile}
-            onSubmit={(values: AnimalRequest) => {
+            onSubmit={(values: AnimalProfileRequest) => {
               updateAnimal(values)
             }}
           >

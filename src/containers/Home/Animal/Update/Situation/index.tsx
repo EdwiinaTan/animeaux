@@ -2,7 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
-import { updateAnimalByIdTest } from 'src/client/Animal'
+import { updateAnimalById } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
 import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/Utils'
 import { HeaderComponent } from 'src/components/Header'
@@ -15,7 +15,7 @@ import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
-import { AnimalRequest } from './Type'
+import { AnimalSituationRequest } from './Type'
 
 export const UpdateAnimalSituation: React.FC = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
@@ -70,16 +70,18 @@ export const UpdateAnimalSituation: React.FC = () => {
   }
 
   const mutation = useMutation({
-    mutationFn: updateAnimalByIdTest,
+    mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalRequest) =>
-        oldData
-          ? {
-              ...oldData,
-              data,
-            }
-          : oldData
+      queryClient.setQueryData(
+        ['animal', { id: animalDetails.id }],
+        (oldData: AnimalSituationRequest) =>
+          oldData
+            ? {
+                ...oldData,
+                data,
+              }
+            : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['animals'] })
     },
@@ -88,7 +90,7 @@ export const UpdateAnimalSituation: React.FC = () => {
     },
   })
 
-  const updateAnimal = async (values: AnimalRequest) => {
+  const updateAnimal = async (values: AnimalSituationRequest) => {
     if (values) {
       const data = {
         ...values,
@@ -110,7 +112,7 @@ export const UpdateAnimalSituation: React.FC = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationAnimalSituation}
-            onSubmit={(values) => updateAnimal(values)}
+            onSubmit={(values: AnimalSituationRequest) => updateAnimal(values)}
           >
             {(field: FormikValues) => (
               <AnimalSituation

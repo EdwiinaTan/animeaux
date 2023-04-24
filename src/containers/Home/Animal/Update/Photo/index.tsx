@@ -5,8 +5,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { Button, Divider, Image as ImageElement } from 'react-native-elements'
-
-import { updateAnimalByIdTest } from 'src/client/Animal'
+import { updateAnimalById } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
@@ -57,7 +56,7 @@ export const AnimalPhoto = () => {
   const queryClient = new QueryClient()
 
   const mutation = useMutation({
-    mutationFn: updateAnimalByIdTest,
+    mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
       queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalType) =>

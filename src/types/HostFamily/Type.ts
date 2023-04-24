@@ -13,7 +13,6 @@ export interface HostFamilyType {
   createdAt: string
   animalId: string[]
   criteria: string
-  notice: string
   description: string
   onBreak: string
 }

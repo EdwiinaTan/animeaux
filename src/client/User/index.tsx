@@ -1,14 +1,10 @@
 import axios from 'axios'
-import { AIRTABLE_API_KEY, AIRTABLE_APP_ID } from 'config'
+import { AIRTABLE_APP_ID } from 'config'
+import { header } from '../Utils'
 
-export const header = {
-  'content-type': 'application/json; charset=utf-8',
-  Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-}
-
-export const getUsers = () => {
+export const getUsers = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })
@@ -19,9 +15,9 @@ export const getUsers = () => {
     })
 }
 
-export const getUserById = (recordId: string) => {
+export const getUserById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/${recordId}/`
-  return axios
+  return await axios
     .get(url, {
       headers: header,
     })

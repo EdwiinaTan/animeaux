@@ -10,10 +10,9 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
-import { HostFamilyType } from 'src/types/HostFamily/Type'
+import { HostFamilyRequest, HostFamilyType } from 'src/types/HostFamily/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { Keyboard } from './Styled'
-import { HostFamilyRequest } from './Type'
 
 export const HostFamilyUpdate = () => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()

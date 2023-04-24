@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
@@ -8,16 +8,18 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { HostFamilyRequest } from 'src/types/HostFamily/Type'
 import { Keyboard } from './Styled'
 
 export const AddHostFamily = () => {
   const navigation = useNavigation()
+  const queryClient = useQueryClient()
 
   const onClickGoBack = () => {
     return navigation.goBack()
   }
 
-  const initialValues = {
+  const initialValues: HostFamilyRequest = {
     firstName: '',
     lastName: '',
     email: '',
@@ -31,8 +33,6 @@ export const AddHostFamily = () => {
     onBreak: '',
   }
 
-  const queryClient = new QueryClient()
-
   const mutation = useMutation({
     mutationFn: postHostFamily,
     onSuccess: () => {
@@ -44,9 +44,20 @@ export const AddHostFamily = () => {
     },
   })
 
-  const addHostFamily = (values) => {
-    mutation.mutate({ ...values, animalId: [values.animalId] })
-    // postHostFamily(values)
+  const addHostFamily = (values: HostFamilyRequest) => {
+    let data
+    if (values.animalId.length === 0) {
+      data = {
+        ...values,
+      }
+    } else {
+      data = {
+        ...values,
+        animalId: [values.animalId],
+      }
+    }
+
+    mutation.mutate(data)
   }
 
   return (
@@ -58,7 +69,7 @@ export const AddHostFamily = () => {
             <Formik
               validationSchema={validationHostFamily}
               initialValues={initialValues}
-              onSubmit={(values) => {
+              onSubmit={(values: HostFamilyRequest) => {
                 addHostFamily(values)
               }}
             >

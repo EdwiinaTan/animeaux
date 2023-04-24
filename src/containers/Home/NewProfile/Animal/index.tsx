@@ -86,9 +86,18 @@ export const AddAnimal = () => {
 
   const validationForm = () => {
     const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
-    const data = {
-      ...values,
-      userId: [values.userId],
+    let data
+    if (values.hostFamilyId.length === 0) {
+      data = {
+        ...values,
+        userId: [values.userId],
+      }
+    } else {
+      data = {
+        ...values,
+        userId: [values.userId],
+        hostFamilyId: [values.hostFamilyId],
+      }
     }
     mutation.mutate(data)
   }

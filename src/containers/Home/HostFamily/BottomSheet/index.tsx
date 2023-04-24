@@ -5,6 +5,7 @@ import {
 } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useState } from 'react'
 import { Divider, ListItem, Overlay } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -26,6 +27,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
   const snapPoints = ['20%']
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
+  const queryClient = useQueryClient()
 
   const toggleOverlay = (): void => {
     setIsOverlayVisible(!isOverlayVisible)
@@ -54,9 +56,19 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
     []
   )
 
-  const deleteHostFamily = (): void => {
-    deleteHostFamilyById(hostFamilyDetails.id)
-    navigation.navigate('hostFamilyScreen')
+  const mutation = useMutation({
+    mutationFn: deleteHostFamilyById,
+    onSuccess: () => {
+      navigation.navigate('hostFamilyScreen')
+      queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
+    },
+    onError: (err) => {
+      console.log('err', err)
+    },
+  })
+
+  const deleteHostFamily = () => {
+    mutation.mutate(hostFamilyDetails.id)
   }
 
   const listBottomSheet = [

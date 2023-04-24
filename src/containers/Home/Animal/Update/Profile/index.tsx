@@ -1,6 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
@@ -21,7 +21,7 @@ export const AnimalUpdate = () => {
     params: { animalDetails },
   } = route as { params: { animalDetails: AnimalType } }
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
   // const nameRef = useRef(animalDetails.name)
 
   const onClickGoBack = () => {
@@ -44,9 +44,7 @@ export const AnimalUpdate = () => {
     mutationFn: updateAnimalByIdTest,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      // https://tanstack.com/query/v4/docs/react/guides/updates-from-mutation-responses
-      // queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
-      queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalRequest) =>
+      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalRequest) =>
         oldData
           ? {
               ...oldData,
@@ -54,6 +52,7 @@ export const AnimalUpdate = () => {
             }
           : oldData
       )
+      queryClient.invalidateQueries({ queryKey: ['animals'] })
     },
     onError: (err) => {
       console.log('err', err)

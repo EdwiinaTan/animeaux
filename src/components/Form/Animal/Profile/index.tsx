@@ -20,19 +20,11 @@ import {
 import { ContainerCheckbox, style, styles } from '../Styled'
 import { AnimalFormProps } from '../Type'
 
-export const AnimalProfile: React.FC<AnimalFormProps> = ({
-  values,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  animalDetails,
-  errors,
-  touched,
-  setFieldValue,
-}) => {
+export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field }) => {
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
   const [modalVisible, setModalVisible] = useState(false)
+  const { handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, values } = field
 
   useEffect(() => {
     if (animalDetails) {

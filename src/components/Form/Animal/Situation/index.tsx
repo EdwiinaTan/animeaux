@@ -10,6 +10,7 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, TextLine, TextRed } from 'src/constant/Theme/Styled'
+import { AddAnimalProps } from 'src/containers/Home/NewProfile/Animal/Type'
 import { useGetHostFamilies } from 'src/hooks/HostFamily'
 import { useGetUsers } from 'src/hooks/User'
 import {
@@ -22,16 +23,10 @@ import { FetchStatus } from 'src/types/Status'
 import { ContainerCalendar, ContainerCheckbox, style, styles } from '../Styled'
 
 export const AnimalSituation: React.FC<AddAnimalProps> = ({
-  values,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  errors,
-  touched,
+  field,
   renderDefaultOptionHostFamily,
   renderDefaultOptionUser,
   renderDefaultOptionPlace,
-  setFieldValue,
 }) => {
   const { statusHostFamilies, hostFamiliesData } = useGetHostFamilies()
   const { statusUsers, usersData } = useGetUsers()
@@ -39,6 +34,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   const [optionUser, setOptionUser] = useState({})
   const [optionPlace, setOptionPlace] = useState({})
   const [modalVisible, setModalVisible] = useState(false)
+  const { handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, values } = field
 
   useEffect(() => {
     if (renderDefaultOptionHostFamily) {

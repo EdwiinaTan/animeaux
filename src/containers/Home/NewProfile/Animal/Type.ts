@@ -1,8 +1,6 @@
-interface AddAnimalProps {
-  values: any
-  handleChange: any
-  handleBlur: any
-  handleSubmit: any
+import { FormikValues } from 'formik'
+
+export interface AddAnimalProps {
   renderDefaultOptionHostFamily?: () => {
     key: string
     value: string
@@ -15,7 +13,6 @@ interface AddAnimalProps {
     key: string
     value: string
   }
-  errors?: any
-  touched?: any
-  setFieldValue?: any
+
+  field?: FormikValues
 }

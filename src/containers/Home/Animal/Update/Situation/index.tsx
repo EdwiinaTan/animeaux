@@ -1,7 +1,7 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
-import { Formik } from 'formik'
+import { Formik, FormikValues } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
 import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/Utils'
@@ -115,26 +115,12 @@ export const UpdateAnimalSituation: React.FC = () => {
             validationSchema={validationAnimalSituation}
             onSubmit={(values) => updateAnimal(values)}
           >
-            {({
-              handleChange,
-              values,
-              handleSubmit,
-              handleBlur,
-              errors,
-              touched,
-              setFieldValue,
-            }) => (
+            {(field: FormikValues) => (
               <AnimalSituation
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                touched={touched}
+                field={field}
                 renderDefaultOptionHostFamily={renderDefaultOptionHostFamily}
                 renderDefaultOptionUser={renderDefaultOptionUser}
                 renderDefaultOptionPlace={renderDefaultOptionPlace}
-                setFieldValue={setFieldValue}
               />
             )}
           </Formik>

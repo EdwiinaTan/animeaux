@@ -11,15 +11,9 @@ import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
 import { HostFamilyFormProps } from './Type'
 
-export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
-  values,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  errors,
-  touched,
-}) => {
+export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
   const { statusAnimal, animalData } = useGetAnimals()
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = field
 
   const animalDataList = () => {
     let animalArray = []

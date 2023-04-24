@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { QueryClient, useMutation } from '@tanstack/react-query'
-import { Formik } from 'formik'
+import { Formik, FormikValues } from 'formik'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
@@ -62,16 +62,7 @@ export const AddHostFamily = () => {
                 addHostFamily(values)
               }}
             >
-              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
-                <HostFamilyProfile
-                  values={values}
-                  handleSubmit={handleSubmit}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  errors={errors}
-                  touched={touched}
-                />
-              )}
+              {(field: FormikValues) => <HostFamilyProfile field={field} />}
             </Formik>
           </CardStyle>
           <Spacing size="24" />

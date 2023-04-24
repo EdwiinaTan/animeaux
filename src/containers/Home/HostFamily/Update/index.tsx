@@ -1,6 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { Formik } from 'formik'
+import { Formik, FormikValues } from 'formik'
 import { StyleSheet } from 'react-native'
 import { updateHostFamilyById } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
@@ -62,16 +62,7 @@ export const HostFamilyUpdate = () => {
                 updateHostFamily(values)
               }}
             >
-              {({ handleChange, values, handleSubmit, handleBlur, errors, touched }) => (
-                <HostFamilyProfile
-                  values={values}
-                  handleSubmit={handleSubmit}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  errors={errors}
-                  touched={touched}
-                />
-              )}
+              {(field: FormikValues) => <HostFamilyProfile field={field} />}
             </Formik>
           </CardStyle>
           <Spacing size="24" />

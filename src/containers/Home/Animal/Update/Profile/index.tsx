@@ -1,7 +1,7 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
-import { Formik } from 'formik'
+import { Formik, FormikValues } from 'formik'
 import { updateAnimalByIdTest } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Utils'
@@ -85,26 +85,7 @@ export const AnimalUpdate = () => {
               updateAnimal(values)
             }}
           >
-            {({
-              handleChange,
-              values,
-              handleSubmit,
-              handleBlur,
-              errors,
-              touched,
-              setFieldValue,
-            }) => (
-              <AnimalProfile
-                values={values}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                handleSubmit={handleSubmit}
-                animalDetails={animalDetails}
-                errors={errors}
-                touched={touched}
-                setFieldValue={setFieldValue}
-              />
-            )}
+            {(field: FormikValues) => <AnimalProfile animalDetails={animalDetails} field={field} />}
           </Formik>
           <Spacing size="24" />
         </ContainerStyle>

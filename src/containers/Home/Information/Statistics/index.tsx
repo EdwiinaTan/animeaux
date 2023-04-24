@@ -39,7 +39,7 @@ export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscript
         <Divider width={2} color={theme.colors.greyOutline} />
         <BarChartComponent title="Raison" data={labelDataReason} />
       </CardStyle>
-      <Spacing size="16" />
+      <Spacing size="32" />
       <CardStyle>
         <Title2>
           Sur les {formInscriptionData.length} réponses fournies pour être famille d'accueil

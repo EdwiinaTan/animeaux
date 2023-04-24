@@ -50,7 +50,7 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40 }}>
         <TouchableOpacity onPress={onClickAddAnimal}>
           <Image
-            source={require('/assets/icons/animal-shelter.png')}
+            source={require('/assets/images/animal-shelter.png')}
             style={{ width: 100, height: 100 }}
           />
           <Spacing size="8" />
@@ -58,7 +58,7 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
           <Title2 textAlign="center">un animal</Title2>
         </TouchableOpacity>
         <TouchableOpacity onPress={onClickAddHostFamily}>
-          <Image source={require('/assets/icons/home.png')} style={{ width: 100, height: 100 }} />
+          <Image source={require('/assets/images/home.png')} style={{ width: 100, height: 100 }} />
           <Spacing size="8" />
           <Title2 textAlign="center">Ajouter </Title2>
           <Title2 textAlign="center">une famille </Title2>

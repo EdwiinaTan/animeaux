@@ -3,8 +3,10 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AddressSvg } from 'assets/svg/address'
 import { CalendarSvg } from 'assets/svg/calendar'
+import { DescriptionSvg } from 'assets/svg/description'
 import { EmailSvg } from 'assets/svg/email'
 import { NoPictureSvg } from 'assets/svg/noPicture'
+import { PauseSvg } from 'assets/svg/pause'
 import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
@@ -92,15 +94,18 @@ export const HostFamilyInformation = (): React.ReactElement => {
             <Spacing size="48" />
             {renderField(<PhoneSvg />, formatPhoneNumber(hostFamilyDetails.phone))}
             {renderField(<EmailSvg />, hostFamilyDetails.email)}
-            {renderField(<AddressSvg />, hostFamilyDetails.address)}
+            {renderField(
+              <AddressSvg />,
+              `${hostFamilyDetails.address}, ${hostFamilyDetails.postalCode} - ${hostFamilyDetails.city}`
+            )}
             {renderField(
               <CalendarSvg />,
               renderDateFormat(hostFamilyDetails.createdAt),
               'Inscrit le '
             )}
-            {renderField(<EmailSvg />, hostFamilyDetails.onBreak)}
-            {renderField(<WarningSvg />, hostFamilyDetails.criteria)}
-            {renderField(<EmailSvg />, hostFamilyDetails.description)}
+            {renderField(<PauseSvg />, hostFamilyDetails.onBreak, 'Indisponible : ')}
+            {renderField(<WarningSvg />, hostFamilyDetails.criteria, 'Critère : ')}
+            {renderField(<DescriptionSvg />, hostFamilyDetails.description, 'Description : ')}
           </Description>
         </ContainerDescription>
         {/* <Text>Historique de prise en charge d'animal</Text> */}

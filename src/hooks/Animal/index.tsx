@@ -7,7 +7,7 @@ import { AnimalClient, AnimalType } from 'src/types/Animal/Type'
 import { ReturnAnimal } from './Type'
 
 export const useGetAnimals = (): ReturnAnimal => {
-  const { status: statusAnimal, data: animalData } = useQuery<AnimalClient[]>({
+  const { status: statusAnimal, data: animalData } = useQuery<AnimalClient[], Error>({
     queryKey: ['animals'],
     queryFn: getAnimals,
   })

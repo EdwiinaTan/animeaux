@@ -25,6 +25,7 @@ export const postAnimal = (data) => {
         headers: header,
       }
     )
+    .then((result) => console.log('resu', result.data))
     .catch((err) => {
       console.log('err', err)
     })

@@ -59,7 +59,7 @@ export const UpdateAnimalPhoto = () => {
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalType) =>
+      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
         oldData
           ? {
               ...oldData,
@@ -70,6 +70,7 @@ export const UpdateAnimalPhoto = () => {
             }
           : oldData
       )
+      queryClient.invalidateQueries(['animals'])
     },
     onError: (err) => {
       console.log('err', err)

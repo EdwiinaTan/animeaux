@@ -37,7 +37,7 @@ export const AddHostFamily = () => {
   const mutation = useMutation({
     mutationFn: postHostFamily,
     onSuccess: () => {
-      onClickGoBack()
+      navigation.goBack()
       queryClient.invalidateQueries(['hostFamilies'])
       SnackbarToastComponent({
         title: 'L’ajout d’une FA a bien été prise en compte',

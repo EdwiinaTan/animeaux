@@ -15,7 +15,6 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { theme } from 'src/constant/Theme'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
-import { AnimalType } from 'src/types/Animal/Type'
 import { AddAnimalPhoto } from './Photo'
 import { customStyles, Keyboard } from './Styled'
 
@@ -27,10 +26,6 @@ export const AddAnimal = () => {
   const [valueSituation, setValueSituation] = useState()
   const [getImage, setGetImage] = useState<any>()
   const queryClient = new QueryClient()
-
-  const onClickGoBack = () => {
-    return navigation.goBack()
-  }
 
   const onPageChange = (value: string) => {
     if (value === 'next') {
@@ -76,10 +71,14 @@ export const AddAnimal = () => {
     onPageChange('next')
   }
 
+  const onClickGoBack = () => {
+    return navigation.goBack()
+  }
+
   const mutation = useMutation({
     mutationFn: postAnimal,
     onSuccess: () => {
-      navigation.goBack()
+      onClickGoBack()
       queryClient.invalidateQueries(['animals'])
       SnackbarToastComponent({
         title: 'L’ajout d’un animal a bien été prise en compte',
@@ -95,7 +94,7 @@ export const AddAnimal = () => {
   })
 
   const validationForm = () => {
-    const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
+    const values: any = Object.assign({}, valueProfile, valueSituation)
     let data
     // let pictures
     // if (getImage) {
@@ -123,7 +122,6 @@ export const AddAnimal = () => {
         //pictures: pictures
       }
     }
-    console.log('data', data)
     mutation.mutate(data)
   }
 

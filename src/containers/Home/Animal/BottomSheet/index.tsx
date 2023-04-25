@@ -164,7 +164,6 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
           <TouchableOpacity onPress={deleteAnimal}>
             <Body1>Oui</Body1>
           </TouchableOpacity>
-          <Divider orientation="vertical" />
           <TouchableOpacity onPress={toggleOverlay}>
             <Body1>Non</Body1>
           </TouchableOpacity>

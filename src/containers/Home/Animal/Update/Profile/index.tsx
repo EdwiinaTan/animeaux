@@ -8,6 +8,7 @@ import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Util
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -54,6 +55,7 @@ export const AnimalUpdate = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['animals'] })
+      SnackbarToastComponent({ title: 'La modif a bien été faite', subTitle: 'coool' })
     },
     onError: (err) => {
       console.log('err', err)

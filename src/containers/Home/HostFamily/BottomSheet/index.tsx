@@ -68,6 +68,10 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

@@ -61,6 +61,10 @@ export const UpdateAnimalProfile = () => {
       })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

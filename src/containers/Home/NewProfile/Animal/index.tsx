@@ -86,6 +86,10 @@ export const AddAnimal = () => {
       })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

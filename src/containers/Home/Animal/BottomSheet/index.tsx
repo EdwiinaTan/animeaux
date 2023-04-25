@@ -83,6 +83,10 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
       })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

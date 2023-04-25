@@ -91,6 +91,10 @@ export const UpdateAnimalSituation = () => {
       })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

@@ -8,6 +8,7 @@ import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyRequest, HostFamilyType } from 'src/types/HostFamily/Type'
@@ -55,8 +56,16 @@ export const HostFamilyUpdate = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
+      SnackbarToastComponent({
+        title: 'La modification a bien été prise en compte',
+        subTitle: `FA édité : ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`,
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

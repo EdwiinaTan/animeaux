@@ -38,7 +38,6 @@ export const Profile = () => {
         <Container>
           <UserHeader>
             <ContainerImage>
-              <Spacing size="8" />
               <ImageProfile picture={userData.picture} />
               <Body3>{userData.email}</Body3>
             </ContainerImage>

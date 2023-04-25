@@ -29,11 +29,10 @@ export const Login = () => {
         <CardStyle>
           <Spacing size="32" />
           <Title1 textAlign="center">Bienvenue !</Title1>
-          <Spacing size="24" />
           <View style={{ alignItems: 'center' }}>
             <Image source={require('/assets/images/animal.png')} />
           </View>
-          <Spacing size="32" />
+          <Spacing size="16" />
           <Formik
             initialValues={initialValues}
             validationSchema={validationAnimalSituation}

@@ -1,22 +1,22 @@
 import { theme } from 'src/constant/Theme'
 import styled from 'styled-components/native'
 
-export const ImageHostFamily = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  background-color: #dce1e7;
-`
-
-export const ImageField = styled.Image`
-  width: 25px;
-  height: 25px;
-  margin-right: 8px;
-`
-
 export const UserHeader = styled.View`
   padding-left: 16px;
   padding-right: 16px;
+`
+
+export const ContainerHeader = styled.View`
+  flex-direction: row
+  width: 80%;
+  justify-content: space-between;
+`
+
+export const HeaderInner = styled.View`
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  width: 50%;
 `
 
 export const Container = styled.ScrollView`
@@ -42,12 +42,6 @@ export const Description = styled.View`
   margin-left: auto;
   margin-right: auto;
   width: 70%;
-  align-items: center;
-`
-
-export const Fields = styled.View`
-  display: flex;
-  flex-direction: row;
   align-items: center;
 `
 

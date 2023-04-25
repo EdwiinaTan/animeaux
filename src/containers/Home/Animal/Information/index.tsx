@@ -21,11 +21,17 @@ import { useGetUserById } from 'src/hooks/User'
 import { AnimalAgreement } from 'src/types/Animal/enum'
 import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
-import { animalAge, renderDateFormat, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
+import {
+  animalAge,
+  renderAnimalGender,
+  renderDateFormat,
+  renderHostFamily,
+  startsWithVowel,
+  uppercaseWord,
+} from 'src/utils/Functions'
 import { BottomSheetAnimal } from '../BottomSheet'
 import { CarouselAnimal } from '../Carousel'
 import { AnimalRouteParams } from '../Router/type'
-import { renderAnimalGender, renderHostFamily } from '../Utils'
 import {
   BoxViewImage,
   ContainerViewImage,

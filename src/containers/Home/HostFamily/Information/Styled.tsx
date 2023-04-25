@@ -1,19 +1,6 @@
 import { theme } from 'src/constant/Theme'
 import styled from 'styled-components/native'
 
-export const ImageHostFamily = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  background-color: #dce1e7;
-`
-
-export const ImageField = styled.Image`
-  width: 25px;
-  height: 25px;
-  margin-right: 8px;
-`
-
 export const Container = styled.ScrollView`
   padding-left: 16px;
   padding-right: 16px;

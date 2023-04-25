@@ -92,7 +92,6 @@ export const HostFamilyInformation = (): React.ReactElement => {
             {renderField(<DescriptionSvg />, hostFamilyDetails.description, 'Description : ')}
           </Description>
         </ContainerDescription>
-        {/* <Text>Historique de prise en charge d'animal</Text> */}
       </Container>
       <BottomSheetHostFamily
         bottomSheetModalRef={bottomSheetModalRef}

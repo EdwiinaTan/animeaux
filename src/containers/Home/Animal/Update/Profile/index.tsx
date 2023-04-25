@@ -16,7 +16,7 @@ import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
 import { AnimalProfileRequest } from './Type'
 
-export const AnimalUpdate = () => {
+export const UpdateAnimalProfile = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },

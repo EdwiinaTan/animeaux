@@ -116,7 +116,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field 
           </Field>
           {errors.name && touched.name && <Body3 color={theme.colors.red}>{errors.name}</Body3>}
           <Spacing size="16" />
-          <View>
+          <View style={{ width: '100%' }}>
             <Body2>
               Date de naissance<TextRed>*</TextRed>
             </Body2>

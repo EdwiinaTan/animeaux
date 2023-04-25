@@ -14,7 +14,7 @@ import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { AnimalRouteParams } from '../../Router/type'
 
-export const AnimalPhoto = () => {
+export const UpdateAnimalPhoto = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },

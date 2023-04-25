@@ -18,7 +18,7 @@ import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
 import { AnimalSituationRequest } from './Type'
 
-export const UpdateAnimalSituation: React.FC = () => {
+export const UpdateAnimalSituation = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },

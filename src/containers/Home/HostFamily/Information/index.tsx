@@ -5,14 +5,12 @@ import { AddressSvg } from 'assets/svg/address'
 import { CalendarSvg } from 'assets/svg/calendar'
 import { DescriptionSvg } from 'assets/svg/description'
 import { EmailSvg } from 'assets/svg/email'
-import { NoPictureSvg } from 'assets/svg/noPicture'
 import { PauseSvg } from 'assets/svg/pause'
 import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
-import { ActivityIndicator } from 'react-native'
-import { Image } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
+import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
@@ -68,27 +66,13 @@ export const HostFamilyInformation = (): React.ReactElement => {
         toggleOverlay={handlePresentModal}
       />
       <Container>
-        <>
+        <ContainerImage>
           <Spacing size="8" />
-          <ContainerImage>
-            {hostFamilyDetails.picture ? (
-              <Image
-                source={{ uri: hostFamilyDetails.picture[0].url }}
-                style={{
-                  width: 100,
-                  height: 100,
-                  borderRadius: 8,
-                }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            ) : (
-              <NoPictureSvg />
-            )}
-            <Body1>
-              {hostFamilyDetails.firstName} {hostFamilyDetails.lastName}
-            </Body1>
-          </ContainerImage>
-        </>
+          <ImageProfile picture={hostFamilyDetails.picture} />
+          <Body1>
+            {hostFamilyDetails.firstName} {hostFamilyDetails.lastName}
+          </Body1>
+        </ContainerImage>
         <ContainerDescription>
           <Description>
             <Spacing size="48" />
@@ -108,7 +92,6 @@ export const HostFamilyInformation = (): React.ReactElement => {
             {renderField(<DescriptionSvg />, hostFamilyDetails.description, 'Description : ')}
           </Description>
         </ContainerDescription>
-        {/* <Text>Historique de prise en charge d'animal</Text> */}
       </Container>
       <BottomSheetHostFamily
         bottomSheetModalRef={bottomSheetModalRef}

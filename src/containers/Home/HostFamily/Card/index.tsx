@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { NoPictureSvg } from 'assets/svg/noPicture'
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
-import { Image } from 'react-native-elements'
+import { TouchableOpacity, View } from 'react-native'
 import { Card } from 'src/components/Card'
+import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { SkeletonCard } from 'src/components/SkeletonCard'
 import { Body1 } from 'src/components/Typo'
@@ -37,19 +36,9 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardHostFamily_${hostFamily.id}`}>
         <Container>
-          {hostFamily.picture ? (
-            <ContainerImage>
-              <Image
-                source={{ uri: hostFamily.picture[0].url }}
-                style={{ width: 100, height: 100, borderRadius: 8 }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            </ContainerImage>
-          ) : (
-            <View style={{ paddingRight: 16 }}>
-              <NoPictureSvg />
-            </View>
-          )}
+          <ContainerImage>
+            <ImageProfile picture={hostFamily.picture} />
+          </ContainerImage>
           <View style={{ flexDirection: 'column' }}>
             <Body1>
               {hostFamily.firstName} {hostFamily.lastName}

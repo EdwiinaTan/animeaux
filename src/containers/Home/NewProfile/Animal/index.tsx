@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
 import { Button } from 'react-native-elements'
@@ -25,7 +25,7 @@ export const AddAnimal = () => {
   const [valueProfile, setValueProfile] = useState()
   const [valueSituation, setValueSituation] = useState()
   const [getImage, setGetImage] = useState<any>()
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
 
   const onPageChange = (value: string) => {
     if (value === 'next') {

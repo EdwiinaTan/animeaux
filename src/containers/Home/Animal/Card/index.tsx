@@ -1,19 +1,17 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Skeleton } from '@rneui/themed'
-import { NoPictureSvg } from 'assets/svg/noPicture'
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
-import { Image } from 'react-native-elements'
+import { TouchableOpacity } from 'react-native'
 import { Card } from 'src/components/Card'
 import { ChipComponent } from 'src/components/Chip'
+import { ImageProfile } from 'src/components/ImageProfile'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
-import { animalAge } from 'src/utils/Functions'
+import { animalAge, renderAnimalGender, renderHostFamily } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
-import { renderAnimalGender, renderHostFamily } from '../Utils'
 import { AnimalGender, Container, ContainerChip, ContainerImage, Description } from './Styled'
 import { CardComponentProps } from './Type'
 
@@ -30,19 +28,9 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardAnimal_${animal.id}`}>
         <Container>
-          {animal.pictures ? (
-            <ContainerImage>
-              <Image
-                source={{ uri: animal.pictures[0].url }}
-                style={{ width: 100, height: 100, borderRadius: 8 }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            </ContainerImage>
-          ) : (
-            <View style={{ paddingRight: 16 }}>
-              <NoPictureSvg />
-            </View>
-          )}
+          <ContainerImage>
+            <ImageProfile picture={animal.pictures} />
+          </ContainerImage>
           <Description>
             <AnimalGender>
               <Body1 paddingRight={4}>{animal.name}</Body1>
@@ -60,17 +48,6 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
               </Body1>
             )}
             {renderHostFamily(statusHostFamily, hostFamilyData)}
-            {/* {statusHostFamily === FetchStatus.FAILED && <Text>failed</Text>}
-            {statusHostFamily === FetchStatus.LOADING ? (
-              <Skeleton animation="pulse" width={200} height={12} />
-            ) : (
-              hostFamilyData &&
-              hostFamilyData?.firstName && (
-                <Text>
-                  FA : {hostFamilyData?.firstName} {hostFamilyData?.lastName}
-                </Text>
-              )
-            )} */}
             <ContainerChip>
               <ChipComponent value={animal.status} />
             </ContainerChip>

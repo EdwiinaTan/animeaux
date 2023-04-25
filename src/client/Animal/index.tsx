@@ -15,9 +15,9 @@ export const getAnimals = async () => {
     })
 }
 
-export const postAnimal = (data) => {
+export const postAnimal = async (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
-  return axios
+  return await axios
     .post(
       url,
       { fields: { ...data } },

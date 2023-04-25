@@ -2,12 +2,25 @@ import { useQuery } from '@tanstack/react-query'
 import Airtable from 'airtable'
 import { AIRTABLE_API_KEY, AIRTABLE_APP_ID } from 'config'
 import { useEffect, useState } from 'react'
-import { getAnimals } from 'src/client/Animal'
+import { getAnimalById, getAnimals } from 'src/client/Animal'
 import { AnimalClient, AnimalType } from 'src/types/Animal/Type'
-import { ReturnAnimal } from './Type'
+import { ReturnAnimal, ReturnAnimals } from './Type'
 
-export const useGetAnimals = (): ReturnAnimal => {
-  const { status: statusAnimal, data: animalData } = useQuery<AnimalClient[]>({
+export const useGetAnimalById = (dataId: string): ReturnAnimal => {
+  const { status: statusAnimal, data: animalData } = useQuery<AnimalType, Error>({
+    enabled: dataId !== null,
+    queryKey: ['formInscription', dataId],
+    queryFn: () => getAnimalById(dataId || ''),
+  })
+
+  return {
+    statusAnimal,
+    animalData,
+  }
+}
+
+export const useGetAnimals = (): ReturnAnimals => {
+  const { status: statusAnimal, data: animalData } = useQuery<AnimalClient[], Error>({
     queryKey: ['animals'],
     queryFn: getAnimals,
   })
@@ -17,6 +30,7 @@ export const useGetAnimals = (): ReturnAnimal => {
     animalData,
   }
 }
+
 const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_APP_ID)
 
 export interface Test {

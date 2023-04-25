@@ -11,7 +11,7 @@ export const SnackbarToastComponent = ({
     text1: title,
     text2: subTitle,
     autoHide: true,
-    visibilityTime: 2500,
+    visibilityTime: 2700,
     position: 'top',
     topOffset: 50,
   })

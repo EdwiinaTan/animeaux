@@ -12,6 +12,7 @@ import { Divider, ListItem, Overlay } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { deleteAnimalById } from 'src/client/Animal'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1, Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome, IconFoundation } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
@@ -76,6 +77,10 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
     onSuccess: () => {
       navigation.navigate('animalScreen')
       queryClient.invalidateQueries({ queryKey: ['animals'] })
+      SnackbarToastComponent({
+        type: 'info',
+        title: 'La suppression a bien été prise en compte',
+      })
     },
     onError: (err) => {
       console.log('err', err)
@@ -152,11 +157,11 @@ export const BottomSheetAnimal: React.FC<BottomSheetProps> = ({
         <Divider />
         <Spacing size="8" />
         <ContainerButton>
-          <TouchableOpacity onPress={() => deleteAnimal()}>
+          <TouchableOpacity onPress={deleteAnimal}>
             <Body1>Oui</Body1>
           </TouchableOpacity>
           <Divider orientation="vertical" />
-          <TouchableOpacity onPress={() => toggleOverlay()}>
+          <TouchableOpacity onPress={toggleOverlay}>
             <Body1>Non</Body1>
           </TouchableOpacity>
         </ContainerButton>

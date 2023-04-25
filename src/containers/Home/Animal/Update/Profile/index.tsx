@@ -55,7 +55,10 @@ export const AnimalUpdate = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['animals'] })
-      SnackbarToastComponent({ title: 'La modif a bien été faite', subTitle: 'coool' })
+      SnackbarToastComponent({
+        title: 'La modification a bien été prise en compte',
+        subTitle: `Animal édité : ${animalDetails.name}`,
+      })
     },
     onError: (err) => {
       console.log('err', err)

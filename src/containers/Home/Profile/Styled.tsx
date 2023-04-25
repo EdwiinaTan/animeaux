@@ -14,9 +14,12 @@ export const ImageField = styled.Image`
   margin-right: 8px;
 `
 
-export const Container = styled.ScrollView`
+export const UserHeader = styled.View`
   padding-left: 16px;
   padding-right: 16px;
+`
+
+export const Container = styled.ScrollView`
   position: relative;
 `
 
@@ -28,15 +31,18 @@ export const ContainerDescription = styled.View`
 
 export const Description = styled.View`
   background-color: ${theme.colors.white};
-  padding: 16px;
+  padding: 8px;
   border-radius: 8px;
   border: 1px solid #dce1e7;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   margin-top: -64px;
   flex-direction: column;
-  width: 100%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  align-items: center;
 `
 
 export const Fields = styled.View`

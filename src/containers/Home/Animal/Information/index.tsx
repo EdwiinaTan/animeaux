@@ -5,12 +5,11 @@ import { CatSvg } from 'assets/svg/cat'
 import { ClipboardSvg } from 'assets/svg/clipboard'
 import { DogSvg } from 'assets/svg/dog'
 import { KidSvg } from 'assets/svg/kid'
-import { NoPictureSvg } from 'assets/svg/noPicture'
 import { useRef } from 'react'
 import { ActivityIndicator, ScrollView, TouchableOpacity, View } from 'react-native'
-import { Image as ImageElement } from 'react-native-elements'
 import { ChipComponent } from 'src/components/Chip'
 import { HeaderComponent } from 'src/components/Header'
+import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Body2, Title2 } from 'src/components/Typo'
@@ -130,26 +129,9 @@ export const AnimalInformation = (): React.ReactElement => {
                 </TitleCard>
                 <Spacing size="8" />
                 <InCharge>
-                  {userData.picture ? (
-                    <PaddingRight>
-                      <ImageElement
-                        source={{ uri: userData.picture[0].url }}
-                        style={{
-                          width: 100,
-                          height: 100,
-                          borderRadius: 8,
-                          borderTopRightRadius: 8,
-                          resizeMode: 'contain',
-                        }}
-                        containerStyle={{ backgroundColor: theme.colors.grey0, borderRadius: 8 }}
-                        PlaceholderContent={<ActivityIndicator />}
-                      />
-                    </PaddingRight>
-                  ) : (
-                    <PaddingRight>
-                      <NoPictureSvg />
-                    </PaddingRight>
-                  )}
+                  <PaddingRight>
+                    <ImageProfile picture={userData.picture} />
+                  </PaddingRight>
                   <View>
                     <Body1>
                       Par : {userData.firstName} {userData.lastName}

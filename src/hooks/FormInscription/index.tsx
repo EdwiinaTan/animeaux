@@ -4,11 +4,14 @@ import { FormInscriptionClient, FormInscriptionType } from 'src/types/FormInscri
 import { ReturnFormInscription, ReturnFormInscriptions } from './Type'
 
 export const useGetFormInscriptionById = (dataId: string): ReturnFormInscription => {
-  const { status: statusFormInscription, data: formInscriptionData } =
-    useQuery<FormInscriptionType>({
-      queryKey: ['formInscription', dataId],
-      queryFn: () => getFormInscriptionById(dataId || ''),
-    })
+  const { status: statusFormInscription, data: formInscriptionData } = useQuery<
+    FormInscriptionType,
+    Error
+  >({
+    enabled: dataId !== null,
+    queryKey: ['formInscription', dataId],
+    queryFn: () => getFormInscriptionById(dataId || ''),
+  })
 
   return {
     statusFormInscription,

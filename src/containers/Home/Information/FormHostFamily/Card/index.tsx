@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ActivityIndicator, TouchableOpacity, View } from 'react-native'
-import { Image } from 'react-native-elements'
+import { TouchableOpacity, View } from 'react-native'
 import { Card } from 'src/components/Card'
+import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { SkeletonCard } from 'src/components/SkeletonCard'
 import { Body1 } from 'src/components/Typo'
@@ -36,15 +36,9 @@ const CardContainer: React.FC<CardComponentProps> = ({ formHostFamily }) => {
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardFormHostFamily_${formHostFamily.id}`}>
         <Container>
-          {formHostFamily.picture && formHostFamily.picture[0] && (
-            <ContainerImage>
-              <Image
-                source={{ uri: formHostFamily.picture[0].url }}
-                style={{ width: 100, height: 100, borderRadius: 8 }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            </ContainerImage>
-          )}
+          <ContainerImage>
+            <ImageProfile picture={formHostFamily.picture} />
+          </ContainerImage>
           <View style={{ flexDirection: 'column' }}>
             <Body1>
               {formHostFamily.firstName} {formHostFamily.lastName}

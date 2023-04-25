@@ -1,10 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { EmailSvg } from 'assets/svg/email'
-import { NoPictureSvg } from 'assets/svg/noPicture'
 import { PhoneSvg } from 'assets/svg/phone'
 import { ActivityIndicator } from 'react-native'
-import { Image } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
@@ -13,6 +11,7 @@ import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { HeaderComponent } from '../Header'
+import { ImageProfile } from '../ImageProfile'
 import { Layout } from '../Layout'
 import { Spacing } from '../Layout/Spacing'
 import { Body1 } from '../Typo'
@@ -57,26 +56,14 @@ export const UserInCharge = () => {
           <>
             <Spacing size="8" />
             <ContainerImage>
-              {userData.picture ? (
-                <Image
-                  source={{ uri: userData.picture[0].url }}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 8,
-                  }}
-                  PlaceholderContent={<ActivityIndicator />}
-                />
-              ) : (
-                <NoPictureSvg />
-              )}
+              <ImageProfile picture={userData.picture} />
               <Body1>
                 {userData.firstName} {userData.lastName}
               </Body1>
             </ContainerImage>
             <ContainerDescription>
               <Description>
-                <Spacing size="64" />
+                <Spacing size="48" />
                 {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
                 {renderField(<EmailSvg />, userData.email)}
               </Description>

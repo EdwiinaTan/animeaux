@@ -11,6 +11,7 @@ import { Divider, ListItem, Overlay } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { deleteHostFamilyById } from 'src/client/HostFamily'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1, Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
@@ -61,8 +62,16 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
     onSuccess: () => {
       navigation.navigate('hostFamilyScreen')
       queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
+      SnackbarToastComponent({
+        type: 'info',
+        title: 'La suppression a bien été prise en compte',
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })
@@ -125,11 +134,10 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
         <Divider />
         <Spacing size="8" />
         <ContainerButton>
-          <TouchableOpacity onPress={() => deleteHostFamily()}>
+          <TouchableOpacity onPress={deleteHostFamily}>
             <Body1>Oui</Body1>
           </TouchableOpacity>
-          <Divider orientation="vertical" />
-          <TouchableOpacity onPress={() => toggleOverlay()}>
+          <TouchableOpacity onPress={toggleOverlay}>
             <Body1>Non</Body1>
           </TouchableOpacity>
         </ContainerButton>

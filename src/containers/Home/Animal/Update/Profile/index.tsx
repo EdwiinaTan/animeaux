@@ -8,6 +8,7 @@ import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Util
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -15,7 +16,7 @@ import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
 import { AnimalProfileRequest } from './Type'
 
-export const AnimalUpdate = () => {
+export const UpdateAnimalProfile = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },
@@ -54,8 +55,16 @@ export const AnimalUpdate = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['animals'] })
+      SnackbarToastComponent({
+        title: 'La modification a bien été prise en compte',
+        subTitle: `Animal édité : ${animalDetails.name}`,
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

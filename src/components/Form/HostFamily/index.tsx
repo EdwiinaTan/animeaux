@@ -82,6 +82,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
           {({ field }) => (
             <TextInput
               {...field}
+              autoCapitalize="none"
               style={styles.input}
               keyboardType="email-address"
               placeholder="Veuillez mettre le prénom"

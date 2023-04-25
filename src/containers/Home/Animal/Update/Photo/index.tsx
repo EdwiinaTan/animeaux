@@ -9,12 +9,13 @@ import { updateAnimalById } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { AnimalRouteParams } from '../../Router/type'
 
-export const AnimalPhoto = () => {
+export const UpdateAnimalPhoto = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },
@@ -59,7 +60,7 @@ export const AnimalPhoto = () => {
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animals', { id: animalDetails.id }], (oldData: AnimalType) =>
+      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
         oldData
           ? {
               ...oldData,
@@ -70,8 +71,16 @@ export const AnimalPhoto = () => {
             }
           : oldData
       )
+      queryClient.invalidateQueries(['animals'])
+      SnackbarToastComponent({
+        title: 'La modification a bien été prise en compte',
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

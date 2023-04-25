@@ -15,9 +15,9 @@ export const getAnimals = async () => {
     })
 }
 
-export const postAnimal = async (data) => {
+export const postAnimal = (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
-  return await axios
+  return axios
     .post(
       url,
       { fields: { ...data } },
@@ -25,8 +25,9 @@ export const postAnimal = async (data) => {
         headers: header,
       }
     )
+    .then((result) => console.log('resu', result.data))
     .catch((err) => {
-      console.log('err', err.response.data)
+      console.log('err', err)
     })
 }
 

@@ -7,6 +7,7 @@ import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRequest } from 'src/types/HostFamily/Type'
 import { Keyboard } from './Styled'
@@ -38,8 +39,15 @@ export const AddHostFamily = () => {
     onSuccess: () => {
       onClickGoBack()
       queryClient.invalidateQueries(['hostFamilies'])
+      SnackbarToastComponent({
+        title: 'L’ajout d’une FA a bien été prise en compte',
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

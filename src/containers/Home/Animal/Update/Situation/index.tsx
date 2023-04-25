@@ -8,6 +8,7 @@ import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
@@ -17,7 +18,7 @@ import { AnimalRouteParams } from '../../Router/type'
 import { Keyboard } from './Styled'
 import { AnimalSituationRequest } from './Type'
 
-export const UpdateAnimalSituation: React.FC = () => {
+export const UpdateAnimalSituation = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const {
     params: { animalDetails },
@@ -84,8 +85,16 @@ export const UpdateAnimalSituation: React.FC = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['animals'] })
+      SnackbarToastComponent({
+        title: 'La modification a bien été prise en compte',
+        subTitle: `Animal édité : ${animalDetails.name}`,
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { QueryClient, useMutation } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Button } from 'react-native-elements'
 import StepIndicator from 'react-native-step-indicator'
 import { postAnimal } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
@@ -12,9 +12,10 @@ import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body1 } from 'src/components/Typo'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
+import { theme } from 'src/constant/Theme'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
-import { AnimalType } from 'src/types/Animal/Type'
+import { AddAnimalPhoto } from './Photo'
 import { customStyles, Keyboard } from './Styled'
 
 export const AddAnimal = () => {
@@ -23,11 +24,8 @@ export const AddAnimal = () => {
   const [currentPosition, setCurrentPosition] = useState(0)
   const [valueProfile, setValueProfile] = useState()
   const [valueSituation, setValueSituation] = useState()
+  const [getImage, setGetImage] = useState<any>()
   const queryClient = new QueryClient()
-
-  const onClickGoBack = () => {
-    return navigation.goBack()
-  }
 
   const onPageChange = (value: string) => {
     if (value === 'next') {
@@ -73,30 +71,55 @@ export const AddAnimal = () => {
     onPageChange('next')
   }
 
+  const onClickGoBack = () => {
+    return navigation.goBack()
+  }
+
   const mutation = useMutation({
     mutationFn: postAnimal,
     onSuccess: () => {
-      navigation.goBack()
+      onClickGoBack()
       queryClient.invalidateQueries(['animals'])
+      SnackbarToastComponent({
+        title: 'L’ajout d’un animal a bien été prise en compte',
+      })
     },
     onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
       console.log('err', err)
     },
   })
 
   const validationForm = () => {
-    const values: AnimalType = Object.assign({}, valueProfile, valueSituation)
+    const values: any = Object.assign({}, valueProfile, valueSituation)
     let data
+    // let pictures
+    // if (getImage) {
+    //   pictures = {
+    //     filename: 'imagerieee',
+    //     height: getImage.height,
+    //     id: `lalala`,
+    //     size: getImage.fileSize,
+    //     thumbnails: [],
+    //     type: getImage.type,
+    //     url: getImage.uri,
+    //   }
+    // }
     if (values.hostFamilyId.length === 0) {
       data = {
         ...values,
         userId: [values.userId],
+        //pictures: pictures
       }
     } else {
       data = {
         ...values,
         userId: [values.userId],
         hostFamilyId: [values.hostFamilyId],
+        //pictures: pictures
       }
     }
     mutation.mutate(data)
@@ -116,12 +139,12 @@ export const AddAnimal = () => {
       <Spacing size="8" />
       <Keyboard behavior="padding" enabled>
         <ContainerStyle>
-          {currentPosition !== 0 && (
+          {/* {currentPosition !== 0 && (
             <TouchableOpacity onPress={() => onPageChange('prev')}>
               <Body1>Précédent</Body1>
               <Spacing size="8" />
             </TouchableOpacity>
-          )}
+          )} */}
           {currentPosition === 0 && (
             <Formik
               initialValues={initialValuesStepOne}
@@ -145,10 +168,17 @@ export const AddAnimal = () => {
             </Formik>
           )}
           {currentPosition === 2 && (
-            <TouchableOpacity onPress={validationForm}>
-              <Body1>Suivant</Body1>
-              <Spacing size="8" />
-            </TouchableOpacity>
+            <>
+              <AddAnimalPhoto getImage={getImage} setGetImage={setGetImage} />
+              <Spacing size="16" />
+              {getImage && (
+                <Button
+                  title="Valider"
+                  buttonStyle={{ backgroundColor: theme.colors.yellow }}
+                  onPress={validationForm}
+                />
+              )}
+            </>
           )}
           <Spacing size="24" />
         </ContainerStyle>

@@ -7,7 +7,6 @@ import { theme } from 'src/constant/Theme'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
 import { useGetUserById } from 'src/hooks/User'
-import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
 import { HeaderComponent } from '../Header'
@@ -21,9 +20,9 @@ export const UserInCharge = () => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const {
-    params: { animalDetails },
-  } = route as { params: { animalDetails: AnimalType } }
-  const { statusUser, userData } = useGetUserById(animalDetails.userId)
+    params: { userId },
+  } = route as { params: { userId: string } }
+  const { statusUser, userData } = useGetUserById(userId)
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -45,33 +44,35 @@ export const UserInCharge = () => {
 
   return (
     <Layout>
-      <HeaderComponent
-        title={uppercaseWord(startsWithVowel(userData.firstName))}
-        onClickGoBack={onClickGoBack}
-      />
-      <ContainerStyle>
-        {statusUser === FetchStatus.LOADING ? (
-          <ActivityIndicator size="large" color={theme.colors.blue} />
-        ) : (
-          <>
-            <Spacing size="8" />
-            <ContainerImage>
-              <ImageProfile picture={userData.picture} />
-              <Body1>
-                {userData.firstName} {userData.lastName}
-              </Body1>
-            </ContainerImage>
-            <ContainerDescription>
-              <Description>
-                <Spacing size="48" />
-                {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
-                {renderField(<EmailSvg />, userData.email)}
-              </Description>
-              {/* animaux en charge avec historique */}
-            </ContainerDescription>
-          </>
-        )}
-      </ContainerStyle>
+      {statusUser === FetchStatus.LOADING ? (
+        <ActivityIndicator size="large" color={theme.colors.blue} />
+      ) : (
+        <>
+          <HeaderComponent
+            title={uppercaseWord(startsWithVowel(userData.firstName))}
+            onClickGoBack={onClickGoBack}
+          />
+          <ContainerStyle>
+            <>
+              <Spacing size="8" />
+              <ContainerImage>
+                <ImageProfile picture={userData.picture} />
+                <Body1>
+                  {userData.firstName} {userData.lastName}
+                </Body1>
+              </ContainerImage>
+              <ContainerDescription>
+                <Description>
+                  <Spacing size="48" />
+                  {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
+                  {renderField(<EmailSvg />, userData.email)}
+                </Description>
+                {/* animaux en charge avec historique */}
+              </ContainerDescription>
+            </>
+          </ContainerStyle>
+        </>
+      )}
     </Layout>
   )
 }

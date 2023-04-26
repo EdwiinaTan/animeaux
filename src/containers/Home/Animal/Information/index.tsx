@@ -64,7 +64,7 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const onClickUser = () => {
-    navigation.navigate('animalUserInCharge', { animalDetails: animalDetails })
+    navigation.navigate('animalUserInCharge', { userId: animalDetails.userId })
   }
 
   const onClickHostFamily = () => {

@@ -21,7 +21,13 @@ export const getUserById = async (recordId: string) => {
     .get(url, {
       headers: header,
     })
-    .then((result) => result.data.fields)
+    .then((result) => {
+      if (!result) {
+        return 'errur'
+      } else {
+        return result.data.fields
+      }
+    })
     .catch((err) => {
       console.log('err', err)
       throw err

@@ -8,7 +8,7 @@ import { HostFamilyRouter } from '../HostFamily/Router'
 import { InformationRouter } from '../Information/Router'
 import { AddAnimal } from '../NewProfile/Animal'
 import { AddHostFamily } from '../NewProfile/HostFamily'
-import { Profile } from '../Profile'
+import { ProfileRouter } from '../Profile/Router'
 import { BottomSheetAdd } from './BottomSheet'
 import { ButtomCustom } from './Styled'
 import { AddRouteParams, RouteParams } from './Type'
@@ -84,7 +84,7 @@ export const HomeRouter: React.FC = () => {
         />
         <Tab.Screen
           name="profile"
-          component={Profile}
+          component={ProfileRouter}
           options={{
             tabBarIcon: ({ focused }) => (
               <IconOcticons

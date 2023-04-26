@@ -9,12 +9,12 @@ import { theme } from 'src/constant/Theme'
 import { useGetAnimalById } from 'src/hooks/Animal'
 import { AnimalType } from 'src/types/Animal/Type'
 import { animalAge, renderAnimalGender } from 'src/utils/Functions'
-import { AnimalRouteParams } from '../../Animal/Router/type'
+import { ProfileRouteParams } from '../Router/type'
 import { AnimalGender, Container, ContainerChip, ContainerImage, Description } from './Styled'
 import { InChargeProps } from './Type'
 
 export const UserAnimalInCharge: React.FC<InChargeProps> = ({ listItem }) => {
-  const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
+  const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
 
   if (!listItem || listItem.length === 0) {
     return (

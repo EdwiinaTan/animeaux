@@ -7,10 +7,9 @@ import { ChipComponent } from 'src/components/Chip'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
-import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
-import { animalAge, renderAnimalGender, renderHostFamily } from 'src/utils/Functions'
+import { animalAge, renderAnimalGender } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../Router/type'
 import { AnimalGender, Container, ContainerChip, ContainerImage, Description } from './Styled'
 import { CardComponentProps } from './Type'
@@ -18,7 +17,6 @@ import { CardComponentProps } from './Type'
 const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
   const { statusUser, userData } = useGetUserById(animal.userId)
-  const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(animal.hostFamilyId)
 
   const onClick = () => {
     navigation.navigate('animalInformation', { animalDetails: animal })
@@ -47,7 +45,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
                 Responsable : {userData?.firstName} {userData?.lastName}
               </Body1>
             )}
-            {renderHostFamily(statusHostFamily, hostFamilyData)}
+            <Body1>Race : {animal.race}</Body1>
             <ContainerChip>
               <ChipComponent value={animal.status} />
             </ContainerChip>

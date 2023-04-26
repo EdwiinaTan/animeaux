@@ -1,3 +1,4 @@
+import { AnimalType } from 'src/types/Animal/Type'
 import { HostFamilyType } from 'src/types/HostFamily/Type'
 
 export type HostFamilyRouteParams = {
@@ -7,5 +8,8 @@ export type HostFamilyRouteParams = {
   }
   hostFamilyUpdate: {
     hostFamilyDetails: HostFamilyType
+  }
+  animalInformation: {
+    animalDetails: AnimalType
   }
 }

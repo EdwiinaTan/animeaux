@@ -68,7 +68,7 @@ export const AnimalInformation = (): React.ReactElement => {
   }
 
   const onClickHostFamily = () => {
-    navigation.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamilyData })
+    navigation.navigate('hostFamilyInformation', { hostFamilyId: animalDetails.hostFamilyId })
   }
 
   const renderIsSterilized = () => {

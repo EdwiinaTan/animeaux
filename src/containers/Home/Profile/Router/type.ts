@@ -1,5 +1,4 @@
 import { AnimalType } from 'src/types/Animal/Type'
-import { HostFamilyType } from 'src/types/HostFamily/Type'
 
 export type ProfileRouteParams = {
   profileScreen: undefined
@@ -7,7 +6,7 @@ export type ProfileRouteParams = {
     animalDetails: AnimalType
   }
   hostFamilyInformation: {
-    hostFamilyDetails: HostFamilyType
+    hostFamilyId: string
   }
   animalUserInCharge: {
     id: string

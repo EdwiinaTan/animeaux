@@ -1,9 +1,9 @@
-import { HostFamilyType } from './../../../../types/HostFamily/Type'
+import { HostFamilyType } from 'src/types/HostFamily/Type'
 
 export type HostFamilyRouteParams = {
   hostFamilyScreen: undefined
   hostFamilyInformation: {
-    hostFamilyDetails: HostFamilyType
+    hostFamilyId: string
   }
   hostFamilyUpdate: {
     hostFamilyDetails: HostFamilyType

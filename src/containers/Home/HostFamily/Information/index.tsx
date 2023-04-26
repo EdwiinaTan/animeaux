@@ -9,12 +9,15 @@ import { PauseSvg } from 'assets/svg/pause'
 import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
+import { ActivityIndicator } from 'react-native'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
-import { HostFamilyType } from 'src/types/HostFamily/Type'
+import { theme } from 'src/constant/Theme'
+import { useGetHostFamilyById } from 'src/hooks/HostFamily'
+import { FetchStatus } from 'src/types/Status'
 import {
   formatPhoneNumber,
   renderDateFormat,
@@ -28,10 +31,11 @@ import { Container, ContainerDescription, ContainerImage, Description, Fields } 
 export const HostFamilyInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()
   const {
-    params: { hostFamilyDetails },
-  } = route as { params: { hostFamilyDetails: HostFamilyType } }
+    params: { hostFamilyId },
+  } = route as { params: { hostFamilyId: string } }
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
+  const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(hostFamilyId)
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -60,43 +64,49 @@ export const HostFamilyInformation = (): React.ReactElement => {
 
   return (
     <Layout>
-      <HeaderComponent
-        onClickGoBack={onClickGoBack}
-        title={uppercaseWord(startsWithVowel(hostFamilyDetails.firstName))}
-        toggleOverlay={handlePresentModal}
-      />
-      <Container>
-        <ContainerImage>
-          <Spacing size="8" />
-          <ImageProfile picture={hostFamilyDetails.picture} />
-          <Body1>
-            {hostFamilyDetails.firstName} {hostFamilyDetails.lastName}
-          </Body1>
-        </ContainerImage>
-        <ContainerDescription>
-          <Description>
-            <Spacing size="48" />
-            {renderField(<PhoneSvg />, formatPhoneNumber(hostFamilyDetails.phone))}
-            {renderField(<EmailSvg />, hostFamilyDetails.email)}
-            {renderField(
-              <AddressSvg />,
-              `${hostFamilyDetails.address}, ${hostFamilyDetails.postalCode} - ${hostFamilyDetails.city}`
-            )}
-            {renderField(
-              <CalendarSvg />,
-              renderDateFormat(hostFamilyDetails.createdAt),
-              'Inscrit le '
-            )}
-            {renderField(<PauseSvg />, hostFamilyDetails.onBreak, 'Indisponible : ')}
-            {renderField(<WarningSvg />, hostFamilyDetails.criteria, 'Critère : ')}
-            {renderField(<DescriptionSvg />, hostFamilyDetails.description, 'Description : ')}
-          </Description>
-        </ContainerDescription>
-      </Container>
-      <BottomSheetHostFamily
-        bottomSheetModalRef={bottomSheetModalRef}
-        hostFamilyDetails={hostFamilyDetails}
-      />
+      {statusHostFamily === FetchStatus.LOADING ? (
+        <ActivityIndicator size="large" color={theme.colors.blue} />
+      ) : (
+        <>
+          <HeaderComponent
+            onClickGoBack={onClickGoBack}
+            title={uppercaseWord(startsWithVowel(hostFamilyData.firstName))}
+            toggleOverlay={handlePresentModal}
+          />
+          <Container>
+            <ContainerImage>
+              <Spacing size="8" />
+              <ImageProfile picture={hostFamilyData.picture} />
+              <Body1>
+                {hostFamilyData.firstName} {hostFamilyData.lastName}
+              </Body1>
+            </ContainerImage>
+            <ContainerDescription>
+              <Description>
+                <Spacing size="48" />
+                {renderField(<PhoneSvg />, formatPhoneNumber(hostFamilyData.phone))}
+                {renderField(<EmailSvg />, hostFamilyData.email)}
+                {renderField(
+                  <AddressSvg />,
+                  `${hostFamilyData.address}, ${hostFamilyData.postalCode} - ${hostFamilyData.city}`
+                )}
+                {renderField(
+                  <CalendarSvg />,
+                  renderDateFormat(hostFamilyData.createdAt),
+                  'Inscrit le '
+                )}
+                {renderField(<PauseSvg />, hostFamilyData.onBreak, 'Indisponible : ')}
+                {renderField(<WarningSvg />, hostFamilyData.criteria, 'Critère : ')}
+                {renderField(<DescriptionSvg />, hostFamilyData.description, 'Description : ')}
+              </Description>
+            </ContainerDescription>
+          </Container>
+          <BottomSheetHostFamily
+            bottomSheetModalRef={bottomSheetModalRef}
+            hostFamilyDetails={hostFamilyData}
+          />
+        </>
+      )}
     </Layout>
   )
 }

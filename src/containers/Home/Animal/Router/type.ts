@@ -1,5 +1,4 @@
 import { AnimalType } from 'src/types/Animal/Type'
-import { HostFamilyType } from 'src/types/HostFamily/Type'
 
 export type AnimalRouteParams = {
   animalScreen: undefined
@@ -19,6 +18,6 @@ export type AnimalRouteParams = {
     animalDetails: AnimalType
   }
   hostFamilyInformation: {
-    hostFamilyDetails: HostFamilyType
+    hostFamilyId: string
   }
 }

@@ -5,8 +5,10 @@ import {
 } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { AnimalShelterSvg } from 'assets/svg/animalShelter'
+import { HostFamilySvg } from 'assets/svg/hostFamily'
 import { useCallback } from 'react'
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Title2 } from 'src/components/Typo'
@@ -49,16 +51,17 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40 }}>
         <TouchableOpacity onPress={onClickAddAnimal}>
-          <Image
+          <AnimalShelterSvg />
+          {/* <Image
             source={require('/assets/images/animal-shelter.png')}
             style={{ width: 100, height: 100 }}
-          />
+          /> */}
           <Spacing size="8" />
           <Title2 textAlign="center">Ajouter</Title2>
           <Title2 textAlign="center">un animal</Title2>
         </TouchableOpacity>
         <TouchableOpacity onPress={onClickAddHostFamily}>
-          <Image source={require('/assets/images/home.png')} style={{ width: 100, height: 100 }} />
+          <HostFamilySvg />
           <Spacing size="8" />
           <Title2 textAlign="center">Ajouter </Title2>
           <Title2 textAlign="center">une famille </Title2>

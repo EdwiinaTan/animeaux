@@ -9,6 +9,7 @@ import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
 import { ActivityIndicator, SafeAreaView, ScrollView } from 'react-native'
+import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -25,7 +26,6 @@ import {
 } from 'src/utils/Functions'
 import { BottomSheetHostFamily } from '../BottomSheet'
 import { HostFamilyRouteParams } from '../Router/type'
-import { HostFamilyAnimal } from './Animal'
 import { Container, ContainerDescription, ContainerImage, Description, Fields } from './Styled'
 
 export const HostFamilyInformation = (): React.ReactElement => {
@@ -112,7 +112,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
                   Animaux en charge ({hostFamilyData.animalId.length})
                 </Body1>
                 <Spacing size="4" />
-                <HostFamilyAnimal listItem={hostFamilyData.animalId} />
+                <CardAnimal listItem={hostFamilyData.animalId} />
               </>
             )}
           </ScrollView>

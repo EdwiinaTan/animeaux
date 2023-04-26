@@ -12,7 +12,7 @@ import { animalAge, renderAnimalGender } from 'src/utils/Functions'
 import { AnimalGender, Container, ContainerChip, ContainerImage, Description } from './Styled'
 import { InChargeProps } from './Type'
 
-export const HostFamilyAnimal: React.FC<InChargeProps> = ({ listItem }) => {
+export const CardAnimal: React.FC<InChargeProps> = ({ listItem }) => {
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
 
   // if (!listItem || listItem.length === 0) {

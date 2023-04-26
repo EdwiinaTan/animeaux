@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -9,7 +10,6 @@ import { Body1, Body2, Body3, Title1 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { useGetUserById } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
-import { UserAnimalInCharge } from './Animal'
 import {
   Container,
   ContainerDescription,
@@ -87,7 +87,7 @@ export const Profile = () => {
             <Spacing size="16" />
           </UserHeader>
           {userData && userData.animalId && userData.animalId.length !== 0 && currentIndex === 0 ? (
-            <UserAnimalInCharge listItem={userData.animalId} />
+            <CardAnimal listItem={userData.animalId} />
           ) : (
             <Title1 textAlign="center">NOTES</Title1>
           )}

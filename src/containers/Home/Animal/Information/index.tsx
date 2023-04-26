@@ -54,9 +54,6 @@ export const AnimalInformation = (): React.ReactElement => {
   } = route as { params: { animalDetails: AnimalType } }
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
   const { hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
-  console.log('animalDetails', animalDetails.hostFamilyId)
-  console.log('typeod', typeof animalDetails.hostFamilyId)
-  console.log('hostFamilyData', hostFamilyData)
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()

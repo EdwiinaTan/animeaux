@@ -30,7 +30,7 @@ export const Information = (): React.ReactElement => {
               setSelectedIndex(value)
             }}
             containerStyle={{
-              marginBottom: 8,
+              marginBottom: 0,
               marginTop: 0,
               borderRadius: 8,
               marginLeft: 16,

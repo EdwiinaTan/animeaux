@@ -75,7 +75,7 @@ export const HostFamily = (): React.ReactElement => {
         </View>
       ) : (
         <>
-          <Spacing size="16" />
+          <Spacing size="8" />
           <FlatList
             data={filtered}
             keyExtractor={(item) => item.id}

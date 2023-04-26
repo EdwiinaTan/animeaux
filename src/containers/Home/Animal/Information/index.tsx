@@ -1,10 +1,14 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { AgreementSvg } from 'assets/svg/agreement'
+import { BookSvg } from 'assets/svg/book'
 import { CatSvg } from 'assets/svg/cat'
 import { ClipboardSvg } from 'assets/svg/clipboard'
 import { DogSvg } from 'assets/svg/dog'
 import { KidSvg } from 'assets/svg/kid'
+import { PrivateDescriptionSvg } from 'assets/svg/privateDescription'
+import { SunriseSvg } from 'assets/svg/sunrise'
 import { useRef } from 'react'
 import { ActivityIndicator, ScrollView, TouchableOpacity, View } from 'react-native'
 import { ChipComponent } from 'src/components/Chip'
@@ -13,7 +17,6 @@ import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Body2, Title2 } from 'src/components/Typo'
-import { IconEntypo, IconMaterialCommunityIcons, IconMaterialIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
@@ -23,12 +26,13 @@ import { AnimalType } from 'src/types/Animal/Type'
 import { FetchStatus } from 'src/types/Status'
 import {
   animalAge,
+  formatPhoneNumber,
   renderAnimalGender,
   renderDateFormat,
-  renderHostFamily,
   startsWithVowel,
   uppercaseWord,
 } from 'src/utils/Functions'
+import { HostFamilyRouteParams } from '../../HostFamily/Router/type'
 import { BottomSheetAnimal } from '../BottomSheet'
 import { CarouselAnimal } from '../Carousel'
 import { AnimalRouteParams } from '../Router/type'
@@ -45,12 +49,13 @@ import {
 export const AnimalInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
+  const navigationFa = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const {
     params: { animalDetails },
   } = route as { params: { animalDetails: AnimalType } }
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
-  const { statusHostFamily, hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
+  const { hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
@@ -62,6 +67,10 @@ export const AnimalInformation = (): React.ReactElement => {
 
   const onClick = () => {
     navigation.navigate('animalUserInCharge', { animalDetails: animalDetails })
+  }
+
+  const onClickFa = () => {
+    navigationFa.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamilyData })
   }
 
   const renderIsSterilized = () => {
@@ -118,7 +127,6 @@ export const AnimalInformation = (): React.ReactElement => {
                 {renderField('Icad', animalDetails.icad)}
                 {renderField('Alias', animalDetails.alias)}
                 {renderField('Race', animalDetails.race)}
-                {renderHostFamily(statusHostFamily, hostFamilyData)}
               </View>
               <View style={{ alignItems: 'flex-end' }}>
                 <ChipComponent value={animalDetails.status} />
@@ -126,6 +134,31 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Body1>{renderIsSterilized()}</Body1>
               </View>
             </Description>
+            {animalDetails.hostFamilyId && (
+              <TouchableOpacity onPress={onClickFa} activeOpacity={1}>
+                <Spacing size="16" />
+                <CardStyle>
+                  <TitleCard>
+                    <SunriseSvg />
+                    <Title2 paddingLeft={4}>Famille d'accueil</Title2>
+                  </TitleCard>
+                  <Spacing size="8" />
+                  <InCharge>
+                    <PaddingRight>
+                      <ImageProfile picture={hostFamilyData.picture} />
+                    </PaddingRight>
+                    <View>
+                      <Body1>
+                        {hostFamilyData.firstName} {hostFamilyData.lastName}
+                      </Body1>
+                      <Body1>{hostFamilyData.email}</Body1>
+                      <Body1>{formatPhoneNumber(hostFamilyData.phone)}</Body1>
+                      <Body1>{hostFamilyData.city}</Body1>
+                    </View>
+                  </InCharge>
+                </CardStyle>
+              </TouchableOpacity>
+            )}
             <Spacing size="16" />
             <TouchableOpacity onPress={onClick} activeOpacity={1}>
               <CardStyle>
@@ -152,8 +185,8 @@ export const AnimalInformation = (): React.ReactElement => {
             <Spacing size="16" />
             <CardStyle>
               <TitleCard>
-                <IconEntypo name="heart" size={20} color={theme.colors.red} />
-                <Title2 paddingLeft={8}>Son histoire</Title2>
+                <BookSvg />
+                <Title2 paddingLeft={4}>Son histoire</Title2>
               </TitleCard>
               <Spacing size="8" />
               <Body2>
@@ -164,11 +197,7 @@ export const AnimalInformation = (): React.ReactElement => {
             <CardStyle>
               <BoxViewImage>
                 <TitleCard>
-                  <IconMaterialCommunityIcons
-                    name="thumbs-up-down"
-                    size={20}
-                    color={theme.colors.blue}
-                  />
+                  <AgreementSvg />
                   <Title2 paddingLeft={8}>Ententes</Title2>
                 </TitleCard>
                 <Spacing size="8" />
@@ -188,8 +217,8 @@ export const AnimalInformation = (): React.ReactElement => {
             <Spacing size="16" />
             <CardStyle>
               <TitleCard>
-                <IconMaterialIcons name="description" size={20} color={theme.colors.yellow} />
-                <Title2 paddingLeft={8}>Description privé</Title2>
+                <PrivateDescriptionSvg />
+                <Title2 paddingLeft={4}>Description privé</Title2>
               </TitleCard>
               <Spacing size="8" />
               <Body2>

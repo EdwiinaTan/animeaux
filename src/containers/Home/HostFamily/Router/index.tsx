@@ -14,7 +14,11 @@ export const HostFamilyRouter: React.FC = () => {
         headerShown: false,
       }}
     >
-      <Tab.Screen name="hostFamilyScreen" component={HostFamily} />
+      <Tab.Screen
+        name="hostFamilyScreen"
+        component={HostFamily}
+        options={{ animation: 'slide_from_right' }}
+      />
       <Tab.Screen
         name="hostFamilyInformation"
         component={HostFamilyInformation}

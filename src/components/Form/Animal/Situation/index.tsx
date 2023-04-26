@@ -1,6 +1,7 @@
+import { useNavigation } from '@react-navigation/native'
 import { CalendarSvg } from 'assets/svg/calendar'
 import { Field } from 'formik'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Modal, TextInput, TouchableOpacity, View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
@@ -30,24 +31,32 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   const [optionPlace, setOptionPlace] = useState({})
   const [modalVisible, setModalVisible] = useState(false)
   const { handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, values } = field
+  const navigation = useNavigation()
+  const listRef = useRef(null)
 
   useEffect(() => {
-    if (renderDefaultOptionHostFamily) {
+    if (renderDefaultOptionHostFamily()) {
       setOptionHostFamily({
         key: renderDefaultOptionHostFamily().key,
         value: renderDefaultOptionHostFamily().value,
       })
+    } else {
+      setOptionHostFamily({ key: '', value: '' })
+    }
+    if (renderDefaultOptionUser()) {
       setOptionUser({
         key: renderDefaultOptionUser().key,
         value: renderDefaultOptionUser().value,
       })
+    } else {
+      setOptionUser({ key: '', value: '' })
+    }
+    if (renderDefaultOptionPlace()) {
       setOptionPlace({
         key: renderDefaultOptionPlace().key,
         value: renderDefaultOptionPlace().value,
       })
     } else {
-      setOptionHostFamily({ key: '', value: '' })
-      setOptionUser({ key: '', value: '' })
       setOptionPlace({ key: '', value: '' })
     }
   }, [])
@@ -81,6 +90,12 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
     setFieldValue('dateAssigned', day.dateString)
     setModalVisible(false)
   }
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      listRef.current?.scrollToOffset({ offset: 0, animated: false })
+    })
+  }, [navigation])
 
   return (
     <>

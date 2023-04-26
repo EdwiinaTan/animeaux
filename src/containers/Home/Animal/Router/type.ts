@@ -1,4 +1,5 @@
-import { AnimalType } from './../../../../types/Animal/Type'
+import { AnimalType } from 'src/types/Animal/Type'
+import { HostFamilyType } from 'src/types/HostFamily/Type'
 
 export type AnimalRouteParams = {
   animalScreen: undefined
@@ -16,5 +17,8 @@ export type AnimalRouteParams = {
   }
   animalUpdatePhoto: {
     animalDetails: AnimalType
+  }
+  hostFamilyInformation: {
+    hostFamilyDetails: HostFamilyType
   }
 }

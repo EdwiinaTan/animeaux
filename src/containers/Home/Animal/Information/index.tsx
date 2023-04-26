@@ -32,7 +32,6 @@ import {
   startsWithVowel,
   uppercaseWord,
 } from 'src/utils/Functions'
-import { HostFamilyRouteParams } from '../../HostFamily/Router/type'
 import { BottomSheetAnimal } from '../BottomSheet'
 import { CarouselAnimal } from '../Carousel'
 import { AnimalRouteParams } from '../Router/type'
@@ -49,7 +48,6 @@ import {
 export const AnimalInformation = (): React.ReactElement => {
   const route = useRoute<RouteProp<AnimalRouteParams>>()
   const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
-  const navigationFa = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const {
     params: { animalDetails },
@@ -65,12 +63,12 @@ export const AnimalInformation = (): React.ReactElement => {
     return navigation.goBack()
   }
 
-  const onClick = () => {
+  const onClickUser = () => {
     navigation.navigate('animalUserInCharge', { animalDetails: animalDetails })
   }
 
-  const onClickFa = () => {
-    navigationFa.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamilyData })
+  const onClickHostFamily = () => {
+    navigation.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamilyData })
   }
 
   const renderIsSterilized = () => {
@@ -135,7 +133,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </View>
             </Description>
             {animalDetails.hostFamilyId && (
-              <TouchableOpacity onPress={onClickFa} activeOpacity={1}>
+              <TouchableOpacity onPress={onClickHostFamily} activeOpacity={1}>
                 <Spacing size="16" />
                 <CardStyle>
                   <TitleCard>
@@ -160,7 +158,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </TouchableOpacity>
             )}
             <Spacing size="16" />
-            <TouchableOpacity onPress={onClick} activeOpacity={1}>
+            <TouchableOpacity onPress={onClickUser} activeOpacity={1}>
               <CardStyle>
                 <TitleCard>
                   <ClipboardSvg />

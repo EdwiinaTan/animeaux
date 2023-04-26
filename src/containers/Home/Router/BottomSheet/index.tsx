@@ -52,10 +52,6 @@ export const BottomSheetAdd: React.FC<BottomSheetRouterProps> = ({ bottomSheetMo
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', paddingTop: 40 }}>
         <TouchableOpacity onPress={onClickAddAnimal}>
           <AnimalShelterSvg />
-          {/* <Image
-            source={require('/assets/images/animal-shelter.png')}
-            style={{ width: 100, height: 100 }}
-          /> */}
           <Spacing size="8" />
           <Title2 textAlign="center">Ajouter</Title2>
           <Title2 textAlign="center">un animal</Title2>

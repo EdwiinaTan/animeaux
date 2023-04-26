@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
+import { NoAnimalFoundSvg } from 'assets/svg/noAnimalFound'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
 import 'react-native-gesture-handler'
@@ -147,7 +148,11 @@ export const Animal = (): React.ReactElement => {
               }
               ListEmptyComponent={
                 search ? (
-                  <Body1 textAlign="center">{`Aucun ${renderSearchNotFound()} trouvé`}</Body1>
+                  <View style={{ alignItems: 'center' }}>
+                    <Spacing size="8" />
+                    <Body1>{`Aucun ${renderSearchNotFound()} trouvé`}</Body1>
+                    <NoAnimalFoundSvg />
+                  </View>
                 ) : (
                   <Body1 textAlign="center">Aucun {isActive} pour le moment</Body1>
                 )

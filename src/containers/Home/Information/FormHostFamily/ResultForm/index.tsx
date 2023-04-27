@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ActivityIndicator, View } from 'react-native'
 import { Divider } from 'react-native-elements'
 import { HeaderComponent } from 'src/components/Header'
+import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1, Title3 } from 'src/components/Typo'
@@ -73,6 +74,8 @@ export const ResultForm = () => {
             <TextLine>2. IDENTITÉ DE LA FAMILLE</TextLine>
           </Title3>
           <Spacing size="8" />
+          <ImageProfile picture={formInscriptionData.picture} />
+          <Spacing size="4" />
           <Body1>
             <TextLine>Nom</TextLine> : {formInscriptionData.firstName}
           </Body1>

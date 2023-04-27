@@ -1,3 +1,4 @@
+import { NoFamilyFoundSvg } from 'assets/svg/noFamilyFound'
 import { useCallback, useEffect, useState } from 'react'
 import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native'
 import { getHostFamilies } from 'src/client/HostFamily'
@@ -43,11 +44,22 @@ export const HostFamily = (): React.ReactElement => {
   }, [getHostFamilies])
 
   const searchHostFamily = (hostFamily: HostFamilyClient) => {
-    return hostFamily.fields.firstName.indexOf(uppercaseWord(search)) >= 0
+    return (
+      hostFamily.fields.firstName.indexOf(uppercaseWord(search)) >= 0 ||
+      hostFamily.fields.lastName.indexOf(uppercaseWord(search)) >= 0
+    )
   }
 
   const renderAnimal: ListRenderItem<HostFamilyClient> = ({ item }) => {
     return <CardContainer hostFamily={item.fields} />
+  }
+
+  const renderEmptySearchAnimal = () => {
+    if (search) {
+      return 'trouvé'
+    } else {
+      return 'pour le moment'
+    }
   }
 
   return (
@@ -63,18 +75,17 @@ export const HostFamily = (): React.ReactElement => {
         </View>
       ) : (
         <>
-          <Spacing size="16" />
+          <Spacing size="8" />
           <FlatList
             data={filtered}
             keyExtractor={(item) => item.id}
             renderItem={renderAnimal}
             refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />}
             ListEmptyComponent={
-              search ? (
-                <Body1 textAlign="center">Aucune famille d’accueil trouvé</Body1>
-              ) : (
-                <Body1>Aucune famille d’accueil pour le moment</Body1>
-              )
+              <View style={{ alignItems: 'center' }}>
+                <Body1>Aucune famille d'accueil {renderEmptySearchAnimal()}</Body1>
+                <NoFamilyFoundSvg />
+              </View>
             }
           />
         </>

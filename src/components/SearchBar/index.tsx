@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { SearchBar } from 'react-native-elements'
+import { theme } from 'src/constant/Theme'
 import { Container } from './Styled'
 import { SearchBarProps } from './Type'
 
@@ -26,6 +27,8 @@ export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch
         containerStyle={{
           borderRadius: 8,
           padding: 4,
+          borderWidth: 1,
+          borderColor: theme.colors.grey1,
         }}
         searchIcon={{
           name: 'search',

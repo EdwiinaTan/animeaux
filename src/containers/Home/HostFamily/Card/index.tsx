@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { Card } from 'src/components/Card'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -10,7 +10,7 @@ import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber } from 'src/utils/Functions'
 import { HostFamilyRouteParams } from '../Router/type'
-import { Container, ContainerImage } from './Styled'
+import { Container, ContainerImage, Description } from './Styled'
 import { CardComponentProps } from './Type'
 
 const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
@@ -18,7 +18,7 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
   const { statusHostFamily } = useGetHostFamilyById(hostFamily.id)
 
   const onClick = () => {
-    navigation.navigate('hostFamilyInformation', { hostFamilyDetails: hostFamily })
+    navigation.navigate('hostFamilyInformation', { hostFamilyId: hostFamily.id })
   }
 
   if (statusHostFamily === FetchStatus.LOADING) {
@@ -39,14 +39,14 @@ const CardContainer: React.FC<CardComponentProps> = ({ hostFamily }) => {
           <ContainerImage>
             <ImageProfile picture={hostFamily.picture} />
           </ContainerImage>
-          <View style={{ flexDirection: 'column' }}>
+          <Description>
             <Body1>
               {hostFamily.firstName} {hostFamily.lastName}
             </Body1>
             <Body1>{formatPhoneNumber(hostFamily.phone)}</Body1>
             <Body1>{hostFamily.email}</Body1>
             <Body1>{hostFamily.city}</Body1>
-          </View>
+          </Description>
         </Container>
       </Card>
     </TouchableOpacity>

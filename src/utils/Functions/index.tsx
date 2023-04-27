@@ -67,9 +67,12 @@ export const renderAnimalGender = (animal: AnimalType) => {
 }
 
 export const renderHostFamily = (statusHostFamily, hostFamilyData: HostFamilyType) => {
+  if (!hostFamilyData) {
+    return <Body1>Pas de FA</Body1>
+  }
   switch (statusHostFamily) {
     case FetchStatus.ERROR:
-      return <Body1>Pas de FA</Body1>
+      return <Body1>Erreur</Body1>
     case FetchStatus.LOADING:
       return <Skeleton animation="pulse" width={200} height={12} />
     case FetchStatus.SUCCESS:

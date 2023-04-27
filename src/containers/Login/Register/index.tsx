@@ -25,6 +25,7 @@ export const Register = () => {
   const [securePassword, setSecurePassword] = useState(true)
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true)
   const queryClient = useQueryClient()
+  const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{7,}$/
 
   const initialValues = {
     lastName: '',
@@ -42,10 +43,16 @@ export const Register = () => {
     phone: Yup.string()
       .required('Le téléphone est requis')
       .length(10, 'Le téléphone doit contenir 10 chiffres'),
-    password: Yup.string().required('Le mot de passe est requis'),
+    password: Yup.string()
+      .min(7, 'Le mot de passe doit contenir au moins 7 caractères')
+      .matches(
+        /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).*$/,
+        ({}) => `Le mot de passe doit contenir au moins 1 chiffre et 1 caractère spécial`
+      )
+      .required('Le mot de passe est requis'),
     confirmPassword: Yup.string().oneOf(
       [Yup.ref('password'), null],
-      'La confirmation de mot de passe doit correspondre avec le mot de passe'
+      'La confirmation de mot de passe doit correspondre avec le mot de passe ci-dessus'
     ),
   })
 
@@ -219,6 +226,9 @@ export const Register = () => {
                     </PasswordContainer>
                   )}
                 </Field>
+                <Body3 color={theme.colors.grey2}>- Au minimum 7 caractères</Body3>
+                <Body3 color={theme.colors.grey2}>- 1 chiffre</Body3>
+                <Body3 color={theme.colors.grey2}>- 1 caractère spécial</Body3>
                 {errors.password && touched.password && (
                   <Body3 color={theme.colors.red}>{errors.password}</Body3>
                 )}

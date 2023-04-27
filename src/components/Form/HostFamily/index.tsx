@@ -14,7 +14,7 @@ import { HostFamilyFormProps } from './Type'
 
 export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
   const { statusAnimal, animalData } = useGetAnimals()
-  const { values, handleChange, handleBlur, handleSubmit, errors, touched } = field
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid } = field
 
   const animalDataList = () => {
     let animalArray = []
@@ -254,7 +254,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
         </View>
         <Spacing size="24" />
       </ContainerForm>
-      <Button title="Valider" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />
     </>
   )
 }

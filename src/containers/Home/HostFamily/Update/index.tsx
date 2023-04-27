@@ -9,11 +9,10 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyRequest, HostFamilyType } from 'src/types/HostFamily/Type'
 import { startsWithVowel } from 'src/utils/Functions'
-import { Keyboard } from './Styled'
 
 export const HostFamilyUpdate = () => {
   const route = useRoute<RouteProp<HostFamilyRouteParams>>()

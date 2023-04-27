@@ -20,7 +20,16 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field 
   const [race, setRace] = useState<string>('')
   const [color, setColor] = useState<string>('')
   const [modalVisible, setModalVisible] = useState(false)
-  const { handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, values } = field
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    errors,
+    touched,
+    setFieldValue,
+    values,
+    isValid,
+  } = field
 
   useEffect(() => {
     if (animalDetails) {
@@ -275,7 +284,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field 
         </ContainerCheckbox>
       </CardStyle>
       <Spacing size="16" />
-      <Button title="Valider" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />
     </>
   )
 }

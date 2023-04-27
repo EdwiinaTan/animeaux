@@ -11,7 +11,7 @@ export const Router: React.FC = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <Stack.Navigator initialRouteName={PRIVATE_BASE}>
-        {/* <Stack.Screen name={ROUTES.AUTH.LOGIN} component={Login} options={{ headerShown: true }} /> */}
+        {/* <Stack.Screen name={PRIVATE_BASE} component={HomeRouter} options={{ headerShown: false }} /> */}
         <Stack.Screen
           name={PRIVATE_BASE}
           component={LoginRouter}

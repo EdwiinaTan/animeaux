@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Field, Formik } from 'formik'
 import { useState } from 'react'
 import { TextInput } from 'react-native'
+import bcrypt from 'react-native-bcrypt'
 import { Button } from 'react-native-elements'
 import { postUser } from 'src/client/User'
 import { styles } from 'src/components/Form/Animal/Styled'
@@ -16,16 +17,16 @@ import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerStyle, Keyboard, TextRed } from 'src/constant/Theme/Styled'
 import { UserRequest } from 'src/types/User/Type'
-import * as Yup from 'yup'
 import { LoginRouteParams } from '../Router/type'
 import { PasswordContainer } from './Styled'
+import { validationAddUser } from './Utils'
 
 export const Register = () => {
   const navigation = useNavigation<NativeStackNavigationProp<LoginRouteParams>>()
   const [securePassword, setSecurePassword] = useState(true)
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true)
   const queryClient = useQueryClient()
-  const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{7,}$/
+  const salt = bcrypt.genSaltSync(10)
 
   const initialValues = {
     lastName: '',
@@ -35,26 +36,6 @@ export const Register = () => {
     password: '',
     confirmPassword: '',
   }
-
-  const validationAddUser = Yup.object().shape({
-    lastName: Yup.string().required('Le nom de famille est requis'),
-    firstName: Yup.string().required('Le prénom est requis'),
-    email: Yup.string().email('Le format est incorrect').required('L’adresse mail est requise'),
-    phone: Yup.string()
-      .required('Le téléphone est requis')
-      .length(10, 'Le téléphone doit contenir 10 chiffres'),
-    password: Yup.string()
-      .min(7, 'Le mot de passe doit contenir au moins 7 caractères')
-      .matches(
-        /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).*$/,
-        ({}) => `Le mot de passe doit contenir au moins 1 chiffre et 1 caractère spécial`
-      )
-      .required('Le mot de passe est requis'),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref('password'), null],
-      'La confirmation de mot de passe doit correspondre avec le mot de passe ci-dessus'
-    ),
-  })
 
   const onClickPasswordEye = () => {
     setSecurePassword(!securePassword)
@@ -83,12 +64,17 @@ export const Register = () => {
 
   const addUser = (values: UserRequest) => {
     let data: UserRequest
+    // bcrypt.setRandomFallback((): any => {
+    // const bytes = RNRandomBytes.randomBytes(16)
+    // return Promise.resolve(bytes)
+    // })
     data = {
       ...values,
+      password: bcrypt.hashSync(values.password, salt),
     }
     delete data.confirmPassword
     console.log('data', data)
-    // mutation.mutate(data)
+    mutation.mutate(data)
   }
 
   return (

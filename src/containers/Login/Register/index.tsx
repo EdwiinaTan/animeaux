@@ -1,13 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Field, Formik } from 'formik'
 import { useState } from 'react'
 import { TextInput } from 'react-native'
 import { Button } from 'react-native-elements'
+import { postUser } from 'src/client/User'
 import { styles } from 'src/components/Form/Animal/Styled'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body2, Body3 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
@@ -21,6 +24,7 @@ export const Register = () => {
   const navigation = useNavigation<NativeStackNavigationProp<LoginRouteParams>>()
   const [securePassword, setSecurePassword] = useState(true)
   const [secureConfirmPassword, setSecureConfirmPassword] = useState(true)
+  const queryClient = useQueryClient()
 
   const initialValues = {
     lastName: '',
@@ -52,6 +56,34 @@ export const Register = () => {
     setSecureConfirmPassword(!secureConfirmPassword)
   }
 
+  const mutation = useMutation({
+    mutationFn: postUser,
+    onSuccess: () => {
+      navigation.goBack()
+      queryClient.invalidateQueries(['users'])
+      SnackbarToastComponent({
+        title: 'La création de votre compte a bien été prise en compte',
+      })
+    },
+    onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
+      console.log('err', err)
+    },
+  })
+
+  const addUser = (values: UserRequest) => {
+    let data: UserRequest
+    data = {
+      ...values,
+    }
+    delete data.confirmPassword
+    console.log('data', data)
+    // mutation.mutate(data)
+  }
+
   return (
     <Layout>
       <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Création de compte" />
@@ -61,7 +93,7 @@ export const Register = () => {
             initialValues={initialValues}
             validationSchema={validationAddUser}
             onSubmit={(values: UserRequest) => {
-              console.log(values)
+              addUser(values)
             }}
           >
             {({ handleChange, handleBlur, values, errors, touched, handleSubmit, isValid }) => (

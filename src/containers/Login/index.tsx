@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AnimalSvg } from 'assets/svg/animal'
 import { Field, Formik } from 'formik'
 import { TextInput, View } from 'react-native'
@@ -8,8 +10,10 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Title1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle, TextRed } from 'src/constant/Theme/Styled'
 import * as Yup from 'yup'
+import { LoginRouteParams } from './Router/type'
 
 export const Login = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<LoginRouteParams>>()
   const initialValues = {
     email: '',
     password: '',
@@ -22,6 +26,10 @@ export const Login = () => {
 
   const updateAnimal = async (values) => {
     console.log('lala')
+  }
+
+  const onClickRegister = () => {
+    navigation.navigate('registerScreen')
   }
 
   return (
@@ -78,7 +86,7 @@ export const Login = () => {
                   )}
                 </Field>
                 <Spacing size="32" />
-                <Button title="Créer un compte" onPress={() => handleSubmit()} />
+                <Button title="Créer un compte" onPress={onClickRegister} />
                 <Spacing size="16" />
                 <Button title="Connexion" onPress={() => handleSubmit()} />
               </>

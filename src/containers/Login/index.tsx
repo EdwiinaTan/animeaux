@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from 'src/components/Form/Animal/Styled'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Title1 } from 'src/components/Typo'
-import { CardStyle, ContainerStyle, TextRed } from 'src/constant/Theme/Styled'
+import { CardStyle, TextRed } from 'src/constant/Theme/Styled'
 import * as Yup from 'yup'
 import { LoginRouteParams } from './Router/type'
 
@@ -34,7 +34,7 @@ export const Login = () => {
 
   return (
     <SafeAreaView>
-      <ContainerStyle>
+      <View style={{ paddingLeft: 16, paddingRight: 16 }}>
         <CardStyle>
           <Spacing size="32" />
           <Title1 textAlign="center">Bienvenue !</Title1>
@@ -93,7 +93,7 @@ export const Login = () => {
             )}
           </Formik>
         </CardStyle>
-      </ContainerStyle>
+      </View>
     </SafeAreaView>
   )
 }

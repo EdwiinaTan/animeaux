@@ -9,11 +9,10 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { ContainerStyle } from 'src/constant/Theme/Styled'
+import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../../Router/type'
-import { Keyboard } from './Styled'
 import { AnimalProfileRequest } from './Type'
 
 export const UpdateAnimalProfile = () => {

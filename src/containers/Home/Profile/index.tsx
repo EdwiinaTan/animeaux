@@ -28,7 +28,7 @@ export const Profile = () => {
     setCurrentIndex(index)
   }
 
-  // faire un router profile (goback profil qd clique animal + système de note)
+  // bottomSheet edit/déconnexion + système de note
   return (
     <Layout>
       <HeaderComponent title="Mon profil" />

@@ -8,9 +8,8 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
 import { HostFamilyRequest } from 'src/types/HostFamily/Type'
-import { Keyboard } from './Styled'
 
 export const AddHostFamily = () => {
   const navigation = useNavigation()
@@ -28,7 +27,7 @@ export const AddHostFamily = () => {
     postalCode: '',
     city: '',
     address: '',
-    animalId: '',
+    animalId: [''],
     criteria: '',
     description: '',
     onBreak: '',

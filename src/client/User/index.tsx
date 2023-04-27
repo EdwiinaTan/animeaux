@@ -33,3 +33,18 @@ export const getUserById = async (recordId: string) => {
       throw err
     })
 }
+
+export const postUser = async (data) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/`
+  return await axios
+    .post(
+      url,
+      { fields: { ...data } },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+}

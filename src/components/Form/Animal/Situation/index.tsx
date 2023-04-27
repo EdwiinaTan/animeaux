@@ -30,7 +30,16 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   const [optionUser, setOptionUser] = useState({})
   const [optionPlace, setOptionPlace] = useState({})
   const [modalVisible, setModalVisible] = useState(false)
-  const { handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, values } = field
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    errors,
+    touched,
+    setFieldValue,
+    values,
+    isValid,
+  } = field
   const navigation = useNavigation()
   const listRef = useRef(null)
 
@@ -384,7 +393,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         </Field>
       </CardStyle>
       <Spacing size="16" />
-      <Button title="Valider" onPress={() => handleSubmit()} />
+      <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />
     </>
   )
 }

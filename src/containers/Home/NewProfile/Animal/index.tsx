@@ -14,9 +14,9 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { theme } from 'src/constant/Theme'
-import { ContainerStyle } from 'src/constant/Theme/Styled'
+import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
 import { AddAnimalPhoto } from './Photo'
-import { customStyles, Keyboard } from './Styled'
+import { customStyles } from './Styled'
 
 export const AddAnimal = () => {
   const navigation = useNavigation()

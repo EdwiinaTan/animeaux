@@ -74,6 +74,7 @@ export const HostFamilyUpdate = () => {
     if (values) {
       const data = {
         ...values,
+        animalId: [values.animalId],
       }
       mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
     }

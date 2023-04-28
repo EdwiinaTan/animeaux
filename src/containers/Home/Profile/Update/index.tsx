@@ -70,25 +70,24 @@ export const UserUpdate = () => {
   const userAuthUpdate = async (values: UserRequest) => {
     let data: UserRequest
     console.log('values', values)
-    if (selected.length > 0) {
-      if (values.animalId) {
-        selected.push(...values.animalId)
-      } else {
-        console.log('passe ici nan ?')
-        data = { ...values, animalId: selected }
-      }
-      console.log('data1111', data)
-    } else {
-      data = { ...values }
+    if (
+      (selected.length > 0 && selectedNoCharge.length > 0) ||
+      (selected.length > 0 && selectedNoCharge.length === 0)
+    ) {
+      selected.push(...values.animalId)
+      data = { ...values, animalId: selected }
     }
-    if (selectedNoCharge.length > 0) {
+    if (
+      (selectedNoCharge.length > 0 && selected.length > 0) ||
+      (selectedNoCharge.length > 0 && selected.length === 0)
+    ) {
       let dataFiltered = values.animalId
       let filtered = dataFiltered.filter((animal) => !selectedNoCharge.includes(animal))
       data = { ...values, animalId: filtered }
-    } else {
+    }
+    if (selected.length === 0 && selectedNoCharge.length === 0) {
       data = { ...values }
     }
-    console.log('data', data)
     mutation.mutateAsync({ id: userId, values: data })
   }
 

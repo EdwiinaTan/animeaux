@@ -4,5 +4,5 @@ export interface HostFamilyFormProps {
   field: FormikValues
   setSelected?: (value: string[]) => void
   hostFamilyId: string
-  setSelectedNoCharge?: (value: string[]) => void
+  setSelectedNotHosted?: (value: string[]) => void
 }

@@ -26,7 +26,7 @@ export const HostFamilyUpdate = () => {
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const queryClient = useQueryClient()
   const [selected, setSelected] = useState<string[]>([])
-  const [selectedNoCharge, setSelectedNoCharge] = useState<string[]>([])
+  const [selectedNotHosted, setSelectedNotHosted] = useState<string[]>([])
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -77,20 +77,24 @@ export const HostFamilyUpdate = () => {
 
   const updateHostFamily = async (values: HostFamilyRequest) => {
     let data: HostFamilyRequest
-    if (selected.length > 0) {
+    if (
+      (selected.length > 0 && selectedNotHosted.length > 0) ||
+      (selected.length > 0 && selectedNotHosted.length === 0)
+    ) {
       selected.push(...values.animalId)
       data = { ...values, animalId: selected }
-    } else {
-      data = { ...values }
     }
-    if (selectedNoCharge.length > 0) {
+    if (
+      (selectedNotHosted.length > 0 && selected.length > 0) ||
+      (selectedNotHosted.length > 0 && selected.length === 0)
+    ) {
       let dataFiltered = values.animalId
-      let filtered = dataFiltered.filter((animal) => !selectedNoCharge.includes(animal))
+      let filtered = dataFiltered.filter((animal) => !selectedNotHosted.includes(animal))
       data = { ...values, animalId: filtered }
-    } else {
+    }
+    if (selected.length === 0 && selectedNotHosted.length === 0) {
       data = { ...values }
     }
-    console.log('data', data)
     mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
 
@@ -116,7 +120,7 @@ export const HostFamilyUpdate = () => {
                     field={field}
                     hostFamilyId={hostFamilyDetails.id}
                     setSelected={setSelected}
-                    setSelectedNoCharge={setSelectedNoCharge}
+                    setSelectedNotHosted={setSelectedNotHosted}
                   />
                 )}
               </Formik>

@@ -16,14 +16,14 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
   field,
   setSelected,
   hostFamilyId,
-  setSelectedNoCharge,
+  setSelectedNotHosted,
 }) => {
   const { statusAnimal, animalData } = useGetAnimals()
   const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid } = field
 
   const animalDataList = () => {
     let animalArray = []
-    let animalNotMyChargeArray = []
+    let animalNotHosted = []
 
     if (statusAnimal === FetchStatus.SUCCESS) {
       animalData.map(({ fields }) => {
@@ -34,7 +34,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           })
         }
         if (fields.hostFamilyId && hostFamilyId === fields.hostFamilyId[0]) {
-          animalNotMyChargeArray.push({
+          animalNotHosted.push({
             key: fields.id,
             value: fields.name,
           })
@@ -42,7 +42,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
       })
       return {
         animalArray,
-        animalNotMyChargeArray,
+        animalNotHosted,
       }
     }
   }
@@ -268,8 +268,8 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
             {({ field }) => (
               <MultipleSelectList
                 {...field}
-                setSelected={(val: string[]) => setSelectedNoCharge(val)}
-                data={animalDataList().animalNotMyChargeArray}
+                setSelected={(val: string[]) => setSelectedNotHosted(val)}
+                data={animalDataList().animalNotHosted}
                 placeholder="Rechercher"
                 save="key"
                 label="N'est plus à ma charge"

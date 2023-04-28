@@ -28,8 +28,6 @@ export const Profile = () => {
   const { statusUser, userData } = useGetUserById(userId)
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
-  // bottomSheet edit/déconnexion + système de note
-
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
   }

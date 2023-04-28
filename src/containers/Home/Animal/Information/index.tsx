@@ -135,28 +135,30 @@ export const AnimalInformation = (): React.ReactElement => {
               </View>
             </Description>
             <Spacing size="16" />
-            <TouchableOpacity onPress={onClickUser} activeOpacity={1}>
-              <CardStyle>
-                <TitleCard>
-                  <ClipboardSvg />
-                  <Title2 paddingLeft={4}>Prise en charge </Title2>
-                </TitleCard>
-                <Spacing size="8" />
-                <InCharge>
-                  <PaddingRight>
-                    <ImageProfile picture={userData.picture} />
-                  </PaddingRight>
-                  <View>
-                    <Body1>
-                      Par : {userData.firstName} {userData.lastName}
-                    </Body1>
-                    <Body1>Date : {renderDateFormat(animalDetails.dateAssigned)}</Body1>
-                    <Body1>Lieu : {animalDetails.placeAssigned}</Body1>
-                    <Body1>Raison : {animalDetails.reason}</Body1>
-                  </View>
-                </InCharge>
-              </CardStyle>
-            </TouchableOpacity>
+            {userData && (
+              <TouchableOpacity onPress={onClickUser} activeOpacity={1}>
+                <CardStyle>
+                  <TitleCard>
+                    <ClipboardSvg />
+                    <Title2 paddingLeft={4}>Prise en charge </Title2>
+                  </TitleCard>
+                  <Spacing size="8" />
+                  <InCharge>
+                    <PaddingRight>
+                      <ImageProfile picture={userData.picture} />
+                    </PaddingRight>
+                    <View>
+                      <Body1>
+                        Par : {userData.firstName} {userData.lastName}
+                      </Body1>
+                      <Body1>Date : {renderDateFormat(animalDetails.dateAssigned)}</Body1>
+                      <Body1>Lieu : {animalDetails.placeAssigned}</Body1>
+                      <Body1>Raison : {animalDetails.reason}</Body1>
+                    </View>
+                  </InCharge>
+                </CardStyle>
+              </TouchableOpacity>
+            )}
             {hostFamilyData && (
               <TouchableOpacity onPress={onClickHostFamily} activeOpacity={1}>
                 <Spacing size="16" />

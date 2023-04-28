@@ -18,6 +18,7 @@ import { BottomSheetProps } from './Type'
 export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModalRef }) => {
   const snapPoints = ['20%']
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
+
   const { logoutUser, userId } = useContext(AuthContext)
   const handleViewEditProfile = (): void => {
     bottomSheetModalRef.current.close()

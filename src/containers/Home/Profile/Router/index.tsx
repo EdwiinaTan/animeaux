@@ -31,6 +31,11 @@ export const ProfileRouter: React.FC = () => {
         component={UserInCharge}
         options={{ animation: 'slide_from_right' }}
       />
+      <Tab.Screen
+        name="userUpdate"
+        component={UserInCharge}
+        options={{ animation: 'slide_from_right' }}
+      />
     </Tab.Navigator>
   )
 }

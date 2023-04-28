@@ -12,11 +12,11 @@ export const ContainerHeader = styled.View`
   justify-content: space-between;
 `
 
-export const HeaderInner = styled.View`
+export const Header = styled.View`
   flex-direction: column;
   align-items: center;
   align-content: center;
-  width: 50%;
+  width: 100%;
 `
 
 export const Container = styled.ScrollView`
@@ -36,7 +36,7 @@ export const Description = styled.View`
   border: 1px solid #dce1e7;
   display: flex;
   flex-direction: row;
-  margin-top: -64px;
+  margin-top: -68px;
   flex-direction: column;
   justify-content: center;
   margin-left: auto;

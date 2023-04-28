@@ -1,6 +1,6 @@
 import { Field } from 'formik'
 import { TextInput, View } from 'react-native'
-import { SelectList } from 'react-native-dropdown-select-list'
+import { MultipleSelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
 import { theme } from 'src/constant/Theme'
 import { TextRed } from 'src/constant/Theme/Styled'
@@ -12,12 +12,19 @@ import { styles } from '../Animal/Styled'
 import { ContainerForm } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
-export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
+export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
+  field,
+  setSelected,
+  hostFamilyId,
+  setSelectedNoCharge,
+}) => {
   const { statusAnimal, animalData } = useGetAnimals()
   const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid } = field
 
   const animalDataList = () => {
     let animalArray = []
+    let animalNotMyChargeArray = []
+
     if (statusAnimal === FetchStatus.SUCCESS) {
       animalData.map(({ fields }) => {
         if (!fields.hostFamilyId) {
@@ -26,8 +33,17 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
             value: fields.name,
           })
         }
+        if (fields.hostFamilyId && hostFamilyId === fields.hostFamilyId[0]) {
+          animalNotMyChargeArray.push({
+            key: fields.id,
+            value: fields.name,
+          })
+        }
       })
-      return animalArray
+      return {
+        animalArray,
+        animalNotMyChargeArray,
+      }
     }
   }
 
@@ -228,28 +244,35 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
           )}
         </Field>
         <Spacing size="16" />
-        <Body2>Animaux en charge</Body2>
+        <Body2>Ajouter un animal en charge</Body2>
         <Spacing size="4" />
         <View style={{ width: '100%' }}>
           <Field name="animalId">
             {({ field }) => (
-              //MultipleSelectList
-              <SelectList
-                inputStyles={{ padding: 0 }}
-                boxStyles={{
-                  width: '100%',
-                  borderColor: theme.colors.grey0,
-                }}
-                label="Animaux"
+              <MultipleSelectList
                 {...field}
-                searchPlaceholder="Rechercher"
-                setSelected={handleChange('animalId')}
-                onChange={handleChange('animalId')}
-                data={animalDataList()}
-                onBlur={handleBlur('animalId')}
-                placeholder="Veuillez choisir l'animal"
+                setSelected={(val: string[]) => setSelected(val)}
+                data={animalDataList().animalArray}
+                placeholder="Rechercher"
                 save="key"
-                value={values.animalId}
+                label="En charge"
+              />
+            )}
+          </Field>
+        </View>
+        <Spacing size="16" />
+        <Body2>Enlever un animal à ma charge</Body2>
+        <Spacing size="4" />
+        <View style={{ width: '100%' }}>
+          <Field name="animalId">
+            {({ field }) => (
+              <MultipleSelectList
+                {...field}
+                setSelected={(val: string[]) => setSelectedNoCharge(val)}
+                data={animalDataList().animalNotMyChargeArray}
+                placeholder="Rechercher"
+                save="key"
+                label="N'est plus à ma charge"
               />
             )}
           </Field>

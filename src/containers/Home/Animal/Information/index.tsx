@@ -144,7 +144,6 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Spacing size="8" />
                 <InCharge>
                   <PaddingRight>
-                    {console.log('userData', userData)}
                     <ImageProfile picture={userData.picture} />
                   </PaddingRight>
                   <View>

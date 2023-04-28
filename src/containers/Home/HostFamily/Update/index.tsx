@@ -2,13 +2,17 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
+import { useState } from 'react'
+import { ScrollView } from 'react-native'
 import { updateHostFamilyById } from 'src/client/HostFamily'
+import { CardAnimal } from 'src/components/Card/Animal'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
+import { Body1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyRequest, HostFamilyType } from 'src/types/HostFamily/Type'
@@ -21,6 +25,8 @@ export const HostFamilyUpdate = () => {
   } = route as { params: { hostFamilyDetails: HostFamilyType } }
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const queryClient = useQueryClient()
+  const [selected, setSelected] = useState<string[]>([])
+  const [selectedNoCharge, setSelectedNoCharge] = useState<string[]>([])
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -70,7 +76,21 @@ export const HostFamilyUpdate = () => {
   })
 
   const updateHostFamily = async (values: HostFamilyRequest) => {
-    const data = values.animalId ? { ...values } : { ...values, animalId: values.animalId }
+    let data: HostFamilyRequest
+    if (selected.length > 0) {
+      selected.push(...values.animalId)
+      data = { ...values, animalId: selected }
+    } else {
+      data = { ...values }
+    }
+    if (selectedNoCharge.length > 0) {
+      let dataFiltered = values.animalId
+      let filtered = dataFiltered.filter((animal) => !selectedNoCharge.includes(animal))
+      data = { ...values, animalId: filtered }
+    } else {
+      data = { ...values }
+    }
+    console.log('data', data)
     mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
 
@@ -81,20 +101,40 @@ export const HostFamilyUpdate = () => {
         title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
       <Keyboard behavior="padding" enabled>
-        <ContainerStyle>
-          <CardStyle>
-            <Formik
-              validationSchema={validationHostFamily}
-              initialValues={initialValues}
-              onSubmit={(values) => {
-                updateHostFamily(values)
-              }}
-            >
-              {(field: FormikValues) => <HostFamilyProfile field={field} />}
-            </Formik>
-          </CardStyle>
-          <Spacing size="24" />
-        </ContainerStyle>
+        <ScrollView>
+          <ContainerStyle>
+            <CardStyle>
+              <Formik
+                validationSchema={validationHostFamily}
+                initialValues={initialValues}
+                onSubmit={(values) => {
+                  updateHostFamily(values)
+                }}
+              >
+                {(field: FormikValues) => (
+                  <HostFamilyProfile
+                    field={field}
+                    hostFamilyId={hostFamilyDetails.id}
+                    setSelected={setSelected}
+                    setSelectedNoCharge={setSelectedNoCharge}
+                  />
+                )}
+              </Formik>
+            </CardStyle>
+            <Spacing size="16" />
+          </ContainerStyle>
+          <Spacing size="8" />
+          {hostFamilyDetails.animalId && hostFamilyDetails.animalId.length !== 0 && (
+            <>
+              <Body1 textAlign="center">
+                Animaux en charge ({hostFamilyDetails.animalId.length})
+              </Body1>
+              <Spacing size="4" />
+              <CardAnimal listItem={hostFamilyDetails.animalId} />
+              <Spacing size="24" />
+            </>
+          )}
+        </ScrollView>
       </Keyboard>
     </Layout>
   )

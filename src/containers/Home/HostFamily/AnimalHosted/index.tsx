@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
+import { Spacing } from 'src/components/Layout/Spacing'
 import { HostFamilyRouteParams } from '../Router/type'
 
 export const AnimalHosted: React.FC = () => {
@@ -14,7 +15,8 @@ export const AnimalHosted: React.FC = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Animaux hébergés" />
-      {animalId && <CardAnimal listItem={animalId} />}
+      <Spacing size="16" />
+      <CardAnimal listItem={animalId} />
     </Layout>
   )
 }

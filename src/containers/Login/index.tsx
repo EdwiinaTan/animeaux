@@ -2,9 +2,8 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AnimalSvg } from 'assets/svg/animal'
 import { Field, Formik } from 'formik'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { TextInput, View } from 'react-native'
-import bcrypt from 'react-native-bcrypt'
 import { Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from 'src/components/Form/Animal/Styled'
@@ -13,15 +12,14 @@ import { Body2, Body3, Title1 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, Keyboard, TextRed } from 'src/constant/Theme/Styled'
-import { useGetUsers } from 'src/hooks/User'
 import * as Yup from 'yup'
+import { AuthContext } from '../App/AuthContext'
 import { LoginRouteParams } from './Router/type'
 import { PasswordContainer } from './Styled'
 
 export const Login = () => {
+  const { loginUser } = useContext(AuthContext)
   const navigation = useNavigation<NativeStackNavigationProp<LoginRouteParams>>()
-  const { usersData } = useGetUsers()
-  // const [logged, setLogged] = useState(false)
   const [securePassword, setSecurePassword] = useState(true)
 
   const onClickPasswordEye = () => {
@@ -37,16 +35,6 @@ export const Login = () => {
     email: Yup.string().email('Le format est incorrect').required('L’adresse mail est requise'),
     password: Yup.string().required('Le responsable est obligatoire'),
   })
-
-  const login = async (values) => {
-    // console.log('usersData', usersData)
-    usersData.map((user) => {
-      if (bcrypt.compareSync(values.password, user.fields.password)) {
-        navigation.navigate('animalHomeScreen')
-        // setLogged(true)
-      }
-    })
-  }
 
   const onClickRegister = () => {
     navigation.navigate('registerScreen')
@@ -67,8 +55,7 @@ export const Login = () => {
               initialValues={initialValues}
               validationSchema={validationLogin}
               onSubmit={(values) => {
-                // console.log('aaaaa', values)
-                login(values)
+                loginUser(values.email, values.password)
               }}
             >
               {({ handleChange, handleBlur, values, handleSubmit, isValid, errors, touched }) => (

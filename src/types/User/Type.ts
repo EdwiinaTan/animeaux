@@ -19,8 +19,8 @@ export interface UserClient {
   id: string
 }
 
-export type UserOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note' | 'token'>
-export type UserTokenOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note'>
+export type UserOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note'>
+export type UserTokenOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note' | 'token'>
 export type UserRequest = UserOmit & {
   confirmPassword: string
 }

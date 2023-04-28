@@ -2,13 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import bcrypt from 'react-native-bcrypt'
 import { useGetUsers } from 'src/hooks/User'
-
-interface AuthProps {
-  userId: string
-  isLoading: boolean
-  loginUser: (passwortd: string) => void
-  logoutUser: () => void
-}
+import { AuthProps } from './Type'
 
 const initialContext: AuthProps = {
   userId: '',
@@ -38,7 +32,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     setUserId(null)
     setIsLoading(false)
     AsyncStorage.removeItem('userId')
-    AsyncStorage.removeItem('userToken')
   }
 
   const isLoggedIn = async () => {

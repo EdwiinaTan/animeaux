@@ -55,6 +55,7 @@ export const AnimalInformation = (): React.ReactElement => {
   const { statusUser, userData } = useGetUserById(animalDetails.userId)
   const { hostFamilyData } = useGetHostFamilyById(animalDetails.hostFamilyId)
 
+  console.log('id', animalDetails)
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
   }
@@ -143,6 +144,7 @@ export const AnimalInformation = (): React.ReactElement => {
                 <Spacing size="8" />
                 <InCharge>
                   <PaddingRight>
+                    {console.log('userData', userData)}
                     <ImageProfile picture={userData.picture} />
                   </PaddingRight>
                   <View>

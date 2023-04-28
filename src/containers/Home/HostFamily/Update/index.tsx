@@ -70,13 +70,8 @@ export const HostFamilyUpdate = () => {
   })
 
   const updateHostFamily = async (values: HostFamilyRequest) => {
-    if (values) {
-      const data = {
-        ...values,
-        animalId: [values.animalId],
-      }
-      mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
-    }
+    const data = values.animalId ? { ...values } : { ...values, animalId: values.animalId }
+    mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
 
   return (

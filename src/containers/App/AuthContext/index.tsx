@@ -18,20 +18,22 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const { usersData } = useGetUsers()
 
-  const loginUser = (password: string) => {
-    usersData.map((user) => {
-      if (bcrypt.compareSync(password, user.fields.password) === true) {
-        AsyncStorage.setItem('userId', user.fields.id)
-        setUserId(user.fields.id)
-      }
-    })
+  const loginUser = async (password: string) => {
+    const matchingUser = usersData.filter((user) =>
+      bcrypt.compareSync(password, user.fields.password)
+    )
+    if (matchingUser.length > 0) {
+      const userId = matchingUser[0].fields.id
+      await AsyncStorage.setItem('userId', userId)
+      setUserId(userId)
+    }
     setIsLoading(false)
   }
 
-  const logoutUser = () => {
+  const logoutUser = async () => {
     setUserId(null)
     setIsLoading(false)
-    AsyncStorage.removeItem('userId')
+    await AsyncStorage.removeItem('userId')
   }
 
   const isLoggedIn = async () => {

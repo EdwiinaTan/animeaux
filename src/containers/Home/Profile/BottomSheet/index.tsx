@@ -5,11 +5,12 @@ import {
 } from '@gorhom/bottom-sheet'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { useCallback, useState } from 'react'
+import { useCallback, useContext } from 'react'
 import { ListItem } from 'react-native-elements'
 import { Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconMaterialIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
+import { AuthContext } from 'src/containers/App/AuthContext'
 import { ProfileRouteParams } from '../Router/type'
 import { ListView } from './Styled'
 import { BottomSheetProps } from './Type'
@@ -17,15 +18,7 @@ import { BottomSheetProps } from './Type'
 export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModalRef }) => {
   const snapPoints = ['20%']
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
-  const [isOverlayVisible, setIsOverlayVisible] = useState(false)
-
-  const toggleOverlay = (): void => {
-    setIsOverlayVisible(!isOverlayVisible)
-    if (isOverlayVisible) {
-      bottomSheetModalRef.current.close()
-    }
-  }
-
+  const { logoutUser, userId } = useContext(AuthContext)
   const handleViewEditProfile = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('userUpdate')
@@ -44,6 +37,11 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
     []
   )
 
+  const lalala = () => {
+    console.log('userId', userId)
+    logoutUser()
+  }
+
   const listBottomSheet = [
     {
       name: 'Éditer mon profil',
@@ -60,7 +58,7 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
           style={{ paddingRight: 16, color: theme.colors.red }}
         />
       ),
-      press: toggleOverlay,
+      press: lalala,
       chevron: false,
     },
   ]

@@ -99,12 +99,21 @@ export const UpdateAnimalSituation = () => {
   })
 
   const updateAnimal = async (values: AnimalSituationRequest) => {
+    let data
     if (values) {
-      const data = {
-        ...values,
-        userId: [values.userId],
-        hostFamilyId: [values.hostFamilyId],
+      if (values.hostFamilyId) {
+        data = {
+          ...values,
+          hostFamilyId: [values.hostFamilyId],
+          userId: [values.userId],
+        }
+      } else {
+        data = {
+          ...values,
+          userId: [values.userId],
+        }
       }
+
       mutation.mutateAsync({ id: animalDetails.id, values: data })
     }
   }

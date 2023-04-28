@@ -51,6 +51,7 @@ export const postUser = async (data) => {
 
 export const updateUserById = async (data) => {
   const { id, values } = data
+  console.log('client', id, values)
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/${id}/`
   return await axios
     .patch(

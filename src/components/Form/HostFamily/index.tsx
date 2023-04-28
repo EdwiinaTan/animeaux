@@ -20,10 +20,12 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
     let animalArray = []
     if (statusAnimal === FetchStatus.SUCCESS) {
       animalData.map(({ fields }) => {
-        animalArray.push({
-          key: fields.id,
-          value: fields.name,
-        })
+        if (!fields.hostFamilyId) {
+          animalArray.push({
+            key: fields.id,
+            value: fields.name,
+          })
+        }
       })
       return animalArray
     }
@@ -226,7 +228,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
           )}
         </Field>
         <Spacing size="16" />
-        <Body2>Animal recueilli</Body2>
+        <Body2>Animaux en charge</Body2>
         <Spacing size="4" />
         <View style={{ width: '100%' }}>
           <Field name="animalId">

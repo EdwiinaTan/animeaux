@@ -3,6 +3,7 @@ import { UserInCharge } from 'src/components/User'
 import { Profile } from '..'
 import { AnimalInformation } from '../../Animal/Information'
 import { HostFamilyInformation } from '../../HostFamily/Information'
+import { UserUpdate } from '../Update'
 import { ProfileRouteParams } from './type'
 
 export const ProfileRouter: React.FC = () => {
@@ -33,7 +34,7 @@ export const ProfileRouter: React.FC = () => {
       />
       <Tab.Screen
         name="userUpdate"
-        component={UserInCharge}
+        component={UserUpdate}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

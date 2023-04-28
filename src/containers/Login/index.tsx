@@ -21,7 +21,7 @@ import { PasswordContainer } from './Styled'
 export const Login = () => {
   const navigation = useNavigation<NativeStackNavigationProp<LoginRouteParams>>()
   const { usersData } = useGetUsers()
-  const [logged, setLogged] = useState(false)
+  // const [logged, setLogged] = useState(false)
   const [securePassword, setSecurePassword] = useState(true)
 
   const onClickPasswordEye = () => {
@@ -42,13 +42,10 @@ export const Login = () => {
     // console.log('usersData', usersData)
     usersData.map((user) => {
       if (bcrypt.compareSync(values.password, user.fields.password)) {
-        setLogged(true)
         navigation.navigate('animalHomeScreen')
-      } else {
-        setLogged(false)
+        // setLogged(true)
       }
     })
-    console.log('logged', logged)
   }
 
   const onClickRegister = () => {

@@ -1,12 +1,12 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useContext, useRef } from 'react'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, ScrollView } from 'react-native'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body1, Body2, Body3 } from 'src/components/Typo'
+import { Body2, Body3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { AuthContext } from 'src/containers/App/AuthContext'
 import { useGetUserById } from 'src/hooks/User'
@@ -54,21 +54,21 @@ export const Profile = () => {
                   <Spacing size="64" />
                   <ContainerHeader>
                     <Header>
-                      <Body1 textAlign="center" lineHeight={0}>
-                        {(userData.animalId && userData.animalId.length) || 0}
-                      </Body1>
                       <Body2 textAlign="center" lineHeight={0}>
-                        En charge{userData.animalId && userData.animalId.length > 1 ? 's' : ''}
+                        En charge{userData.animalId && userData.animalId.length > 1 ? 's' : ''} :{' '}
+                        {(userData.animalId && userData.animalId.length) || 0}
                       </Body2>
                     </Header>
                   </ContainerHeader>
                 </Description>
               </ContainerDescription>
-              <Spacing size="16" />
+              <Spacing size="8" />
             </UserHeader>
-            {userData.animalId && userData.animalId.length !== 0 && (
-              <CardAnimal listItem={userData.animalId} />
-            )}
+            <ScrollView>
+              {userData.animalId && userData.animalId.length !== 0 && (
+                <CardAnimal listItem={userData.animalId} />
+              )}
+            </ScrollView>
           </Container>
         )}
         <BottomSheetProfile bottomSheetModalRef={bottomSheetModalRef} />

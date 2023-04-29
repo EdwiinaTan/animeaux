@@ -81,7 +81,9 @@ export const HostFamilyUpdate = () => {
       (selected.length > 0 && selectedNotHosted.length > 0) ||
       (selected.length > 0 && selectedNotHosted.length === 0)
     ) {
-      selected.push(...values.animalId)
+      if (values.animalId && values.animalId.length > 0) {
+        selected.push(...values.animalId)
+      }
       data = { ...values, animalId: selected }
     }
     if (
@@ -118,7 +120,7 @@ export const HostFamilyUpdate = () => {
                 {(field: FormikValues) => (
                   <HostFamilyProfile
                     field={field}
-                    hostFamilyId={hostFamilyDetails.id}
+                    hostFamilyDetails={hostFamilyDetails}
                     setSelected={setSelected}
                     setSelectedNotHosted={setSelectedNotHosted}
                   />

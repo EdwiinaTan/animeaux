@@ -19,7 +19,7 @@ export const Header = styled.View`
   width: 100%;
 `
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   position: relative;
 `
 

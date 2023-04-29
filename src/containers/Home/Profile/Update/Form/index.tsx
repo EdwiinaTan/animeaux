@@ -11,17 +11,20 @@ import { CardStyle, TextRed } from 'src/constant/Theme/Styled'
 import { AuthContext } from 'src/containers/App/AuthContext'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
+import { UserType } from 'src/types/User/Type'
 
 export interface UserUpdateFormProps {
   field: FormikValues
   setSelected?: (value: string[]) => void
   setSelectedNoCharge?: (value: string[]) => void
+  userData: UserType
 }
 
 export const UserUpdateForm: React.FC<UserUpdateFormProps> = ({
   field,
   setSelected,
   setSelectedNoCharge,
+  userData,
 }) => {
   const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid } = field
   const { userId } = useContext(AuthContext)
@@ -154,23 +157,27 @@ export const UserUpdateForm: React.FC<UserUpdateFormProps> = ({
           )}
         </Field>
       </View>
-      <Spacing size="16" />
-      <Body2>Enlever un animal à ma charge</Body2>
-      <Spacing size="4" />
-      <View style={{ width: '100%' }}>
-        <Field name="animalId">
-          {({ field }) => (
-            <MultipleSelectList
-              {...field}
-              setSelected={(val: string[]) => setSelectedNoCharge(val)}
-              data={animalDataList().animalNotMyChargeArray}
-              placeholder="Rechercher"
-              save="key"
-              label="N'est plus à ma charge"
-            />
-          )}
-        </Field>
-      </View>
+      {userData.animalId && userData.animalId.length > 0 && (
+        <>
+          <Spacing size="16" />
+          <Body2>Enlever un animal à ma charge</Body2>
+          <Spacing size="4" />
+          <View style={{ width: '100%' }}>
+            <Field name="animalId">
+              {({ field }) => (
+                <MultipleSelectList
+                  {...field}
+                  setSelected={(val: string[]) => setSelectedNoCharge(val)}
+                  data={animalDataList().animalNotMyChargeArray}
+                  placeholder="Rechercher"
+                  save="key"
+                  label="N'est plus à ma charge"
+                />
+              )}
+            </Field>
+          </View>
+        </>
+      )}
       <Spacing size="16" />
       <Button title="Valider mes modification" onPress={() => handleSubmit()} disabled={!isValid} />
     </CardStyle>

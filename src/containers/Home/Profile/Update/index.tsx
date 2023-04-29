@@ -5,10 +5,12 @@ import { Formik, FormikValues } from 'formik'
 import { useContext, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { updateUserById } from 'src/client/User'
+import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
+import { Body1 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
 import { AuthContext } from 'src/containers/App/AuthContext'
@@ -21,9 +23,9 @@ import { validationUser } from './Utils'
 
 export const UserUpdate = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
-  const queryClient = useQueryClient()
   const { userId } = useContext(AuthContext)
   const { statusUser, userData } = useGetUserById(userId)
+  const queryClient = useQueryClient()
   const [selected, setSelected] = useState<string[]>([])
   const [selectedNoCharge, setSelectedNoCharge] = useState<string[]>([])
 
@@ -31,7 +33,7 @@ export const UserUpdate = () => {
     return navigation.goBack()
   }
 
-  const initialValues = {
+  const initialValues: UserRequest = {
     firstName: userData.firstName,
     lastName: userData.lastName,
     email: userData.email,
@@ -42,15 +44,8 @@ export const UserUpdate = () => {
   const mutation = useMutation({
     mutationFn: updateUserById,
     onSuccess: (data) => {
-      navigation.goBack()
-      queryClient.setQueryData(['user', { id: userId }], (oldData: UserRequest) =>
-        oldData
-          ? {
-              ...oldData,
-              data,
-            }
-          : oldData
-      )
+      navigation.navigate('profileScreen')
+      queryClient.setQueryData(['user', { id: userId }], data)
       queryClient.invalidateQueries({ queryKey: ['users'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
@@ -65,16 +60,15 @@ export const UserUpdate = () => {
     },
   })
 
-  console.log('values', selected)
-
   const userAuthUpdate = async (values: UserRequest) => {
     let data: UserRequest
-    console.log('values', values)
     if (
       (selected.length > 0 && selectedNoCharge.length > 0) ||
       (selected.length > 0 && selectedNoCharge.length === 0)
     ) {
-      selected.push(...values.animalId)
+      if (values.animalId && values.animalId.length > 0) {
+        selected.push(...values.animalId)
+      }
       data = { ...values, animalId: selected }
     }
     if (
@@ -88,6 +82,7 @@ export const UserUpdate = () => {
     if (selected.length === 0 && selectedNoCharge.length === 0) {
       data = { ...values }
     }
+    console.log('dataTOTAL', data)
     mutation.mutateAsync({ id: userId, values: data })
   }
 
@@ -111,12 +106,21 @@ export const UserUpdate = () => {
               {(field: FormikValues) => (
                 <UserUpdateForm
                   field={field}
+                  userData={userData}
                   setSelected={setSelected}
                   setSelectedNoCharge={setSelectedNoCharge}
                 />
               )}
             </Formik>
             <Spacing size="24" />
+            {userData.animalId && userData.animalId.length !== 0 && (
+              <>
+                <Body1 textAlign="center">Animaux en charge ({userData.animalId.length})</Body1>
+                <Spacing size="4" />
+                <CardAnimal listItem={userData.animalId} />
+                <Spacing size="24" />
+              </>
+            )}
           </ContainerStyle>
         </Keyboard>
       )}

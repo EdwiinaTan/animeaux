@@ -15,7 +15,7 @@ import { HostFamilyFormProps } from './Type'
 export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
   field,
   setSelected,
-  hostFamilyId,
+  hostFamilyDetails,
   setSelectedNotHosted,
 }) => {
   const { statusAnimal, animalData } = useGetAnimals()
@@ -33,7 +33,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
             value: fields.name,
           })
         }
-        if (fields.hostFamilyId && hostFamilyId === fields.hostFamilyId[0]) {
+        if (fields.hostFamilyId && hostFamilyDetails.id === fields.hostFamilyId[0]) {
           animalNotHosted.push({
             key: fields.id,
             value: fields.name,
@@ -260,23 +260,27 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
             )}
           </Field>
         </View>
-        <Spacing size="16" />
-        <Body2>Enlever un animal à ma charge</Body2>
-        <Spacing size="4" />
-        <View style={{ width: '100%' }}>
-          <Field name="animalId">
-            {({ field }) => (
-              <MultipleSelectList
-                {...field}
-                setSelected={(val: string[]) => setSelectedNotHosted(val)}
-                data={animalDataList().animalNotHosted}
-                placeholder="Rechercher"
-                save="key"
-                label="N'est plus à ma charge"
-              />
-            )}
-          </Field>
-        </View>
+        {hostFamilyDetails.animalId && hostFamilyDetails.animalId.length > 0 && (
+          <>
+            <Spacing size="16" />
+            <Body2>Enlever un animal à ma charge</Body2>
+            <Spacing size="4" />
+            <View style={{ width: '100%' }}>
+              <Field name="animalId">
+                {({ field }) => (
+                  <MultipleSelectList
+                    {...field}
+                    setSelected={(val: string[]) => setSelectedNotHosted(val)}
+                    data={animalDataList().animalNotHosted}
+                    placeholder="Rechercher"
+                    save="key"
+                    label="N'est plus à ma charge"
+                  />
+                )}
+              </Field>
+            </View>
+          </>
+        )}
         <Spacing size="24" />
       </ContainerForm>
       <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />

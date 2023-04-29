@@ -4,7 +4,7 @@ import { UserClient, UserType } from 'src/types/User/Type'
 import { ReturnUser, ReturnUsers } from './Type'
 
 export const useGetUserById = (userId: string): ReturnUser => {
-  const { status: statusUser, data: userData } = useQuery<UserType>({
+  const { status: statusUser, data: userData } = useQuery<UserType, Error>({
     enabled: userId !== null, // à cause de tsconfig strict true
     queryKey: ['user', userId],
     queryFn: () => getUserById(userId || ''),

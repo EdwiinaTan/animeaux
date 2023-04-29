@@ -45,15 +45,8 @@ export const UserUpdate = () => {
     mutationFn: updateUserById,
     onSuccess: (data) => {
       navigation.navigate('profileScreen')
-      queryClient.setQueryData(['user', { id: userId }], (oldData: UserRequest) =>
-        oldData
-          ? {
-              ...oldData,
-              data,
-            }
-          : oldData
-      )
-      queryClient.invalidateQueries({ queryKey: ['users'] })
+      queryClient.setQueryData(['user', { id: userId }], data)
+      queryClient.invalidateQueries({ queryKey: ['user'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })

@@ -1,6 +1,6 @@
 import * as Yup from 'yup'
 
-const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{7,}$/
+const passwordRegex = /^(?=.*\d)(?=.*[+-£=/?!@#$%^&*])(?=.*[a-zA-Z]).{7,}$/
 
 export const validationAddUser = Yup.object().shape({
   lastName: Yup.string().required('Le nom de famille est requis'),

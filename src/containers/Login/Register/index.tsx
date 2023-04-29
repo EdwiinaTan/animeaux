@@ -118,7 +118,7 @@ export const Register = () => {
                     <TextInput
                       {...field}
                       style={styles.input}
-                      placeholder="Veuillez mettre votre prénom*"
+                      placeholder="Veuillez mettre votre prénom"
                       onChangeText={handleChange('firstName')}
                       onChange={handleChange('firstName')}
                       onBlur={handleBlur('firstName')}
@@ -141,7 +141,7 @@ export const Register = () => {
                       keyboardType="email-address"
                       autoCapitalize="none"
                       style={styles.input}
-                      placeholder="Veuillez mettre votre adresse mail*"
+                      placeholder="Veuillez mettre votre adresse mail"
                       onChangeText={handleChange('email')}
                       onChange={handleChange('email')}
                       onBlur={handleBlur('email')}
@@ -163,7 +163,7 @@ export const Register = () => {
                       {...field}
                       keyboardType="phone-pad"
                       style={styles.input}
-                      placeholder="Veuillez mettre votre téléphone*"
+                      placeholder="Veuillez mettre votre téléphone"
                       onChangeText={handleChange('phone')}
                       onChange={handleChange('phone')}
                       onBlur={handleBlur('phone')}
@@ -187,7 +187,7 @@ export const Register = () => {
                         secureTextEntry={securePassword}
                         autoCapitalize="none"
                         style={[styles.input, { width: '88%' }]}
-                        placeholder="Veuillez choisir votre mot de passe*"
+                        placeholder="Veuillez choisir votre mot de passe"
                         onChangeText={handleChange('password')}
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}
@@ -228,7 +228,7 @@ export const Register = () => {
                         secureTextEntry={secureConfirmPassword}
                         autoCapitalize="none"
                         style={[styles.input, { width: '88%' }]}
-                        placeholder="Veuillez confirmer le mot de passe*"
+                        placeholder="Veuillez confirmer le mot de passe"
                         onChangeText={handleChange('confirmPassword')}
                         onChange={handleChange('confirmPassword')}
                         onBlur={handleBlur('confirmPassword')}

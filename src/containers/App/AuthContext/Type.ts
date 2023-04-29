@@ -1,6 +1,6 @@
 export interface AuthProps {
   userId: string
   isLoading: boolean
-  loginUser: (passwortd: string) => void
+  loginUser: (email: string, password: string) => void
   logoutUser: () => void
 }

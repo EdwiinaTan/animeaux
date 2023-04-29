@@ -55,7 +55,7 @@ export const Login = () => {
               initialValues={initialValues}
               validationSchema={validationLogin}
               onSubmit={(values) => {
-                loginUser(values.password)
+                loginUser(values.email, values.password)
               }}
             >
               {({ handleChange, handleBlur, values, handleSubmit, isValid, errors, touched }) => (

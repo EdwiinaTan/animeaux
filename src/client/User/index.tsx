@@ -48,3 +48,23 @@ export const postUser = async (data) => {
       console.log('err', err)
     })
 }
+
+export const updateUserById = async (data) => {
+  const { id, values } = data
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/${id}/`
+  return await axios
+    .patch(
+      url,
+      {
+        fields: {
+          ...values,
+        },
+      },
+      {
+        headers: header,
+      }
+    )
+    .catch((err) => {
+      console.log('err', err)
+    })
+}

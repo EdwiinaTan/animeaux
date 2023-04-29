@@ -10,6 +10,7 @@ export interface UserType {
   animalId: string[]
   note: string
   password: string
+  token: string
 }
 
 export interface UserClient {
@@ -19,6 +20,7 @@ export interface UserClient {
 }
 
 export type UserOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note'>
+export type UserTokenOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note' | 'token'>
 export type UserRequest = UserOmit & {
   confirmPassword: string
 }

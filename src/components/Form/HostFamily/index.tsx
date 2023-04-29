@@ -1,31 +1,53 @@
 import { Field } from 'formik'
 import { TextInput, View } from 'react-native'
-import { SelectList } from 'react-native-dropdown-select-list'
+import { MultipleSelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
+import { Spacing } from 'src/components/Layout/Spacing'
+import { Body2, Body3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { TextRed } from 'src/constant/Theme/Styled'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
-import { Spacing } from '../../Layout/Spacing'
-import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
 import { ContainerForm } from './Styled'
 import { HostFamilyFormProps } from './Type'
 
-export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
+export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
+  field,
+  setSelected,
+  hostFamilyDetails,
+  setSelectedNotHosted,
+}) => {
   const { statusAnimal, animalData } = useGetAnimals()
   const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid } = field
 
   const animalDataList = () => {
     let animalArray = []
+    let animalNotHosted = []
+
     if (statusAnimal === FetchStatus.SUCCESS) {
       animalData.map(({ fields }) => {
-        animalArray.push({
-          key: fields.id,
-          value: fields.name,
-        })
+        if (!fields.hostFamilyId) {
+          animalArray.push({
+            key: fields.id,
+            value: fields.name,
+          })
+        }
+        if (
+          hostFamilyDetails &&
+          fields.hostFamilyId &&
+          hostFamilyDetails.id === fields.hostFamilyId[0]
+        ) {
+          animalNotHosted.push({
+            key: fields.id,
+            value: fields.name,
+          })
+        }
       })
-      return animalArray
+      return {
+        animalArray,
+        animalNotHosted,
+      }
     }
   }
 
@@ -226,32 +248,45 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({ field }) => {
           )}
         </Field>
         <Spacing size="16" />
-        <Body2>Animal recueilli</Body2>
+        <Body2>Ajouter un animal en charge</Body2>
         <Spacing size="4" />
         <View style={{ width: '100%' }}>
           <Field name="animalId">
             {({ field }) => (
-              //MultipleSelectList
-              <SelectList
-                inputStyles={{ padding: 0 }}
-                boxStyles={{
-                  width: '100%',
-                  borderColor: theme.colors.grey0,
-                }}
-                label="Animaux"
+              <MultipleSelectList
                 {...field}
-                searchPlaceholder="Rechercher"
-                setSelected={handleChange('animalId')}
-                onChange={handleChange('animalId')}
-                data={animalDataList()}
-                onBlur={handleBlur('animalId')}
-                placeholder="Veuillez choisir l'animal"
+                setSelected={(val: string[]) => setSelected(val)}
+                data={animalDataList().animalArray}
+                placeholder="Rechercher"
                 save="key"
-                value={values.animalId}
+                label="En charge"
               />
             )}
           </Field>
         </View>
+        {hostFamilyDetails &&
+          hostFamilyDetails.animalId &&
+          hostFamilyDetails.animalId.length > 0 && (
+            <>
+              <Spacing size="16" />
+              <Body2>Enlever un animal à ma charge</Body2>
+              <Spacing size="4" />
+              <View style={{ width: '100%' }}>
+                <Field name="animalId">
+                  {({ field }) => (
+                    <MultipleSelectList
+                      {...field}
+                      setSelected={(val: string[]) => setSelectedNotHosted(val)}
+                      data={animalDataList().animalNotHosted}
+                      placeholder="Rechercher"
+                      save="key"
+                      label="N'est plus à ma charge"
+                    />
+                  )}
+                </Field>
+              </View>
+            </>
+          )}
         <Spacing size="24" />
       </ContainerForm>
       <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />

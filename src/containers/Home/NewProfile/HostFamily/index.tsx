@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
+import { useState } from 'react'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
@@ -14,6 +15,7 @@ import { HostFamilyRequest } from 'src/types/HostFamily/Type'
 export const AddHostFamily = () => {
   const navigation = useNavigation()
   const queryClient = useQueryClient()
+  const [selected, setSelected] = useState<string[]>([])
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -53,9 +55,10 @@ export const AddHostFamily = () => {
 
   const addHostFamily = (values: HostFamilyRequest) => {
     let data
-    if (values.animalId.length === 0) {
+    if (selected.length > 0) {
       data = {
         ...values,
+        animalId: selected,
       }
     } else {
       data = {
@@ -80,7 +83,9 @@ export const AddHostFamily = () => {
                 addHostFamily(values)
               }}
             >
-              {(field: FormikValues) => <HostFamilyProfile field={field} />}
+              {(field: FormikValues) => (
+                <HostFamilyProfile field={field} setSelected={setSelected} />
+              )}
             </Formik>
           </CardStyle>
           <Spacing size="24" />

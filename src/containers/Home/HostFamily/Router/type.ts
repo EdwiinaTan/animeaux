@@ -9,6 +9,9 @@ export type HostFamilyRouteParams = {
   hostFamilyUpdate: {
     hostFamilyDetails: HostFamilyType
   }
+  hostFamilyAnimalHosted: {
+    animalId: string[]
+  }
   animalInformation: {
     animalDetails: AnimalType
   }

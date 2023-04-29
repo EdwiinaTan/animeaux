@@ -41,7 +41,11 @@ export const Information = (): React.ReactElement => {
           {selectedIndex === 0 ? (
             <InfoFormHostFamily status={statusFormInscription} data={formInscriptionsData} />
           ) : (
-            <Statistics animalData={animalData} formInscriptionData={formInscriptionsData} />
+            <Statistics
+              status={statusFormInscription}
+              animalData={animalData}
+              formInscriptionData={formInscriptionsData}
+            />
           )}
         </>
       )}

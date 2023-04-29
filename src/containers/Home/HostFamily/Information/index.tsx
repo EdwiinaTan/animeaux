@@ -2,6 +2,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AddressSvg } from 'assets/svg/address'
+import { AquariumSvg } from 'assets/svg/aquarium'
 import { CalendarSvg } from 'assets/svg/calendar'
 import { EmailSvg } from 'assets/svg/email'
 import { PauseSvg } from 'assets/svg/pause'
@@ -9,7 +10,6 @@ import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
 import { ActivityIndicator, SafeAreaView, ScrollView } from 'react-native'
-import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -45,7 +45,7 @@ export const HostFamilyInformation = (): React.ReactElement => {
     bottomSheetModalRef.current?.present()
   }
 
-  const renderField = (image?: React.ReactElement, value?: string, moreValue?: string) => {
+  const renderField = (image?: React.ReactElement, value?: string | number, moreValue?: string) => {
     if (value) {
       return (
         <>
@@ -60,6 +60,14 @@ export const HostFamilyInformation = (): React.ReactElement => {
         </>
       )
     }
+  }
+
+  let numberAnimal
+
+  if (hostFamilyData.animalId && hostFamilyData.animalId.length) {
+    numberAnimal = hostFamilyData.animalId && hostFamilyData.animalId.length
+  } else {
+    numberAnimal = 0
   }
 
   return (
@@ -102,19 +110,11 @@ export const HostFamilyInformation = (): React.ReactElement => {
                   {renderField(<PauseSvg />, hostFamilyData.onBreak, 'Indisponible : ')}
                   {renderField(<WarningSvg />, hostFamilyData.criteria, 'Critère : ')}
                   {renderField(null, hostFamilyData.description, 'Description : ')}
+                  {renderField(<AquariumSvg />, numberAnimal, `Nombre d'animaux hébergés : `)}
                 </Description>
               </ContainerDescription>
             </Container>
             <Spacing size="16" />
-            {hostFamilyData.animalId && hostFamilyData.animalId.length !== 0 && (
-              <>
-                <Body1 textAlign="center">
-                  Animaux en charge ({hostFamilyData.animalId.length})
-                </Body1>
-                <Spacing size="4" />
-                <CardAnimal listItem={hostFamilyData.animalId} />
-              </>
-            )}
           </ScrollView>
           <BottomSheetHostFamily
             bottomSheetModalRef={bottomSheetModalRef}

@@ -13,7 +13,7 @@ import { deleteHostFamilyById } from 'src/client/HostFamily'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1, Title3 } from 'src/components/Typo'
-import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
+import { IconAntDesign, IconFontAwesome, IconMaterialIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { TextRed } from 'src/constant/Theme/Styled'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -25,7 +25,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
   bottomSheetModalRef,
   hostFamilyDetails,
 }) => {
-  const snapPoints = ['20%']
+  const snapPoints = [hostFamilyDetails.animalId ? '27%' : '20%']
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
   const queryClient = useQueryClient()
@@ -41,6 +41,13 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
     bottomSheetModalRef.current.close()
     navigation.navigate('hostFamilyUpdate', {
       hostFamilyDetails: hostFamilyDetails,
+    })
+  }
+
+  const handleViewAnimalHosted = (): void => {
+    bottomSheetModalRef.current.close()
+    navigation.navigate('hostFamilyAnimalHosted', {
+      animalId: hostFamilyDetails.animalId,
     })
   }
 
@@ -82,6 +89,12 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
 
   const listBottomSheet = [
     {
+      name: 'Liste des animaux hébergés',
+      icon: <IconMaterialIcons name="pets" size={20} style={{ paddingRight: 16 }} />,
+      press: handleViewAnimalHosted,
+      chevron: true,
+    },
+    {
       name: 'Éditer le profil',
       icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewEditProfil,
@@ -100,6 +113,11 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       chevron: false,
     },
   ]
+
+  console.log('adzadaz', hostFamilyDetails.animalId)
+  if (hostFamilyDetails && !hostFamilyDetails.animalId) {
+    listBottomSheet.shift()
+  }
 
   return (
     <BottomSheetModal

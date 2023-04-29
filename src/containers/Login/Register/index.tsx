@@ -40,6 +40,7 @@ export const Register = () => {
   const onClickPasswordEye = () => {
     setSecurePassword(!securePassword)
   }
+
   const onClickPasswordConfirmEye = () => {
     setSecureConfirmPassword(!secureConfirmPassword)
   }
@@ -62,18 +63,14 @@ export const Register = () => {
     },
   })
 
-  const addUser = (values: UserRequest) => {
-    let data: UserRequest
-    // bcrypt.setRandomFallback((): any => {
-    // const bytes = RNRandomBytes.randomBytes(16)
-    // return Promise.resolve(bytes)
-    // })
+  const addUser = async (values) => {
+    let data
     data = {
       ...values,
       password: bcrypt.hashSync(values.password, salt),
+      // token:
     }
     delete data.confirmPassword
-    console.log('data', data)
     mutation.mutate(data)
   }
 

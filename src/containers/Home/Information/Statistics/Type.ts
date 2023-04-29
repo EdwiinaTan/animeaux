@@ -4,4 +4,5 @@ import { FormInscriptionClient } from 'src/types/FormInscription/Type'
 export interface StatisticsProps {
   animalData: AnimalClient[]
   formInscriptionData: FormInscriptionClient[]
+  status: 'error' | 'success' | 'loading'
 }

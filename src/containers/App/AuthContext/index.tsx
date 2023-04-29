@@ -9,6 +9,7 @@ import { AuthProps } from './Type'
 
 const initialContext: AuthProps = {
   userId: '',
+  userToken: '',
   isLoading: false,
   loginUser: () => null,
   logoutUser: () => null,
@@ -18,6 +19,7 @@ export const AuthContext = createContext(initialContext)
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [userId, setUserId] = useState('')
+  const [userToken, setUserToken] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const { usersData } = useGetUsers()
   const queryClient = useQueryClient()
@@ -42,19 +44,28 @@ export const AuthProvider: React.FC = ({ children }) => {
     usersData.forEach(async (user) => {
       if (user.fields.email === email) {
         const match = await new Promise((resolve, reject) => {
-          bcrypt.compare(password, user.fields.password, (err, result) => {
-            if (err) {
-              console.log('err', err)
-              reject(err)
-            } else {
-              console.log('result', result)
-              resolve(result)
+          bcrypt.compare(
+            password,
+            user.fields.password,
+            (err, result) => {
+              if (err) {
+                console.log('err', err)
+                reject(err)
+              } else {
+                console.log('result', result)
+                resolve(result)
+              }
+            },
+            (progress) => {
+              //faire le loading
+              console.log('progress', progress)
             }
-          })
+          )
         })
         if (match) {
           setUserId(user.id)
           const token = bcrypt.hashSync(`${user.id}${user.fields.email}`)
+          setUserToken(token)
           const data = {
             firstName: user.fields.firstName,
             lastName: user.fields.lastName,
@@ -63,12 +74,9 @@ export const AuthProvider: React.FC = ({ children }) => {
             phone: user.fields.phone,
             token: token,
           }
-          console.log('data', data)
           mutation.mutateAsync({ id: user.id, values: data })
-          await AsyncStorage.setItem('userId', user.id)
-          console.log('USERID', userId)
+          await AsyncStorage.setItem('userToken', token)
         } else {
-          SnackbarToastComponent({ type: 'error', title: `Erreur d'authentification` })
         }
       }
     })
@@ -77,16 +85,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const logoutUser = async () => {
     setUserId(null)
+    setUserToken(null)
     setIsLoading(false)
-    await AsyncStorage.removeItem('userId')
+    await AsyncStorage.removeItem('userToken')
   }
 
   const isLoggedIn = async () => {
     try {
       setIsLoading(true)
-      let userId = await AsyncStorage.getItem('userId')
-      if (userId) {
-        setUserId(userId)
+      let userTokenId = await AsyncStorage.getItem('userToken')
+      if (userTokenId) {
+        setUserToken(userTokenId)
       }
       setIsLoading(false)
     } catch (e) {
@@ -95,6 +104,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   useEffect(() => {
+    console.log('token', userToken)
+
     console.log('aaa')
     isLoggedIn()
   }, [])
@@ -102,6 +113,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const value = useMemo(() => {
     return {
       userId,
+      userToken,
       isLoading,
       loginUser,
       logoutUser,

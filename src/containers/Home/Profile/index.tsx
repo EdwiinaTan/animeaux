@@ -1,7 +1,6 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useContext, useRef } from 'react'
 import { ActivityIndicator } from 'react-native'
-import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -9,7 +8,7 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { AuthContext } from 'src/containers/App/AuthContext'
-import { useGetUserById } from 'src/hooks/User'
+import { useGetUserByToken } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber } from 'src/utils/Functions'
 import { BottomSheetProfile } from './BottomSheet'
@@ -24,36 +23,42 @@ import {
 } from './Styled'
 
 export const Profile = () => {
-  const { userId } = useContext(AuthContext)
-  const { statusUser, userData } = useGetUserById(userId)
+  const { userToken } = useContext(AuthContext)
+  const { statusTokenUser, userDataToken } = useGetUserByToken(userToken)
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
   }
 
-  const renderListAnimal = () => {
-    if (userData && userData.animalId && userData.animalId.length !== 0) {
-      return <CardAnimal listItem={userData.animalId} />
-    }
-  }
+  // const renderListAnimal = () => {
+  //   if (
+  //     userDataToken.fields &&
+  //     userDataToken.fields.animalId &&
+  //     userDataToken.fields.animalId.length !== 0
+  //   ) {
+  //     return <CardAnimal listItem={userDataToken.fields.animalId} />
+  //   }
+  // }
 
   return (
     <Layout>
       <>
         <HeaderComponent title="Mon profil" toggleOverlay={handlePresentModal} />
-        {statusUser === FetchStatus.LOADING ? (
+        {statusTokenUser === FetchStatus.LOADING ? (
           <ActivityIndicator size="large" color={theme.colors.blue} />
         ) : (
           <Container>
             <UserHeader>
               <ContainerImage>
-                <ImageProfile picture={userData.picture} />
+                <ImageProfile picture={userDataToken.fields.picture} />
                 <Body3>
-                  {userData.firstName} {userData.lastName}
+                  {userDataToken.fields.firstName} {userDataToken.fields.lastName}
                 </Body3>
-                <Body3 color={theme.colors.grey2}>{formatPhoneNumber(userData.phone)}</Body3>
-                <Body3>{userData.email}</Body3>
+                <Body3 color={theme.colors.grey2}>
+                  {formatPhoneNumber(userDataToken.fields.phone)}
+                </Body3>
+                <Body3>{userDataToken.fields.email}</Body3>
               </ContainerImage>
               <ContainerDescription>
                 <Description>
@@ -61,8 +66,13 @@ export const Profile = () => {
                   <ContainerHeader>
                     <Header>
                       <Body2 textAlign="center" lineHeight={0}>
-                        En charge{userData.animalId && userData.animalId.length > 1 ? 's' : ''} :{' '}
-                        {(userData.animalId && userData.animalId.length) || 0}
+                        En charge
+                        {userDataToken.fields.animalId && userDataToken.fields.animalId.length > 1
+                          ? 's'
+                          : ''}{' '}
+                        :
+                        {(userDataToken.fields.animalId && userDataToken.fields.animalId.length) ||
+                          0}
                       </Body2>
                     </Header>
                   </ContainerHeader>
@@ -70,7 +80,7 @@ export const Profile = () => {
               </ContainerDescription>
               <Spacing size="8" />
             </UserHeader>
-            {renderListAnimal()}
+            {/* {renderListAnimal()} */}
           </Container>
         )}
         <BottomSheetProfile bottomSheetModalRef={bottomSheetModalRef} />

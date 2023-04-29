@@ -17,14 +17,14 @@ export const useGetUserById = (userId: string): ReturnUser => {
 }
 
 export const useGetUserByToken = (token: string): ReturnUserToken => {
-  const { status: statusUser, data: userDataToken } = useQuery<UserType, Error>({
-    enabled: token !== null, // à cause de tsconfig strict true
-    queryKey: ['userToken', token],
+  const { status: statusTokenUser, data: userDataToken } = useQuery<UserClient, Error>({
+    enabled: token !== null,
+    queryKey: ['getUserToken', token],
     queryFn: () => getUserByIdToken(token || ''),
   })
 
   return {
-    statusUser,
+    statusTokenUser,
     userDataToken,
   }
 }

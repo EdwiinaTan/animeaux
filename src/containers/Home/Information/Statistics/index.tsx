@@ -1,3 +1,4 @@
+import { ActivityIndicator, View } from 'react-native'
 import { Divider } from 'react-native-elements'
 import { BarChartComponent } from 'src/components/Chart/BarChart'
 import { LineChartComponent } from 'src/components/Chart/LineChart'
@@ -6,10 +7,15 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
+import { FetchStatus } from 'src/types/Status'
 import { StatisticsProps } from './Type'
 import { getLabelDataReduce } from './Utils'
 
-export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscriptionData }) => {
+export const Statistics: React.FC<StatisticsProps> = ({
+  status,
+  animalData,
+  formInscriptionData,
+}) => {
   const labelDataSpecies = getLabelDataReduce(animalData, 'species')
   const labelDataGender = getLabelDataReduce(animalData, 'gender')
   const labelDataStatus = getLabelDataReduce(animalData, 'status')
@@ -25,6 +31,14 @@ export const Statistics: React.FC<StatisticsProps> = ({ animalData, formInscript
   const labelDataHasEducKnowledge = getLabelDataReduce(formInscriptionData, 'educationalKnowledge')
   const labelDataAllergy = getLabelDataReduce(formInscriptionData, 'allergy')
   const labelDataAbsence = getLabelDataReduce(formInscriptionData, 'absenceHours')
+
+  if (status === FetchStatus.LOADING) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={theme.colors.blue} />
+      </View>
+    )
+  }
 
   return (
     <ContainerStyle>

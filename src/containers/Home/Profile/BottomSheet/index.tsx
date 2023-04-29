@@ -19,7 +19,7 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
   const snapPoints = ['20%']
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
 
-  const { logoutUser, userId } = useContext(AuthContext)
+  const { logoutUser } = useContext(AuthContext)
   const handleViewEditProfile = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('userUpdate')
@@ -38,8 +38,7 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
     []
   )
 
-  const lalala = () => {
-    console.log('userId', userId)
+  const logout = () => {
     logoutUser()
   }
 
@@ -59,7 +58,7 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
           style={{ paddingRight: 16, color: theme.colors.red }}
         />
       ),
-      press: lalala,
+      press: logout,
       chevron: false,
     },
   ]

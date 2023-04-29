@@ -8,7 +8,7 @@ export interface ReturnUser {
 
 export interface ReturnUserToken {
   statusTokenUser: 'error' | 'success' | 'loading'
-  userDataToken: UserClient
+  userDataToken: UserType
 }
 
 export interface ReturnUsers {

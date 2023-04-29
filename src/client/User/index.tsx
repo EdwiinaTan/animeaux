@@ -49,7 +49,7 @@ export const getUserByIdToken = async (token: string) => {
       if (!result) {
         return 'err'
       } else {
-        return result.data.records[0]
+        return result.data.records[0].fields
       }
     })
     .catch((err) => {

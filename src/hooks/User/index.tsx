@@ -17,7 +17,7 @@ export const useGetUserById = (userId: string): ReturnUser => {
 }
 
 export const useGetUserByToken = (token: string): ReturnUserToken => {
-  const { status: statusTokenUser, data: userDataToken } = useQuery<UserClient, Error>({
+  const { status: statusTokenUser, data: userDataToken } = useQuery<UserType, Error>({
     enabled: token !== null,
     queryKey: ['getUserToken', token],
     queryFn: () => getUserByIdToken(token || ''),

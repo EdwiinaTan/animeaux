@@ -33,11 +33,11 @@ export const Profile = () => {
 
   // const renderListAnimal = () => {
   //   if (
-  //     userDataToken.fields &&
-  //     userDataToken.fields.animalId &&
-  //     userDataToken.fields.animalId.length !== 0
+  //     userDataToken &&
+  //     userDataToken.animalId &&
+  //     userDataToken.animalId.length !== 0
   //   ) {
-  //     return <CardAnimal listItem={userDataToken.fields.animalId} />
+  //     return <CardAnimal listItem={userDataToken.animalId} />
   //   }
   // }
 
@@ -51,14 +51,12 @@ export const Profile = () => {
           <Container>
             <UserHeader>
               <ContainerImage>
-                <ImageProfile picture={userDataToken.fields.picture} />
+                <ImageProfile picture={userDataToken.picture} />
                 <Body3>
-                  {userDataToken.fields.firstName} {userDataToken.fields.lastName}
+                  {userDataToken.firstName} {userDataToken.lastName}
                 </Body3>
-                <Body3 color={theme.colors.grey2}>
-                  {formatPhoneNumber(userDataToken.fields.phone)}
-                </Body3>
-                <Body3>{userDataToken.fields.email}</Body3>
+                <Body3 color={theme.colors.grey2}>{formatPhoneNumber(userDataToken.phone)}</Body3>
+                <Body3>{userDataToken.email}</Body3>
               </ContainerImage>
               <ContainerDescription>
                 <Description>
@@ -67,12 +65,9 @@ export const Profile = () => {
                     <Header>
                       <Body2 textAlign="center" lineHeight={0}>
                         En charge
-                        {userDataToken.fields.animalId && userDataToken.fields.animalId.length > 1
+                        {userDataToken.animalId && userDataToken.animalId.length > 1
                           ? 's'
-                          : ''}{' '}
-                        :
-                        {(userDataToken.fields.animalId && userDataToken.fields.animalId.length) ||
-                          0}
+                          : ''} : {(userDataToken.animalId && userDataToken.animalId.length) || 0}
                       </Body2>
                     </Header>
                   </ContainerHeader>

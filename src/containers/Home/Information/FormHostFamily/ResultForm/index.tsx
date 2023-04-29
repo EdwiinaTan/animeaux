@@ -20,7 +20,6 @@ export const ResultForm = () => {
     params: { informationId },
   } = route as { params: { informationId: string } }
   const { statusFormInscription, formInscriptionData } = useGetFormInscriptionById(informationId)
-  console.log('adazdza', formInscriptionData)
   const navigation = useNavigation<NativeStackNavigationProp<InformationRouteParams>>()
 
   if (statusFormInscription === FetchStatus.LOADING) {

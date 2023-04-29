@@ -87,7 +87,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     setUserId(null)
     setUserToken(null)
     setIsLoading(false)
-    await AsyncStorage.removeItem('userToken')
+    // mutation update sa suppresion dans airtable !!!
+    await AsyncStorage.removeItem('userToken').then(() => {
+      SnackbarToastComponent({ type: 'info', title: 'À bientôt ! 👋' })
+    })
   }
 
   const isLoggedIn = async () => {
@@ -104,9 +107,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log('token', userToken)
-
-    console.log('aaa')
     isLoggedIn()
   }, [])
 

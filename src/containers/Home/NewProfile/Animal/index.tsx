@@ -14,7 +14,7 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { theme } from 'src/constant/Theme'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { AddAnimalPhoto } from './Photo'
 import { customStyles } from './Styled'
 
@@ -137,7 +137,7 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior="padding" enabled>
         <ContainerStyle>
           {/* {currentPosition !== 0 && (
             <TouchableOpacity onPress={() => onPageChange('prev')}>
@@ -182,7 +182,7 @@ export const AddAnimal = () => {
           )}
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

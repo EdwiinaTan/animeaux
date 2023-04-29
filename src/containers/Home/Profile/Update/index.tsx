@@ -12,7 +12,7 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { AuthContext } from 'src/containers/App/AuthContext'
 import { useGetUserById } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
@@ -80,7 +80,6 @@ export const UserUpdate = () => {
     if (selected.length === 0 && selectedNoCharge.length === 0) {
       data = { ...values }
     }
-    console.log('dataTOTAL', data)
     mutation.mutateAsync({ id: userId, values: data })
   }
 
@@ -92,7 +91,7 @@ export const UserUpdate = () => {
           <ActivityIndicator size="large" color={theme.colors.blue} />
         </View>
       ) : (
-        <Keyboard behavior="padding" enabled>
+        <KeyboardStyle behavior="padding" enabled>
           <ContainerStyle>
             <Formik
               validationSchema={validationUser}
@@ -120,7 +119,7 @@ export const UserUpdate = () => {
               </>
             )}
           </ContainerStyle>
-        </Keyboard>
+        </KeyboardStyle>
       )}
     </Layout>
   )

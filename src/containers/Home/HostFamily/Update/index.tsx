@@ -13,7 +13,7 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
-import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyRequest, HostFamilyType } from 'src/types/HostFamily/Type'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -124,7 +124,7 @@ export const HostFamilyUpdate = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior="padding" enabled>
         <ScrollView>
           <ContainerStyle>
             <CardStyle>
@@ -149,7 +149,7 @@ export const HostFamilyUpdate = () => {
           </ContainerStyle>
           {renderListAnimal()}
         </ScrollView>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

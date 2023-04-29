@@ -28,7 +28,7 @@ export const TextRed = styled.Text`
   color: ${theme.colors.red};
 `
 
-export const Keyboard = styled.KeyboardAvoidingView`
+export const KeyboardStyle = styled.KeyboardAvoidingView`
   flex: 1;
   flex-direction: column;
   justify-content: center;

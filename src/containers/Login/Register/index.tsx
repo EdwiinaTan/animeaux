@@ -15,7 +15,7 @@ import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body2, Body3 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, ContainerStyle, Keyboard, TextRed } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, KeyboardStyle, TextRed } from 'src/constant/Theme/Styled'
 import { UserRequest } from 'src/types/User/Type'
 import { LoginRouteParams } from '../Router/type'
 import { PasswordContainer } from './Styled'
@@ -77,7 +77,7 @@ export const Register = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Création de compte" />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior="padding" enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}
@@ -259,7 +259,7 @@ export const Register = () => {
             )}
           </Formik>
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

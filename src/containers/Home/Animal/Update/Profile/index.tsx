@@ -9,7 +9,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../../Router/type'
@@ -83,7 +83,7 @@ export const UpdateAnimalProfile = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
       />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior="padding" enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}
@@ -96,7 +96,7 @@ export const UpdateAnimalProfile = () => {
           </Formik>
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

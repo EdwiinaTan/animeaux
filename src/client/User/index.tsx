@@ -40,7 +40,6 @@ export const getUserByIdToken = async (token: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user?filterByFormula=token${encodeURI(
     `="${token}"`
   )}`
-  console.log('ndioazdjziodaz', url)
   return await axios
     .get(url, {
       headers: header,

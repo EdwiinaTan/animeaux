@@ -9,7 +9,6 @@ import { RouterAnimal } from './Router/animal'
 
 export const AppContainer = () => {
   const { isLoading, userToken } = useContext(AuthContext)
-  console.log('userAppToken', userToken)
 
   if (isLoading) {
     return (

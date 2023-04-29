@@ -9,7 +9,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRequest } from 'src/types/HostFamily/Type'
 
 export const AddHostFamily = () => {
@@ -73,7 +73,7 @@ export const AddHostFamily = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior="padding" enabled>
         <ContainerStyle>
           <CardStyle>
             <Formik
@@ -90,7 +90,7 @@ export const AddHostFamily = () => {
           </CardStyle>
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

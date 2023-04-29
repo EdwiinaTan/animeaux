@@ -9,7 +9,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
@@ -124,7 +124,7 @@ export const UpdateAnimalSituation = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier la situation de ${animalDetails.name}`}
       />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior="padding" enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}
@@ -142,7 +142,7 @@ export const UpdateAnimalSituation = () => {
           </Formik>
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

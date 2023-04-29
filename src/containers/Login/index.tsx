@@ -11,7 +11,7 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title1 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, Keyboard, TextRed } from 'src/constant/Theme/Styled'
+import { CardStyle, KeyboardStyle, TextRed } from 'src/constant/Theme/Styled'
 import * as Yup from 'yup'
 import { AuthContext } from '../App/AuthContext'
 import { LoginRouteParams } from './Router/type'
@@ -41,7 +41,7 @@ export const Login = () => {
   }
 
   return (
-    <Keyboard behavior="padding" enabled>
+    <KeyboardStyle behavior="padding" enabled>
       <SafeAreaView>
         <View style={{ paddingLeft: 16, paddingRight: 16 }}>
           <CardStyle>
@@ -130,6 +130,6 @@ export const Login = () => {
           </CardStyle>
         </View>
       </SafeAreaView>
-    </Keyboard>
+    </KeyboardStyle>
   )
 }

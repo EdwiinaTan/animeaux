@@ -1,6 +1,6 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useContext, useRef } from 'react'
-import { ActivityIndicator, ScrollView } from 'react-native'
+import { ActivityIndicator } from 'react-native'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
@@ -30,6 +30,12 @@ export const Profile = () => {
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
+  }
+
+  const renderListAnimal = () => {
+    if (userData && userData.animalId && userData.animalId.length !== 0) {
+      return <CardAnimal listItem={userData.animalId} />
+    }
   }
 
   return (
@@ -64,11 +70,7 @@ export const Profile = () => {
               </ContainerDescription>
               <Spacing size="8" />
             </UserHeader>
-            <ScrollView>
-              {userData.animalId && userData.animalId.length !== 0 && (
-                <CardAnimal listItem={userData.animalId} />
-              )}
-            </ScrollView>
+            {renderListAnimal()}
           </Container>
         )}
         <BottomSheetProfile bottomSheetModalRef={bottomSheetModalRef} />

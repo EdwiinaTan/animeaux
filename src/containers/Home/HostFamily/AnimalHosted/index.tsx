@@ -1,9 +1,9 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { ScrollView } from 'react-native'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
-import { Spacing } from 'src/components/Layout/Spacing'
 import { HostFamilyRouteParams } from '../Router/type'
 
 export const AnimalHosted: React.FC = () => {
@@ -12,11 +12,13 @@ export const AnimalHosted: React.FC = () => {
   const {
     params: { animalId },
   } = route as { params: { animalId: string[] } }
+
   return (
     <Layout>
       <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Animaux hébergés" />
-      <Spacing size="16" />
-      <CardAnimal listItem={animalId} />
+      <ScrollView>
+        <CardAnimal listItem={animalId} />
+      </ScrollView>
     </Layout>
   )
 }

@@ -2,12 +2,12 @@ import { Field } from 'formik'
 import { TextInput, View } from 'react-native'
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
+import { Spacing } from 'src/components/Layout/Spacing'
+import { Body2, Body3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { TextRed } from 'src/constant/Theme/Styled'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
-import { Spacing } from '../../Layout/Spacing'
-import { Body2, Body3 } from '../../Typo'
 import { styles } from '../Animal/Styled'
 import { ContainerForm } from './Styled'
 import { HostFamilyFormProps } from './Type'
@@ -33,7 +33,11 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
             value: fields.name,
           })
         }
-        if (fields.hostFamilyId && hostFamilyDetails.id === fields.hostFamilyId[0]) {
+        if (
+          hostFamilyDetails &&
+          fields.hostFamilyId &&
+          hostFamilyDetails.id === fields.hostFamilyId[0]
+        ) {
           animalNotHosted.push({
             key: fields.id,
             value: fields.name,
@@ -260,27 +264,29 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
             )}
           </Field>
         </View>
-        {hostFamilyDetails.animalId && hostFamilyDetails.animalId.length > 0 && (
-          <>
-            <Spacing size="16" />
-            <Body2>Enlever un animal à ma charge</Body2>
-            <Spacing size="4" />
-            <View style={{ width: '100%' }}>
-              <Field name="animalId">
-                {({ field }) => (
-                  <MultipleSelectList
-                    {...field}
-                    setSelected={(val: string[]) => setSelectedNotHosted(val)}
-                    data={animalDataList().animalNotHosted}
-                    placeholder="Rechercher"
-                    save="key"
-                    label="N'est plus à ma charge"
-                  />
-                )}
-              </Field>
-            </View>
-          </>
-        )}
+        {hostFamilyDetails &&
+          hostFamilyDetails.animalId &&
+          hostFamilyDetails.animalId.length > 0 && (
+            <>
+              <Spacing size="16" />
+              <Body2>Enlever un animal à ma charge</Body2>
+              <Spacing size="4" />
+              <View style={{ width: '100%' }}>
+                <Field name="animalId">
+                  {({ field }) => (
+                    <MultipleSelectList
+                      {...field}
+                      setSelected={(val: string[]) => setSelectedNotHosted(val)}
+                      data={animalDataList().animalNotHosted}
+                      placeholder="Rechercher"
+                      save="key"
+                      label="N'est plus à ma charge"
+                    />
+                  )}
+                </Field>
+              </View>
+            </>
+          )}
         <Spacing size="24" />
       </ContainerForm>
       <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />

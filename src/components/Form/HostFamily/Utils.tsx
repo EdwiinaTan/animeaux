@@ -8,7 +8,7 @@ export const validationHostFamily = Yup.object().shape({
     .required('Le téléphone est requis')
     .length(10, 'Le téléphone doit contenir 10 chiffres'),
   postalCode: Yup.string()
-    .length(10, 'Le code postal doit contenir 5 chiffres')
+    .length(5, 'Le code postal doit contenir 5 chiffres')
     .required('Le code postal est requis'),
   city: Yup.string().required('La ville est requise'),
   address: Yup.string().required('L’adresse est requise'),

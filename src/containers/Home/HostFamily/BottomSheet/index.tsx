@@ -115,7 +115,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
   ]
 
   console.log('adzadaz', hostFamilyDetails.animalId)
-  if (!hostFamilyDetails.animalId) {
+  if (hostFamilyDetails && !hostFamilyDetails.animalId) {
     listBottomSheet.shift()
   }
 

@@ -100,6 +100,24 @@ export const HostFamilyUpdate = () => {
     mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
 
+  const renderListAnimal = () => {
+    if (
+      hostFamilyDetails &&
+      hostFamilyDetails.animalId &&
+      hostFamilyDetails.animalId.length !== 0
+    ) {
+      return (
+        <>
+          <Spacing size="8" />
+          <Body1 textAlign="center">Animaux en charge ({hostFamilyDetails.animalId.length})</Body1>
+          <Spacing size="4" />
+          <CardAnimal listItem={hostFamilyDetails.animalId} />
+          <Spacing size="24" />
+        </>
+      )
+    }
+  }
+
   return (
     <Layout>
       <HeaderComponent
@@ -129,17 +147,7 @@ export const HostFamilyUpdate = () => {
             </CardStyle>
             <Spacing size="16" />
           </ContainerStyle>
-          <Spacing size="8" />
-          {hostFamilyDetails.animalId && hostFamilyDetails.animalId.length !== 0 && (
-            <>
-              <Body1 textAlign="center">
-                Animaux en charge ({hostFamilyDetails.animalId.length})
-              </Body1>
-              <Spacing size="4" />
-              <CardAnimal listItem={hostFamilyDetails.animalId} />
-              <Spacing size="24" />
-            </>
-          )}
+          {renderListAnimal()}
         </ScrollView>
       </Keyboard>
     </Layout>

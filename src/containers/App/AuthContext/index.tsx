@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import bcrypt from 'react-native-bcrypt'
+import { updateUserById } from 'src/client/User'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { useGetUsers } from 'src/hooks/User'
 import { AuthProps } from './Type'
@@ -18,6 +20,23 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [userId, setUserId] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const { usersData } = useGetUsers()
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn: updateUserById,
+    onSuccess: (data) => {
+      queryClient.setQueryData(['user', { id: userId }], data)
+      queryClient.invalidateQueries({ queryKey: ['user'] })
+      SnackbarToastComponent({ title: 'Connexion réussie' })
+    },
+    onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
+      console.log('err', err)
+    },
+  })
 
   const loginUser = async (email: string, password: string) => {
     usersData.forEach(async (user) => {
@@ -34,9 +53,20 @@ export const AuthProvider: React.FC = ({ children }) => {
           })
         })
         if (match) {
-          SnackbarToastComponent({ title: 'Connexion réussie' })
-          await AsyncStorage.setItem('userId', user.id)
           setUserId(user.id)
+          const token = bcrypt.hashSync(`${user.id}${user.fields.email}`)
+          const data = {
+            firstName: user.fields.firstName,
+            lastName: user.fields.lastName,
+            email: user.fields.email,
+            password: user.fields.password,
+            phone: user.fields.phone,
+            token: token,
+          }
+          console.log('data', data)
+          mutation.mutateAsync({ id: user.id, values: data })
+          await AsyncStorage.setItem('userId', user.id)
+          console.log('USERID', userId)
         } else {
           SnackbarToastComponent({ type: 'error', title: `Erreur d'authentification` })
         }

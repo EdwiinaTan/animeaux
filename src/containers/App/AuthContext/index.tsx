@@ -2,9 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import bcrypt from 'react-native-bcrypt'
+import 'react-native-get-random-values' // allow crypto.getRandomValues() to support
 import { updateUserById } from 'src/client/User'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { useGetUsers } from 'src/hooks/User'
+import { v4 as uuidv4 } from 'uuid'
 import { AuthProps } from './Type'
 
 const initialContext: AuthProps = {
@@ -23,6 +25,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const { usersData } = useGetUsers()
   const queryClient = useQueryClient()
+  const saltRounds = 10
 
   const mutation = useMutation({
     mutationFn: updateUserById,
@@ -63,7 +66,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         })
         if (match) {
           setUserId(user.id)
-          const token = bcrypt.hashSync(`${user.id}${user.fields.email}`)
+          const token = bcrypt.hashSync(uuidv4(), saltRounds)
           setUserToken(token)
           const dataUpdate = {
             token: token,

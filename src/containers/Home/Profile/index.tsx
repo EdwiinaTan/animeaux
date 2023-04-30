@@ -1,6 +1,7 @@
 import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { useContext, useRef } from 'react'
 import { ActivityIndicator } from 'react-native'
+import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -26,20 +27,22 @@ export const Profile = () => {
   const { userToken } = useContext(AuthContext)
   const { statusTokenUser, userDataToken } = useGetUserByToken(userToken)
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
+  // console.log('1.userDataToken', userDataToken)
+  // const { animalUserData } = useGetAnimalByUserId(userDataToken.id)
+  // console.log('2. ezfezfezfze', animalUserData)
+
+  // const { animalUserData } = useGetAnimalByUserId(userDataToken.id)
+  // console.log('2. ezfezfezfze', animalUserData)
 
   const handlePresentModal = () => {
     bottomSheetModalRef.current?.present()
   }
 
-  // const renderListAnimal = () => {
-  //   if (
-  //     userDataToken &&
-  //     userDataToken.animalId &&
-  //     userDataToken.animalId.length !== 0
-  //   ) {
-  //     return <CardAnimal listItem={userDataToken.animalId} />
-  //   }
-  // }
+  const renderListAnimal = () => {
+    if (userDataToken && userDataToken.animalId && userDataToken.animalId.length !== 0) {
+      return <CardAnimal listItem={userDataToken.animalId} />
+    }
+  }
 
   return (
     <Layout>
@@ -75,7 +78,7 @@ export const Profile = () => {
               </ContainerDescription>
               <Spacing size="8" />
             </UserHeader>
-            {/* {renderListAnimal()} */}
+            {renderListAnimal()}
           </Container>
         )}
         <BottomSheetProfile bottomSheetModalRef={bottomSheetModalRef} />

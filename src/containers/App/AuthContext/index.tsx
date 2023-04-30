@@ -29,7 +29,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     onSuccess: (data) => {
       queryClient.setQueryData(['user', { id: userId }], data)
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      SnackbarToastComponent({ title: 'Connexion réussie' })
     },
     onError: (err) => {
       SnackbarToastComponent({
@@ -66,15 +65,11 @@ export const AuthProvider: React.FC = ({ children }) => {
           setUserId(user.id)
           const token = bcrypt.hashSync(`${user.id}${user.fields.email}`)
           setUserToken(token)
-          const data = {
-            firstName: user.fields.firstName,
-            lastName: user.fields.lastName,
-            email: user.fields.email,
-            password: user.fields.password,
-            phone: user.fields.phone,
+          const dataUpdate = {
             token: token,
           }
-          mutation.mutateAsync({ id: user.id, values: data })
+          mutation.mutateAsync({ id: user.id, values: dataUpdate })
+          SnackbarToastComponent({ title: 'Connexion réussie' })
           await AsyncStorage.setItem('userToken', token)
         } else {
         }
@@ -87,7 +82,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     setUserId(null)
     setUserToken(null)
     setIsLoading(false)
-    // mutation update sa suppresion dans airtable !!!
+    const dataUpdate = {
+      token: null,
+    }
+    mutation.mutateAsync({ id: userId, values: dataUpdate })
     await AsyncStorage.removeItem('userToken').then(() => {
       SnackbarToastComponent({ type: 'info', title: 'À bientôt ! 👋' })
     })

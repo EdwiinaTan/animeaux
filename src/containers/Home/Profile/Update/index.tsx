@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useContext, useState } from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, Platform, View } from 'react-native'
 import { updateUserById } from 'src/client/User'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
@@ -91,7 +91,7 @@ export const UserUpdate = () => {
           <ActivityIndicator size="large" color={theme.colors.blue} />
         </View>
       ) : (
-        <KeyboardStyle behavior="padding" enabled>
+        <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
           <ContainerStyle>
             <Formik
               validationSchema={validationUser}

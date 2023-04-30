@@ -2,6 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
+import { Platform } from 'react-native'
 import { updateAnimalById } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
 import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/Utils'
@@ -124,7 +125,7 @@ export const UpdateAnimalSituation = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier la situation de ${animalDetails.name}`}
       />
-      <KeyboardStyle behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}

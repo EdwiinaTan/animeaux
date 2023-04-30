@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
-import { ScrollView } from 'react-native'
+import { Platform, ScrollView } from 'react-native'
 import { updateHostFamilyById } from 'src/client/HostFamily'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
@@ -124,7 +124,7 @@ export const HostFamilyUpdate = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
-      <KeyboardStyle behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ScrollView>
           <ContainerStyle>
             <CardStyle>

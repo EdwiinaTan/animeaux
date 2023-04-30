@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
+import { Platform } from 'react-native'
 import { Button } from 'react-native-elements'
 import StepIndicator from 'react-native-step-indicator'
 import { postAnimal } from 'src/client/Animal'
@@ -137,7 +138,7 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <KeyboardStyle behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           {/* {currentPosition !== 0 && (
             <TouchableOpacity onPress={() => onPageChange('prev')}>

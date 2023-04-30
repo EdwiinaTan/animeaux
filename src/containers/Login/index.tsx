@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AnimalSvg } from 'assets/svg/animal'
 import { Field, Formik } from 'formik'
 import { useContext, useState } from 'react'
-import { TextInput, View } from 'react-native'
+import { Platform, TextInput, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from 'src/components/Form/Animal/Styled'
@@ -41,7 +41,7 @@ export const Login = () => {
   }
 
   return (
-    <KeyboardStyle behavior="padding" enabled>
+    <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
       <SafeAreaView>
         <View style={{ paddingLeft: 16, paddingRight: 16 }}>
           <CardStyle>

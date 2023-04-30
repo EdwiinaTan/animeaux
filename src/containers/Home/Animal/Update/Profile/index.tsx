@@ -2,6 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
+import { Platform } from 'react-native'
 import { updateAnimalById } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Utils'
@@ -83,7 +84,7 @@ export const UpdateAnimalProfile = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
       />
-      <KeyboardStyle behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}

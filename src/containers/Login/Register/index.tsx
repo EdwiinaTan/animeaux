@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Field, Formik } from 'formik'
 import { useState } from 'react'
-import { TextInput } from 'react-native'
+import { Platform, TextInput } from 'react-native'
 import bcrypt from 'react-native-bcrypt'
 import { Button } from 'react-native-elements'
 import { postUser } from 'src/client/User'
@@ -77,7 +77,7 @@ export const Register = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Création de compte" />
-      <KeyboardStyle behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}

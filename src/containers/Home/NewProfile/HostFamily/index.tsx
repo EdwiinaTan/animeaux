@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
+import { Platform } from 'react-native'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
@@ -73,7 +74,7 @@ export const AddHostFamily = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
-      <KeyboardStyle behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <CardStyle>
             <Formik

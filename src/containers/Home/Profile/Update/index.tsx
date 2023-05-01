@@ -48,6 +48,8 @@ export const UserUpdate = () => {
       navigation.navigate('profileScreen')
       queryClient.setQueryData(['user', { id: userDataToken.id }], data)
       queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
+      queryClient.invalidateQueries({ queryKey: ['user', userDataToken.id] })
+      queryClient.invalidateQueries({ queryKey: ['users'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })
@@ -67,7 +69,9 @@ export const UserUpdate = () => {
       (selected.length > 0 && selectedNoCharge.length > 0) ||
       (selected.length > 0 && selectedNoCharge.length === 0)
     ) {
-      selected.push(...values.animalId)
+      if (values.animalId && values.animalId.length > 0) {
+        selected.push(...values.animalId)
+      }
       data = { ...values, animalId: selected }
     }
     if (
@@ -81,9 +85,6 @@ export const UserUpdate = () => {
     if (selected.length === 0 && selectedNoCharge.length === 0) {
       data = { ...values }
     }
-    console.log('data', data)
-    console.log('selected', selected)
-
     mutation.mutateAsync({ id: userDataToken.id, values: data })
   }
 

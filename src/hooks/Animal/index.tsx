@@ -1,31 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { getAnimalById, getAnimalByIdUser, getAnimals } from 'src/client/Animal'
+import { getAnimalById, getAnimals } from 'src/client/Animal'
 import { AnimalClient, AnimalType } from 'src/types/Animal/Type'
-import { ReturnAnimal, ReturnAnimalByUser, ReturnAnimals } from './Type'
+import { ReturnAnimal, ReturnAnimals } from './Type'
 
 export const useGetAnimalById = (dataId: string): ReturnAnimal => {
   const { status: statusAnimal, data: animalData } = useQuery<AnimalType, Error>({
     enabled: dataId !== null,
-    queryKey: ['formInscription', dataId],
+    queryKey: ['animal', dataId],
     queryFn: () => getAnimalById(dataId || ''),
   })
 
   return {
     statusAnimal,
     animalData,
-  }
-}
-
-export const useGetAnimalByUserId = (userId: string): ReturnAnimalByUser => {
-  const { status: statusAnimalUser, data: animalUserData } = useQuery<AnimalType[], Error>({
-    enabled: userId !== null,
-    queryKey: ['getAnimalByUser', userId],
-    queryFn: () => getAnimalByIdUser(userId || ''),
-  })
-
-  return {
-    statusAnimalUser,
-    animalUserData,
   }
 }
 

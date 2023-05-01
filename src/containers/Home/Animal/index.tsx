@@ -120,7 +120,6 @@ export const Animal = (): React.ReactElement => {
     return isActive
   }
 
-  // faire icons + text => aucun animal / chien trouvé
   return (
     <View>
       <Layout>
@@ -149,15 +148,15 @@ export const Animal = (): React.ReactElement => {
                 <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
               }
               ListEmptyComponent={
-                search ? (
-                  <View style={{ alignItems: 'center' }}>
-                    <Spacing size="8" />
+                <View style={{ alignItems: 'center' }}>
+                  <Spacing size="8" />
+                  {search ? (
                     <Body1>{`Aucun ${renderSearchNotFound()} trouvé`}</Body1>
-                    <NoAnimalFoundSvg />
-                  </View>
-                ) : (
-                  <Body1 textAlign="center">Aucun {isActive} pour le moment</Body1>
-                )
+                  ) : (
+                    <Body1 textAlign="center">Aucun {isActive} pour le moment</Body1>
+                  )}
+                  <NoAnimalFoundSvg />
+                </View>
               }
             />
           </>

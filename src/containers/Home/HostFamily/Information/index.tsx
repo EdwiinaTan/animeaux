@@ -2,7 +2,6 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AddressSvg } from 'assets/svg/address'
-import { AquariumSvg } from 'assets/svg/aquarium'
 import { CalendarSvg } from 'assets/svg/calendar'
 import { EmailSvg } from 'assets/svg/email'
 import { PauseSvg } from 'assets/svg/pause'
@@ -10,6 +9,7 @@ import { PhoneSvg } from 'assets/svg/phone'
 import { WarningSvg } from 'assets/svg/warning'
 import { useRef } from 'react'
 import { ActivityIndicator, SafeAreaView, ScrollView } from 'react-native'
+import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
@@ -57,6 +57,20 @@ export const HostFamilyInformation = (): React.ReactElement => {
               {value}
             </Body1>
           </Fields>
+        </>
+      )
+    }
+  }
+
+  const renderListAnimal = () => {
+    if (hostFamilyData && hostFamilyData.animalId && hostFamilyData.animalId.length !== 0) {
+      return (
+        <>
+          <Spacing size="8" />
+          <Body1 textAlign="center">Animaux en charge ({hostFamilyData.animalId.length})</Body1>
+          <Spacing size="4" />
+          <CardAnimal listItem={hostFamilyData.animalId} />
+          <Spacing size="24" />
         </>
       )
     }
@@ -110,11 +124,11 @@ export const HostFamilyInformation = (): React.ReactElement => {
                   {renderField(<PauseSvg />, hostFamilyData.onBreak, 'Indisponible : ')}
                   {renderField(<WarningSvg />, hostFamilyData.criteria, 'Critère : ')}
                   {renderField(null, hostFamilyData.description, 'Description : ')}
-                  {renderField(<AquariumSvg />, numberAnimal, `Nombre d'animaux hébergés : `)}
                 </Description>
               </ContainerDescription>
             </Container>
             <Spacing size="16" />
+            {renderListAnimal()}
           </ScrollView>
           <BottomSheetHostFamily
             bottomSheetModalRef={bottomSheetModalRef}

@@ -81,6 +81,9 @@ export const UserUpdate = () => {
     if (selected.length === 0 && selectedNoCharge.length === 0) {
       data = { ...values }
     }
+    console.log('data', data)
+    console.log('selected', selected)
+
     mutation.mutateAsync({ id: userDataToken.id, values: data })
   }
 

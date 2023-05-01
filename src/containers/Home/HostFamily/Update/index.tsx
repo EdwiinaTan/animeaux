@@ -61,6 +61,7 @@ export const HostFamilyUpdate = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
+      queryClient.invalidateQueries({ queryKey: ['hostFamily'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
         subTitle: `FA édité : ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`,

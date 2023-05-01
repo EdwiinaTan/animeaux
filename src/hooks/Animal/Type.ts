@@ -9,3 +9,8 @@ export interface ReturnAnimal {
   statusAnimal: 'error' | 'success' | 'loading'
   animalData: AnimalType
 }
+
+export interface ReturnAnimalByUser {
+  statusAnimalUser: 'error' | 'success' | 'loading'
+  animalUserData: AnimalType[]
+}

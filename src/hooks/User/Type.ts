@@ -6,6 +6,11 @@ export interface ReturnUser {
   userData: UserType
 }
 
+export interface ReturnUserToken {
+  statusTokenUser: 'error' | 'success' | 'loading'
+  userDataToken: UserType
+}
+
 export interface ReturnUsers {
   statusUsers: 'error' | 'success' | 'loading'
   usersData: UserClient[]

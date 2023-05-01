@@ -11,5 +11,18 @@ export type ProfileRouteParams = {
   animalUserInCharge: {
     id: string
   }
+  userInfo: {
+    userId: string
+  }
+  animalUpdateProfile: {
+    animalDetails: AnimalType
+  }
+  animalUpdateSituation: {
+    animalDetails: AnimalType
+  }
+  animalUpdatePhoto: {
+    animalDetails: AnimalType
+  }
   userUpdate: undefined
+  usersScreen: undefined
 }

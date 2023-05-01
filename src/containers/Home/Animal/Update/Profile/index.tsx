@@ -2,6 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
+import { Platform } from 'react-native'
 import { updateAnimalById } from 'src/client/Animal'
 import { AnimalProfile } from 'src/components/Form/Animal/Profile'
 import { validationAnimalProfile } from 'src/components/Form/Animal/Profile/Utils'
@@ -9,7 +10,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
 import { startsWithVowel } from 'src/utils/Functions'
 import { AnimalRouteParams } from '../../Router/type'
@@ -83,7 +84,7 @@ export const UpdateAnimalProfile = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
       />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}
@@ -96,7 +97,7 @@ export const UpdateAnimalProfile = () => {
           </Formik>
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

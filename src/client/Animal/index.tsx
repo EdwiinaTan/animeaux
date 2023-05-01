@@ -44,6 +44,26 @@ export const getAnimalById = async (recordId: string) => {
     })
 }
 
+export const getAnimalByIdUser = async (userId: string) => {
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal?filterByFormula=userId="${userId}"`
+  return await axios
+    .get(url, {
+      headers: header,
+    })
+    .then((result) => {
+      if (!result) {
+        return 'err'
+      } else {
+        console.log('re', result.data.records)
+        return result.data.records
+      }
+    })
+    .catch((err) => {
+      console.log('err', err)
+      throw err
+    })
+}
+
 export const deleteAnimalById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   await axios

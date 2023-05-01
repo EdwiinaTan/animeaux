@@ -16,6 +16,7 @@ export const getUsers = async () => {
 }
 
 export const getUserById = async (recordId: string) => {
+  console
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/${recordId}/`
   return await axios
     .get(url, {
@@ -23,9 +24,31 @@ export const getUserById = async (recordId: string) => {
     })
     .then((result) => {
       if (!result) {
-        return 'errur'
+        return 'err'
       } else {
         return result.data.fields
+      }
+    })
+    .catch((err) => {
+      console.log('err', err)
+      throw err
+    })
+}
+
+export const getUserByIdToken = async (token: string) => {
+  //api.airtable.com/v0/dzadzadza/user?filterByFormula=email%3D%22srun.singdavid%40gmail.com%22
+  const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user?filterByFormula=token${encodeURI(
+    `="${token}"`
+  )}`
+  return await axios
+    .get(url, {
+      headers: header,
+    })
+    .then((result) => {
+      if (!result) {
+        return 'err'
+      } else {
+        return result.data.records[0].fields
       }
     })
     .catch((err) => {

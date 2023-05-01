@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
+import { Platform } from 'react-native'
 import { postHostFamily } from 'src/client/HostFamily'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
 import { validationHostFamily } from 'src/components/Form/HostFamily/Utils'
@@ -9,14 +10,13 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRequest } from 'src/types/HostFamily/Type'
 
 export const AddHostFamily = () => {
   const navigation = useNavigation()
   const queryClient = useQueryClient()
   const [selected, setSelected] = useState<string[]>([])
-
   const onClickGoBack = () => {
     return navigation.goBack()
   }
@@ -66,21 +66,21 @@ export const AddHostFamily = () => {
         animalId: [values.animalId],
       }
     }
-
     mutation.mutate(data)
   }
 
   return (
     <Layout>
       <HeaderComponent onClickGoBack={onClickGoBack} title="Ajouter une famille d’accueil" />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <CardStyle>
             <Formik
               validationSchema={validationHostFamily}
               initialValues={initialValues}
-              onSubmit={(values: HostFamilyRequest) => {
+              onSubmit={(values: HostFamilyRequest, { resetForm }) => {
                 addHostFamily(values)
+                resetForm()
               }}
             >
               {(field: FormikValues) => (
@@ -90,7 +90,7 @@ export const AddHostFamily = () => {
           </CardStyle>
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

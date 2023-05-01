@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
+import { Platform } from 'react-native'
 import { Button } from 'react-native-elements'
 import StepIndicator from 'react-native-step-indicator'
 import { postAnimal } from 'src/client/Animal'
@@ -14,7 +15,7 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { theme } from 'src/constant/Theme'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { AddAnimalPhoto } from './Photo'
 import { customStyles } from './Styled'
 
@@ -137,20 +138,15 @@ export const AddAnimal = () => {
         direction="horizontal"
       />
       <Spacing size="8" />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
-          {/* {currentPosition !== 0 && (
-            <TouchableOpacity onPress={() => onPageChange('prev')}>
-              <Body1>Précédent</Body1>
-              <Spacing size="8" />
-            </TouchableOpacity>
-          )} */}
           {currentPosition === 0 && (
             <Formik
               initialValues={initialValuesStepOne}
               validationSchema={validationAnimalProfile}
-              onSubmit={(values) => {
+              onSubmit={(values, { resetForm }) => {
                 onSubmitProfile(values)
+                resetForm()
               }}
             >
               {(field: FormikValues) => <AnimalProfile field={field} />}
@@ -160,8 +156,9 @@ export const AddAnimal = () => {
             <Formik
               initialValues={initialValuesStepTwo}
               validationSchema={validationAnimalSituation}
-              onSubmit={(values) => {
+              onSubmit={(values, { resetForm }) => {
                 onSubmitSituation(values)
+                resetForm()
               }}
             >
               {(field: FormikValues) => <AnimalSituation field={field} />}
@@ -182,7 +179,7 @@ export const AddAnimal = () => {
           )}
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

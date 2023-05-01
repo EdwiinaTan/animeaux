@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Field, Formik } from 'formik'
 import { useState } from 'react'
-import { TextInput } from 'react-native'
+import { Platform, TextInput } from 'react-native'
 import bcrypt from 'react-native-bcrypt'
 import { Button } from 'react-native-elements'
 import { postUser } from 'src/client/User'
@@ -15,7 +15,7 @@ import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body2, Body3 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, ContainerStyle, Keyboard, TextRed } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, KeyboardStyle, TextRed } from 'src/constant/Theme/Styled'
 import { UserRequest } from 'src/types/User/Type'
 import { LoginRouteParams } from '../Router/type'
 import { PasswordContainer } from './Styled'
@@ -77,7 +77,7 @@ export const Register = () => {
   return (
     <Layout>
       <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Création de compte" />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}
@@ -259,7 +259,7 @@ export const Register = () => {
             )}
           </Formik>
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

@@ -2,13 +2,14 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { EmailSvg } from 'assets/svg/email'
 import { PhoneSvg } from 'assets/svg/phone'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, ScrollView } from 'react-native'
 import { theme } from 'src/constant/Theme'
 import { ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalRouteParams } from 'src/containers/Home/Animal/Router/type'
 import { useGetUserById } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
 import { formatPhoneNumber, startsWithVowel, uppercaseWord } from 'src/utils/Functions'
+import { CardAnimal } from '../Card/Animal'
 import { HeaderComponent } from '../Header'
 import { ImageProfile } from '../ImageProfile'
 import { Layout } from '../Layout'
@@ -42,6 +43,20 @@ export const UserInCharge = () => {
     }
   }
 
+  const renderListAnimal = () => {
+    if (userData && userData.animalId && userData.animalId.length !== 0) {
+      return (
+        <>
+          <Spacing size="8" />
+          <Body1 textAlign="center">Animaux en charge ({userData.animalId.length})</Body1>
+          <Spacing size="4" />
+          <CardAnimal listItem={userData.animalId} />
+          <Spacing size="24" />
+        </>
+      )
+    }
+  }
+
   return (
     <Layout>
       {statusUser === FetchStatus.LOADING ? (
@@ -52,8 +67,8 @@ export const UserInCharge = () => {
             title={uppercaseWord(startsWithVowel(userData.firstName))}
             onClickGoBack={onClickGoBack}
           />
-          <ContainerStyle>
-            <>
+          <ScrollView>
+            <ContainerStyle>
               <Spacing size="8" />
               <ContainerImage>
                 <ImageProfile picture={userData.picture} />
@@ -63,14 +78,15 @@ export const UserInCharge = () => {
               </ContainerImage>
               <ContainerDescription>
                 <Description>
-                  <Spacing size="48" />
+                  <Spacing size="40" />
                   {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
                   {renderField(<EmailSvg />, userData.email)}
                 </Description>
                 {/* animaux en charge avec historique */}
               </ContainerDescription>
-            </>
-          </ContainerStyle>
+            </ContainerStyle>
+            {renderListAnimal()}
+          </ScrollView>
         </>
       )}
     </Layout>

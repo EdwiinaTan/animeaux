@@ -20,6 +20,8 @@ export const LineChartComponent: React.FC<ChartProps> = ({ title, data }) => {
         height={220}
         fromZero
         chartConfig={chartConfig}
+        withDots={false}
+        bezier
       />
     </>
   )

@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { AnimalSvg } from 'assets/svg/animal'
 import { Field, Formik } from 'formik'
 import { useContext, useState } from 'react'
-import { TextInput, View } from 'react-native'
+import { Platform, TextInput, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from 'src/components/Form/Animal/Styled'
@@ -11,7 +11,7 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3, Title1 } from 'src/components/Typo'
 import { IconMaterialCommunityIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
-import { CardStyle, Keyboard, TextRed } from 'src/constant/Theme/Styled'
+import { CardStyle, KeyboardStyle, TextRed } from 'src/constant/Theme/Styled'
 import * as Yup from 'yup'
 import { AuthContext } from '../App/AuthContext'
 import { LoginRouteParams } from './Router/type'
@@ -41,7 +41,7 @@ export const Login = () => {
   }
 
   return (
-    <Keyboard behavior="padding" enabled>
+    <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
       <SafeAreaView>
         <View style={{ paddingLeft: 16, paddingRight: 16 }}>
           <CardStyle>
@@ -55,7 +55,7 @@ export const Login = () => {
               initialValues={initialValues}
               validationSchema={validationLogin}
               onSubmit={(values) => {
-                loginUser(values.password)
+                loginUser(values.email, values.password)
               }}
             >
               {({ handleChange, handleBlur, values, handleSubmit, isValid, errors, touched }) => (
@@ -130,6 +130,6 @@ export const Login = () => {
           </CardStyle>
         </View>
       </SafeAreaView>
-    </Keyboard>
+    </KeyboardStyle>
   )
 }

@@ -2,6 +2,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
+import { Platform } from 'react-native'
 import { updateAnimalById } from 'src/client/Animal'
 import { AnimalSituation } from 'src/components/Form/Animal/Situation'
 import { validationAnimalSituation } from 'src/components/Form/Animal/Situation/Utils'
@@ -9,7 +10,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
-import { ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
 import { useGetUserById } from 'src/hooks/User'
 import { AnimalType } from 'src/types/Animal/Type'
@@ -124,7 +125,7 @@ export const UpdateAnimalSituation = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier la situation de ${animalDetails.name}`}
       />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
           <Formik
             initialValues={initialValues}
@@ -142,7 +143,7 @@ export const UpdateAnimalSituation = () => {
           </Formik>
           <Spacing size="24" />
         </ContainerStyle>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

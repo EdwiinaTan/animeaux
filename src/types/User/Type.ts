@@ -8,7 +8,6 @@ export interface UserType {
   phone: string
   picture: Picture[]
   animalId: string[]
-  note: string
   password: string
   token: string
 }
@@ -19,8 +18,8 @@ export interface UserClient {
   id: string
 }
 
-export type UserOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note'>
-export type UserTokenOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'note' | 'token'>
+export type UserOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'token'>
+export type UserTokenOmit = Omit<UserType, 'id' | 'picture' | 'animalId' | 'token'>
 export type UserRequest = UserOmit & {
   confirmPassword: string
 }

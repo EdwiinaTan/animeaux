@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { UserInCharge } from 'src/components/User'
 import { Animal } from '..'
 import { HostFamilyInformation } from '../../HostFamily/Information'
+import { HostFamilyUpdate } from '../../HostFamily/Update'
 import { AnimalInformation } from '../Information'
 import { UpdateAnimalPhoto } from '../Update/Photo'
 import { UpdateAnimalProfile } from '../Update/Profile'
@@ -47,6 +48,11 @@ export const AnimalRouter: React.FC = () => {
       <Tab.Screen
         name="hostFamilyInformation"
         component={HostFamilyInformation}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Tab.Screen
+        name="hostFamilyUpdate"
+        component={HostFamilyUpdate}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

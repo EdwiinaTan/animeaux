@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useState } from 'react'
-import { ScrollView } from 'react-native'
+import { Platform, ScrollView } from 'react-native'
 import { updateHostFamilyById } from 'src/client/HostFamily'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HostFamilyProfile } from 'src/components/Form/HostFamily'
@@ -13,7 +13,7 @@ import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
-import { CardStyle, ContainerStyle, Keyboard } from 'src/constant/Theme/Styled'
+import { CardStyle, ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
 import { HostFamilyRouteParams } from 'src/containers/Home/HostFamily/Router/type'
 import { HostFamilyRequest, HostFamilyType } from 'src/types/HostFamily/Type'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -61,6 +61,8 @@ export const HostFamilyUpdate = () => {
             : oldData
       )
       queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
+      queryClient.invalidateQueries({ queryKey: ['hostFamily', hostFamilyDetails.id] })
+      queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
         subTitle: `FA édité : ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`,
@@ -124,7 +126,7 @@ export const HostFamilyUpdate = () => {
         onClickGoBack={onClickGoBack}
         title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
-      <Keyboard behavior="padding" enabled>
+      <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ScrollView>
           <ContainerStyle>
             <CardStyle>
@@ -149,7 +151,7 @@ export const HostFamilyUpdate = () => {
           </ContainerStyle>
           {renderListAnimal()}
         </ScrollView>
-      </Keyboard>
+      </KeyboardStyle>
     </Layout>
   )
 }

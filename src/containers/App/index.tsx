@@ -8,8 +8,7 @@ import { Router } from './Router'
 import { RouterAnimal } from './Router/animal'
 
 export const AppContainer = () => {
-  const { isLoading, userId } = useContext(AuthContext)
-  console.log(userId, 'userId')
+  const { isLoading, userToken } = useContext(AuthContext)
 
   if (isLoading) {
     return (
@@ -24,7 +23,7 @@ export const AppContainer = () => {
       <View style={{ zIndex: 1 }}>
         <Toast />
       </View>
-      <NavigationContainer>{userId ? <RouterAnimal /> : <Router />}</NavigationContainer>
+      <NavigationContainer>{userToken ? <RouterAnimal /> : <Router />}</NavigationContainer>
     </>
   )
 }

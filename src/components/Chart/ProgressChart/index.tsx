@@ -53,6 +53,7 @@ export const ProgressChartComponent: React.FC<ChartProps> = ({ title, data }) =>
       />
       <Spacing size="8" />
       <Body2>{renderKeyReason()}</Body2>
+      <Spacing size="16" />
     </>
   )
 }

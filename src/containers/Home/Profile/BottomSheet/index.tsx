@@ -16,13 +16,18 @@ import { ListView } from './Styled'
 import { BottomSheetProps } from './Type'
 
 export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModalRef }) => {
-  const snapPoints = ['20%']
+  const snapPoints = ['26%']
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
-
   const { logoutUser } = useContext(AuthContext)
+
   const handleViewEditProfile = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('userUpdate')
+  }
+
+  const handleViewUsers = (): void => {
+    bottomSheetModalRef.current.close()
+    navigation.navigate('usersScreen')
   }
 
   const renderBackdrop = useCallback(
@@ -43,6 +48,12 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
   }
 
   const listBottomSheet = [
+    {
+      name: 'Voir les autres utilisateurs',
+      icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,
+      press: handleViewUsers,
+      chevron: true,
+    },
     {
       name: 'Éditer mon profil',
       icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,

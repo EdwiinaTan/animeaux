@@ -55,12 +55,15 @@ export const Profile = () => {
                 </ContainerDescription>
               </UserHeader>
             </Container>
-            <Spacing size="8" />
-            <Body1 textAlign="center">
-              Animaux en charge (
-              {(userDataToken && userDataToken.animalId && userDataToken.animalId.length) ?? 0})
-            </Body1>
-            {renderListAnimal()}
+            {userDataToken && userDataToken.animalId && userDataToken.animalId.length > 0 && (
+              <>
+                <Spacing size="8" />
+                <Body1 textAlign="center">
+                  Animaux en charge ({userDataToken.animalId.length})
+                </Body1>
+                {renderListAnimal()}
+              </>
+            )}
           </ScrollView>
         )}
         <BottomSheetProfile bottomSheetModalRef={bottomSheetModalRef} />

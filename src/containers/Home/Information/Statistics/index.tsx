@@ -3,6 +3,7 @@ import { Divider } from 'react-native-elements'
 import { BarChartComponent } from 'src/components/Chart/BarChart'
 import { LineChartComponent } from 'src/components/Chart/LineChart'
 import { PieChartComponent } from 'src/components/Chart/PieChart'
+import { ProgressChartComponent } from 'src/components/Chart/ProgressChart'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Title2 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
@@ -51,7 +52,7 @@ export const Statistics: React.FC<StatisticsProps> = ({
         <Divider width={2} color={theme.colors.greyOutline} />
         <PieChartComponent title="Statut" data={labelDataStatus} noLeft />
         <Divider width={2} color={theme.colors.greyOutline} />
-        <BarChartComponent title="Raison" data={labelDataReason} />
+        <ProgressChartComponent title="Raison" data={labelDataReason} />
       </CardStyle>
       <Spacing size="32" />
       <CardStyle>

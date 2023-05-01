@@ -1,5 +1,4 @@
-import { Field, FormikValues } from 'formik'
-import { useContext } from 'react'
+import { Field } from 'formik'
 import { TextInput, View } from 'react-native'
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
@@ -8,26 +7,17 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { Body2, Body3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, TextRed } from 'src/constant/Theme/Styled'
-import { AuthContext } from 'src/containers/App/AuthContext'
 import { useGetAnimals } from 'src/hooks/Animal'
 import { FetchStatus } from 'src/types/Status'
-import { UserType } from 'src/types/User/Type'
-
-export interface UserUpdateFormProps {
-  field: FormikValues
-  setSelected?: (value: string[]) => void
-  setSelectedNoCharge?: (value: string[]) => void
-  userData: UserType
-}
+import { UserUpdateFormProps } from './Type'
 
 export const UserUpdateForm: React.FC<UserUpdateFormProps> = ({
   field,
   setSelected,
   setSelectedNoCharge,
-  userData,
+  userDataToken,
 }) => {
   const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid } = field
-  const { userId } = useContext(AuthContext)
   const { statusAnimal, animalData } = useGetAnimals()
 
   const animalDataList = () => {
@@ -42,7 +32,7 @@ export const UserUpdateForm: React.FC<UserUpdateFormProps> = ({
             value: fields.name,
           })
         }
-        if (fields.userId && userId === fields.userId[0]) {
+        if (fields.userId && userDataToken.id === fields.userId[0]) {
           animalNotMyChargeArray.push({
             key: fields.id,
             value: fields.name,
@@ -157,7 +147,7 @@ export const UserUpdateForm: React.FC<UserUpdateFormProps> = ({
           )}
         </Field>
       </View>
-      {userData.animalId && userData.animalId.length > 0 && (
+      {userDataToken.animalId && userDataToken.animalId.length > 0 && (
         <>
           <Spacing size="16" />
           <Body2>Enlever un animal à ma charge</Body2>

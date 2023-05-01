@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Formik, FormikValues } from 'formik'
 import { useContext, useState } from 'react'
-import { ActivityIndicator, Platform, View } from 'react-native'
+import { ActivityIndicator, Platform, ScrollView, View } from 'react-native'
 import { updateUserById } from 'src/client/User'
 import { CardAnimal } from 'src/components/Card/Animal'
 import { HeaderComponent } from 'src/components/Header'
@@ -12,12 +12,13 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
-import { ContainerStyle, KeyboardStyle } from 'src/constant/Theme/Styled'
+import { KeyboardStyle } from 'src/constant/Theme/Styled'
 import { AuthContext } from 'src/containers/App/AuthContext'
 import { useGetUserByToken } from 'src/hooks/User'
 import { FetchStatus } from 'src/types/Status'
 import { ProfileRouteParams } from '../Router/type'
 import { UserUpdateForm } from './Form'
+import { Container } from './Styled'
 import { UserRequest } from './Type'
 import { validationUser } from './Utils'
 
@@ -45,8 +46,8 @@ export const UserUpdate = () => {
     mutationFn: updateUserById,
     onSuccess: (data) => {
       navigation.navigate('profileScreen')
-      queryClient.setQueryData(['user', { id: userDataToken.animalId }], data)
-      queryClient.invalidateQueries({ queryKey: ['user'] })
+      queryClient.setQueryData(['user', { id: userDataToken.id }], data)
+      queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })
@@ -92,24 +93,26 @@ export const UserUpdate = () => {
         </View>
       ) : (
         <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
-          <ContainerStyle>
-            <Formik
-              validationSchema={validationUser}
-              initialValues={initialValues}
-              onSubmit={(values) => {
-                userAuthUpdate(values)
-              }}
-            >
-              {(field: FormikValues) => (
-                <UserUpdateForm
-                  field={field}
-                  userData={userDataToken}
-                  setSelected={setSelected}
-                  setSelectedNoCharge={setSelectedNoCharge}
-                />
-              )}
-            </Formik>
-            <Spacing size="24" />
+          <ScrollView>
+            <Container>
+              <Formik
+                validationSchema={validationUser}
+                initialValues={initialValues}
+                onSubmit={(values) => {
+                  userAuthUpdate(values)
+                }}
+              >
+                {(field: FormikValues) => (
+                  <UserUpdateForm
+                    field={field}
+                    userDataToken={userDataToken}
+                    setSelected={setSelected}
+                    setSelectedNoCharge={setSelectedNoCharge}
+                  />
+                )}
+              </Formik>
+              <Spacing size="16" />
+            </Container>
             {userDataToken.animalId && userDataToken.animalId.length !== 0 && (
               <>
                 <Body1 textAlign="center">
@@ -120,7 +123,7 @@ export const UserUpdate = () => {
                 <Spacing size="24" />
               </>
             )}
-          </ContainerStyle>
+          </ScrollView>
         </KeyboardStyle>
       )}
     </Layout>

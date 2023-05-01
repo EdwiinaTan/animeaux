@@ -17,7 +17,6 @@ export const AddHostFamily = () => {
   const navigation = useNavigation()
   const queryClient = useQueryClient()
   const [selected, setSelected] = useState<string[]>([])
-
   const onClickGoBack = () => {
     return navigation.goBack()
   }
@@ -67,7 +66,6 @@ export const AddHostFamily = () => {
         animalId: [values.animalId],
       }
     }
-
     mutation.mutate(data)
   }
 
@@ -80,8 +78,9 @@ export const AddHostFamily = () => {
             <Formik
               validationSchema={validationHostFamily}
               initialValues={initialValues}
-              onSubmit={(values: HostFamilyRequest) => {
+              onSubmit={(values: HostFamilyRequest, { resetForm }) => {
                 addHostFamily(values)
+                resetForm()
               }}
             >
               {(field: FormikValues) => (

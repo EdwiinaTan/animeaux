@@ -287,7 +287,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
               </View>
             </>
           )}
-        <Spacing size="24" />
+        <Spacing size="16" />
       </ContainerForm>
       <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />
     </>

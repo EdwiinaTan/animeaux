@@ -140,18 +140,13 @@ export const AddAnimal = () => {
       <Spacing size="8" />
       <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>
-          {/* {currentPosition !== 0 && (
-            <TouchableOpacity onPress={() => onPageChange('prev')}>
-              <Body1>Précédent</Body1>
-              <Spacing size="8" />
-            </TouchableOpacity>
-          )} */}
           {currentPosition === 0 && (
             <Formik
               initialValues={initialValuesStepOne}
               validationSchema={validationAnimalProfile}
-              onSubmit={(values) => {
+              onSubmit={(values, { resetForm }) => {
                 onSubmitProfile(values)
+                resetForm()
               }}
             >
               {(field: FormikValues) => <AnimalProfile field={field} />}
@@ -161,8 +156,9 @@ export const AddAnimal = () => {
             <Formik
               initialValues={initialValuesStepTwo}
               validationSchema={validationAnimalSituation}
-              onSubmit={(values) => {
+              onSubmit={(values, { resetForm }) => {
                 onSubmitSituation(values)
+                resetForm()
               }}
             >
               {(field: FormikValues) => <AnimalSituation field={field} />}

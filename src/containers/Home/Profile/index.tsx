@@ -6,7 +6,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body1, Body3 } from 'src/components/Typo'
+import { Body1, Body2, Body3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { AuthContext } from 'src/containers/App/AuthContext'
 import { useGetUserByToken } from 'src/hooks/User'
@@ -42,9 +42,9 @@ export const Profile = () => {
               <UserHeader>
                 <ContainerImage>
                   <ImageProfile picture={userDataToken.picture} />
-                  <Body3>
+                  <Body2>
                     {userDataToken.firstName} {userDataToken.lastName}
-                  </Body3>
+                  </Body2>
                   <Body3 color={theme.colors.grey2}>{formatPhoneNumber(userDataToken.phone)}</Body3>
                   <Body3>{userDataToken.email}</Body3>
                 </ContainerImage>

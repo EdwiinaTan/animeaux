@@ -57,7 +57,9 @@ export const Animal = (): React.ReactElement => {
         setFiltered(
           animalData.filter(
             (animalSearch: AnimalClient) =>
-              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
+              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0 ||
+              animalSearch.fields.status.indexOf(uppercaseWord(search)) >= 0 ||
+              animalSearch.fields.race.indexOf(uppercaseWord(search)) >= 0
           )
         )
       } else {
@@ -123,7 +125,7 @@ export const Animal = (): React.ReactElement => {
     <View>
       <Layout>
         <HeaderComponent title="Animal" />
-        <SearchBarComponent search={search} setSearch={setSearch} />
+        <SearchBarComponent search={search} setSearch={setSearch} text={'(nom, statut, race)'} />
         <Spacing size="8" />
         {statusAnimal === FetchStatus.LOADING ? (
           <View>

@@ -46,7 +46,8 @@ export const HostFamily = (): React.ReactElement => {
   const searchHostFamily = (hostFamily: HostFamilyClient) => {
     return (
       hostFamily.fields.firstName.indexOf(uppercaseWord(search)) >= 0 ||
-      hostFamily.fields.lastName.indexOf(uppercaseWord(search)) >= 0
+      hostFamily.fields.lastName.indexOf(uppercaseWord(search)) >= 0 ||
+      hostFamily.fields.city.indexOf(uppercaseWord(search)) >= 0
     )
   }
 
@@ -65,7 +66,7 @@ export const HostFamily = (): React.ReactElement => {
   return (
     <Layout>
       <HeaderComponent title="Famille d’accueil" />
-      <SearchBarComponent search={search} setSearch={setSearch} />
+      <SearchBarComponent search={search} setSearch={setSearch} text="(nom, prénom, ville)" />
       {statusHostFamilies === FetchStatus.LOADING ? (
         <View>
           <SkeletonCard />

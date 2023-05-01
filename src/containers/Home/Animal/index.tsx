@@ -57,7 +57,9 @@ export const Animal = (): React.ReactElement => {
         setFiltered(
           animalData.filter(
             (animalSearch: AnimalClient) =>
-              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0
+              animalSearch.fields.name.indexOf(uppercaseWord(search)) >= 0 ||
+              animalSearch.fields.status.indexOf(uppercaseWord(search)) >= 0 ||
+              animalSearch.fields.race.indexOf(uppercaseWord(search)) >= 0
           )
         )
       } else {
@@ -118,12 +120,11 @@ export const Animal = (): React.ReactElement => {
     return isActive
   }
 
-  // faire icons + text => aucun animal / chien trouvé
   return (
     <View>
       <Layout>
         <HeaderComponent title="Animal" />
-        <SearchBarComponent search={search} setSearch={setSearch} />
+        <SearchBarComponent search={search} setSearch={setSearch} text={'(nom, statut, race)'} />
         <Spacing size="8" />
         {statusAnimal === FetchStatus.LOADING ? (
           <View>
@@ -147,15 +148,15 @@ export const Animal = (): React.ReactElement => {
                 <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
               }
               ListEmptyComponent={
-                search ? (
-                  <View style={{ alignItems: 'center' }}>
-                    <Spacing size="8" />
+                <View style={{ alignItems: 'center' }}>
+                  <Spacing size="8" />
+                  {search ? (
                     <Body1>{`Aucun ${renderSearchNotFound()} trouvé`}</Body1>
-                    <NoAnimalFoundSvg />
-                  </View>
-                ) : (
-                  <Body1 textAlign="center">Aucun {isActive} pour le moment</Body1>
-                )
+                  ) : (
+                    <Body1 textAlign="center">Aucun {isActive} pour le moment</Body1>
+                  )}
+                  <NoAnimalFoundSvg />
+                </View>
               }
             />
           </>

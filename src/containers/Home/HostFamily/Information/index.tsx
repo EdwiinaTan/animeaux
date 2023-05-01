@@ -67,7 +67,10 @@ export const HostFamilyInformation = (): React.ReactElement => {
       return (
         <>
           <Spacing size="8" />
-          <Body1 textAlign="center">Animaux en charge ({hostFamilyData.animalId.length})</Body1>
+          <Body1 textAlign="center">
+            Animaux hébergé{hostFamilyData.animalId.length > 1 ? 's' : ''} (
+            {hostFamilyData.animalId.length})
+          </Body1>
           <Spacing size="4" />
           <CardAnimal listItem={hostFamilyData.animalId} />
           <Spacing size="24" />

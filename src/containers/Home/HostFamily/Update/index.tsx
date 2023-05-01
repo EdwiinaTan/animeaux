@@ -79,25 +79,23 @@ export const HostFamilyUpdate = () => {
 
   const updateHostFamily = async (values: HostFamilyRequest) => {
     let data: HostFamilyRequest
-    if (
-      (selected.length > 0 && selectedNotHosted.length > 0) ||
-      (selected.length > 0 && selectedNotHosted.length === 0)
-    ) {
-      if (values.animalId && values.animalId.length > 0) {
-        selected.push(...values.animalId)
+    if (selected.length > 0 && selectedNotHosted.length > 0) {
+      selected.push(...values.animalId)
+      let newAnimalArray = selected.filter((animal) => !selectedNotHosted.includes(animal))
+      data = { ...values, animalId: newAnimalArray }
+    } else {
+      if (selected.length > 0 && selectedNotHosted.length === 0) {
+        if (values.animalId && values.animalId.length > 0) {
+          selected.push(...values.animalId)
+        }
+        data = { ...values, animalId: selected }
+      } else if (selectedNotHosted.length > 0 && selected.length === 0) {
+        let dataFiltered = values.animalId
+        let filtered = dataFiltered.filter((animal) => !selectedNotHosted.includes(animal))
+        data = { ...values, animalId: filtered }
+      } else {
+        data = { ...values }
       }
-      data = { ...values, animalId: selected }
-    }
-    if (
-      (selectedNotHosted.length > 0 && selected.length > 0) ||
-      (selectedNotHosted.length > 0 && selected.length === 0)
-    ) {
-      let dataFiltered = values.animalId
-      let filtered = dataFiltered.filter((animal) => !selectedNotHosted.includes(animal))
-      data = { ...values, animalId: filtered }
-    }
-    if (selected.length === 0 && selectedNotHosted.length === 0) {
-      data = { ...values }
     }
     mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
@@ -111,7 +109,10 @@ export const HostFamilyUpdate = () => {
       return (
         <>
           <Spacing size="8" />
-          <Body1 textAlign="center">Animaux en charge ({hostFamilyDetails.animalId.length})</Body1>
+          <Body1 textAlign="center">
+            Animaux hébergé{hostFamilyDetails.animalId.length > 1 ? 's' : ''} (
+            {hostFamilyDetails.animalId.length})
+          </Body1>
           <Spacing size="4" />
           <CardAnimal listItem={hostFamilyDetails.animalId} />
           <Spacing size="24" />

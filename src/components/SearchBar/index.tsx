@@ -4,7 +4,7 @@ import { theme } from 'src/constant/Theme'
 import { Container } from './Styled'
 import { SearchBarProps } from './Type'
 
-export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch }) => {
+export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch, text }) => {
   const ref = useRef(null)
   const updateSearch = (text: string): void => {
     setSearch(text)
@@ -15,7 +15,7 @@ export const SearchBarComponent: React.FC<SearchBarProps> = ({ search, setSearch
       <SearchBar
         platform="android"
         onBlur={() => updateSearch}
-        placeholder="Rechercher"
+        placeholder={`Rechercher ${text}`}
         autoCorrect={false}
         ref={ref}
         onChangeText={(text: string) => setSearch(text)}

@@ -65,25 +65,31 @@ export const UserUpdate = () => {
 
   const userAuthUpdate = async (values: UserRequest) => {
     let data: UserRequest
-    if (
-      (selected.length > 0 && selectedNoCharge.length > 0) ||
-      (selected.length > 0 && selectedNoCharge.length === 0)
-    ) {
-      if (values.animalId && values.animalId.length > 0) {
-        selected.push(...values.animalId)
+    if (selected.length > 0 && selectedNoCharge.length > 0) {
+      //add animal selected
+      selected.push(...values.animalId)
+      // filter remove animal by selectedNoCharge
+      let newAnimalArray = selected.filter((animal) => !selectedNoCharge.includes(animal))
+      data = { ...values, animalId: newAnimalArray }
+    } else {
+      if (selected.length > 0 && selectedNoCharge.length === 0) {
+        //values animalId exist
+        if (values.animalId && values.animalId.length > 0) {
+          selected.push(...values.animalId)
+        }
+        // value animalId doesn't exist
+        data = { ...values, animalId: selected }
+      } else if (selectedNoCharge.length > 0 && selected.length === 0) {
+        // create array filter
+        let dataFiltered = values.animalId
+        // remove it by filter selectedNoCharge
+        let filtered = dataFiltered.filter((animal) => !selectedNoCharge.includes(animal))
+        data = { ...values, animalId: filtered }
       }
-      data = { ...values, animalId: selected }
-    }
-    if (
-      (selectedNoCharge.length > 0 && selected.length > 0) ||
-      (selectedNoCharge.length > 0 && selected.length === 0)
-    ) {
-      let dataFiltered = values.animalId
-      let filtered = dataFiltered.filter((animal) => !selectedNoCharge.includes(animal))
-      data = { ...values, animalId: filtered }
-    }
-    if (selected.length === 0 && selectedNoCharge.length === 0) {
-      data = { ...values }
+      // no add & remove animal selected
+      else {
+        data = { ...values }
+      }
     }
     mutation.mutateAsync({ id: userDataToken.id, values: data })
   }

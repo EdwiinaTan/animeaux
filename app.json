@@ -15,13 +15,18 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yutsu77.animeauxexpo"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.yutsu77.animeauxexpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +38,11 @@
           "photosPermission": "L'application souhaite accéder à vos photos pour vous permettre d'ajouter une image"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e401617f-86bd-4cb2-9fee-441cd361531d"
+      }
+    }
   }
 }

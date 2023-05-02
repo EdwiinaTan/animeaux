@@ -3,6 +3,7 @@
     "name": "animeaux-expo",
     "slug": "animeaux-expo",
     "version": "1.0.0",
+    "owner": "flatsy",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -41,7 +42,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "e401617f-86bd-4cb2-9fee-441cd361531d"
+        "projectId": "63a33b82-6d75-4fe8-a222-300072f1f508"
       }
     }
   }

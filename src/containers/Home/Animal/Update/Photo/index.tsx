@@ -1,6 +1,6 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import AWS from 'aws-sdk'
 import { ACCESS_KEY, BUCKET_NAME, BUCKET_REGION, SECRET_ACCESS_KEY } from 'config'
 import * as ImagePicker from 'expo-image-picker'
@@ -29,7 +29,7 @@ export const UpdateAnimalPhoto = () => {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)
   const [imageAws, setImageAws] = useState<any>()
   const [getUuid, setGetUuid] = useState('')
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
 
   // Configurer les informations d'identification AWS
   AWS.config.update({
@@ -62,7 +62,6 @@ export const UpdateAnimalPhoto = () => {
       quality: 1,
     })
 
-    // console.log(result)
     if (!result.canceled) {
       const key = uuidv4()
 
@@ -145,8 +144,18 @@ export const UpdateAnimalPhoto = () => {
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
       navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
-      queryClient.invalidateQueries(['animals'])
+      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
+        oldData
+          ? {
+              ...oldData,
+              pictures: {
+                ...oldData.pictures,
+                data,
+              },
+            }
+          : oldData
+      )
+      queryClient.invalidateQueries({ queryKey: ['animals'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })
@@ -161,42 +170,10 @@ export const UpdateAnimalPhoto = () => {
   })
 
   const updateAnimalPhoto = () => {
-    const newPicture = {
-      filename: uuidv4(),
-      height: 300,
-      id: uuidv4(),
-      size: 1321,
-      thumbnails: {
-        full: {
-          height: 300,
-          url: imageAws,
-          width: 300,
-        },
-        large: {
-          height: 300,
-          url: imageAws,
-          width: 300,
-        },
-        small: {
-          height: 300,
-          url: imageAws,
-          width: 300,
-        },
-      },
-      type: 'image/jpeg',
-      url: imageAws,
-      width: 300,
-    }
-
     let data = {
-      ...animalDetails,
-      pictures: [...animalDetails.pictures, newPicture],
+      pictures: [...animalDetails.pictures, { url: imageAws }],
     }
-
-    console.log('update_phot_animal_data', data)
-    if (imagePush) {
-      mutation.mutateAsync(data)
-    }
+    mutation.mutateAsync({ id: animalDetails.id, values: data })
   }
 
   return (

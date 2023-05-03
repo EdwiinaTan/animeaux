@@ -8,6 +8,11 @@
       "distribution": "internal"
     },
     "preview": {
+      "autoIncrement": true,
+      "env": {
+        "AIRTABLE_APP_ID": "appevNCvjnED9DHiS",
+        "AIRTABLE_API_KEY": "keyy6iHrjOJKxLMAc"
+      }
     },
     "production": {}
   },

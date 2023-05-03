@@ -11,7 +11,11 @@
       "autoIncrement": true,
       "env": {
         "AIRTABLE_APP_ID": "appevNCvjnED9DHiS",
-        "AIRTABLE_API_KEY": "keyy6iHrjOJKxLMAc"
+        "AIRTABLE_API_KEY": "keyy6iHrjOJKxLMAc",
+        "ACCESS_KEY": "AKIAWKEQ3DEVMM457SGP",
+        "SECRET_ACCESS_KEY": "keyy6iHrjOJKxLMAc",
+        "BUCKET_REGION": "keyy6iHrjOJKxLMAc",
+        "BUCKET_NAME": "keyy6iHrjOJKxLMAc"
       }
     },
     "production": {}

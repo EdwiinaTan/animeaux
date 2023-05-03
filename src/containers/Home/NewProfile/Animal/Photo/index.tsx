@@ -64,7 +64,7 @@ export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetIma
       setGetUuid(key)
 
       // console.log('uploadParams', uploadParams)
-      // Envoyer une requête POST pour uploader l'objet
+      // Envoi un POST pour uploader l'objet
       s3.putObject(uploadParams, function (err, data) {
         if (err) {
           console.log('Error uploading file:', JSON.stringify(err))

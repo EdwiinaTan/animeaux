@@ -1,6 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { QueryClient, useMutation } from '@tanstack/react-query'
+import AWS from 'aws-sdk'
+import { ACCESS_KEY, BUCKET_NAME, BUCKET_REGION, SECRET_ACCESS_KEY } from 'config'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
@@ -13,6 +15,7 @@ import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
+import { v4 as uuidv4 } from 'uuid'
 import { AnimalRouteParams } from '../../Router/type'
 
 export const UpdateAnimalPhoto = () => {
@@ -24,6 +27,19 @@ export const UpdateAnimalPhoto = () => {
   const [image, setImage] = useState(null)
   const [imagePush, setImagePush] = useState(null)
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)
+  const [imageAws, setImageAws] = useState<any>()
+  const [getUuid, setGetUuid] = useState('')
+  const queryClient = new QueryClient()
+
+  // Configurer les informations d'identification AWS
+  AWS.config.update({
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+    region: BUCKET_REGION,
+  })
+
+  // Créer l'instance d'AWS bucket S3
+  const s3 = new AWS.S3()
 
   const onClickGoBack = () => {
     return navigation.goBack()
@@ -48,54 +64,30 @@ export const UpdateAnimalPhoto = () => {
 
     // console.log(result)
     if (!result.canceled) {
+      const key = uuidv4()
+
+      const response = await fetch(result.assets[0].uri)
+      const blob = await response.blob()
+
       setImage(result.assets[0].uri)
       setImagePush(result.assets[0])
-    }
-  }
 
-  const queryClient = new QueryClient()
+      const uploadParams = {
+        Bucket: BUCKET_NAME,
+        Key: key,
+        Body: blob,
+        ContentType: 'image/jpeg',
+      }
+      setGetUuid(key)
 
-  const mutation = useMutation({
-    mutationFn: updateAnimalById,
-    onSuccess: (data) => {
-      navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
-        oldData
-          ? {
-              ...oldData,
-              pictures: {
-                ...oldData.pictures,
-                data,
-              },
-            }
-          : oldData
-      )
-      queryClient.invalidateQueries(['animals'])
-      SnackbarToastComponent({
-        title: 'La modification a bien été prise en compte',
+      // Envoi un POST pour uploader l'objet
+      s3.putObject(uploadParams, function (err, data) {
+        if (err) {
+          console.log('Error uploading file:', JSON.stringify(err))
+        } else {
+          console.log('File uploaded successfully:', JSON.stringify(data))
+        }
       })
-    },
-    onError: (err) => {
-      SnackbarToastComponent({
-        type: 'error',
-        title: 'Erreur',
-      })
-      console.log('err', err)
-    },
-  })
-
-  const updateAnimalPhoto = () => {
-    const picture = {
-      filename: 'imagerieee',
-      height: imagePush.height,
-      id: `${animalDetails.id}aaa`,
-      size: imagePush.fileSize,
-      thumbnails: [],
-      type: imagePush.type,
-      url: imagePush.uri,
-    }
-    if (imagePush) {
-      mutation.mutateAsync(picture)
     }
   }
 
@@ -116,6 +108,95 @@ export const UpdateAnimalPhoto = () => {
   const resetPicture = () => {
     setImagePush('')
     setImage('')
+    setImageAws('')
+
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: getUuid,
+    }
+
+    // Supprimer l'objet dans le bucket s3
+    s3.deleteObject(params, function (err, data) {
+      if (err) {
+        console.log('Error deleting object:', err)
+      } else {
+        console.log('Object deleted successfully:', data)
+      }
+    })
+  }
+
+  const getPicture = async () => {
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: getUuid,
+    }
+    // Récupérer l'objet avec le lien url d'aws
+    s3.getSignedUrlPromise('getObject', params)
+      .then((url) => {
+        setImageAws(url)
+        console.log(`L'URL signée pour l'objet est : ${url}`)
+      })
+      .catch((err) => {
+        console.log(`Erreur lors de la génération de l'URL signée pour l'objet: ${err}`)
+      })
+  }
+
+  const mutation = useMutation({
+    mutationFn: updateAnimalById,
+    onSuccess: (data) => {
+      navigation.navigate('animalScreen')
+      queryClient.setQueryData(['animal', { id: animalDetails.id }], data)
+      queryClient.invalidateQueries(['animals'])
+      SnackbarToastComponent({
+        title: 'La modification a bien été prise en compte',
+      })
+    },
+    onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
+      console.log('err', err)
+    },
+  })
+
+  const updateAnimalPhoto = () => {
+    const newPicture = {
+      filename: uuidv4(),
+      height: 300,
+      id: uuidv4(),
+      size: 1321,
+      thumbnails: {
+        full: {
+          height: 300,
+          url: imageAws,
+          width: 300,
+        },
+        large: {
+          height: 300,
+          url: imageAws,
+          width: 300,
+        },
+        small: {
+          height: 300,
+          url: imageAws,
+          width: 300,
+        },
+      },
+      type: 'image/jpeg',
+      url: imageAws,
+      width: 300,
+    }
+
+    let data = {
+      ...animalDetails,
+      pictures: [...animalDetails.pictures, newPicture],
+    }
+
+    console.log('update_phot_animal_data', data)
+    if (imagePush) {
+      mutation.mutateAsync(data)
+    }
   }
 
   return (
@@ -136,7 +217,7 @@ export const UpdateAnimalPhoto = () => {
                   justifyContent: 'space-between',
                 }}
               >
-                {renderPictures()}
+                {animalDetails && animalDetails.pictures && renderPictures()}
               </View>
               <Spacing size="16" />
               {!imagePush ? (
@@ -154,12 +235,23 @@ export const UpdateAnimalPhoto = () => {
                   />
                 </View>
               )}
-              {imagePush && (
+              {imagePush && !imageAws && (
                 <>
                   <Spacing size="16" />
-                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
+                  <Button title="Êtes-vous sûre d'utiliser cette photo ?" onPress={getPicture} />
+                </>
+              )}
+              {imagePush && !imageAws && (
+                <>
                   <Spacing size="8" />
                   <Button title="Supprimer l'image" onPress={resetPicture} />
+                </>
+              )}
+              {imageAws && (
+                <>
+                  <Spacing size="8" />
+                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
+                  <Spacing size="16" />
                 </>
               )}
             </>

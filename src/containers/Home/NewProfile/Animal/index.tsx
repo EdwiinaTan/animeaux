@@ -113,6 +113,7 @@ export const AddAnimal = () => {
         pictures: [{ url: getImage }],
       }
     }
+    console.log('add_Profile_data', data)
     mutation.mutate(data)
   }
 

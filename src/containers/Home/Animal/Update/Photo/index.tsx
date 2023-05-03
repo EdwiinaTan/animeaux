@@ -170,8 +170,15 @@ export const UpdateAnimalPhoto = () => {
   })
 
   const updateAnimalPhoto = () => {
-    let data = {
-      pictures: [...animalDetails.pictures, { url: imageAws }],
+    let data
+    if (animalDetails.pictures && animalDetails.pictures.length > 0) {
+      data = {
+        pictures: [...animalDetails.pictures, { url: imageAws }],
+      }
+    } else {
+      data = {
+        pictures: [{ url: imageAws }],
+      }
     }
     mutation.mutateAsync({ id: animalDetails.id, values: data })
   }

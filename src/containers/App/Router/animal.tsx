@@ -6,8 +6,8 @@ import { HomeRouter } from 'src/containers/Home/Router'
 export const RouterAnimal: React.FC = () => {
   const Stack = createNativeStackNavigator()
 
+  // ANIMAL AUTH ROUTE
   return (
-    // initialRouteName : Private or login
     <>
       <StatusBar barStyle="dark-content" />
       <Stack.Navigator initialRouteName={PRIVATE_BASE}>

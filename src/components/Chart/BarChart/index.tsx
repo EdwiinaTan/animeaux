@@ -7,7 +7,7 @@ import { chartConfig, dataBarChart, labelDate } from '../Utils'
 
 export const BarChartComponent: React.FC<ChartProps> = ({ title, data, suffix }) => {
   const { width } = useWindowDimensions()
-  const newWidth = width - 64
+  const newWidth = width - 64 //because of the padding
 
   return (
     <>

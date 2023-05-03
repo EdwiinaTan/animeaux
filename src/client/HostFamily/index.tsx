@@ -2,6 +2,9 @@ import axios from 'axios'
 import { AIRTABLE_APP_ID } from 'config'
 import { header } from '../Utils'
 
+/**
+ * GET Method
+ */
 export const getHostFamilies = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
   return await axios
@@ -15,6 +18,9 @@ export const getHostFamilies = async () => {
     })
 }
 
+/**
+ * POST Method
+ */
 export const postHostFamily = async (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/`
   return await axios
@@ -30,6 +36,9 @@ export const postHostFamily = async (data) => {
     })
 }
 
+/**
+ * GET by Id Method
+ */
 export const getHostFamilyById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
   return await axios
@@ -43,6 +52,9 @@ export const getHostFamilyById = async (recordId: string) => {
     })
 }
 
+/**
+ * DELETE by Id Method
+ */
 export const deleteHostFamilyById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${recordId}/`
   await axios
@@ -54,6 +66,9 @@ export const deleteHostFamilyById = async (recordId: string) => {
     })
 }
 
+/**
+ * UPDATE Method
+ */
 export const updateHostFamilyById = async (data) => {
   const { id, values } = data
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/hostFamily/${id}/`

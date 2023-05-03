@@ -84,6 +84,8 @@ export const AddAnimal = () => {
       SnackbarToastComponent({
         title: 'L’ajout d’un animal a bien été prise en compte',
       })
+      setGetImage('')
+      setCurrentPosition(0)
     },
     onError: (err) => {
       SnackbarToastComponent({
@@ -97,30 +99,18 @@ export const AddAnimal = () => {
   const validationForm = () => {
     const values: any = Object.assign({}, valueProfile, valueSituation)
     let data
-    // let pictures
-    // if (getImage) {
-    //   pictures = {
-    //     filename: 'imagerieee',
-    //     height: getImage.height,
-    //     id: `lalala`,
-    //     size: getImage.fileSize,
-    //     thumbnails: [],
-    //     type: getImage.type,
-    //     url: getImage.uri,
-    //   }
-    // }
     if (values.hostFamilyId.length === 0) {
       data = {
         ...values,
         userId: [values.userId],
-        //pictures: pictures
+        pictures: [{ url: getImage }],
       }
     } else {
       data = {
         ...values,
         userId: [values.userId],
         hostFamilyId: [values.hostFamilyId],
-        //pictures: pictures
+        pictures: [{ url: getImage }],
       }
     }
     mutation.mutate(data)

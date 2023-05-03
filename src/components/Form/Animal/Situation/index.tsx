@@ -3,7 +3,7 @@ import { CalendarSvg } from 'assets/svg/calendar'
 import { Field } from 'formik'
 import { useEffect, useRef, useState } from 'react'
 import { Modal, TextInput, TouchableOpacity, View } from 'react-native'
-import { Calendar } from 'react-native-calendars'
+import { CalendarList } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
 import { CheckBoxComponent } from 'src/components/Form/Animal/Checkbox'
@@ -244,7 +244,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
                   <Modal visible={modalVisible} transparent={true} animationType="slide">
                     <View style={style.centeredView}>
                       <View style={style.modalView}>
-                        <Calendar
+                        <CalendarList
                           onDayPress={handleDateSelect}
                           hideExtraDays
                           markedDates={{

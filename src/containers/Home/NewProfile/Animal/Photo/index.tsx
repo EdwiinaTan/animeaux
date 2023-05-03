@@ -23,7 +23,7 @@ export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetIma
     region: BUCKET_REGION,
   })
 
-  // Créer une instance du service S3
+  // Créer l'instance d'AWS bucket S3
   const s3 = new AWS.S3()
 
   useEffect(() => {
@@ -48,21 +48,22 @@ export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetIma
 
       const response = await fetch(result.assets[0].uri)
       const blob = await response.blob()
-      console.log('blob', blob)
+      // console.log('blob', blob)
 
       setImage(result.assets[0].uri)
       setImagePush(result.assets[0])
-      setGetImage(result.assets[0])
+      // setGetImage(result.assets[0])
 
       // Configurer les options de l'objet à uploader
       const uploadParams = {
         Bucket: BUCKET_NAME,
         Key: key,
         Body: blob,
+        ContentType: 'image/jpeg',
       }
       setGetUuid(key)
 
-      console.log('uploadParams', uploadParams)
+      // console.log('uploadParams', uploadParams)
       // Envoyer une requête POST pour uploader l'objet
       s3.putObject(uploadParams, function (err, data) {
         if (err) {
@@ -79,26 +80,28 @@ export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetIma
       Bucket: BUCKET_NAME,
       Key: getUuid,
     }
-
-    // Récupérer l'objet
-    s3.getObject(params, function (err, data) {
-      if (err) {
-        console.log('Error getting object:', JSON.stringify(err))
-      } else {
-        console.log('Object retrieved successfully:', JSON.stringify(data))
-      }
-    })
+    // Récupérer l'objet avec le lien url d'aws
+    s3.getSignedUrlPromise('getObject', params)
+      .then((url) => {
+        setGetImage(url)
+        console.log(`L'URL signée pour l'objet est : ${url}`)
+      })
+      .catch((err) => {
+        console.log(`Erreur lors de la génération de l'URL signée pour l'objet: ${err}`)
+      })
   }
 
   const resetPicture = () => {
     setImagePush('')
     setImage('')
+    setGetImage('')
+
     const params = {
       Bucket: BUCKET_NAME,
       Key: getUuid,
     }
 
-    // Supprimer l'objet
+    // Supprimer l'objet dans le bucket s3
     s3.deleteObject(params, function (err, data) {
       if (err) {
         console.log('Error deleting object:', err)
@@ -127,7 +130,7 @@ export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetIma
             <>
               <Spacing size="16" />
               <Spacing size="8" />
-              <Button title="GET IMG FROM AWS" onPress={getPicture} />
+              <Button title="Êtes-vous sûre d'utiliser cette photo ?" onPress={getPicture} />
             </>
           )}
           {imagePush && (

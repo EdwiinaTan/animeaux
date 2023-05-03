@@ -44,7 +44,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
   const listRef = useRef(null)
 
   useEffect(() => {
-    if (renderDefaultOptionHostFamily()) {
+    if (renderDefaultOptionHostFamily && renderDefaultOptionHostFamily()) {
       setOptionHostFamily({
         key: renderDefaultOptionHostFamily().key,
         value: renderDefaultOptionHostFamily().value,
@@ -52,7 +52,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
     } else {
       setOptionHostFamily({ key: '', value: '' })
     }
-    if (renderDefaultOptionUser()) {
+    if (renderDefaultOptionUser && renderDefaultOptionUser()) {
       setOptionUser({
         key: renderDefaultOptionUser().key,
         value: renderDefaultOptionUser().value,
@@ -60,7 +60,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
     } else {
       setOptionUser({ key: '', value: '' })
     }
-    if (renderDefaultOptionPlace()) {
+    if (renderDefaultOptionPlace && renderDefaultOptionPlace()) {
       setOptionPlace({
         key: renderDefaultOptionPlace().key,
         value: renderDefaultOptionPlace().value,

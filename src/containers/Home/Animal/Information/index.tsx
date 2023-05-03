@@ -16,7 +16,7 @@ import { HeaderComponent } from 'src/components/Header'
 import { ImageProfile } from 'src/components/ImageProfile'
 import { Layout } from 'src/components/Layout'
 import { Spacing } from 'src/components/Layout/Spacing'
-import { Body1, Body2, Title2 } from 'src/components/Typo'
+import { Body1, Body2, Title2, Title3 } from 'src/components/Typo'
 import { theme } from 'src/constant/Theme'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { useGetHostFamilyById } from 'src/hooks/HostFamily'
@@ -134,7 +134,7 @@ export const AnimalInformation = (): React.ReactElement => {
               </View>
             </Description>
             <Spacing size="16" />
-            {userData && (
+            {userData ? (
               <TouchableOpacity onPress={onClickUser} activeOpacity={1}>
                 <CardStyle>
                   <TitleCard>
@@ -157,10 +157,17 @@ export const AnimalInformation = (): React.ReactElement => {
                   </InCharge>
                 </CardStyle>
               </TouchableOpacity>
+            ) : (
+              <CardStyle>
+                <TitleCard>
+                  <ClipboardSvg />
+                  <Title3 paddingLeft={4}>Aucun responsable</Title3>
+                </TitleCard>
+              </CardStyle>
             )}
-            {hostFamilyData && (
+            <Spacing size="16" />
+            {hostFamilyData ? (
               <TouchableOpacity onPress={onClickHostFamily} activeOpacity={1}>
-                <Spacing size="16" />
                 <CardStyle>
                   <TitleCard>
                     <SunriseSvg />
@@ -182,6 +189,13 @@ export const AnimalInformation = (): React.ReactElement => {
                   </InCharge>
                 </CardStyle>
               </TouchableOpacity>
+            ) : (
+              <CardStyle>
+                <TitleCard>
+                  <SunriseSvg />
+                  <Title3 paddingLeft={4}>Aucune famille d'accueil</Title3>
+                </TitleCard>
+              </CardStyle>
             )}
             <Spacing size="16" />
             <CardStyle>

@@ -16,8 +16,10 @@ export const validationAddUser = Yup.object().shape({
       ({}) => `Le mot de passe doit contenir au moins 1 chiffre et 1 caractère spécial`
     )
     .required('Le mot de passe est requis'),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref('password'), null],
-    'La confirmation de mot de passe doit correspondre avec le mot de passe ci-dessus'
-  ),
+  confirmPassword: Yup.string()
+    .required('La confirmation du mot de passe est requise')
+    .oneOf(
+      [Yup.ref('password'), null],
+      'La confirmation de mot de passe doit correspondre avec le mot de passe ci-dessus'
+    ),
 })

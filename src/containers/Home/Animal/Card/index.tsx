@@ -22,6 +22,25 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
     navigation.navigate('animalInformation', { animalDetails: animal })
   }
 
+  const renderUser = () => {
+    if (statusUser === FetchStatus.LOADING) {
+      return (
+        <>
+          <Skeleton animation="pulse" width={200} height={12} />
+          <Spacing size="4" />
+        </>
+      )
+    } else if (!userData) {
+      return <Body1>Responsable : aucun</Body1>
+    } else {
+      return (
+        <Body1>
+          Responsable : {userData?.firstName} {userData?.lastName}
+        </Body1>
+      )
+    }
+  }
+
   return (
     <TouchableOpacity onPress={onClick} activeOpacity={1}>
       <Card id={`cardAnimal_${animal.id}`}>
@@ -35,17 +54,8 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
               {renderAnimalGender(animal)}
             </AnimalGender>
             <Body1>{animalAge(animal.birthday)}</Body1>
-            {statusUser === FetchStatus.LOADING ? (
-              <>
-                <Skeleton animation="pulse" width={200} height={12} />
-                <Spacing size="4" />
-              </>
-            ) : (
-              <Body1>
-                Responsable : {userData?.firstName} {userData?.lastName}
-              </Body1>
-            )}
             <Body1>Race : {animal.race}</Body1>
+            {renderUser()}
             <ContainerChip>
               <ChipComponent value={animal.status} />
             </ContainerChip>

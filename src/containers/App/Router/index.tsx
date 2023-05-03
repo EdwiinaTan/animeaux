@@ -6,8 +6,8 @@ import { LoginRouter } from 'src/containers/Login/Router'
 export const Router: React.FC = () => {
   const Stack = createNativeStackNavigator()
 
+  // LOGIN ROUTE
   return (
-    // initialRouteName : Private or login
     <>
       <StatusBar barStyle="dark-content" />
       <Stack.Navigator initialRouteName={PRIVATE_BASE}>

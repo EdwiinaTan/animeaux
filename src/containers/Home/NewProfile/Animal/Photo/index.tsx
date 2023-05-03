@@ -5,13 +5,9 @@ import { Button, Image as ImageElement } from 'react-native-elements'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { Body1 } from 'src/components/Typo'
 import { CardStyle } from 'src/constant/Theme/Styled'
+import { AnimalPhotoProps } from './Type'
 
-interface test {
-  getImage: any
-  setGetImage: any
-}
-
-export const AddAnimalPhoto: React.FC<test> = ({ getImage, setGetImage }) => {
+export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetImage }) => {
   const [image, setImage] = useState(null)
   const [imagePush, setImagePush] = useState(null)
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)

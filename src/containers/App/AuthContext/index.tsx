@@ -44,7 +44,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const loginUser = async (email: string, password: string) => {
     usersData.forEach(async (user) => {
+      // check user mail first
       if (user.fields.email === email) {
+        //check password crypted after
         const match = await new Promise((resolve, reject) => {
           bcrypt.compare(
             password,
@@ -59,13 +61,13 @@ export const AuthProvider: React.FC = ({ children }) => {
               }
             },
             (progress) => {
-              //faire le loading
               console.log('progress', progress)
             }
           )
         })
         if (match) {
           setUserId(user.id)
+          //create token by uuidv4 with salt hashed
           const token = bcrypt.hashSync(uuidv4(), saltRounds)
           setUserToken(token)
           const dataUpdate = {

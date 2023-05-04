@@ -11,7 +11,7 @@ export interface HostFamilyType {
   address?: string
   picture: Picture[]
   createdAt: string
-  animalId: string[]
+  animalId: string
   criteria: string
   description: string
   onBreak: string

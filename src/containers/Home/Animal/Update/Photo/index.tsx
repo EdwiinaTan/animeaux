@@ -193,16 +193,18 @@ export const UpdateAnimalPhoto = () => {
         <CardStyle>
           {hasGalleryPermission ? (
             <>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-between',
-                }}
-              >
-                {animalDetails && animalDetails.pictures && renderPictures()}
-              </View>
+              {animalDetails && animalDetails.pictures && (
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  {renderPictures()}
+                </View>
+              )}
               <Spacing size="16" />
               {!imagePush ? (
                 <Button title="Ajouter une photo" onPress={pickImage} />

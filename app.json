@@ -17,8 +17,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yutsu77.animeauxexpo",
-      "buildNumber": "2"
+      "bundleIdentifier": "com.yutsu77.animeauxexpo"
     },
     "android": {
       "adaptiveIcon": {

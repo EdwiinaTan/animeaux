@@ -14,16 +14,17 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
-import { UserType } from 'src/types/User/Type'
+import { AnimalType } from 'src/types/Animal/Type'
+import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { v4 as uuidv4 } from 'uuid'
-import { ProfileRouteParams } from '../../Router/type'
+import { HostFamilyRouteParams } from '../../Router/type'
 
-export const UpdateProfilePhoto = () => {
-  const route = useRoute<RouteProp<ProfileRouteParams>>()
+export const HostFamilyUpdatePhoto = () => {
+  const route = useRoute<RouteProp<HostFamilyRouteParams>>()
   const {
-    params: { user },
-  } = route as { params: { user: UserType } }
-  const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
+    params: { hostFamilyDetails },
+  } = route as { params: { hostFamilyDetails: HostFamilyType } }
+  const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const [image, setImage] = useState(null)
   const [imagePush, setImagePush] = useState(null)
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)
@@ -110,16 +111,6 @@ export const UpdateProfilePhoto = () => {
     })
   }
 
-  const resetPictureByPicture = () => {
-    setImagePush('')
-    setImage('')
-    setImageAws('')
-    const data = {
-      picture: [{ url: '' }],
-    }
-    mutation.mutateAsync({ id: user.id, values: data })
-  }
-
   const getPicture = async () => {
     const params = {
       Bucket: BUCKET_NAME,
@@ -139,20 +130,21 @@ export const UpdateProfilePhoto = () => {
   const mutation = useMutation({
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
-      queryClient.setQueryData(['user', { id: user.id }], (oldData: UserType) =>
-        oldData
-          ? {
-              ...oldData,
-              picture: {
-                ...oldData.picture,
-                data,
-              },
-            }
-          : oldData
+      navigation.navigate('hostFamilyScreen')
+      queryClient.setQueryData(
+        ['hostFamily', { id: hostFamilyDetails.id }],
+        (oldData: AnimalType) =>
+          oldData
+            ? {
+                ...oldData,
+                pictures: {
+                  ...oldData.pictures,
+                  data,
+                },
+              }
+            : oldData
       )
-      queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
-      queryClient.invalidateQueries({ queryKey: ['user', user.id] })
-      queryClient.invalidateQueries({ queryKey: ['users'] })
+      queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })
@@ -166,44 +158,62 @@ export const UpdateProfilePhoto = () => {
     },
   })
 
+  const resetPictureByPicture = () => {
+    setImagePush('')
+    setImage('')
+    setImageAws('')
+
+    const data = {
+      picture: [{ url: '' }],
+    }
+    mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
+  }
+
   const updateAnimalPhoto = () => {
     const data = {
       picture: [{ url: imageAws }],
     }
-    mutation.mutateAsync({ id: user.id, values: data })
-    navigation.navigate('profileScreen')
+
+    mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
 
   return (
     <Layout>
-      <HeaderComponent onClickGoBack={onClickGoBack} title="Modifier ma photo" />
+      <HeaderComponent
+        onClickGoBack={onClickGoBack}
+        title={`Modifier la photo de ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`}
+      />
       <ContainerStyle>
         <CardStyle>
           {hasGalleryPermission ? (
             <>
-              {user && user.picture && user.picture[0] && (
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <View key={`pictureEdit_${user.id}`} style={{ paddingTop: 8 }}>
-                    <ImageElement
-                      source={{ uri: user.picture[0].url }}
-                      style={{ width: 150, height: 150, borderRadius: 8 }}
-                      PlaceholderContent={<ActivityIndicator />}
-                    />
+              {hostFamilyDetails &&
+                hostFamilyDetails.picture &&
+                hostFamilyDetails.picture.length > 0 && (
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <View key={`pictureEdit_${hostFamilyDetails.id}`} style={{ paddingTop: 8 }}>
+                      <ImageElement
+                        source={{ uri: hostFamilyDetails.picture[0].url }}
+                        style={{ width: 150, height: 150, borderRadius: 8 }}
+                        PlaceholderContent={<ActivityIndicator />}
+                      />
+                    </View>
                   </View>
-                </View>
-              )}
-              {/* <Spacing size="16" /> */}
-              {!imagePush && !user.picture && (
+                )}
+              {!imagePush && !hostFamilyDetails.picture && (
                 <Button title="Ajouter une photo" onPress={pickImage} />
               )}
-              {user.picture && (
-                <Button title="Supprimer la photo" onPress={resetPictureByPicture} />
+              {hostFamilyDetails.picture && (
+                <>
+                  <Spacing size="16" />
+                  <Button title="Supprimer la photo" onPress={resetPictureByPicture} />
+                </>
               )}
               {image && (
                 <View style={{ alignItems: 'center' }}>

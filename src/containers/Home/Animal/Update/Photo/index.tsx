@@ -193,7 +193,7 @@ export const UpdateAnimalPhoto = () => {
         <CardStyle>
           {hasGalleryPermission ? (
             <>
-              {animalDetails && animalDetails.pictures && (
+              {animalDetails && animalDetails.pictures && animalDetails.pictures.length > 0 && (
                 <View
                   style={{
                     display: 'flex',

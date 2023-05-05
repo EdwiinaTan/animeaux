@@ -7,6 +7,7 @@ import { UpdateAnimalProfile } from '../../Animal/Update/Profile'
 import { UpdateAnimalSituation } from '../../Animal/Update/Situation'
 import { HostFamilyInformation } from '../../HostFamily/Information'
 import { UserUpdate } from '../Update'
+import { UpdateProfilePhoto } from '../Update/Photo'
 import { UsersScreen } from '../Users'
 import { ProfileRouteParams } from './type'
 
@@ -64,6 +65,11 @@ export const ProfileRouter: React.FC = () => {
       <Tab.Screen
         name="userInfo"
         component={UserInCharge}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Tab.Screen
+        name="updateProfilePhoto"
+        component={UpdateProfilePhoto}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

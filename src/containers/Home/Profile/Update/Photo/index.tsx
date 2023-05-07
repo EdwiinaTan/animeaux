@@ -176,7 +176,7 @@ export const UpdateProfilePhoto = () => {
 
   return (
     <Layout>
-      <HeaderComponent onClickGoBack={onClickGoBack} title="Modifier ma photo" />
+      <HeaderComponent onClickGoBack={onClickGoBack} title="Éditer ma photo" />
       <ContainerStyle>
         <CardStyle>
           {hasGalleryPermission ? (

@@ -161,7 +161,7 @@ export const AnimalInformation = (): React.ReactElement => {
               <CardStyle>
                 <TitleCard>
                   <ClipboardSvg />
-                  <Title3 paddingLeft={4}>Aucun responsable</Title3>
+                  <Title3 paddingLeft={4}>Aucun bénévole</Title3>
                 </TitleCard>
               </CardStyle>
             )}

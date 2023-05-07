@@ -95,7 +95,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       chevron: true,
     },
     {
-      name: 'Modifier la photo',
+      name: 'Éditer la photo',
       icon: <IconFoundation name="photo" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewEditPhoto,
       chevron: true,

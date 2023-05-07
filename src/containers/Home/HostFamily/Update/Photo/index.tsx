@@ -181,7 +181,7 @@ export const HostFamilyUpdatePhoto = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier la photo de ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`}
+        title={`Éditer la photo de ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`}
       />
       <ContainerStyle>
         <CardStyle>

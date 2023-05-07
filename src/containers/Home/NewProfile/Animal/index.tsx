@@ -21,7 +21,7 @@ import { customStyles } from './Styled'
 
 export const AddAnimal = () => {
   const navigation = useNavigation()
-  const labels = ['Profil', 'Situation', 'Photos']
+  const labels = ['Profil', 'Situation', 'Photo']
   const [currentPosition, setCurrentPosition] = useState(0)
   const [valueProfile, setValueProfile] = useState()
   const [valueSituation, setValueSituation] = useState()

@@ -31,11 +31,11 @@ const CardContainer: React.FC<CardComponentProps> = ({ animal }) => {
         </>
       )
     } else if (!userData) {
-      return <Body1>Responsable : aucun</Body1>
+      return <Body1>Bénévole : aucun</Body1>
     } else {
       return (
         <Body1>
-          Responsable : {userData?.firstName} {userData?.lastName}
+          Bénévole : {userData?.firstName} {userData?.lastName}
         </Body1>
       )
     }

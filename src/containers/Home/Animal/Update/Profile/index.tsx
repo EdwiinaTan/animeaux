@@ -82,7 +82,7 @@ export const UpdateAnimalProfile = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier le ${startsWithVowel(animalDetails.name)}`}
+        title={`Éditer le ${startsWithVowel(animalDetails.name)}`}
       />
       <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>

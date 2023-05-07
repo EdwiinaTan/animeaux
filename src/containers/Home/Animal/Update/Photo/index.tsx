@@ -187,7 +187,7 @@ export const UpdateAnimalPhoto = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier les photos de ${animalDetails.name}`}
+        title={`Éditer les photos de ${animalDetails.name}`}
       />
       <ContainerStyle>
         <CardStyle>
@@ -247,6 +247,7 @@ export const UpdateAnimalPhoto = () => {
             </Body1>
           )}
         </CardStyle>
+        <Spacing size="16" />
       </ContainerStyle>
     </Layout>
   )

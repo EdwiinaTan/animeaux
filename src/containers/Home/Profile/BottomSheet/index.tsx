@@ -60,7 +60,7 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
 
   const listBottomSheet = [
     {
-      name: 'Voir les autres utilisateurs',
+      name: 'Voir la liste des bénévoles',
       icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewUsers,
       chevron: true,
@@ -72,7 +72,7 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
       chevron: true,
     },
     {
-      name: 'Modifier ma photo',
+      name: 'Éditer ma photo',
       icon: <IconFoundation name="photo" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewEditPhoto,
       chevron: true,

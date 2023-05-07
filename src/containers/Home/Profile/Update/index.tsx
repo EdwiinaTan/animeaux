@@ -96,7 +96,7 @@ export const UserUpdate = () => {
 
   return (
     <Layout>
-      <HeaderComponent onClickGoBack={onClickGoBack} title="Modifier mon compte" />
+      <HeaderComponent onClickGoBack={onClickGoBack} title="Éditer mon profil" />
       {statusTokenUser === FetchStatus.LOADING ? (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator size="large" color={theme.colors.blue} />

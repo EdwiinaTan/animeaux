@@ -126,14 +126,14 @@ export const AddAnimalPhoto: React.FC<AnimalPhotoProps> = ({ getImage, setGetIma
               />
             </View>
           )}
-          {imagePush && (
+          {imagePush && !getImage && (
             <>
               <Spacing size="16" />
               <Spacing size="8" />
               <Button title="Êtes-vous sûre d'utiliser cette photo ?" onPress={getPicture} />
             </>
           )}
-          {imagePush && (
+          {imagePush && !getImage && (
             <>
               <Spacing size="16" />
               <Spacing size="8" />

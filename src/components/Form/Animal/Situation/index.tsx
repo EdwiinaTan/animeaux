@@ -166,7 +166,7 @@ export const AnimalSituation: React.FC<AddAnimalProps> = ({
         </View>
         <Spacing size="16" />
         <Body2>
-          Responsable<TextRed>*</TextRed>
+          Bénévole<TextRed>*</TextRed>
         </Body2>
         <Spacing size="4" />
         <View>

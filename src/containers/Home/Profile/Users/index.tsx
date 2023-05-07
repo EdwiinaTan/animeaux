@@ -44,7 +44,7 @@ export const UsersScreen: React.FC = () => {
 
   return (
     <Layout>
-      <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Liste des utilisateurs" />
+      <HeaderComponent onClickGoBack={() => navigation.goBack()} title="Liste des bénévoles" />
       <FlatList
         style={{ height: '100%' }}
         ref={listRef}

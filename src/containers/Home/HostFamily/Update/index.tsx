@@ -125,7 +125,7 @@ export const HostFamilyUpdate = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier le ${startsWithVowel(hostFamilyDetails.firstName)}`}
+        title={`Éditer le ${startsWithVowel(hostFamilyDetails.firstName)}`}
       />
       <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ScrollView>

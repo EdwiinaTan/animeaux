@@ -3,11 +3,15 @@ import {
   BottomSheetBackdropProps,
   BottomSheetModal,
 } from '@gorhom/bottom-sheet'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useContext } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { ListItem } from 'react-native-elements'
+import { updateUserById } from 'src/client/User'
+import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Title3 } from 'src/components/Typo'
 import { IconAntDesign, IconFoundation, IconMaterialIcons } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
@@ -21,8 +25,9 @@ import { BottomSheetProps } from './Type'
 export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModalRef }) => {
   const snapPoints = ['30%']
   const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
-  const { logoutUser, userToken } = useContext(AuthContext)
+  const { logoutUser, userToken, setUserToken } = useContext(AuthContext)
   const { statusTokenUser, userDataToken } = useGetUserByToken(userToken)
+  const queryClient = useQueryClient()
 
   const handleViewEditProfile = (): void => {
     bottomSheetModalRef.current.close()
@@ -54,8 +59,41 @@ export const BottomSheetProfile: React.FC<BottomSheetProps> = ({ bottomSheetModa
     []
   )
 
+  const mutation = useMutation({
+    mutationFn: updateUserById,
+    onSuccess: (data) => {
+      queryClient.setQueryData(['user', { id: userDataToken.id }], data)
+      queryClient.invalidateQueries({ queryKey: ['user', userDataToken.id] })
+      // queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
+      // queryClient.invalidateQueries({ queryKey: ['getUserToken', userDataToken.id] })
+      // queryClient.invalidateQueries({ queryKey: ['users'] })
+      AsyncStorage.removeItem('userToken')
+      SnackbarToastComponent({ type: 'info', title: 'À bientôt ! 👋' })
+      // setUserToken('')
+    },
+    onError: (err) => {
+      SnackbarToastComponent({
+        type: 'error',
+        title: 'Erreur',
+      })
+      console.log('err', err)
+    },
+  })
+
   const logout = () => {
+    bottomSheetModalRef.current.close()
     logoutUser()
+    navigation.navigate('loginHomeScreen')
+    const data = {
+      firstName: userDataToken.firstName,
+      lastName: userDataToken.lastName,
+      email: userDataToken.email,
+      phone: userDataToken.phone,
+      picture: userDataToken.picture,
+      animalId: userDataToken.animalId,
+      token: '',
+    }
+    mutation.mutateAsync({ id: userDataToken.id, values: data })
   }
 
   const listBottomSheet = [

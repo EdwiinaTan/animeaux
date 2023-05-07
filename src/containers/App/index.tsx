@@ -1,14 +1,17 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { NavigationContainer } from '@react-navigation/native'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import Toast from 'react-native-toast-message'
 import { theme } from 'src/constant/Theme'
 import { AuthContext } from 'src/containers/App/AuthContext'
-import { Router } from './Router'
-import { RouterAnimal } from './Router/animal'
+import { RouterHome } from './Router/Home'
+import { RouterLogin } from './Router/Login'
 
 export const AppContainer = () => {
-  const { isLoading, userToken } = useContext(AuthContext)
+  const { isLoading } = useContext(AuthContext)
+  const [token, setToken] = useState<string | undefined>()
+  AsyncStorage.getItem('userToken').then((value) => setToken(value))
 
   if (isLoading) {
     return (
@@ -23,7 +26,7 @@ export const AppContainer = () => {
       <View style={{ zIndex: 1 }}>
         <Toast />
       </View>
-      <NavigationContainer>{userToken ? <RouterAnimal /> : <Router />}</NavigationContainer>
+      <NavigationContainer>{token ? <RouterHome /> : <RouterLogin />}</NavigationContainer>
     </>
   )
 }

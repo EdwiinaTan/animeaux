@@ -29,4 +29,5 @@ export type ProfileRouteParams = {
   }
   userUpdate: undefined
   usersScreen: undefined
+  loginHomeScreen: undefined
 }

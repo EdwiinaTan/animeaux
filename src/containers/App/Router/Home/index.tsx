@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native'
 import { PRIVATE_BASE } from 'src/constant/Routes'
 import { HomeRouter } from 'src/containers/Home/Router'
 
-export const RouterAnimal: React.FC = () => {
+export const RouterHome: React.FC = () => {
   const Stack = createNativeStackNavigator()
 
   // ANIMAL AUTH ROUTE

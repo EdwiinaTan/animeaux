@@ -29,7 +29,7 @@ export const AddHostFamily = () => {
     postalCode: '',
     city: '',
     address: '',
-    animalId: '',
+    animalId: [],
     criteria: '',
     description: '',
     onBreak: '',

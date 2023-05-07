@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { UserInCharge } from 'src/components/User'
+import { LoginRouter } from 'src/containers/Login/Router'
 import { Profile } from '..'
 import { AnimalInformation } from '../../Animal/Information'
 import { UpdateAnimalPhoto } from '../../Animal/Update/Photo'
@@ -70,6 +71,11 @@ export const ProfileRouter: React.FC = () => {
       <Tab.Screen
         name="updateProfilePhoto"
         component={UpdateProfilePhoto}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Tab.Screen
+        name="loginHomeScreen"
+        component={LoginRouter}
         options={{ animation: 'slide_from_right' }}
       />
     </Tab.Navigator>

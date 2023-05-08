@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useMemo, useState } from 'react'
 import bcrypt from 'react-native-bcrypt'
 import 'react-native-get-random-values' // allow crypto.getRandomValues() to support
 import { updateUserById } from 'src/client/User'
@@ -12,6 +12,7 @@ import { AuthProps } from './Type'
 const initialContext: AuthProps = {
   userId: '',
   userToken: '',
+  setUserToken: () => null,
   isLoading: false,
   loginUser: () => null,
   logoutUser: () => null,
@@ -22,7 +23,7 @@ export const AuthContext = createContext(initialContext)
 export const AuthProvider: React.FC = ({ children }) => {
   const [userId, setUserId] = useState('')
   const [userToken, setUserToken] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const { usersData } = useGetUsers()
   const queryClient = useQueryClient()
   const saltRounds = 10
@@ -31,7 +32,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     mutationFn: updateUserById,
     onSuccess: (data) => {
       queryClient.setQueryData(['user', { id: userId }], data)
-      queryClient.invalidateQueries({ queryKey: ['user'] })
+      queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
+      queryClient.invalidateQueries({ queryKey: ['users'] })
+      setIsLoading(false)
     },
     onError: (err) => {
       SnackbarToastComponent({
@@ -43,80 +46,86 @@ export const AuthProvider: React.FC = ({ children }) => {
   })
 
   const loginUser = async (email: string, password: string) => {
-    usersData.forEach(async (user) => {
-      // check user mail first
-      if (user.fields.email === email) {
-        //check password crypted after
-        const match = await new Promise((resolve, reject) => {
-          bcrypt.compare(
-            password,
-            user.fields.password,
-            (err, result) => {
-              if (err) {
-                console.log('err', err)
-                reject(err)
-              } else {
-                console.log('result', result)
-                resolve(result)
+    const userAuth = usersData.filter((user) => user.fields.email === email)
+    console.log('userAuth', userAuth)
+    if (userAuth.length > 0) {
+      setIsLoading(true)
+      const match = await new Promise((resolve, reject) => {
+        bcrypt.compare(
+          password,
+          userAuth[0].fields.password,
+          (err, result) => {
+            if (err) {
+              console.log('err', err)
+              reject(err)
+            } else {
+              console.log('result', result)
+              resolve(result)
+              if (result === true) {
+                setIsLoading(false)
               }
-            },
-            (progress) => {
-              console.log('progress', progress)
             }
-          )
-        })
-        if (match) {
-          setUserId(user.id)
-          //create token by uuidv4 with salt hashed
-          const token = bcrypt.hashSync(uuidv4(), saltRounds)
-          setUserToken(token)
-          const dataUpdate = {
-            token: token,
+          },
+          (progress) => {
+            console.log('progress', progress)
           }
-          mutation.mutateAsync({ id: user.id, values: dataUpdate })
-          SnackbarToastComponent({ title: 'Connexion réussie' })
-          await AsyncStorage.setItem('userToken', token)
-        } else {
+        )
+      })
+      if (match) {
+        //create token by uuidv4 with salt hashed
+        const token = bcrypt.hashSync(uuidv4(), saltRounds)
+        AsyncStorage.setItem('userToken', token)
+        setUserId(userAuth[0].id)
+        setUserToken(token)
+        const dataUpdate = {
+          token: token,
         }
+        mutation.mutateAsync({ id: userAuth[0].id, values: dataUpdate })
+        SnackbarToastComponent({ title: 'Connexion réussie' })
+      } else {
+        setIsLoading(false)
+        SnackbarToastComponent({ type: 'error', title: 'La connexion a échoué' })
       }
-    })
-    setIsLoading(false)
+    } else {
+      setIsLoading(false)
+      SnackbarToastComponent({ type: 'error', title: 'La connexion a échoué' })
+    }
   }
 
   const logoutUser = async () => {
     setUserId(null)
-    setUserToken(null)
     setIsLoading(false)
-    const dataUpdate = {
-      token: null,
-    }
-    mutation.mutateAsync({ id: userId, values: dataUpdate })
-    await AsyncStorage.removeItem('userToken').then(() => {
-      SnackbarToastComponent({ type: 'info', title: 'À bientôt ! 👋' })
-    })
+    // const dataUpdate = {
+    //   token: '',
+    // }
+    // mutation.mutateAsync({ id: userId, values: dataUpdate })
+    // await AsyncStorage.removeItem('userToken').then(() => {
+    //   SnackbarToastComponent({ type: 'info', title: 'À bientôt ! 👋' })
+    // })
   }
 
-  const isLoggedIn = async () => {
-    try {
-      setIsLoading(true)
-      let userTokenId = await AsyncStorage.getItem('userToken')
-      if (userTokenId) {
-        setUserToken(userTokenId)
-      }
-      setIsLoading(false)
-    } catch (e) {
-      console.log('e', e)
-    }
-  }
+  // const isLoggedIn = async () => {
+  //   try {
+  //     setIsLoading(true)
+  //     let userTokenId = await AsyncStorage.getItem('userToken')
+  //     if (userTokenId) {
+  //       setUserToken(userTokenId)
+  //     }
+  //     setIsLoading(false)
+  //   } catch (e) {
+  //     console.log('e', e)
+  //   }
+  // }
 
-  useEffect(() => {
-    isLoggedIn()
-  }, [])
+  // useEffect(() => {
+  //   isLoggedIn()
+  // }, [])
 
   const value = useMemo(() => {
     return {
       userId,
       userToken,
+      setUserToken,
       isLoading,
       loginUser,
       logoutUser,

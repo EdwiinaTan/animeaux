@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native'
 import { PRIVATE_BASE } from 'src/constant/Routes'
 import { LoginRouter } from 'src/containers/Login/Router'
 
-export const Router: React.FC = () => {
+export const RouterLogin: React.FC = () => {
   const Stack = createNativeStackNavigator()
 
   // LOGIN ROUTE

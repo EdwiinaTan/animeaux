@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 
 export const validationAnimalSituation = Yup.object().shape({
   status: Yup.string().required('Le statut est requis'),
-  userId: Yup.string().required('Le responsable est obligatoire'),
+  userId: Yup.string().required('Le bénévole est obligatoire'),
   placeAssigned: Yup.string().required('Le lieu de prise en charge est obligaroire'),
   reason: Yup.string().required('La raison est requise'),
   dogAgreement: Yup.string().required('L’entente avec un chien est requis'),

@@ -123,7 +123,7 @@ export const UpdateAnimalSituation = () => {
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Modifier la situation de ${animalDetails.name}`}
+        title={`Éditer la situation de ${animalDetails.name}`}
       />
       <KeyboardStyle behavior={Platform.select({ android: undefined, ios: 'padding' })} enabled>
         <ContainerStyle>

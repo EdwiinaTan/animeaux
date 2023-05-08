@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { AIRTABLE_APP_ID } from 'config'
 import { header } from '../Utils'
+// import dotenv from 'dotenv'
+// dotenv.config()
+// const name = process.env.AIRTABLE_APP_ID
 
 /**
  * GET Method

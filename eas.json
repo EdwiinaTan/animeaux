@@ -8,11 +8,17 @@
       "distribution": "internal"
     },
     "preview": {
-      "autoIncrement": true,
+      "autoIncrement": false,
+      "extends": "production",
       "env": {
         "AIRTABLE_APP_ID": "appevNCvjnED9DHiS",
-        "AIRTABLE_API_KEY": "keyy6iHrjOJKxLMAc"
-      }
+        "AIRTABLE_API_KEY": "keyy6iHrjOJKxLMAc",
+        "ACCESS_KEY": "AKIAWKEQ3DEVMM457SGP",
+        "SECRET_ACCESS_KEY": "hVOIU6Lt0U6o3FihAl0rOa79ZbYkT",
+        "BUCKET_REGION": "eu-west-3",
+        "BUCKET_NAME": "animeaux-img"
+      },
+      "channel": "preview"
     },
     "production": {}
   },

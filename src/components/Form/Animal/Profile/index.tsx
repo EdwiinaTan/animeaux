@@ -2,7 +2,7 @@ import { CalendarSvg } from 'assets/svg/calendar'
 import { Field } from 'formik'
 import { useEffect, useState } from 'react'
 import { Modal, TextInput, View } from 'react-native'
-import { Calendar } from 'react-native-calendars'
+import { CalendarList } from 'react-native-calendars'
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Button } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -144,7 +144,7 @@ export const AnimalProfile: React.FC<AnimalFormProps> = ({ animalDetails, field 
                     <Modal visible={modalVisible} transparent={true} animationType="slide">
                       <View style={style.centeredView}>
                         <View style={style.modalView}>
-                          <Calendar
+                          <CalendarList
                             onDayPress={handleDateSelect}
                             hideExtraDays
                             markedDates={{

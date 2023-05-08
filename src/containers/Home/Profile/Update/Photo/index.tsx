@@ -6,7 +6,7 @@ import { ACCESS_KEY, BUCKET_NAME, BUCKET_REGION, SECRET_ACCESS_KEY } from 'confi
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
-import { Button, Divider, Image as ImageElement } from 'react-native-elements'
+import { Button, Image as ImageElement } from 'react-native-elements'
 import { updateAnimalById } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
@@ -14,16 +14,16 @@ import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
-import { AnimalType } from 'src/types/Animal/Type'
+import { UserType } from 'src/types/User/Type'
 import { v4 as uuidv4 } from 'uuid'
-import { AnimalRouteParams } from '../../Router/type'
+import { ProfileRouteParams } from '../../Router/type'
 
-export const UpdateAnimalPhoto = () => {
-  const route = useRoute<RouteProp<AnimalRouteParams>>()
+export const UpdateProfilePhoto = () => {
+  const route = useRoute<RouteProp<ProfileRouteParams>>()
   const {
-    params: { animalDetails },
-  } = route as { params: { animalDetails: AnimalType } }
-  const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
+    params: { user },
+  } = route as { params: { user: UserType } }
+  const navigation = useNavigation<NativeStackNavigationProp<ProfileRouteParams>>()
   const [image, setImage] = useState(null)
   const [imagePush, setImagePush] = useState(null)
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)
@@ -90,20 +90,6 @@ export const UpdateAnimalPhoto = () => {
     }
   }
 
-  const renderPictures = () => {
-    return animalDetails.pictures.map((picture, key) => {
-      return (
-        <View key={`pictureEdit_${key}`} style={{ paddingTop: 8 }}>
-          <ImageElement
-            source={{ uri: picture.url }}
-            style={{ width: 150, height: 150, borderRadius: 8 }}
-            PlaceholderContent={<ActivityIndicator />}
-          />
-        </View>
-      )
-    })
-  }
-
   const resetPicture = () => {
     setImagePush('')
     setImage('')
@@ -122,6 +108,16 @@ export const UpdateAnimalPhoto = () => {
         console.log('Object deleted successfully:', data)
       }
     })
+  }
+
+  const resetPictureByPicture = () => {
+    setImagePush('')
+    setImage('')
+    setImageAws('')
+    const data = {
+      picture: [{ url: '' }],
+    }
+    mutation.mutateAsync({ id: user.id, values: data })
   }
 
   const getPicture = async () => {
@@ -143,19 +139,20 @@ export const UpdateAnimalPhoto = () => {
   const mutation = useMutation({
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
-      navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
+      queryClient.setQueryData(['user', { id: user.id }], (oldData: UserType) =>
         oldData
           ? {
               ...oldData,
-              pictures: {
-                ...oldData.pictures,
+              picture: {
+                ...oldData.picture,
                 data,
               },
             }
           : oldData
       )
-      queryClient.invalidateQueries({ queryKey: ['animals'] })
+      queryClient.invalidateQueries({ queryKey: ['getUserToken'] })
+      queryClient.invalidateQueries({ queryKey: ['user', user.id] })
+      queryClient.invalidateQueries({ queryKey: ['users'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })
@@ -170,50 +167,46 @@ export const UpdateAnimalPhoto = () => {
   })
 
   const updateAnimalPhoto = () => {
-    let data
-    if (animalDetails.pictures && animalDetails.pictures.length > 0) {
-      data = {
-        pictures: [...animalDetails.pictures, { url: imageAws }],
-      }
-    } else {
-      data = {
-        pictures: [{ url: imageAws }],
-      }
+    const data = {
+      picture: [{ url: imageAws }],
     }
-    mutation.mutateAsync({ id: animalDetails.id, values: data })
+    mutation.mutateAsync({ id: user.id, values: data })
+    navigation.navigate('profileScreen')
   }
 
   return (
     <Layout>
-      <HeaderComponent
-        onClickGoBack={onClickGoBack}
-        title={`Éditer les photos de ${animalDetails.name}`}
-      />
+      <HeaderComponent onClickGoBack={onClickGoBack} title="Éditer ma photo" />
       <ContainerStyle>
         <CardStyle>
           {hasGalleryPermission ? (
             <>
-              {animalDetails && animalDetails.pictures && animalDetails.pictures.length > 0 && (
+              {user && user.picture && user.picture[0] && (
                 <View
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between',
+                    justifyContent: 'center',
                   }}
                 >
-                  {renderPictures()}
+                  <View key={`pictureEdit_${user.id}`} style={{ paddingTop: 8 }}>
+                    <ImageElement
+                      source={{ uri: user.picture[0].url }}
+                      style={{ width: 150, height: 150, borderRadius: 8 }}
+                      PlaceholderContent={<ActivityIndicator />}
+                    />
+                  </View>
                 </View>
               )}
-              <Spacing size="16" />
-              {!imagePush ? (
+              {/* <Spacing size="16" /> */}
+              {!imagePush && !user.picture && (
                 <Button title="Ajouter une photo" onPress={pickImage} />
-              ) : (
-                <Divider width={2} />
+              )}
+              {user.picture && (
+                <Button title="Supprimer la photo" onPress={resetPictureByPicture} />
               )}
               {image && (
                 <View style={{ alignItems: 'center' }}>
-                  <Spacing size="16" />
                   <ImageElement
                     source={{ uri: image }}
                     style={{ width: 200, height: 200, borderRadius: 8 }}
@@ -225,6 +218,7 @@ export const UpdateAnimalPhoto = () => {
                 <>
                   <Spacing size="16" />
                   <Button title="Êtes-vous sûre d'utiliser cette photo ?" onPress={getPicture} />
+                  <Spacing size="16" />
                 </>
               )}
               {imagePush && !imageAws && (
@@ -235,9 +229,8 @@ export const UpdateAnimalPhoto = () => {
               )}
               {imageAws && (
                 <>
-                  <Spacing size="8" />
-                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
                   <Spacing size="16" />
+                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
                 </>
               )}
             </>
@@ -247,7 +240,6 @@ export const UpdateAnimalPhoto = () => {
             </Body1>
           )}
         </CardStyle>
-        <Spacing size="16" />
       </ContainerStyle>
     </Layout>
   )

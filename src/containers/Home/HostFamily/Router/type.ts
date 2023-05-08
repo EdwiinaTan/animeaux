@@ -12,4 +12,7 @@ export type HostFamilyRouteParams = {
   animalInformation: {
     animalDetails: AnimalType
   }
+  hostFamilyUpdatePhoto: {
+    hostFamilyDetails: HostFamilyType
+  }
 }

@@ -13,7 +13,7 @@ import { deleteHostFamilyById } from 'src/client/HostFamily'
 import { Spacing } from 'src/components/Layout/Spacing'
 import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1, Title3 } from 'src/components/Typo'
-import { IconAntDesign, IconFontAwesome } from 'src/constant/Icons'
+import { IconAntDesign, IconFontAwesome, IconFoundation } from 'src/constant/Icons'
 import { theme } from 'src/constant/Theme'
 import { TextRed } from 'src/constant/Theme/Styled'
 import { startsWithVowel } from 'src/utils/Functions'
@@ -25,7 +25,7 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
   bottomSheetModalRef,
   hostFamilyDetails,
 }) => {
-  const snapPoints = ['20%']
+  const snapPoints = ['27%']
   const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
   const queryClient = useQueryClient()
@@ -40,6 +40,13 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
   const handleViewEditProfil = (): void => {
     bottomSheetModalRef.current.close()
     navigation.navigate('hostFamilyUpdate', {
+      hostFamilyDetails: hostFamilyDetails,
+    })
+  }
+
+  const handleViewEditPhoto = () => {
+    bottomSheetModalRef.current.close()
+    navigation.navigate('hostFamilyUpdatePhoto', {
       hostFamilyDetails: hostFamilyDetails,
     })
   }
@@ -85,6 +92,12 @@ export const BottomSheetHostFamily: React.FC<BottomSheetProps> = ({
       name: 'Éditer le profil',
       icon: <IconAntDesign name="profile" size={20} style={{ paddingRight: 16 }} />,
       press: handleViewEditProfil,
+      chevron: true,
+    },
+    {
+      name: 'Éditer la photo',
+      icon: <IconFoundation name="photo" size={20} style={{ paddingRight: 16 }} />,
+      press: handleViewEditPhoto,
       chevron: true,
     },
     {

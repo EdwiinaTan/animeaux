@@ -29,7 +29,7 @@ export const AddHostFamily = () => {
     postalCode: '',
     city: '',
     address: '',
-    animalId: [''],
+    animalId: [],
     criteria: '',
     description: '',
     onBreak: '',
@@ -63,7 +63,7 @@ export const AddHostFamily = () => {
     } else {
       data = {
         ...values,
-        animalId: [values.animalId],
+        // animalId: [values.animalId],
       }
     }
     mutation.mutate(data)

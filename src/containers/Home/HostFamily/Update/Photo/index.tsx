@@ -6,7 +6,7 @@ import { ACCESS_KEY, BUCKET_NAME, BUCKET_REGION, SECRET_ACCESS_KEY } from 'confi
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
-import { Button, Divider, Image as ImageElement } from 'react-native-elements'
+import { Button, Image as ImageElement } from 'react-native-elements'
 import { updateAnimalById } from 'src/client/Animal'
 import { HeaderComponent } from 'src/components/Header'
 import { Layout } from 'src/components/Layout'
@@ -15,15 +15,16 @@ import { SnackbarToastComponent } from 'src/components/SnackbarToast'
 import { Body1 } from 'src/components/Typo'
 import { CardStyle, ContainerStyle } from 'src/constant/Theme/Styled'
 import { AnimalType } from 'src/types/Animal/Type'
+import { HostFamilyType } from 'src/types/HostFamily/Type'
 import { v4 as uuidv4 } from 'uuid'
-import { AnimalRouteParams } from '../../Router/type'
+import { HostFamilyRouteParams } from '../../Router/type'
 
-export const UpdateAnimalPhoto = () => {
-  const route = useRoute<RouteProp<AnimalRouteParams>>()
+export const HostFamilyUpdatePhoto = () => {
+  const route = useRoute<RouteProp<HostFamilyRouteParams>>()
   const {
-    params: { animalDetails },
-  } = route as { params: { animalDetails: AnimalType } }
-  const navigation = useNavigation<NativeStackNavigationProp<AnimalRouteParams>>()
+    params: { hostFamilyDetails },
+  } = route as { params: { hostFamilyDetails: HostFamilyType } }
+  const navigation = useNavigation<NativeStackNavigationProp<HostFamilyRouteParams>>()
   const [image, setImage] = useState(null)
   const [imagePush, setImagePush] = useState(null)
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null)
@@ -90,20 +91,6 @@ export const UpdateAnimalPhoto = () => {
     }
   }
 
-  const renderPictures = () => {
-    return animalDetails.pictures.map((picture, key) => {
-      return (
-        <View key={`pictureEdit_${key}`} style={{ paddingTop: 8 }}>
-          <ImageElement
-            source={{ uri: picture.url }}
-            style={{ width: 150, height: 150, borderRadius: 8 }}
-            PlaceholderContent={<ActivityIndicator />}
-          />
-        </View>
-      )
-    })
-  }
-
   const resetPicture = () => {
     setImagePush('')
     setImage('')
@@ -143,19 +130,21 @@ export const UpdateAnimalPhoto = () => {
   const mutation = useMutation({
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
-      navigation.navigate('animalScreen')
-      queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
-        oldData
-          ? {
-              ...oldData,
-              pictures: {
-                ...oldData.pictures,
-                data,
-              },
-            }
-          : oldData
+      navigation.navigate('hostFamilyScreen')
+      queryClient.setQueryData(
+        ['hostFamily', { id: hostFamilyDetails.id }],
+        (oldData: AnimalType) =>
+          oldData
+            ? {
+                ...oldData,
+                pictures: {
+                  ...oldData.pictures,
+                  data,
+                },
+              }
+            : oldData
       )
-      queryClient.invalidateQueries({ queryKey: ['animals'] })
+      queryClient.invalidateQueries({ queryKey: ['hostFamilies'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
       })
@@ -169,51 +158,65 @@ export const UpdateAnimalPhoto = () => {
     },
   })
 
-  const updateAnimalPhoto = () => {
-    let data
-    if (animalDetails.pictures && animalDetails.pictures.length > 0) {
-      data = {
-        pictures: [...animalDetails.pictures, { url: imageAws }],
-      }
-    } else {
-      data = {
-        pictures: [{ url: imageAws }],
-      }
+  const resetPictureByPicture = () => {
+    setImagePush('')
+    setImage('')
+    setImageAws('')
+
+    const data = {
+      picture: [{ url: '' }],
     }
-    mutation.mutateAsync({ id: animalDetails.id, values: data })
+    mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
+  }
+
+  const updateAnimalPhoto = () => {
+    const data = {
+      picture: [{ url: imageAws }],
+    }
+
+    mutation.mutateAsync({ id: hostFamilyDetails.id, values: data })
   }
 
   return (
     <Layout>
       <HeaderComponent
         onClickGoBack={onClickGoBack}
-        title={`Éditer les photos de ${animalDetails.name}`}
+        title={`Éditer la photo de ${hostFamilyDetails.firstName} ${hostFamilyDetails.lastName}`}
       />
       <ContainerStyle>
         <CardStyle>
           {hasGalleryPermission ? (
             <>
-              {animalDetails && animalDetails.pictures && animalDetails.pictures.length > 0 && (
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  {renderPictures()}
-                </View>
-              )}
-              <Spacing size="16" />
-              {!imagePush ? (
+              {hostFamilyDetails &&
+                hostFamilyDetails.picture &&
+                hostFamilyDetails.picture.length > 0 && (
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <View key={`pictureEdit_${hostFamilyDetails.id}`} style={{ paddingTop: 8 }}>
+                      <ImageElement
+                        source={{ uri: hostFamilyDetails.picture[0].url }}
+                        style={{ width: 150, height: 150, borderRadius: 8 }}
+                        PlaceholderContent={<ActivityIndicator />}
+                      />
+                    </View>
+                  </View>
+                )}
+              {!imagePush && !hostFamilyDetails.picture && (
                 <Button title="Ajouter une photo" onPress={pickImage} />
-              ) : (
-                <Divider width={2} />
+              )}
+              {hostFamilyDetails.picture && (
+                <>
+                  <Spacing size="16" />
+                  <Button title="Supprimer la photo" onPress={resetPictureByPicture} />
+                </>
               )}
               {image && (
                 <View style={{ alignItems: 'center' }}>
-                  <Spacing size="16" />
                   <ImageElement
                     source={{ uri: image }}
                     style={{ width: 200, height: 200, borderRadius: 8 }}
@@ -225,6 +228,7 @@ export const UpdateAnimalPhoto = () => {
                 <>
                   <Spacing size="16" />
                   <Button title="Êtes-vous sûre d'utiliser cette photo ?" onPress={getPicture} />
+                  <Spacing size="16" />
                 </>
               )}
               {imagePush && !imageAws && (
@@ -235,9 +239,8 @@ export const UpdateAnimalPhoto = () => {
               )}
               {imageAws && (
                 <>
-                  <Spacing size="8" />
-                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
                   <Spacing size="16" />
+                  <Button title="Valider l'image" onPress={updateAnimalPhoto} />
                 </>
               )}
             </>
@@ -247,7 +250,6 @@ export const UpdateAnimalPhoto = () => {
             </Body1>
           )}
         </CardStyle>
-        <Spacing size="16" />
       </ContainerStyle>
     </Layout>
   )

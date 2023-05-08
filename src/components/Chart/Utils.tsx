@@ -42,7 +42,7 @@ export const colors = [
   theme.colors.blue,
   theme.colors.red,
   theme.colors.yellow,
-  theme.colors.secondary,
+  theme.colors.green,
   theme.colors.grey4,
   theme.colors.orange,
 ]

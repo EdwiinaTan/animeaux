@@ -1,4 +1,5 @@
 import { AnimalType } from 'src/types/Animal/Type'
+import { UserType } from 'src/types/User/Type'
 
 export type ProfileRouteParams = {
   profileScreen: undefined
@@ -14,6 +15,9 @@ export type ProfileRouteParams = {
   userInfo: {
     userId: string
   }
+  updateProfilePhoto: {
+    user: UserType
+  }
   animalUpdateProfile: {
     animalDetails: AnimalType
   }
@@ -25,4 +29,5 @@ export type ProfileRouteParams = {
   }
   userUpdate: undefined
   usersScreen: undefined
+  loginHomeScreen: undefined
 }

@@ -248,7 +248,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           )}
         </Field>
         <Spacing size="16" />
-        <Body2>Ajouter un animal en charge</Body2>
+        <Body2>Ajouter un animal à héberger</Body2>
         <Spacing size="4" />
         <View style={{ width: '100%' }}>
           <Field name="animalId">
@@ -269,7 +269,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
           hostFamilyDetails.animalId.length > 0 && (
             <>
               <Spacing size="16" />
-              <Body2>Enlever un animal à ma charge</Body2>
+              <Body2>Enlever un animal à héberger</Body2>
               <Spacing size="4" />
               <View style={{ width: '100%' }}>
                 <Field name="animalId">

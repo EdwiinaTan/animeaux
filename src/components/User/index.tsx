@@ -48,7 +48,9 @@ export const UserInCharge = () => {
       return (
         <>
           <Spacing size="8" />
-          <Body1 textAlign="center">Animaux en charge ({userData.animalId.length})</Body1>
+          <Body1 textAlign="center">
+            Anima{userData.animalId.length > 1 ? 'ux' : 'l'} en charge ({userData.animalId.length})
+          </Body1>
           <Spacing size="4" />
           <CardAnimal listItem={userData.animalId} />
           <Spacing size="24" />
@@ -82,7 +84,6 @@ export const UserInCharge = () => {
                   {renderField(<PhoneSvg />, userData.phone && formatPhoneNumber(userData.phone))}
                   {renderField(<EmailSvg />, userData.email)}
                 </Description>
-                {/* animaux en charge avec historique */}
               </ContainerDescription>
             </ContainerStyle>
             {renderListAnimal()}

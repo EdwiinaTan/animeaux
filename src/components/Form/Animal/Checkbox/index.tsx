@@ -15,7 +15,7 @@ export const CheckBoxComponent: React.FC<CheckboxProps> = ({ animal, values, han
       textStyle={{ color: theme.colors.grey0 }}
       key={animal.value}
       title={animal.label}
-      checkedColor={theme.colors.yellow}
+      checkedColor={theme.colors.blue}
       checked={values === animal.value}
       onPress={handleChange}
     />

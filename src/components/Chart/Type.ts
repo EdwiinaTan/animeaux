@@ -3,4 +3,5 @@ export interface ChartProps {
   data: any
   noLeft?: boolean
   suffix?: string
+  lengthAnimal?: number
 }

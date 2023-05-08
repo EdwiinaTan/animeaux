@@ -21,12 +21,27 @@ export const AppContainer = () => {
     )
   }
 
+  if (token) {
+    return (
+      <>
+        <View style={{ zIndex: 1 }}>
+          <Toast />
+        </View>
+        <NavigationContainer>
+          <RouterHome />
+        </NavigationContainer>
+      </>
+    )
+  }
+
   return (
     <>
       <View style={{ zIndex: 1 }}>
         <Toast />
       </View>
-      <NavigationContainer>{token ? <RouterHome /> : <RouterLogin />}</NavigationContainer>
+      <NavigationContainer>
+        <RouterLogin />
+      </NavigationContainer>
     </>
   )
 }

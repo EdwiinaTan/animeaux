@@ -12,7 +12,7 @@ export const FilterAnimal: React.FC<FilterAnimalProps> = ({ isActive, setIsActiv
 
   const renderColorActive = (value: string) => {
     if (isActive === value) {
-      return theme.colors.yellow
+      return theme.colors.primary
     }
     return theme.colors.grey0
   }

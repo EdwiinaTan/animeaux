@@ -143,7 +143,7 @@ export const UpdateAnimalPhoto = () => {
   const mutation = useMutation({
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
-      navigation.navigate('animalScreen')
+      navigation.navigate('animalInformation', { animalDetails: animalDetails })
       queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
         oldData
           ? {

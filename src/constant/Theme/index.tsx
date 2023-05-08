@@ -8,7 +8,6 @@ export const theme = {
     background: '#F1F5F9',
     greyOutline: '#D8DDE3',
     red: '#DA4133',
-    yellow: '#F7C549',
     orange: '#e4814b',
     blue: '#3376BA',
     grey0: '#b5b6b8',

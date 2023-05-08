@@ -7,13 +7,15 @@ import { ChartProps } from '../Type'
 import { colors } from '../Utils'
 import { Container, ContainerItem } from './Styled'
 
-export const ProgressChartComponent: React.FC<ChartProps> = ({ title, data }) => {
+export const ProgressChartComponent: React.FC<ChartProps> = ({ title, data, lengthAnimal }) => {
   const { width } = useWindowDimensions()
   const newWidth = width - 64
 
   const dataArray = {
     labels: Object.keys(data),
-    data: Object.values(data).map((datas: number) => datas / 10),
+    data: Object.values(data).map((item: number) => {
+      return Number((item / lengthAnimal).toFixed(1))
+    }),
     colors: colors,
   }
 
@@ -22,7 +24,9 @@ export const ProgressChartComponent: React.FC<ChartProps> = ({ title, data }) =>
       return (
         <Container key={key}>
           <ContainerItem color={colors[key]} />
-          <Body2 paddingLeft={4} key={key}>{`${item}: ${data[item] * 10}%${'   '}`}</Body2>
+          <Body2 paddingLeft={4} key={key}>{`${item}: ${((data[item] / 24) * 100).toFixed(
+            2
+          )}%${'   '}`}</Body2>
         </Container>
       )
     })
@@ -51,7 +55,7 @@ export const ProgressChartComponent: React.FC<ChartProps> = ({ title, data }) =>
           color: (opacity = 1, _index) => `rgba(0,0,0,${opacity})`,
         }}
       />
-      <Spacing size="8" />
+      <Spacing size="16" />
       <Body2>{renderKeyReason()}</Body2>
       <Spacing size="16" />
     </>

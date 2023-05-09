@@ -16,10 +16,10 @@
         "ACCESS_KEY": "AKIAWKEQ3DEVMM457SGP",
         "SECRET_ACCESS_KEY": "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",
         "BUCKET_REGION": "eu-west-3",
-        "BUCKET_NAME": "animeaux-img",
-        "android": {
-          "buildType": "apk"
-        }
+        "BUCKET_NAME": "animeaux-img"
+      },
+      "android": {
+        "buildType": "apk"
       },
       "channel": "preview"
     },

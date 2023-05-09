@@ -198,12 +198,14 @@ export const UpdateProfilePhoto = () => {
                   </View>
                 </View>
               )}
-              {/* <Spacing size="16" /> */}
               {!imagePush && !user.picture && (
                 <Button title="Ajouter une photo" onPress={pickImage} />
               )}
               {user.picture && (
-                <Button title="Supprimer la photo" onPress={resetPictureByPicture} />
+                <>
+                  <Spacing size="16" />
+                  <Button title="Supprimer la photo" onPress={resetPictureByPicture} />
+                </>
               )}
               {image && (
                 <View style={{ alignItems: 'center' }}>

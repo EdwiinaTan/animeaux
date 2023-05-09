@@ -21,10 +21,10 @@ export type AnimalRouteParams = {
   hostFamilyInformation: {
     hostFamilyId: string
   }
-  hostFamilyAnimalHosted: {
-    animalId: string[]
-  }
   hostFamilyUpdate: {
+    hostFamilyDetails: HostFamilyType
+  }
+  hostFamilyScreen: {
     hostFamilyDetails: HostFamilyType
   }
 }

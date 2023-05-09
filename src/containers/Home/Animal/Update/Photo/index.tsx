@@ -143,7 +143,7 @@ export const UpdateAnimalPhoto = () => {
   const mutation = useMutation({
     mutationFn: updateAnimalById,
     onSuccess: (data) => {
-      navigation.navigate('animalInformation', { animalDetails: animalDetails })
+      navigation.navigate('animalScreen')
       queryClient.setQueryData(['animal', { id: animalDetails.id }], (oldData: AnimalType) =>
         oldData
           ? {
@@ -158,6 +158,7 @@ export const UpdateAnimalPhoto = () => {
       queryClient.invalidateQueries({ queryKey: ['animals'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
+        subTitle: `Animal édité : ${animalDetails.name}`,
       })
     },
     onError: (err) => {

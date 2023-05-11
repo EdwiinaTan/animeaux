@@ -259,7 +259,7 @@ export const HostFamilyProfile: React.FC<HostFamilyFormProps> = ({
                 data={animalDataList().animalArray}
                 placeholder="Rechercher"
                 save="key"
-                label="En charge"
+                label="À héberger"
               />
             )}
           </Field>

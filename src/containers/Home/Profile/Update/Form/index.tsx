@@ -169,7 +169,7 @@ export const UserUpdateForm: React.FC<UserUpdateFormProps> = ({
         </>
       )}
       <Spacing size="16" />
-      <Button title="Valider mes modification" onPress={() => handleSubmit()} disabled={!isValid} />
+      <Button title="Valider" onPress={() => handleSubmit()} disabled={!isValid} />
     </CardStyle>
   )
 }

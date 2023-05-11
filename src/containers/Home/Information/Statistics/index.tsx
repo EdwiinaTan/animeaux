@@ -50,9 +50,17 @@ export const Statistics: React.FC<StatisticsProps> = ({
         <Divider width={2} color={theme.colors.greyOutline} />
         <PieChartComponent title="Genre" data={labelDataGender} noLeft />
         <Divider width={2} color={theme.colors.greyOutline} />
-        <ProgressChartComponent title="Statut" data={labelDataStatus} />
+        <ProgressChartComponent
+          title="Statut"
+          data={labelDataStatus}
+          lengthAnimal={animalData.length}
+        />
         <Divider width={2} color={theme.colors.greyOutline} />
-        <ProgressChartComponent title="Raison" data={labelDataReason} />
+        <ProgressChartComponent
+          title="Raison"
+          data={labelDataReason}
+          lengthAnimal={animalData.length}
+        />
       </CardStyle>
       <Spacing size="32" />
       <CardStyle>

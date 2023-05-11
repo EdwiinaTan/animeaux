@@ -126,7 +126,8 @@ export const UserUpdate = () => {
             {userDataToken.animalId && userDataToken.animalId.length !== 0 && (
               <>
                 <Body1 textAlign="center">
-                  Animaux en charge ({userDataToken.animalId.length})
+                  Anima{userDataToken.animalId.length > 1 ? 'ux' : 'l'} en charge (
+                  {userDataToken.animalId.length})
                 </Body1>
                 <Spacing size="4" />
                 <CardAnimal listItem={userDataToken.animalId} />

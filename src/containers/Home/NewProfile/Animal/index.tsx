@@ -162,7 +162,7 @@ export const AddAnimal = () => {
               {getImage && (
                 <Button
                   title="Valider"
-                  buttonStyle={{ backgroundColor: theme.colors.yellow }}
+                  buttonStyle={{ backgroundColor: theme.colors.primary }}
                   onPress={validationForm}
                 />
               )}

@@ -2,7 +2,7 @@ import { theme } from 'src/constant/Theme'
 
 export const chartConfig = {
   backgroundGradientFrom: theme.colors.orange,
-  backgroundGradientTo: theme.colors.yellow,
+  backgroundGradientTo: theme.colors.primary,
   decimalPlaces: 0,
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -38,10 +38,10 @@ export const dataBarChart = (label: string[], data: number[]) => {
 }
 
 export const colors = [
-  theme.colors.primary,
+  theme.colors.secondary,
   theme.colors.blue,
   theme.colors.red,
-  theme.colors.yellow,
+  theme.colors.primary,
   theme.colors.green,
   theme.colors.grey4,
   theme.colors.orange,

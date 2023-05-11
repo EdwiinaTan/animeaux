@@ -158,6 +158,7 @@ export const UpdateAnimalPhoto = () => {
       queryClient.invalidateQueries({ queryKey: ['animals'] })
       SnackbarToastComponent({
         title: 'La modification a bien été prise en compte',
+        subTitle: `Animal édité : ${animalDetails.name}`,
       })
     },
     onError: (err) => {

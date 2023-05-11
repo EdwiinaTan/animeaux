@@ -44,4 +44,4 @@ scanner le QRcode affichez dans la console et vous serez redirigé vers l'applic
 
 ## Formulaire
 
-Voici le lien du formulaire pour devenir famille d'accueil (puis retranscript dans la partie Information)par Airtable => https://airtable.com/shrZmXZfAWYmaHJBi
+Voici le lien du formulaire pour devenir famille d'accueil (puis retranscript dans la partie Information)généré par Airtable (avec quelque modificiation en plus) => https://airtable.com/shrZmXZfAWYmaHJBi

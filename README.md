@@ -45,3 +45,7 @@ scanner le QRcode affichez dans la console et vous serez redirigé vers l'applic
 ## Formulaire
 
 Voici le lien du formulaire pour devenir famille d'accueil (puis retranscript dans la partie Information)généré par Airtable (avec quelque modificiation en plus) => https://airtable.com/shrZmXZfAWYmaHJBi
+
+## Information
+
+Je n'ai pas déployé l'application sur l'Apple store car mon compte développeur est celui de mon compte de mon entreprise donc je souhaite pas le déployer sous le nom de Flatsy (edwina.tan@flatsy.fr)

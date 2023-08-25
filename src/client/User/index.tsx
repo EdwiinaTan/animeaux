@@ -2,9 +2,6 @@ import axios from 'axios'
 import { AIRTABLE_APP_ID } from 'config'
 import { header } from '../Utils'
 
-/**
- * GET Method
- */
 export const getUsers = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/`
   return await axios
@@ -18,9 +15,6 @@ export const getUsers = async () => {
     })
 }
 
-/**
- * GET by Id Method
- */
 export const getUserById = async (recordId: string) => {
   console
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/${recordId}/`
@@ -41,9 +35,6 @@ export const getUserById = async (recordId: string) => {
     })
 }
 
-/**
- * GET by Token Id Method
- */
 export const getUserByIdToken = async (token: string) => {
   //api.airtable.com/v0/dzadzadza/user?filterByFormula=email%3D%22srun.singdavid%40gmail.com%22
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user?filterByFormula=token${encodeURI(
@@ -66,9 +57,6 @@ export const getUserByIdToken = async (token: string) => {
     })
 }
 
-/**
- * POST Method
- */
 export const postUser = async (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/`
   return await axios
@@ -84,9 +72,6 @@ export const postUser = async (data) => {
     })
 }
 
-/**
- * UPDATE Method
- */
 export const updateUserById = async (data) => {
   const { id, values } = data
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/user/${id}/`

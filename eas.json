@@ -11,12 +11,12 @@
       "autoIncrement": false,
       "extends": "production",
       "env": {
-        "AIRTABLE_APP_ID": "appevNCvjnED9DHiS",
-        "AIRTABLE_API_KEY": "keyy6iHrjOJKxLMAc",
-        "ACCESS_KEY": "AKIAWKEQ3DEVMM457SGP",
-        "SECRET_ACCESS_KEY": "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",
-        "BUCKET_REGION": "eu-west-3",
-        "BUCKET_NAME": "animeaux-img"
+        "AIRTABLE_APP_ID": "$AIRTABLE_APP_ID",
+        "AIRTABLE_API_KEY": "$AIRTABLE_APP_KEY",
+        "ACCESS_KEY": "$ACCESS_KEY",
+        "SECRET_ACCESS_KEY": "$SECRET_ACCESS_KEY",
+        "BUCKET_REGION": "$BUCKET_REGION",
+        "BUCKET_NAME": "$BUCKET_NAME"
       },
       "android": {
         "buildType": "apk"

@@ -1,13 +1,7 @@
 import axios from 'axios'
 import { AIRTABLE_APP_ID } from 'config'
 import { header } from '../Utils'
-// import dotenv from 'dotenv'
-// dotenv.config()
-// const name = process.env.AIRTABLE_APP_ID
 
-/**
- * GET Method
- */
 export const getAnimals = async () => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
   return await axios
@@ -21,9 +15,6 @@ export const getAnimals = async () => {
     })
 }
 
-/**
- * POST Method
- */
 export const postAnimal = async (data) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/`
   return await axios
@@ -40,9 +31,6 @@ export const postAnimal = async (data) => {
     })
 }
 
-/**
- * GET by Id Method
- */
 export const getAnimalById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   return await axios
@@ -56,9 +44,6 @@ export const getAnimalById = async (recordId: string) => {
     })
 }
 
-/**
- * GET by UserId Method
- */
 export const getAnimalByIdUser = async (userId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal?filterByFormula=userId="${userId}"`
   return await axios
@@ -79,9 +64,6 @@ export const getAnimalByIdUser = async (userId: string) => {
     })
 }
 
-/**
- * DELETE Method
- */
 export const deleteAnimalById = async (recordId: string) => {
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${recordId}/`
   await axios
@@ -93,9 +75,6 @@ export const deleteAnimalById = async (recordId: string) => {
     })
 }
 
-/**
- * UPDATE Method
- */
 export const updateAnimalById = async (data) => {
   const { id, values } = data
   const url = `https://api.airtable.com/v0/${AIRTABLE_APP_ID}/animal/${id}/`
